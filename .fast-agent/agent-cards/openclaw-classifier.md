@@ -4,6 +4,8 @@ name: openclaw_classifier
 model: "$system.default"
 skills: []
 use_history: false
+variables:
+  policy: ""
 ---
 
 # OpenClaw Routing Classifier
@@ -19,4 +21,4 @@ Required output shape:
 
 {{file:eval/openclaw/allowed-topics.md}}
 
-{{file:seed/openclaw/policy.md}}
+{{policy}}

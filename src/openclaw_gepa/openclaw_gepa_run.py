@@ -7,10 +7,13 @@ import shutil
 import subprocess
 import sys
 import time
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from openclaw_gepa.fast_agent_lm import FastAgentReflectionLM
+from fast_agent.batch import BatchRunResult
+from fast_agent.eval import CandidateRun
+from fast_agent.integrations.gepa import FastAgentBatchEvaluator, FastAgentReflectionLM
 from openclaw_gepa.openclaw_benchmark import (
     ENV_DIR,
     EVAL,
@@ -394,21 +397,20 @@ def run_candidate_batch(
 
 
 def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
-    def evaluate(candidate: dict[str, str]) -> tuple[float, dict[str, Any]]:
-        idx, candidate_dir = next_candidate_dir(run_dir)
-        (candidate_dir / "candidate.json").write_text(json.dumps(candidate, indent=2), encoding="utf-8")
-        output = run_candidate_batch(
-            candidate=candidate,
-            candidate_dir=candidate_dir,
-            input_path=input_path,
-            model=args.model,
-            parallel=args.parallel,
-            fast_agent_bin=args.fast_agent_bin,
-            plain_labels=args.plain_labels,
-        )
-        report = score(output)
+    if args.plain_labels:
+        return build_legacy_plain_label_evaluator(run_dir, input_path, args)
+
+    def score_candidate(
+        result: BatchRunResult,
+        candidate: Mapping[str, str],
+        candidate_run: CandidateRun,
+    ) -> tuple[float, dict[str, Any]]:
+        idx = candidate_run.index or 0
+        candidate_dir = candidate_run.path
+        (candidate_dir / "policy.md").write_text(candidate["policy"], encoding="utf-8")
+        report = score(result.output_path)
         policy_chars = len(candidate.get("policy", ""))
-        classifier_card_chars = len((candidate_dir / "openclaw-classifier.md").read_text(encoding="utf-8"))
+        classifier_card_chars = len((ENV_DIR / "agent-cards" / "openclaw-classifier.md").read_text(encoding="utf-8")) + policy_chars
         over_budget = max(0, policy_chars - args.policy_char_budget)
         length_penalty = min(
             args.max_policy_length_penalty,
@@ -425,8 +427,7 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
         report["score_details"]["policy_length_penalty"] = length_penalty
         report["candidate_idx"] = idx
         report["candidate_dir"] = str(candidate_dir)
-        report["result_jsonl"] = str(output)
-        (candidate_dir / "score.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+        report["result_jsonl"] = str(result.output_path)
         log_trackio_candidate(idx, candidate_dir, report)
         print(
             f"candidate-{idx:04d}: gepa={gepa_score:.4f} "
@@ -438,6 +439,42 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
         side_info.pop("candidate_dir", None)
         side_info.pop("result_jsonl", None)
         return gepa_score, side_info
+
+    return FastAgentBatchEvaluator(
+        env_dir=ENV_DIR,
+        agent_card=ENV_DIR / "agent-cards" / "openclaw-classifier.md",
+        agent="openclaw_classifier",
+        candidate_variables={"policy": "policy"},
+        input=input_path,
+        template_source=TASK_TEMPLATE,
+        schema=SCHEMA,
+        model=args.model,
+        parallel=args.parallel,
+        scorer=score_candidate,
+        run_dir=run_dir,
+        backend="process",
+    )
+
+
+def build_legacy_plain_label_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
+    def evaluate(candidate: dict[str, str]) -> tuple[float, dict[str, Any]]:
+        idx, candidate_dir = next_candidate_dir(run_dir)
+        (candidate_dir / "candidate.json").write_text(json.dumps(candidate, indent=2), encoding="utf-8")
+        output = run_candidate_batch(
+            candidate=candidate,
+            candidate_dir=candidate_dir,
+            input_path=input_path,
+            model=args.model,
+            parallel=args.parallel,
+            fast_agent_bin=args.fast_agent_bin,
+            plain_labels=True,
+        )
+        report = score(output)
+        report["candidate_idx"] = idx
+        report["candidate_dir"] = str(candidate_dir)
+        report["result_jsonl"] = str(output)
+        (candidate_dir / "score.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+        return float(report["scores"]["topic_micro_f1"]), report
 
     return evaluate
 
@@ -473,10 +510,9 @@ def main() -> int:
             return 2
 
         reflection_lm = FastAgentReflectionLM(
-            model=args.reflection_model,
-            run_dir=run_dir / "reflection",
             env_dir=ENV_DIR,
-            fast_agent_bin=args.fast_agent_bin,
+            model=args.reflection_model,
+            audit_dir=run_dir / "reflection",
         )
         reflection_objective = build_reflection_objective(
             task_model=args.model,
