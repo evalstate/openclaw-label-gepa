@@ -1,0 +1,62 @@
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyre/
+.coverage
+coverage.xml
+htmlcov/
+
+# Virtual environments / local env
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+.python-version
+
+# Packaging / build outputs
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Tool caches and local state
+.cache/
+**/.cache/
+.uv-cache/
+.ipynb_checkpoints/
+
+# fast-agent local runtime state
+.fast-agent/sessions/
+.fast-agent/gepa-runs/
+.fast-agent/data/runs/
+.fast-agent/.check_for_update_done
+
+# Experiment / run outputs
+runs/
+trackio/
+.trackio/
+
+# Generated evaluation artifacts
+*.log
+*.out
+*.err
+eval/openclaw/label-rationales/generated-*/
+eval/openclaw/splits/gepa-train-*.jsonl
+eval/openclaw/splits/*validation*.manifest.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+eval/openclaw/splits/validation-random-*.jsonl
+reference/

@@ -1,0 +1,25 @@
+[project]
+name = "openclaw-gepa"
+version = "0.1.0"
+description = "fast-agent + GEPA + Trackio optimization scaffold"
+readme = "README.md"
+requires-python = ">=3.10,<3.15"
+dependencies = [
+  "gepa @ file:///home/shaun/temp/gepa",
+  "trackio @ file:///home/shaun/temp/trackio",
+]
+
+[project.scripts]
+openclaw-gepa = "openclaw_gepa.cli:main"
+openclaw-benchmark = "openclaw_gepa.openclaw_benchmark:main"
+openclaw-gepa-run = "openclaw_gepa.openclaw_gepa_run:main"
+
+[tool.uv]
+package = true
+
+[tool.ruff]
+line-length = 120
+src = ["src", "scripts"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

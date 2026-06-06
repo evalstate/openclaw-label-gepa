@@ -1,0 +1,22 @@
+{
+  "content_fingerprint": "sha256:5498c41853037986f6c725a94f4f1a2ec1052d600505eb292b1f925cb5497e2b",
+  "installed_at": "2026-06-05T18:01:29Z",
+  "installed_commit": "077c45e6581fc2737cedd1151888c0e7f45cf258",
+  "installed_files": [
+    "agent-cards/dev.md",
+    "fast-agent.yaml",
+    "hooks/ripgrep_readonly_guard.py",
+    "tool-cards/ripgrep_spark.md"
+  ],
+  "installed_path_oid": "b2cc0e2ae5d3621a74bee09c96f7b74c715f9887",
+  "installed_revision": "077c45e6581fc2737cedd1151888c0e7f45cf258",
+  "installed_via": "marketplace",
+  "kind": "card",
+  "name": "codex",
+  "repo_path": "packs/codex",
+  "repo_ref": "main",
+  "repo_url": "https://github.com/fast-agent-ai/card-packs",
+  "schema_version": 1,
+  "source_origin": "remote",
+  "source_url": "https://raw.githubusercontent.com/fast-agent-ai/card-packs/main/marketplace.json"
+}

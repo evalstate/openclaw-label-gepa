@@ -1,0 +1,21 @@
+name: llamacpp-gemma-4-e2b-it-gguf
+provider: openresponses
+model: unsloth/gemma-4-E2B-it-gguf
+connection:
+  base_url: http://localhost:8080/v1
+  auth: none
+  default_headers: {}
+defaults: {}
+metadata:
+  context_window: 131072
+  tokenizes:
+  - text/plain
+  - image/jpeg
+  - image/png
+  - image/webp
+  json_mode: none
+picker:
+  label: unsloth/gemma-4-E2B-it-gguf
+  description: Imported from llama.cpp
+  current: true
+  featured: false
