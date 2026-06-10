@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenClawRoutingClassifierOutput",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "topics_of_interest",
+    "description",
+    "caveats"
+  ],
+  "properties": {
+    "topics_of_interest": {
+      "type": "array",
+      "description": "Central allowed OpenClaw maintainer routing topics. Use the smallest set needed.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "local_models",
+          "local_model_providers",
+          "model_serving",
+          "self_hosted_inference",
+          "open_weight_models",
+          "acpx",
+          "acp",
+          "coding_agents",
+          "mcp_tooling",
+          "hf_agents",
+          "hub_workflows",
+          "post_training",
+          "model_releases",
+          "agent_demos",
+          "codex",
+          "agent_runtime",
+          "sessions",
+          "gateway",
+          "exec_tools",
+          "approvals",
+          "sandboxing",
+          "hooks",
+          "cron_automation",
+          "chat_integrations",
+          "ui_tui",
+          "browser_automation",
+          "memory",
+          "security",
+          "config",
+          "packaging_deployment",
+          "docs",
+          "tests_ci",
+          "telemetry_usage",
+          "api_surface",
+          "queueing",
+          "notifications",
+          "skills_plugins",
+          "auth_identity",
+          "reliability",
+          "tool_calling"
+        ]
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "One concise evidence-backed sentence."
+    },
+    "caveats": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Uncertainty, missing context, or material limits only."
+    }
+  }
+}

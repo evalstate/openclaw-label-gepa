@@ -12,6 +12,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 REF = ROOT / "reference" / "openclaw-classification-dataset"
+SOURCE = REF / "ds4.jsonl"
 EVAL = ROOT / "eval" / "openclaw"
 ENV_DIR = ROOT / ".fast-agent"
 CARD = ENV_DIR / "agent-cards" / "openclaw-classifier.md"
@@ -35,12 +36,16 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fn": "Add notifications for generic notification policy, routing, delivery gates, notifier behavior, announcements, or maintainer notification mechanics.",
     },
     "coding_agents": {
-        "fp": "Tighten coding_agents: require coding-agent runtime/harness/subagent/orchestration evidence, not generic agent/plugin/runtime wording.",
-        "fn": "Improve coding_agents recall: add positive cues for subagents, coding-agent runs, harness behavior, compaction, approvals, sandboxing, durable exec, and agent orchestration.",
+        "fp": "Tighten coding_agents: require an external coding-agent backend/run such as Codex, Claude Code, Gemini CLI/coding agents, Pi, or coding-agent harness/tools/approvals. Do not use for internal OpenClaw subagent/session/queue/lock orchestration; prefer agent_runtime/sessions/queueing.",
+        "fn": "Improve coding_agents recall: add when Codex, Claude Code, Gemini CLI/coding agents, Pi, external coding-agent harnesses, coding-agent approvals/sandboxing/tools, or provider behavior breaking an external coding-agent turn is central.",
     },
     "local_model_providers": {
-        "fp": "Tighten local_model_providers: require provider setup/routing/auth/discovery/compatibility. Do not use for local lifecycle knobs, model serving endpoint behavior, hosted catalogs, or generic local model mentions.",
-        "fn": "Add local_model_providers when local/self-hosted/OpenAI-compatible provider setup, auth, discovery, routing, model resolution, or compatibility is central.",
+        "fp": "Tighten local_model_providers: require local, self-hosted, or user-configured OpenAI-compatible provider setup/routing/auth/discovery/compatibility. Do not use for ordinary hosted cloud providers such as Vertex/Azure/Bedrock/Anthropic/DeepInfra/OpenRouter, local lifecycle knobs, model serving endpoint behavior, hosted catalogs, or generic local model mentions.",
+        "fn": "Add local_model_providers when local/self-hosted/user-configured OpenAI-compatible provider setup, auth, discovery, routing, model resolution, or adapter compatibility is central.",
+    },
+    "local_models": {
+        "fp": "Tighten local_models: require concrete local/on-device inference, backend, model-family, or hardware behavior (LM Studio/Ollama/llama.cpp/GGUF/local GPU/ggml-metal). Do not use merely for OpenAI-compatible API/protocol issues.",
+        "fn": "Add local_models when local backend execution, local model UX, local hardware/VRAM/cold-start, llama.cpp/Ollama/LM Studio inference behavior, or local model crash/timeout is central.",
     },
     "config": {
         "fp": "Tighten config: do not add merely because an option, payload field, or example exists. Use only for config schema, persisted config, setup options, defaults, validation, or config read/write policy.",
@@ -55,8 +60,12 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fn": "Add sessions when session lifecycle, state, persistence, identity, isolation, resume, or storage behavior is central.",
     },
     "model_serving": {
-        "fp": "Tighten model_serving: require endpoint/chat/completions/responses/streaming/SSE/usage chunk/routing/lifecycle semantics; do not use for provider setup or local lifecycle settings.",
-        "fn": "Add model_serving for OpenAI-compatible endpoint behavior, chat/completions/responses semantics, streaming/SSE, usage chunks, vLLM/TGI/LocalAI serving, endpoint lifecycle, or request routing.",
+        "fp": "Tighten model_serving only when endpoint/protocol/model-serving behavior is central. Do not use for pure config metadata with no serving behavior, or local provider setup without endpoint compatibility.",
+        "fn": "Add model_serving for hosted or local model endpoint behavior: Responses/Chat Completions, streaming/SSE, model registration/selection, endpoint lifecycle, serving metadata, request routing, or provider endpoint compatibility.",
+    },
+    "skills_plugins": {
+        "fp": "Tighten skills_plugins: require a real skill/plugin surface such as plugin manifests/loading/registration, plugin SDK/runtime APIs, skill files/prelude/sync/wrappers, hooks, SecretRefs, MCP Apps, or plugin-owned user-visible behavior. Do not add just because an extension package or review skill is mentioned.",
+        "fn": "Add skills_plugins for SKILL.md/managed skills, plugin manifests/loading/registration, plugin SDK/runtime APIs, plugin hooks, SecretRefs, skill sync/prelude/wrappers, MCP Apps, or plugin-owned tools/resources/UI.",
     },
     "chat_integrations": {
         "fp": "Tighten chat_integrations: require a named chat surface or user-facing chat integration behavior, not generic message delivery/recovery.",
@@ -118,7 +127,7 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Run the OpenClaw topic-routing benchmark with fast-agent.")
     p.add_argument("--model", default="passthrough", help="fast-agent model override; passthrough is smoke-only.")
     p.add_argument("--input", type=Path, default=EVAL / "benchmark.jsonl")
-    p.add_argument("--source", type=Path, default=REF / "seed.jsonl")
+    p.add_argument("--source", type=Path, default=SOURCE)
     p.add_argument("--limit", type=int, default=50)
     p.add_argument("--sample", type=int, default=None, help="Deterministic sample size from source.")
     p.add_argument("--seed", type=int, default=0)
@@ -255,7 +264,7 @@ def prepare_dataset(source: Path, output: Path, *, limit: int, sample: int | Non
     print(f"wrote {len(prepared)} rows to {output}")
 
 
-def refresh_github_context(input_path: Path, output: Path, source: Path = REF / "seed.jsonl") -> None:
+def refresh_github_context(input_path: Path, output: Path, source: Path = SOURCE) -> None:
     """Copy a prepared JSONL input while rebuilding github_context from raw seed rows.
 
     Historical prepared splits only contain a truncated/rendered github_context.  Keep the
@@ -467,6 +476,8 @@ def compact_confusion(conf: dict[str, Any]) -> dict[str, Any]:
 
 def compact_failure(failure: dict[str, Any]) -> dict[str, Any]:
     return {
+        "id": failure.get("id"),
+        "title": failure.get("title"),
         "expected": failure.get("expected"),
         "actual": failure.get("actual"),
         "false_positives": failure.get("false_positives"),
@@ -490,6 +501,8 @@ def score(output_path: Path) -> dict[str, Any]:
     confusion_examples: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     invalid_topics: Counter[str] = Counter()
     tp = fp = fn = exact = valid_json = 0
+    row_jaccard_total = 0.0
+    row_symdiff_total = 0
     expected_total = actual_total = 0
 
     allowed = set(json.loads(SCHEMA.read_text())["properties"]["topics_of_interest"]["items"]["enum"])
@@ -514,6 +527,9 @@ def score(output_path: Path) -> dict[str, Any]:
         row_tp = expected & actual
         row_fp = actual - expected
         row_fn = expected - actual
+        row_union = expected | actual
+        row_jaccard_total += 1.0 if not row_union else len(row_tp) / len(row_union)
+        row_symdiff_total += len(expected ^ actual)
         row_score = f1(len(row_tp), len(row_fp), len(row_fn))
         example = failure_example(inp, result, expected, actual, row_score)
         tp += len(row_tp); fp += len(row_fp); fn += len(row_fn)
@@ -557,6 +573,9 @@ def score(output_path: Path) -> dict[str, Any]:
     precision = 0.0 if tp + fp == 0 else tp / (tp + fp)
     recall = 0.0 if tp + fn == 0 else tp / (tp + fn)
     micro_f1 = f1(tp, fp, fn)
+    row_exact_accuracy = exact / n
+    avg_row_jaccard = row_jaccard_total / n
+    avg_row_symdiff = row_symdiff_total / n
 
     patterns = []
     for topic, c in topic_stats.items():
@@ -630,13 +649,18 @@ def score(output_path: Path) -> dict[str, Any]:
             "topic_micro_f1": micro_f1,
             "topic_micro_precision": precision,
             "topic_micro_recall": recall,
-            "exact_match": exact / n,
+            "exact_match": row_exact_accuracy,
+            "row_exact_accuracy": row_exact_accuracy,
+            "avg_row_jaccard": avg_row_jaccard,
             "valid_json": valid_json / n,
             "cardinality_closeness": cardinality_closeness,
         },
         "score_details": {
             "false_positives": fp,
             "false_negatives": fn,
+            "row_exact_accuracy": row_exact_accuracy,
+            "avg_row_jaccard": avg_row_jaccard,
+            "avg_row_symdiff": avg_row_symdiff,
             "avg_expected_topics": avg_expected,
             "avg_predicted_topics": avg_actual,
             "asi_score": asi_score,
