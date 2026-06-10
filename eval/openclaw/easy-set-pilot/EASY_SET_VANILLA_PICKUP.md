@@ -28,16 +28,24 @@ unused:             58
 
 ```text
 eval/openclaw/easy-set-pilot/allowed-topics-v2.md
+eval/openclaw/easy-set-pilot/allowed-topics-v3.md
 eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-v2.md
 eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-plain-v2.md
+eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-v3.md
+eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-plain-v3.md
 eval/openclaw/easy-set-pilot/seed-policy-vanilla-v2.md
 eval/openclaw/easy-set-pilot/seed-policy-vanilla-v3.md
+eval/openclaw/easy-set-pilot/seed-policy-vanilla-v3-asi.md
 eval/openclaw/easy-set-pilot/easy-final-v2-vanilla-asi.md
+eval/openclaw/easy-set-pilot/vanilla-asi-v3.md
+eval/openclaw/easy-set-pilot/approved-label-guidance-v3.md
+eval/openclaw/easy-set-pilot/V3_ASI_RUNSET.md
 ```
 
-Use `seed-policy-vanilla-v3.md` for the next easy-set vanilla baseline/GEPA runs.
-It adds the instability-mined boundary rules while preserving the vanilla labeler
-shape.
+Use `V3_ASI_RUNSET.md` for the next easy-set vanilla baseline/GEPA runs. It uses
+the v3 card/topic names plus `seed-policy-vanilla-v3-asi.md`, which folds the
+instability-mined ASI into prompt-safe routing guidance while preserving the
+vanilla labeler shape.
 
 ## Review/instability artifacts
 
@@ -129,10 +137,11 @@ export PYTHONPATH="src:/home/shaun/temp/gepa/src:${PYTHONPATH:-}"
 
 TRAIN="eval/openclaw/easy-set-pilot/easy-final-v2-train.jsonl"
 TEST="eval/openclaw/easy-set-pilot/easy-final-v2-test.jsonl"
-CARD="eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-v2.md"
-PLAIN_CARD="eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-plain-v2.md"
-TOPICS="eval/openclaw/easy-set-pilot/allowed-topics-v2.md"
-SEED="eval/openclaw/easy-set-pilot/seed-policy-vanilla-v3.md"
+CARD="eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-v3.md"
+PLAIN_CARD="eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-plain-v3.md"
+TOPICS="eval/openclaw/easy-set-pilot/allowed-topics-v3.md"
+SEED="eval/openclaw/easy-set-pilot/seed-policy-vanilla-v3-asi.md"
+STATIC_ASI="eval/openclaw/easy-set-pilot/vanilla-asi-v3.md"
 ```
 
 Baseline:
@@ -144,6 +153,7 @@ python scripts/openclaw-vanilla-f1-gepa.py \
   --agent-card "$CARD" \
   --allowed-topics "$TOPICS" \
   --seed-policy "$SEED" \
+  --static-asi "$STATIC_ASI" \
   --model 'MODEL_ALIAS' \
   --run-name easy-final-v2-test-MODEL-vanilla-v3 \
   --parallel 4 \
@@ -159,6 +169,7 @@ python scripts/openclaw-vanilla-f1-gepa.py \
   --agent-card "$CARD" \
   --allowed-topics "$TOPICS" \
   --seed-policy "$SEED" \
+  --static-asi "$STATIC_ASI" \
   --model 'MODEL_ALIAS' \
   --reflection-model 'codexresponses.gpt-5.5?reasoning=high' \
   --max-metric-calls 20 \

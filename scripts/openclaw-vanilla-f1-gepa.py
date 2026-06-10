@@ -31,6 +31,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--reflection-model", default="codexresponses.gpt-5.5?reasoning=high")
     p.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     p.add_argument("--seed-policy", type=Path, default=SEED_POLICY)
+    p.add_argument("--static-asi", type=Path, default=None, help="Optional static ASI markdown to include in score/reflection side-info.")
     p.add_argument("--agent-card", type=Path, default=CARD)
     p.add_argument("--allowed-topics", type=Path, default=ALLOWED_TOPICS)
     p.add_argument("--plain-labels", action="store_true", help="Ask for comma-separated topic IDs instead of structured JSON.")
@@ -70,6 +71,7 @@ def init_trackio(args: argparse.Namespace, run_name: str, run_dir: Path) -> bool
             "reflection_model": args.reflection_model,
             "input": str(args.input),
             "seed_policy": str(args.seed_policy),
+            "static_asi": str(args.static_asi) if args.static_asi else None,
             "max_metric_calls": args.max_metric_calls,
             "score_mode": args.score_mode,
             "run_dir": str(run_dir),
@@ -308,6 +310,8 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
     ) -> tuple[float, dict[str, Any]]:
         policy = str(candidate.get("policy", ""))
         report = add_vanilla_asi(score(result.output_path), policy, score_mode=args.score_mode)
+        if args.static_asi:
+            report["static_asi_pack"] = args.static_asi.read_text(encoding="utf-8").strip()
         idx = candidate_run.index or 0
         report["candidate_idx"] = idx
         report["candidate_dir"] = str(candidate_run.path)
@@ -392,6 +396,8 @@ def main() -> int:
     shutil.copy2(active_card, run_dir / "openclaw-vanilla-labeler.md")
     shutil.copy2(args.seed_policy, run_dir / "seed-policy.md")
     shutil.copy2(args.allowed_topics, run_dir / "allowed-topics.md")
+    if args.static_asi:
+        shutil.copy2(args.static_asi, run_dir / "static-asi.md")
     objective = objective_text(plain_labels=args.plain_labels, allowed_topics=args.allowed_topics, score_mode=args.score_mode)
     (run_dir / "objective.md").write_text(objective, encoding="utf-8")
     trackio_enabled = init_trackio(args, run_name, run_dir)
