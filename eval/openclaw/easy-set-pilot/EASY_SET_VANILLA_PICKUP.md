@@ -237,3 +237,42 @@ runs/openclaw-easy-set-stability/<run-name>/
   unstable-rows.jsonl
   unstable-row-ids.txt
 ```
+
+## Teacher/generator stability check
+
+The stability runner also supports direct `fast-agent batch` mode for the easy-set
+teacher/generator card. Use this to test GPT-5.5 label stability against the
+current approved easy labels:
+
+```bash
+python scripts/openclaw-easy-set-stability.py \
+  --direct-batch \
+  --input eval/openclaw/easy-set-pilot/easy-final-v2-test.jsonl \
+  --agent-card eval/openclaw/easy-set-pilot/teacher-card.md \
+  --agent-name openclaw_easy_set_pilot_teacher \
+  --template eval/openclaw/easy-set-pilot/teacher-template-v2-clean.md \
+  --schema eval/openclaw/easy-set-pilot/teacher-output.schema.json \
+  --model 'codexresponses.gpt-5.5?reasoning=high' \
+  --runs 3 \
+  --parallel 4 \
+  --run-name easy-final-v2-test-gpt55-teacher-stability \
+  --overwrite
+```
+
+For quick smoke testing on a few rows first:
+
+```bash
+python scripts/openclaw-easy-set-stability.py \
+  --direct-batch \
+  --input eval/openclaw/easy-set-pilot/easy-final-v2-test.jsonl \
+  --agent-card eval/openclaw/easy-set-pilot/teacher-card.md \
+  --agent-name openclaw_easy_set_pilot_teacher \
+  --template eval/openclaw/easy-set-pilot/teacher-template-v2-clean.md \
+  --schema eval/openclaw/easy-set-pilot/teacher-output.schema.json \
+  --model 'codexresponses.gpt-5.5?reasoning=high' \
+  --row-ids openclaw-openclaw-83863 openclaw-openclaw-87277 \
+  --runs 3 \
+  --parallel 2 \
+  --run-name easy-final-v2-gpt55-teacher-review-smoke \
+  --overwrite
+```

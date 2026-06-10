@@ -22,6 +22,8 @@ DEFAULT_CARD = ROOT / "eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-v2.
 DEFAULT_PLAIN_CARD = ROOT / "eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-plain-v2.md"
 DEFAULT_TOPICS = ROOT / "eval/openclaw/easy-set-pilot/allowed-topics-v2.md"
 DEFAULT_POLICY = ROOT / "eval/openclaw/easy-set-pilot/seed-policy-vanilla-v3.md"
+DEFAULT_TEMPLATE = ROOT / "eval/openclaw/task-template.md"
+DEFAULT_SCHEMA = ROOT / "eval/openclaw/output.schema.json"
 
 
 def parse_args() -> argparse.Namespace:
@@ -30,6 +32,9 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--agent-card", type=Path, default=DEFAULT_CARD)
     p.add_argument("--allowed-topics", type=Path, default=DEFAULT_TOPICS)
     p.add_argument("--seed-policy", type=Path, default=DEFAULT_POLICY)
+    p.add_argument("--agent-name", default=None, help="Agent name in the AgentCard. Defaults to vanilla/plain agent names.")
+    p.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
+    p.add_argument("--schema", type=Path, default=DEFAULT_SCHEMA)
     p.add_argument("--model", required=True)
     p.add_argument("--runs", type=int, default=3)
     p.add_argument("--parallel", type=int, default=4)
@@ -43,6 +48,11 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--row-ids", nargs="*", default=None)
     p.add_argument("--row-ids-file", type=Path, default=None)
     p.add_argument("--overwrite", action="store_true")
+    p.add_argument(
+        "--direct-batch",
+        action="store_true",
+        help="Run fast-agent batch directly instead of wrapping openclaw-vanilla-f1-gepa.py. Use for teacher/generator cards.",
+    )
     p.add_argument("--keep-vanilla-runs", action="store_true", help="Do not copy/delete wrapped openclaw-vanilla-f1-gepa run dirs; reports still reference them.")
     return p.parse_args()
 
@@ -141,6 +151,9 @@ def run_repeat(args: argparse.Namespace, stability_dir: Path, selected_input: Pa
     if (repeat_dir / "score.json").exists() and (repeat_dir / "results.jsonl").exists():
         return {"repeat": idx, "run_name": repeat_name, "vanilla_run_dir": str(vanilla_dir), "repeat_dir": str(repeat_dir), "status": "cached"}
 
+    if args.direct_batch:
+        return run_direct_batch_repeat(args, stability_dir, selected_input, idx, repeat_name, repeat_dir)
+
     cmd = [
         sys.executable,
         str(ROOT / "scripts/openclaw-vanilla-f1-gepa.py"),
@@ -185,6 +198,142 @@ def run_repeat(args: argparse.Namespace, stability_dir: Path, selected_input: Pa
             shutil.copy2(src, repeat_dir / name)
     (repeat_dir / "vanilla-run-dir.txt").write_text(str(vanilla_dir) + "\n", encoding="utf-8")
     return {"repeat": idx, "run_name": repeat_name, "vanilla_run_dir": str(vanilla_dir), "repeat_dir": str(repeat_dir), "status": "complete"}
+
+
+def infer_agent_name(args: argparse.Namespace) -> str:
+    if args.agent_name:
+        return args.agent_name
+    return "openclaw_vanilla_labeler_plain" if args.plain_labels else "openclaw_vanilla_labeler"
+
+
+def run_direct_batch_repeat(
+    args: argparse.Namespace,
+    stability_dir: Path,
+    selected_input: Path,
+    idx: int,
+    repeat_name: str,
+    repeat_dir: Path,
+) -> dict[str, Any]:
+    repeat_dir.mkdir(parents=True, exist_ok=True)
+    output = repeat_dir / "results.jsonl"
+    summary = repeat_dir / "batch-summary.json"
+    telemetry = repeat_dir / "telemetry.jsonl"
+    log_path = stability_dir / f"repeat-{idx:02d}.log"
+    cmd = [
+        "fast-agent",
+        "--no-update-check",
+        "--env",
+        str(ROOT / ".fast-agent"),
+        "batch",
+        "run",
+        "--input",
+        str(selected_input),
+        "--output",
+        str(output),
+        "--agent-card",
+        str(args.agent_card),
+        "--agent",
+        infer_agent_name(args),
+        "--template",
+        str(args.template),
+        "--model",
+        args.model,
+        "--parallel",
+        str(args.parallel),
+        "--summary-output",
+        str(summary),
+        "--telemetry-output",
+        str(telemetry),
+        "--include-input",
+        "--overwrite",
+        "--no-progress",
+        "--no-final-summary",
+    ]
+    if args.schema and not args.plain_labels:
+        cmd.extend(["--json-schema", str(args.schema)])
+    with log_path.open("w", encoding="utf-8") as log:
+        proc = subprocess.run(cmd, cwd=ROOT, text=True, stdout=log, stderr=subprocess.STDOUT)
+    if proc.returncode != 0:
+        raise SystemExit(f"repeat {idx} failed with exit {proc.returncode}; see {log_path}")
+    shutil.copy2(args.agent_card, repeat_dir / "agent-card.md")
+    shutil.copy2(args.template, repeat_dir / "template.md")
+    if args.schema and args.schema.exists():
+        shutil.copy2(args.schema, repeat_dir / "schema.json")
+    score_direct_repeat(selected_input, output, repeat_dir / "score.json")
+    return {"repeat": idx, "run_name": repeat_name, "vanilla_run_dir": None, "repeat_dir": str(repeat_dir), "status": "complete"}
+
+
+def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path) -> None:
+    expected = {row["id"]: expected_topics(row) for row in load_jsonl(input_path)}
+    rows = load_jsonl(result_path)
+    tp = fp = fn = exact = 0
+    row_jaccards: list[float] = []
+    row_symdiffs: list[int] = []
+    predicted_counts: list[int] = []
+    expected_counts: list[int] = []
+    valid = 0
+    failures = []
+    for rr in rows:
+        rid = (rr.get("input") or {}).get("id")
+        if rid not in expected:
+            continue
+        pred = predicted_topics(rr)
+        exp = expected[rid]
+        ok = bool(rr.get("ok")) and bool(pred or not exp)
+        valid += int(bool(rr.get("ok")))
+        sp, se = set(pred), set(exp)
+        tp += len(sp & se)
+        fp += len(sp - se)
+        fn += len(se - sp)
+        exact += int(sp == se)
+        row_jaccards.append(jaccard(pred, exp))
+        row_symdiffs.append(symdiff(pred, exp))
+        predicted_counts.append(len(pred))
+        expected_counts.append(len(exp))
+        if sp != se:
+            failures.append(
+                {
+                    "id": rid,
+                    "title": (rr.get("input") or {}).get("title") or (rr.get("input") or {}).get("target", ""),
+                    "expected": list(exp),
+                    "actual": list(pred),
+                    "false_positives": sorted(sp - se),
+                    "false_negatives": sorted(se - sp),
+                    "row_score": jaccard(pred, exp),
+                }
+            )
+    precision = tp / (tp + fp) if tp + fp else 1.0
+    recall = tp / (tp + fn) if tp + fn else 1.0
+    f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+    avg_sym = mean(row_symdiffs) if row_symdiffs else 0.0
+    report = {
+        "score": 0.70 * f1 + 0.20 * (exact / max(len(expected), 1)) + 0.10 * (mean(row_jaccards) if row_jaccards else 0.0),
+        "side_info": {
+            "scores": {
+                "gepa_score": 0.70 * f1 + 0.20 * (exact / max(len(expected), 1)) + 0.10 * (mean(row_jaccards) if row_jaccards else 0.0),
+                "topic_micro_f1": f1,
+                "row_exact_accuracy": exact / max(len(expected), 1),
+                "avg_row_jaccard": mean(row_jaccards) if row_jaccards else 0.0,
+                "row_symdiff_score": 1.0 / (1.0 + avg_sym),
+            },
+            "score_details": {
+                "topic_micro_precision": precision,
+                "topic_micro_recall": recall,
+                "exact_match": exact / max(len(expected), 1),
+                "row_exact_accuracy": exact / max(len(expected), 1),
+                "avg_row_jaccard": mean(row_jaccards) if row_jaccards else 0.0,
+                "avg_row_symdiff": avg_sym,
+                "valid_json": valid / max(len(expected), 1),
+                "false_positives": fp,
+                "false_negatives": fn,
+                "avg_predicted_topics": mean(predicted_counts) if predicted_counts else 0.0,
+                "avg_expected_topics": mean(expected_counts) if expected_counts else 0.0,
+            },
+            "evaluated": len(expected),
+            "failures": sorted(failures, key=lambda r: r["row_score"])[:20],
+        },
+    }
+    score_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
 
 def classify_row(exact_rate: float, pairwise_j: float, avg_sym: float, unique_sets: int, runs: int, invalid: bool) -> str:
