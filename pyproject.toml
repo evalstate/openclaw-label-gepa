@@ -5,9 +5,9 @@ description = "fast-agent + GEPA + Trackio optimization scaffold"
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
 dependencies = [
-  "fast-agent-mcp @ file:///home/shaun/source/fast-agent-pr",
-  "gepa @ file:///home/shaun/temp/gepa",
-  "trackio @ file:///home/shaun/temp/trackio",
+  "fast-agent-mcp",
+  "gepa",
+  "trackio",
 ]
 
 [project.scripts]
