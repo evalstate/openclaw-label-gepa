@@ -1,0 +1,369 @@
+{
+  "strict_easy_rows": 194,
+  "manual_decisions": 29,
+  "reviewed_easy_rows": 194,
+  "labels_changed_by_review": 16,
+  "decision_counts": {
+    "unreviewed": 165,
+    "fix_labels": 16,
+    "keep_easy": 13
+  },
+  "train": 80,
+  "test": 40,
+  "unused": 74,
+  "top_labels": [
+    [
+      "reliability",
+      75
+    ],
+    [
+      "sessions",
+      63
+    ],
+    [
+      "config",
+      42
+    ],
+    [
+      "acp",
+      41
+    ],
+    [
+      "chat_integrations",
+      32
+    ],
+    [
+      "security",
+      32
+    ],
+    [
+      "gateway",
+      24
+    ],
+    [
+      "auth_identity",
+      23
+    ],
+    [
+      "ui_tui",
+      19
+    ],
+    [
+      "memory",
+      19
+    ],
+    [
+      "acpx",
+      18
+    ],
+    [
+      "codex",
+      18
+    ],
+    [
+      "api_surface",
+      17
+    ],
+    [
+      "agent_runtime",
+      17
+    ],
+    [
+      "model_serving",
+      16
+    ],
+    [
+      "skills_plugins",
+      14
+    ],
+    [
+      "queueing",
+      14
+    ],
+    [
+      "notifications",
+      14
+    ],
+    [
+      "exec_tools",
+      13
+    ],
+    [
+      "cron_automation",
+      12
+    ],
+    [
+      "hooks",
+      11
+    ],
+    [
+      "local_model_providers",
+      11
+    ],
+    [
+      "self_hosted_inference",
+      10
+    ],
+    [
+      "approvals",
+      10
+    ],
+    [
+      "tests_ci",
+      10
+    ]
+  ],
+  "changed_rows": [
+    {
+      "id": "openclaw-openclaw-68725",
+      "number": 68725,
+      "before": [
+        "local_model_providers",
+        "open_weight_models"
+      ],
+      "after": [
+        "open_weight_models",
+        "config"
+      ],
+      "notes": "Bedrock/Mantle is hosted; this is configuring known context-window metadata/defaults for open-weight model families, not local provider setup."
+    },
+    {
+      "id": "openclaw-openclaw-84719",
+      "number": 84719,
+      "before": [
+        "api_surface",
+        "reliability",
+        "skills_plugins"
+      ],
+      "after": [
+        "queueing",
+        "reliability"
+      ],
+      "notes": "this does not directly relate to skills_plugins. queueing label applies as this relates to a backpressure type problem"
+    },
+    {
+      "id": "openclaw-openclaw-39248",
+      "number": 39248,
+      "before": [
+        "coding_agents",
+        "agent_runtime",
+        "sessions",
+        "sandboxing",
+        "reliability"
+      ],
+      "after": [
+        "agent_runtime",
+        "sessions",
+        "sandboxing",
+        "reliability"
+      ],
+      "notes": "it is not coding_agents as this applies to openclaw internal subagents rather than external tools."
+    },
+    {
+      "id": "openclaw-openclaw-44202",
+      "number": 44202,
+      "before": [
+        "gateway",
+        "local_models",
+        "self_hosted_inference",
+        "memory",
+        "reliability"
+      ],
+      "after": [
+        "local_models",
+        "self_hosted_inference",
+        "memory",
+        "reliability"
+      ],
+      "notes": "this issue mentions the gateway as a diagnostic point not a root cause so was removed."
+    },
+    {
+      "id": "openclaw-openclaw-80783",
+      "number": 80783,
+      "before": [
+        "config",
+        "local_model_providers",
+        "mcp_tooling",
+        "security",
+        "skills_plugins"
+      ],
+      "after": [
+        "config",
+        "local_model_providers",
+        "mcp_tooling",
+        "security"
+      ],
+      "notes": "There is no mention of skills / plugins here."
+    },
+    {
+      "id": "openclaw-openclaw-51654",
+      "number": 51654,
+      "before": [
+        "acp",
+        "acpx",
+        "sessions",
+        "auth_identity",
+        "security"
+      ],
+      "after": [
+        "acp",
+        "acpx",
+        "sessions",
+        "security"
+      ],
+      "notes": "auth_identity is intended to be used for direct auth issues or identity issues with openclaw, rather than a general term."
+    },
+    {
+      "id": "openclaw-openclaw-69256",
+      "number": 69256,
+      "before": [
+        "cron_automation",
+        "sessions",
+        "agent_runtime",
+        "coding_agents",
+        "reliability"
+      ],
+      "after": [
+        "cron_automation",
+        "sessions",
+        "agent_runtime",
+        "queueing",
+        "reliability"
+      ],
+      "notes": "coding_agents does not apply as it is not directly referring to external tool integrations. queueing applies as it relates to lock/orchestration type activities"
+    },
+    {
+      "id": "openclaw-openclaw-84746",
+      "number": 84746,
+      "before": [
+        "agent_runtime",
+        "memory",
+        "reliability",
+        "sessions"
+      ],
+      "after": [
+        "agent_runtime",
+        "reliability",
+        "sessions"
+      ],
+      "notes": "memory does not apply here - memory should be used for the specific memory features, not as a general term"
+    },
+    {
+      "id": "openclaw-openclaw-77827",
+      "number": 77827,
+      "before": [
+        "model_serving",
+        "api_surface",
+        "local_models"
+      ],
+      "after": [
+        "model_serving",
+        "api_surface",
+        "local_model_providers"
+      ],
+      "notes": "local_models does not apply as it does include a specific model or class of model. local_model_providers applies as this is about serving generally models with LM Studio via the Responses API - which is a local model provider"
+    },
+    {
+      "id": "openclaw-openclaw-55790",
+      "number": 55790,
+      "before": [
+        "coding_agents",
+        "agent_runtime",
+        "sessions",
+        "config"
+      ],
+      "after": [
+        "agent_runtime",
+        "sessions",
+        "config"
+      ],
+      "notes": "this is not coding_agents as it does not directly involve external coding agents such as gemini, codex etc. "
+    },
+    {
+      "id": "openclaw-openclaw-47285",
+      "number": 47285,
+      "before": [
+        "memory",
+        "local_model_providers",
+        "auth_identity"
+      ],
+      "after": [
+        "memory",
+        "api_surface"
+      ],
+      "notes": "it is not local_model_providers as azure is a hosted model provider. this is an update to the memory model."
+    },
+    {
+      "id": "openclaw-openclaw-84549",
+      "number": 84549,
+      "before": [
+        "local_model_providers",
+        "model_serving",
+        "skills_plugins"
+      ],
+      "after": [
+        "model_serving",
+        "config"
+      ],
+      "notes": "Only apply the `skills_plugin` if there is a specific change to that area (a mention of a review skill is not alone enough). config label applies as this PR addresses a configuration failure/bypass"
+    },
+    {
+      "id": "openclaw-openclaw-84997",
+      "number": 84997,
+      "before": [
+        "local_model_providers",
+        "auth_identity"
+      ],
+      "after": [
+        "model_serving",
+        "auth_identity"
+      ],
+      "notes": "NearAI is a cloud hosted (not local) model provider so local_model_providers does not apply."
+    },
+    {
+      "id": "openclaw-openclaw-88400",
+      "number": 88400,
+      "before": [
+        "config",
+        "local_model_providers"
+      ],
+      "after": [
+        "config",
+        "model_serving"
+      ],
+      "notes": "this is not specific to local models. this is about configuration of model_serving providers."
+    },
+    {
+      "id": "openclaw-openclaw-88816",
+      "number": 88816,
+      "before": [
+        "auth_identity",
+        "config",
+        "local_model_providers"
+      ],
+      "after": [
+        "auth_identity",
+        "config",
+        "model_serving"
+      ],
+      "notes": "Google Vertex Express is not a local_model_provider, it is a hosted service so model_serving applies"
+    },
+    {
+      "id": "openclaw-openclaw-43246",
+      "number": 43246,
+      "before": [
+        "chat_integrations",
+        "config",
+        "notifications",
+        "security"
+      ],
+      "after": [
+        "chat_integrations",
+        "config",
+        "tool_calling",
+        "security"
+      ],
+      "notes": "tool_calling applies as this relates to how tools are used. security as this relates to potential leakage. "
+    }
+  ]
+}
