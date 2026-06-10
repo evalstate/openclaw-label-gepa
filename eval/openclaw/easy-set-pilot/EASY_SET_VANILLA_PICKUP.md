@@ -182,3 +182,58 @@ python scripts/openclaw-vanilla-f1-gepa.py \
 
 Keep these easy-set-pilot-local changes local until v3 improves held-out stability.
 Only then promote rules into global legacy/shared guidance files.
+
+## Standard stability test
+
+Use the standard stability wrapper instead of hand-running three repeat evals:
+
+```bash
+python scripts/openclaw-easy-set-stability.py \
+  --input eval/openclaw/easy-set-pilot/easy-final-v2-test.jsonl \
+  --agent-card eval/openclaw/easy-set-pilot/openclaw-vanilla-labeler-v2.md \
+  --allowed-topics eval/openclaw/easy-set-pilot/allowed-topics-v2.md \
+  --seed-policy eval/openclaw/easy-set-pilot/seed-policy-vanilla-v3.md \
+  --model MODEL_ALIAS \
+  --runs 3 \
+  --parallel 4 \
+  --run-name easy-final-v2-test-MODEL-vanilla-v3-stability \
+  --overwrite
+```
+
+Specific rows:
+
+```bash
+python scripts/openclaw-easy-set-stability.py \
+  --input eval/openclaw/easy-set-pilot/easy-final-v2-test.jsonl \
+  --model MODEL_ALIAS \
+  --run-name easy-final-v2-review-rows-MODEL \
+  --row-ids openclaw-openclaw-83863 openclaw-openclaw-87277 \
+  --runs 3
+```
+
+Random sample:
+
+```bash
+python scripts/openclaw-easy-set-stability.py \
+  --input eval/openclaw/easy-set-pilot/easy-final-v2.jsonl \
+  --model MODEL_ALIAS \
+  --run-name easy-final-v2-sample40-MODEL \
+  --sample-size 40 \
+  --seed 55 \
+  --runs 3
+```
+
+Outputs:
+
+```text
+runs/openclaw-easy-set-stability/<run-name>/
+  config.json
+  selected-input.jsonl
+  repeat-01/{results.jsonl,score.json,batch-summary.json,telemetry.jsonl}
+  repeat-02/...
+  repeat-03/...
+  stability-report.json
+  stability-report.md
+  unstable-rows.jsonl
+  unstable-row-ids.txt
+```

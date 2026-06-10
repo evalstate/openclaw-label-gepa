@@ -18,6 +18,10 @@ openclaw-gepa-run = "openclaw_gepa.openclaw_gepa_run:main"
 [tool.uv]
 package = true
 
+
+[tool.uv.sources]
+gepa = { git = "https://github.com/evalstate/gepa.git", branch = "feat/trackio" }
+
 [tool.ruff]
 line-length = 120
 src = ["src", "scripts"]
