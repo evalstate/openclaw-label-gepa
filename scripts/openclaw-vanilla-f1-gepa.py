@@ -32,10 +32,17 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     p.add_argument("--seed-policy", type=Path, default=SEED_POLICY)
     p.add_argument("--static-asi", type=Path, default=None, help="Optional static ASI markdown to include in score/reflection side-info.")
+    p.add_argument(
+        "--optimizer-cues",
+        type=Path,
+        default=None,
+        help="Optional cue/reference markdown shown to GEPA reflection only; not inserted into the task AgentCard.",
+    )
     p.add_argument("--agent-card", type=Path, default=CARD)
     p.add_argument("--allowed-topics", type=Path, default=ALLOWED_TOPICS)
     p.add_argument("--plain-labels", action="store_true", help="Ask for comma-separated topic IDs instead of structured JSON.")
     p.add_argument("--run-name", default=None)
+    p.add_argument("--run-root", type=Path, default=RUN_ROOT, help="Directory under which this run directory is created.")
     p.add_argument("--parallel", type=int, default=4)
     p.add_argument("--max-metric-calls", type=int, default=12)
     p.add_argument(
@@ -72,9 +79,11 @@ def init_trackio(args: argparse.Namespace, run_name: str, run_dir: Path) -> bool
             "input": str(args.input),
             "seed_policy": str(args.seed_policy),
             "static_asi": str(args.static_asi) if args.static_asi else None,
+            "optimizer_cues": str(args.optimizer_cues) if args.optimizer_cues else None,
             "max_metric_calls": args.max_metric_calls,
             "score_mode": args.score_mode,
             "run_dir": str(run_dir),
+            "run_root": str(args.run_root),
             "score": "topic_micro_f1" if args.score_mode == "f1" else "0.50*topic_micro_f1+0.20*row_exact_accuracy+0.30*avg_row_jaccard",
             "plain_labels": args.plain_labels,
         },
@@ -149,6 +158,8 @@ def policy_hygiene(policy: str) -> dict[str, Any]:
         findings.append("Policy appears to copy or redefine the fixed cue/keyword taxonomy.")
     if len(re.findall(r"openclaw-[a-z0-9_-]+-[0-9]{3,}", lower)) >= 3:
         findings.append("Policy may contain row IDs or issue-number-specific memorization.")
+    if re.search(r"\b(easy-final|confusion-bucket|demoted rows|promotion rule|adjudicated source)\b", lower):
+        findings.append("Policy appears to include data-build or adjudication notes; keep task guidance model-facing.")
     if len(re.findall(r"(?m)^- `?[a-z][a-z0-9_]+`?:", policy)) > 25:
         findings.append("Policy has a large topic-by-topic table; prefer concise reusable rules.")
     return {
@@ -298,9 +309,28 @@ def add_vanilla_asi(report: dict[str, Any], policy: str, *, score_mode: str = "f
     return report
 
 
+def resolve_agent_card(args: argparse.Namespace) -> Path:
+    if not args.plain_labels:
+        return args.agent_card
+    if args.agent_card == CARD:
+        return PLAIN_CARD
+    if "-plain" in args.agent_card.stem:
+        return args.agent_card
+
+    name = args.agent_card.name
+    candidates = []
+    if "labeler-" in name:
+        candidates.append(args.agent_card.with_name(name.replace("labeler-", "labeler-plain-", 1)))
+    candidates.append(args.agent_card.with_name(args.agent_card.stem + "-plain" + args.agent_card.suffix))
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return args.agent_card
+
+
 def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
     plain_labels = args.plain_labels
-    agent_card = PLAIN_CARD if args.plain_labels and args.agent_card == CARD else args.agent_card
+    agent_card = resolve_agent_card(args)
     agent_name = "openclaw_vanilla_labeler_plain" if plain_labels else "openclaw_vanilla_labeler"
 
     def score_candidate(
@@ -347,12 +377,26 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
     )
 
 
-def objective_text(*, plain_labels: bool, allowed_topics: Path, score_mode: str) -> str:
+def objective_text(*, plain_labels: bool, allowed_topics: Path, score_mode: str, optimizer_cues: Path | None) -> str:
     output_contract = (
         "plain comma-separated topic-ID output contract"
         if plain_labels
         else "JSON output contract"
     )
+    cues_text = ""
+    if optimizer_cues:
+        cues_text = f"""
+
+Optimizer-only cue/reference material follows. The task model does not see this file
+unless you distill a small piece of it into the mutable policy. Use it to identify
+transferable evidence patterns and topic-boundary distinctions. Do not copy or recreate
+the cue table in the candidate policy.
+
+```md
+{optimizer_cues.read_text(encoding="utf-8").strip()}
+```
+"""
+
     return f"""Improve only the mutable OpenClaw vanilla labeler routing policy.
 
 The fixed AgentCard header, {output_contract}, schema enum, GitHub context renderer,
@@ -378,18 +422,22 @@ when a concise reusable boundary rule needs them.
 Do not include row IDs, issue numbers, exact titles, URLs, or copied examples. Do not add
 memorized issue/title/keyword tables.
 
+Do not include data-build notes, version-history commentary, teacher/adjudication
+procedure, promotion rules, or confusion-bucket bookkeeping in the task policy.
+
 The task model sees this fixed taxonomy before the mutable policy:
 
 ```md
 {allowed_topics.read_text(encoding="utf-8").strip()}
 ```
+{cues_text}
 """
 
 
 def main() -> int:
     args = parse_args()
     run_name = args.run_name or time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
-    run_dir = RUN_ROOT / run_name
+    run_dir = args.run_root / run_name
     run_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(args.input, run_dir / "input.jsonl")
     active_card = PLAIN_CARD if args.plain_labels and args.agent_card == CARD else args.agent_card
@@ -398,7 +446,14 @@ def main() -> int:
     shutil.copy2(args.allowed_topics, run_dir / "allowed-topics.md")
     if args.static_asi:
         shutil.copy2(args.static_asi, run_dir / "static-asi.md")
-    objective = objective_text(plain_labels=args.plain_labels, allowed_topics=args.allowed_topics, score_mode=args.score_mode)
+    if args.optimizer_cues:
+        shutil.copy2(args.optimizer_cues, run_dir / "optimizer-cues.md")
+    objective = objective_text(
+        plain_labels=args.plain_labels,
+        allowed_topics=args.allowed_topics,
+        score_mode=args.score_mode,
+        optimizer_cues=args.optimizer_cues,
+    )
     (run_dir / "objective.md").write_text(objective, encoding="utf-8")
     trackio_enabled = init_trackio(args, run_name, run_dir)
 

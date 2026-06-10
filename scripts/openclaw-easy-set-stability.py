@@ -39,6 +39,13 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--runs", type=int, default=3)
     p.add_argument("--parallel", type=int, default=4)
     p.add_argument("--run-name", required=True)
+    p.add_argument("--run-root", type=Path, default=STABILITY_ROOT, help="Directory under which the stability run directory is created.")
+    p.add_argument(
+        "--wrapped-run-root",
+        type=Path,
+        default=VANILLA_RUN_ROOT,
+        help="Directory for wrapped openclaw-vanilla-f1-gepa.py evaluate-only repeats.",
+    )
     p.add_argument("--plain-labels", action="store_true")
     p.add_argument("--score-mode", choices=["f1", "row-aware"], default="row-aware")
     p.add_argument("--no-trackio", action="store_true", default=True, help="Disable Trackio for repeat stability runs (default).")
@@ -143,7 +150,7 @@ def numeric_metric(score: dict[str, Any], key: str) -> float | None:
 
 def run_repeat(args: argparse.Namespace, stability_dir: Path, selected_input: Path, idx: int) -> dict[str, Any]:
     repeat_name = f"{args.run_name}-repeat-{idx:02d}"
-    vanilla_dir = VANILLA_RUN_ROOT / repeat_name
+    vanilla_dir = args.wrapped_run_root / repeat_name
     repeat_dir = stability_dir / f"repeat-{idx:02d}"
     if args.overwrite:
         shutil.rmtree(vanilla_dir, ignore_errors=True)
@@ -170,6 +177,8 @@ def run_repeat(args: argparse.Namespace, stability_dir: Path, selected_input: Pa
         args.model,
         "--run-name",
         repeat_name,
+        "--run-root",
+        str(args.wrapped_run_root),
         "--parallel",
         str(args.parallel),
         "--score-mode",
@@ -534,7 +543,7 @@ def main() -> int:
     if not selected:
         raise SystemExit("no rows selected")
 
-    stability_dir = STABILITY_ROOT / args.run_name
+    stability_dir = args.run_root / args.run_name
     if args.overwrite:
         shutil.rmtree(stability_dir, ignore_errors=True)
     stability_dir.mkdir(parents=True, exist_ok=True)
@@ -546,6 +555,8 @@ def main() -> int:
         "agent_card": str(args.agent_card),
         "allowed_topics": str(args.allowed_topics),
         "seed_policy": str(args.seed_policy),
+        "run_root": str(args.run_root),
+        "wrapped_run_root": str(args.wrapped_run_root),
         "selected_input": str(selected_input),
         "selected_rows": len(selected),
     }
