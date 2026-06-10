@@ -42,7 +42,7 @@ def parse_args() -> argparse.Namespace:
         "--score-mode",
         choices=["f1", "row-aware"],
         default="f1",
-        help="GEPA scoring mode. row-aware uses 0.70*micro-F1 + 0.20*row-exact + 0.10*row-Jaccard and exposes row metrics as frontier scores.",
+        help="GEPA scoring mode. row-aware uses 0.50*micro-F1 + 0.20*row-exact + 0.30*row-Jaccard and exposes row metrics as frontier scores.",
     )
     p.add_argument("--evaluate-only", action="store_true")
     p.add_argument("--no-trackio", action="store_true")
@@ -75,7 +75,7 @@ def init_trackio(args: argparse.Namespace, run_name: str, run_dir: Path) -> bool
             "max_metric_calls": args.max_metric_calls,
             "score_mode": args.score_mode,
             "run_dir": str(run_dir),
-            "score": "topic_micro_f1" if args.score_mode == "f1" else "0.70*topic_micro_f1+0.20*row_exact_accuracy+0.10*avg_row_jaccard",
+            "score": "topic_micro_f1" if args.score_mode == "f1" else "0.50*topic_micro_f1+0.20*row_exact_accuracy+0.30*avg_row_jaccard",
             "plain_labels": args.plain_labels,
         },
     }
@@ -179,7 +179,7 @@ def add_vanilla_asi(report: dict[str, Any], policy: str, *, score_mode: str = "f
     hygiene = policy_hygiene(policy)
 
     if score_mode == "row-aware":
-        gepa_score = 0.70 * f1 + 0.20 * row_exact + 0.10 * avg_row_jaccard
+        gepa_score = 0.50 * f1 + 0.20 * row_exact + 0.30 * avg_row_jaccard
         # Frontier-safe: all values in scores are higher-is-better.
         report["scores"] = {
             "gepa_score": gepa_score,
@@ -361,7 +361,7 @@ and allowed-topic taxonomy in `{allowed_topics}` are not editable.
 Primary objective: {
     "maximize pure topic_micro_f1 against the frozen teacher/adjudicated labels"
     if score_mode == "f1"
-    else "maximize row-aware GEPA score = 0.70*topic_micro_f1 + 0.20*row_exact_accuracy + 0.10*avg_row_jaccard"
+    else "maximize row-aware GEPA score = 0.50*topic_micro_f1 + 0.20*row_exact_accuracy + 0.30*avg_row_jaccard"
 }. Do not optimize for recall-biased F-beta. Use precision, recall, exact match,
 row Jaccard, row symdiff, cardinality, topic confusions, row examples, and
 prompt-hygiene ASI to understand how to improve reliable row-level reproduction.
