@@ -1,0 +1,87 @@
+## Boundary overlay (fixed)
+
+Classify for maintainer topic inventory, not code search. Apply these rules on
+top of the topic definitions; they are not extra labels.
+
+### Cardinality law
+
+- Use 1-3 topics by default; 4-5 only when the item is genuinely cross-cutting
+  and each topic is central. Never more than 5; if more qualify, keep the 5
+  strongest central owner boundaries. Return [] when no topic applies.
+- Include every topic whose inclusion rule is satisfied — do not drop a
+  qualifying topic to keep the output short.
+- Do not add topics supported only by changed files, tests added alongside a
+  change, examples, incidental helper code, or weak downstream consequences.
+
+### Conformance and policy rows
+
+- Allow/deny rules, conformance checks, or doctor checks: include the checked
+  domains, plus `config` when the rules/settings are operator-visible or
+  persisted; plus `security` for private-network/SSRF/credential/auth/
+  permission posture; plus `inference_api` for provider refs/catalogs/
+  routing; plus `mcp_tooling` for MCP servers/tools.
+- Work on the bundled Policy plugin (a plugin surface) requires
+  `skills_plugins`, even when model/MCP/security/config topics also apply.
+
+### Inference family
+
+`inference_api` = the API/INTEGRATION layer between OpenClaw and model
+serving/providers: Responses, Chat Completions, Anthropic Messages and similar
+inference APIs (including TTS/vision/embeddings), streaming/usage chunks,
+base-URL normalization, and adding/configuring inference providers (setup,
+auth, routing, catalogs, compatibility). `self_hosted_inference` = the ENGINE
+layer: integration with vLLM, llama.cpp, Ollama, LM Studio, TGI, LocalAI — on
+device or self-hosted elsewhere — engine setup, lifecycle, compatibility,
+crashes/timeouts, and self-hosted embeddings/speech/memory backends.
+`local_models` = the MODEL-ARTIFACT/HARDWARE layer on device: GGUF/quantization
+behavior, VRAM/hardware constraints, model-family quirks, local model
+UX/fallback/context. `model_lifecycle` = introducing, decommissioning, or
+adjusting model configurations, catalogs, and metadata. Layer test: which
+would the maintainer change to fix it — the API client, the engine hookup,
+expectations about the model/hardware, or the model catalog/config? Never
+substitute `config` or `docs` for this family when a provider/engine/model
+integration is the central subject.
+
+### High-traffic boundaries
+
+- `reliability`: timeout, crash, leak, stuck state, retry, data loss, cleanup,
+  recovery, overload, or operational failure mode as a deliverable — including
+  docs/tests whose subject is that behavior. Not a generic bug tag; CI-only
+  failures are `tests_ci`.
+- `api_surface`: external API, CLI, HTTP, SDK, or documented command contracts.
+  If the item changes WHAT an external contract promises, label api_surface
+  even when the implementation lives in the gateway or a serving endpoint.
+- `config`: schemas, persisted shape, loading/validation/repair, defaults,
+  operator-facing options, allow/deny configuration, policy settings. A config
+  key as mere mechanism of another surface does not qualify.
+- `security`: SSRF, private-network access, credential/auth boundaries,
+  permissions, secret leakage, sandbox escape, supply-chain hardening, access
+  control. Credential/auth-boundary rows take `security` AND `auth_identity`
+  (mechanics); isolation behavior also takes `sandboxing`.
+- `coding_agents` vs `agent_runtime`: subagents, coding-agent runs, harness
+  behavior, compaction, tool-use approvals, agent sandboxing, and agent
+  orchestration → `coding_agents` (external backend NOT required). Runtime
+  machinery — startup, loop, backends, model-call orchestration, runtime
+  adapters, execution architecture → `agent_runtime`. Co-label only when both
+  layers are central.
+- `acpx`/`acp`: ACPX worker/transport/binding internals → `acpx`; add `acp`
+  when protocol-level binding/override/delivery semantics are involved. ACPX
+  internals alone do not imply `agent_runtime` or `exec_tools`.
+- `queueing`: queues, lanes, scheduling, ordering, work dispatch; locks that
+  gate dispatch/pending-running state count, a mutex implementation detail
+  does not. Keep the co-label when lane/lock/state mechanics change inside a
+  session or ACP flow.
+- `notifications`: outbound notifications, completion delivery, delivery
+  gates, announcements. A chat-surface change that implements or alters a
+  delivery payload/path takes notifications alongside the chat label.
+- `hooks` vs `skills_plugins`: channel/event hooks are `hooks` (+ the chat
+  surface); `skills_plugins` only when plugin SDK/loading/manifest or a skill/
+  plugin surface (including the Policy plugin) is changed, validated, or given
+  doctor/check behavior.
+- `docs`: only when documentation itself is the subject — and a docs-only item
+  still carries the product topic whose behavior is centrally documented.
+- `tool_calling`: tool-call protocol, function/tool schemas, result transcript
+  handling, tool-call rendering; parameter coercion for tool invocation counts,
+  even inside an MCP bundle.
+- `hf_agents`, `hub_workflows`, `post_training`, `agent_demos`: use sparingly,
+  only as the unambiguous central subject.

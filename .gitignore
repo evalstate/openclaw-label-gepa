@@ -60,3 +60,8 @@ Thumbs.db
 *.swo
 eval/openclaw/splits/validation-random-*.jsonl
 reference/
+
+# Local data and logs (v6)
+refdata/
+fast-agent-log.jsonl
+fastagent.jsonl

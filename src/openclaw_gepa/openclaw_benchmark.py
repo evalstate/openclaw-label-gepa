@@ -111,6 +111,70 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fp": "Tighten auth_identity: require auth profile, token, credential, identity, permission, or account boundary. Exclude generic provider config or security wording without identity/auth mechanics.",
         "fn": "Add auth_identity for auth profiles, tokens, credentials, account identity, permission checks, login/session identity, or auth-bound routing.",
     },
+    "self_hosted_inference": {
+        "fp": "Tighten self_hosted_inference: require self-operated inference services or locally operated inference backends, including embeddings, speech, or memory providers. Exclude ordinary hosted cloud providers, generic local provider config, or endpoint protocol behavior better covered by model_serving.",
+        "fn": "Add self_hosted_inference when self-hosted inference backends, private/local inference servers, self-hosted embeddings/speech/memory providers, proxy bypass for private inference, or operator-run inference services are central.",
+    },
+    "open_weight_models": {
+        "fp": "Tighten open_weight_models: require open-weight model families, weights, quantization, context metadata for open-weight families, packaging/deployability, or hosted catalogs of open-weight models. Do not add merely because a provider serves a named model.",
+        "fn": "Add open_weight_models when named open-weight families, model weights, GGUF/quantization, context windows for open-weight models, model cards/checkpoints, or open-weight catalog metadata are central.",
+    },
+    "model_releases": {
+        "fp": "Tighten model_releases: require new, renamed, deprecated, or version-specific model availability, provider catalog updates, release metadata, or release tracking. Do not add merely because a model name appears.",
+        "fn": "Add model_releases when adding/removing/updating model IDs, provider catalogs, release notes, model-family availability, version-specific model support, or deprecation/rename behavior is central.",
+    },
+    "acp": {
+        "fp": "Tighten acp: require ACP protocol/runtime/session binding/delivery semantics. Do not add merely because an item mentions an agent session or internal runtime behavior.",
+        "fn": "Add acp when ACP protocol, ACP session tools, ACP binding, ACP parent/child delivery, ACP blocks, acp_send, sessions_spawn/cancel, or ACP client/server compatibility is central.",
+    },
+    "acpx": {
+        "fp": "Tighten acpx: require ACPX-specific runtime, proxy, backend, worker, transport, configured binding, command, auth, or compatibility behavior. Do not use for generic ACP issues.",
+        "fn": "Add acpx when files, commands, runtime paths, worker/proxy behavior, transport, configured binding, HMAC/auth, or compatibility are explicitly ACPX-specific.",
+    },
+    "codex": {
+        "fp": "Tighten codex: require the Codex runtime, Codex CLI, Codex ACP, Codex auth, Codex command compatibility, or Codex harness behavior. Do not add merely because a coding-agent-like workflow is discussed.",
+        "fn": "Add codex when Codex-specific runtime behavior, auth, ACP integration, command execution, plugin behavior, or harness compatibility is central.",
+    },
+    "mcp_tooling": {
+        "fp": "Tighten mcp_tooling: require MCP server/client behavior, MCP config, tool/resource/prompt listing, tool invocation, handshake, routing, allow/deny policy, or MCP conformance. Do not add merely because MCP appears in examples or incidental config.",
+        "fn": "Add mcp_tooling for MCP servers/clients, tools/list, resources/list, prompts/list, MCP tool routing, MCP config, MCP allow/deny rules, MCP conformance checks, or MCP invocation compatibility.",
+    },
+    "approvals": {
+        "fp": "Tighten approvals: require approval prompts, approve/deny decisions, permission modes, pending approval state, approval policy checks, or approval UI/commands. Do not add merely because a command or tool might require permission.",
+        "fn": "Add approvals when permission decisions, approval mode behavior, approve/reject flow, approval queues/state, exec approvals, or tool allow/deny decisions are central.",
+    },
+    "sandboxing": {
+        "fp": "Tighten sandboxing: require containment or isolation behavior such as sandbox policy, inherited sandbox state, filesystem/process/container boundaries, sandbox escape, volumes, or runtime isolation. Do not add merely because command execution or security is mentioned.",
+        "fn": "Add sandboxing when sandbox inheritance, sandbox escape/prevention, path isolation, containers, filesystem hiding, process limits, Docker/bubblewrap, or workspace boundary behavior is central.",
+    },
+    "hooks": {
+        "fp": "Tighten hooks: require hook registration, lifecycle, trigger filtering, priority/order, payload shape, hook execution, hook security, or managed hook behavior. Do not add for generic plugin behavior unless hook mechanics are the owner surface.",
+        "fn": "Add hooks when before/after lifecycle events, hook priority, hook ingress, hook payload validation, hook execution policy, managed hooks, or hook security are central.",
+    },
+    "cron_automation": {
+        "fp": "Tighten cron_automation: require scheduled, recurring, or one-shot automation, cron jobs, force-run behavior, or job lifecycle. Do not add merely because an agent/runtime heartbeat is mentioned.",
+        "fn": "Add cron_automation when cron jobs, scheduled runs, recurring task execution, force-run, deleteAfterRun, at-jobs, heartbeat automation jobs, or scheduler behavior is central.",
+    },
+    "memory": {
+        "fp": "Tighten memory: require memory systems such as indexing, recall, active memory, embeddings/vector stores, memory provider state, archival, or recovery. Do not add merely for context window, session state, transcript, or generic remembering.",
+        "fn": "Add memory when memory indexing/search, active-memory recall, embeddings, vector/LanceDB storage, memory provider config/state, archive/recovery, or memory hook behavior is central.",
+    },
+    "security": {
+        "fp": "Tighten security: require concrete security posture such as SSRF/private network access, secrets/credentials/token leakage, auth hardening, permission boundaries, sandbox escape, vulnerability prevention, supply-chain hardening, redaction, or unsafe access control. Do not add for generic privacy preferences or ordinary auth/profile configuration without security risk.",
+        "fn": "Add security when SSRF, private/internal network access, credential/secret/token exposure, HMAC/signature hardening, unsafe permissions, sandbox escape, vulnerability mitigation, redaction, supply-chain hardening, or access-control enforcement is central.",
+    },
+    "queueing": {
+        "fp": "Tighten queueing: require queues, lanes, locks, pending/running state, scheduling, ordering, dispatch, backpressure, or stuck work queues. Do not add for any async/background task unless queue mechanics are the owner boundary.",
+        "fn": "Add queueing when task queues, lanes, follow-up queues, run ordering, work dispatch, locks, pending/running state, backpressure, or stuck queue behavior is central.",
+    },
+    "docs": {
+        "fp": "Tighten docs: require documentation, guides, README/reference text, spelling, taxonomy wording, or explanatory content to be the central subject. Do not add merely because docs are updated alongside implementation.",
+        "fn": "Add docs when the item's main subject is documentation, examples/guides as docs, README/reference changes, explanatory text, taxonomy wording, or doc-only corrections.",
+    },
+    "packaging_deployment": {
+        "fp": "Tighten packaging_deployment: require packaging, installers, release artifacts, Docker images, service managers, build distribution, dependency packaging, or deployment/runtime distribution. Do not add for ordinary runtime config.",
+        "fn": "Add packaging_deployment when build/package/release artifacts, Docker images, SEA/single executable, systemd/launchd service files, installer behavior, dependency packaging, or deployment paths are central.",
+    },
 }
 
 
@@ -381,6 +445,49 @@ def failure_example(
         "evidence_excerpt": evidence_excerpt(inp.get("github_context") or ""),
         "row_score": round(row_score, 3),
     }
+
+
+def load_topic_hints_from_guidance(path: Path | str) -> dict[str, dict[str, str]]:
+    """Replace TOPIC_HINTS from a frozen boundary-guidance markdown file.
+
+    Makes the markdown spec the single source of truth for the dynamic-ASI
+    topic hints. Parses `## \\`topic\\`` sections. Recognized bullet labels:
+    `MUST include:` / `False-negative guard:` become the `fn` hint (when to
+    add the topic) and `Do not include:` / `False-positive guard:` become the
+    `fp` hint (when to withhold it). Any additional bullets in a section
+    (decision rules, co-label and version notes) are appended to both
+    directions.
+    """
+    text = Path(path).read_text(encoding="utf-8")
+    parsed: dict[str, dict[str, str]] = {}
+    section_re = re.compile(r"(?m)^## `([a-z][a-z0-9_]+)`[^\n]*\n(.*?)(?=^## |\Z)", re.S)
+    bullet_re = re.compile(r"(?m)^- (.*?)(?=^- |\Z)", re.S)
+    for match in section_re.finditer(text):
+        topic, body = match.group(1), match.group(2)
+        fp = fn = ""
+        extras: list[str] = []
+        for bullet in bullet_re.findall(body):
+            flat = " ".join(bullet.split())
+            lower = flat.lower()
+            if lower.startswith(("false-positive guard:", "do not include:")):
+                guard = flat.split(":", 1)[1].strip()
+                fp = guard if not fp else f"{fp} {guard}"
+            elif lower.startswith(("false-negative guard:", "must include:")):
+                rule = flat.split(":", 1)[1].strip()
+                if lower.startswith("must include:"):
+                    rule = f"MUST include when central: {rule}"
+                fn = rule if not fn else f"{fn} {rule}"
+            elif flat:
+                extras.append(flat)
+        if not fp and not fn:
+            continue
+        suffix = (" " + " ".join(extras)) if extras else ""
+        parsed[topic] = {"fp": (fp + suffix).strip(), "fn": (fn + suffix).strip()}
+    if not parsed:
+        raise ValueError(f"No `## \\`topic\\`` guard sections parsed from {path}")
+    TOPIC_HINTS.clear()
+    TOPIC_HINTS.update(parsed)
+    return parsed
 
 
 def topic_hint(topic: str, problem: str) -> str:
