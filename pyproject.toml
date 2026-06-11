@@ -3,11 +3,9 @@ name = "openclaw-gepa"
 version = "0.1.0"
 description = "fast-agent + GEPA + Trackio optimization scaffold"
 readme = "README.md"
-requires-python = ">=3.10,<3.15"
+requires-python = ">=3.13.5,<3.15"
 dependencies = [
-  "fast-agent-mcp",
-  "gepa",
-  "trackio",
+  "fast-agent-mcp[gepa]",
 ]
 
 [project.scripts]
@@ -20,7 +18,10 @@ package = true
 
 
 [tool.uv.sources]
-gepa = { git = "https://github.com/evalstate/gepa.git", branch = "feat/trackio" }
+# Local dev branch (dev/0.7.18) for the RowWise GEPA adapter and trackio batch
+# monitoring; the [gepa] extra pulls gepa@feat/trackio + trackio>=0.26.0.
+# When fast-agent-mcp >= 0.7.17 lands on PyPI, delete this source override.
+fast-agent-mcp = { path = "/home/ssmith/source/fast-agent-pr", editable = true }
 
 [tool.ruff]
 line-length = 120
