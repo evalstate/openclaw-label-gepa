@@ -176,12 +176,11 @@ Builder asserts (code-level, build fails loudly):
 - stability gate verified per row (3/3 gpt-5.5 exact-set + Opus match, or an
   adjudication record)
 - every label that differs from v5 gold traceable to a decision record
-- rows carrying no-MUST-rule topics (`hf_agents`, `hub_workflows`,
-  `post_training`, `agent_demos`) flagged for review
-- no v4-era labels (`model_serving`, `local_model_providers`,
-  `open_weight_models`, `model_releases`) in any v6 output; relabel diffs on
-  the inference family compared via the changelog crosswalk, not as plain
-  flips
+- no retired labels in any v6 output (`model_serving`,
+  `local_model_providers`, `open_weight_models`, `model_releases`,
+  `hf_agents`, `hub_workflows`, `post_training`, `agent_demos`); relabel
+  diffs on the inference family compared via the changelog crosswalk, not as
+  plain flips
 - cardinality-distribution sanity report vs v5 (avg expected ~3.3)
 
 Judge audit (recorded artifact, not recomputed): on every flipped row plus a

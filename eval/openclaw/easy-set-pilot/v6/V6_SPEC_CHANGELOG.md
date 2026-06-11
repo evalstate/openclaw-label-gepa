@@ -48,6 +48,10 @@ cluster):
   `model_lifecycle`; on-device artifact behavior → `local_models`).
 - `model_releases` → `model_lifecycle`: introduction, decommissioning, or
   adjustment of model configurations.
+- `hf_agents`, `hub_workflows`, `post_training`, `agent_demos` → removed
+  entirely (no maintainer MUST rule, near-zero traffic: 1 occurrence of
+  `agent_demos` in 195 v5 gold rows, zero for the others). Final v6 enum: 34
+  topics.
 
 Crosswalk for relabel comparison and v5-gold migration:
 

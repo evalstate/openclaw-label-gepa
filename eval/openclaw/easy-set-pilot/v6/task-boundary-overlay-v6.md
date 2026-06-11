@@ -83,5 +83,3 @@ integration is the central subject.
 - `tool_calling`: tool-call protocol, function/tool schemas, result transcript
   handling, tool-call rendering; parameter coercion for tool invocation counts,
   even inside an MCP bundle.
-- `hf_agents`, `hub_workflows`, `post_training`, `agent_demos`: use sparingly,
-  only as the unambiguous central subject.

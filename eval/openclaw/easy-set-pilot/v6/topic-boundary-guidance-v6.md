@@ -338,8 +338,3 @@ provider/engine/model integration is the central subject.
 - Co-label: parameter coercion/normalization for tool invocation is
   tool_calling, even inside an MCP bundle or adapter.
 
-## Low-traffic topics
-
-`hf_agents`, `hub_workflows`, `post_training`, and `agent_demos` have no MUST
-rule. Use them sparingly and only when the topic is unambiguously the central
-subject.

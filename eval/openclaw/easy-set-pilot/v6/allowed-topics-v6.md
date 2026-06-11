@@ -12,11 +12,7 @@ maintainer-routing concern, not by keyword match.
   "acp",
   "coding_agents",
   "mcp_tooling",
-  "hf_agents",
-  "hub_workflows",
-  "post_training",
   "model_lifecycle",
-  "agent_demos",
   "codex",
   "agent_runtime",
   "sessions",
@@ -55,11 +51,7 @@ maintainer-routing concern, not by keyword match.
 - `acp`: ACP protocol features, ACP sessions, binding, parent/child behavior, and delivery semantics that are not necessarily ACPX-specific.
 - `coding_agents`: Coding-agent behavior: subagents, coding-agent runs, agent harness behavior, compaction, tool-use approvals, sandboxing for agents, and agent orchestration. Includes external backends (Codex, Claude Code, Gemini CLI, Pi) and internal OpenClaw subagent orchestration alike; runtime machinery alone belongs to `agent_runtime`.
 - `mcp_tooling`: MCP server or client behavior, MCP allow/deny rules, conformance checks, handshake/tool behavior, MCP config, tools/list and resources, and tool invocation compatibility.
-- `hf_agents`: Hugging Face agent workflows, Spaces, Hub agent demos, or HF-specific agent integrations.
-- `hub_workflows`: Hub automation for datasets, models, Spaces, releases, and repository synchronization.
-- `post_training`: Fine-tuning, preference optimization, evaluation loops, and data generation after pretraining.
 - `model_lifecycle`: Introduction, decommissioning, or adjustment of model configurations: adding/removing/renaming model IDs, catalog and default updates, deprecations, version-specific model support, and model metadata (context windows, quantization variants) changes.
-- `agent_demos`: Demo workflows and visible examples for agents.
 - `codex`: Items that explicitly involve the Codex runtime, Codex auth, Codex ACP, Codex plugin, or Codex command compatibility.
 - `agent_runtime`: Agent runtime machinery: runtime startup, loop, backends, model call orchestration, runtime adapter behavior, and runtime ownership/execution architecture. Agent-level subagent/orchestration behavior belongs to `coding_agents`.
 - `sessions`: Session identity, lifecycle, persistence, binding, transcript, resume, reset, cleanup, parent/child session behavior, and session stores.
