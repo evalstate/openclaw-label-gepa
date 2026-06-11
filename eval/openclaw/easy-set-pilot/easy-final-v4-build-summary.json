@@ -1,0 +1,174 @@
+{
+  "source": "easy-final-v3.jsonl",
+  "rows_before": 141,
+  "easy_final_v4_rows": 125,
+  "confusion_bucket_rows": 16,
+  "demoted_ids": [
+    "openclaw-openclaw-70529",
+    "openclaw-openclaw-83982",
+    "openclaw-openclaw-47083",
+    "openclaw-openclaw-51849",
+    "openclaw-openclaw-84697",
+    "openclaw-openclaw-77748",
+    "openclaw-openclaw-84637",
+    "openclaw-openclaw-81957",
+    "openclaw-openclaw-85999",
+    "openclaw-openclaw-81249",
+    "openclaw-openclaw-84301",
+    "openclaw-openclaw-77694",
+    "openclaw-openclaw-43564",
+    "openclaw-openclaw-78977",
+    "openclaw-openclaw-39714",
+    "openclaw-openclaw-69669"
+  ],
+  "demoted_by_original_split": {
+    "test": 10,
+    "train": 6
+  },
+  "demoted_metrics": [
+    {
+      "id": "openclaw-openclaw-70529",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.35,
+      "avg_symdiff": 2.75,
+      "unique_prediction_sets": 4,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-83982",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.35416666666666663,
+      "avg_symdiff": 2.25,
+      "unique_prediction_sets": 4,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-47083",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.375,
+      "avg_symdiff": 2.0,
+      "unique_prediction_sets": 4,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-51849",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.375,
+      "avg_symdiff": 1.25,
+      "unique_prediction_sets": 2,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-84697",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.3958333333333333,
+      "avg_symdiff": 2.0,
+      "unique_prediction_sets": 4,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-77748",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.3988095238095238,
+      "avg_symdiff": 3.5,
+      "unique_prediction_sets": 4,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-84637",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.4375,
+      "avg_symdiff": 2.5,
+      "unique_prediction_sets": 4,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-81957",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.4375,
+      "avg_symdiff": 2.25,
+      "unique_prediction_sets": 3,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-85999",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.4375,
+      "avg_symdiff": 2.25,
+      "unique_prediction_sets": 3,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-81249",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.45,
+      "avg_symdiff": 2.5,
+      "unique_prediction_sets": 4,
+      "observations": 4,
+      "analysis_split": "test"
+    },
+    {
+      "id": "openclaw-openclaw-84301",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.38702380952380955,
+      "avg_symdiff": 2.8833333333333333,
+      "unique_prediction_sets": 20,
+      "observations": 60,
+      "analysis_split": "train"
+    },
+    {
+      "id": "openclaw-openclaw-77694",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.4652777777777778,
+      "avg_symdiff": 2.216666666666667,
+      "unique_prediction_sets": 12,
+      "observations": 60,
+      "analysis_split": "train"
+    },
+    {
+      "id": "openclaw-openclaw-43564",
+      "exact_rate": 0.0,
+      "avg_jaccard": 0.49166666666666664,
+      "avg_symdiff": 2.216666666666667,
+      "unique_prediction_sets": 8,
+      "observations": 60,
+      "analysis_split": "train"
+    },
+    {
+      "id": "openclaw-openclaw-78977",
+      "exact_rate": 0.016666666666666666,
+      "avg_jaccard": 0.3486111111111111,
+      "avg_symdiff": 1.7166666666666666,
+      "unique_prediction_sets": 11,
+      "observations": 60,
+      "analysis_split": "train"
+    },
+    {
+      "id": "openclaw-openclaw-39714",
+      "exact_rate": 0.016666666666666666,
+      "avg_jaccard": 0.49916666666666665,
+      "avg_symdiff": 1.8333333333333333,
+      "unique_prediction_sets": 9,
+      "observations": 60,
+      "analysis_split": "train"
+    },
+    {
+      "id": "openclaw-openclaw-69669",
+      "exact_rate": 0.016666666666666666,
+      "avg_jaccard": 0.49916666666666665,
+      "avg_symdiff": 2.0166666666666666,
+      "unique_prediction_sets": 6,
+      "observations": 60,
+      "analysis_split": "train"
+    }
+  ]
+}

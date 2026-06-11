@@ -1,0 +1,28 @@
+name: gemma-e4
+provider: openresponses
+model: google/gemma-4-E4B-it
+connection:
+  base_url: https://chapel-your-phys-thumb.trycloudflare.com/v1
+  auth: none
+  default_headers: {}
+defaults:
+  temperature: 0
+metadata:
+  context_window: 131072
+  max_output_tokens: 8192
+  tokenizes:
+  - text/plain
+  - image/jpeg
+  - image/png
+  - image/webp
+  json_mode: object
+  structured_tool_policy: defer
+  model_specific: |
+    Gemma E4 served through a Responses-compatible vLLM endpoint.
+    For structured responses, return raw JSON only: no markdown fences, prose, or extra text.
+picker:
+  label: Gemma E4
+  description: google/gemma-4-E4B-it via Cloudflare Responses endpoint
+  current: false
+  featured: false
+  

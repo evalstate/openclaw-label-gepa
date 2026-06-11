@@ -268,11 +268,11 @@ def run_direct_batch_repeat(
     shutil.copy2(args.template, repeat_dir / "template.md")
     if args.schema and args.schema.exists():
         shutil.copy2(args.schema, repeat_dir / "schema.json")
-    score_direct_repeat(selected_input, output, repeat_dir / "score.json")
+    score_direct_repeat(selected_input, output, repeat_dir / "score.json", args.score_mode)
     return {"repeat": idx, "run_name": repeat_name, "vanilla_run_dir": None, "repeat_dir": str(repeat_dir), "status": "complete"}
 
 
-def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path) -> None:
+def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path, score_mode: str) -> None:
     expected = {row["id"]: expected_topics(row) for row in load_jsonl(input_path)}
     rows = load_jsonl(result_path)
     tp = fp = fn = exact = 0
@@ -315,22 +315,28 @@ def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path) -
     recall = tp / (tp + fn) if tp + fn else 1.0
     f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
     avg_sym = mean(row_symdiffs) if row_symdiffs else 0.0
+    row_exact = exact / max(len(expected), 1)
+    avg_jaccard = mean(row_jaccards) if row_jaccards else 0.0
+    if score_mode == "row-aware":
+        gepa_score = 0.50 * f1 + 0.20 * row_exact + 0.30 * avg_jaccard
+    else:
+        gepa_score = 0.70 * f1 + 0.20 * row_exact + 0.10 * avg_jaccard
     report = {
-        "score": 0.70 * f1 + 0.20 * (exact / max(len(expected), 1)) + 0.10 * (mean(row_jaccards) if row_jaccards else 0.0),
+        "score": gepa_score,
         "side_info": {
             "scores": {
-                "gepa_score": 0.70 * f1 + 0.20 * (exact / max(len(expected), 1)) + 0.10 * (mean(row_jaccards) if row_jaccards else 0.0),
+                "gepa_score": gepa_score,
                 "topic_micro_f1": f1,
-                "row_exact_accuracy": exact / max(len(expected), 1),
-                "avg_row_jaccard": mean(row_jaccards) if row_jaccards else 0.0,
+                "row_exact_accuracy": row_exact,
+                "avg_row_jaccard": avg_jaccard,
                 "row_symdiff_score": 1.0 / (1.0 + avg_sym),
             },
             "score_details": {
                 "topic_micro_precision": precision,
                 "topic_micro_recall": recall,
-                "exact_match": exact / max(len(expected), 1),
-                "row_exact_accuracy": exact / max(len(expected), 1),
-                "avg_row_jaccard": mean(row_jaccards) if row_jaccards else 0.0,
+                "exact_match": row_exact,
+                "row_exact_accuracy": row_exact,
+                "avg_row_jaccard": avg_jaccard,
                 "avg_row_symdiff": avg_sym,
                 "valid_json": valid / max(len(expected), 1),
                 "false_positives": fp,

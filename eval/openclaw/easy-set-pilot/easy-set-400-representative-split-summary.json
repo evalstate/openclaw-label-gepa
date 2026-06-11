@@ -1,0 +1,670 @@
+{
+  "input": "eval/openclaw/easy-set-pilot/easy-set-400.jsonl",
+  "output_prefix": "eval/openclaw/easy-set-pilot/easy-set-400-representative",
+  "seed": 20260610,
+  "objective": 92.90757145385092,
+  "rows": 126,
+  "sizes": {
+    "train": 88,
+    "dev": 19,
+    "test": 19
+  },
+  "fractions": {
+    "train": 0.6984126984126984,
+    "dev": 0.15079365079365079,
+    "test": 0.15079365079365079
+  },
+  "counts": {
+    "train": {
+      "topic": {
+        "acp": 20,
+        "acpx": 11,
+        "agent_runtime": 9,
+        "api_surface": 2,
+        "approvals": 8,
+        "auth_identity": 10,
+        "browser_automation": 2,
+        "chat_integrations": 16,
+        "codex": 8,
+        "config": 15,
+        "cron_automation": 6,
+        "docs": 4,
+        "exec_tools": 9,
+        "gateway": 13,
+        "hooks": 7,
+        "local_model_providers": 2,
+        "local_models": 1,
+        "mcp_tooling": 4,
+        "memory": 9,
+        "model_releases": 1,
+        "model_serving": 4,
+        "notifications": 9,
+        "packaging_deployment": 2,
+        "queueing": 5,
+        "reliability": 38,
+        "sandboxing": 1,
+        "security": 12,
+        "self_hosted_inference": 2,
+        "sessions": 29,
+        "skills_plugins": 1,
+        "telemetry_usage": 4,
+        "tests_ci": 7,
+        "tool_calling": 3,
+        "ui_tui": 11
+      },
+      "item_type": {
+        "github_issue": 37,
+        "github_pr": 51
+      },
+      "source": {
+        "new": 1,
+        "v4": 87
+      },
+      "confusion_family": {
+        "acp+acpx": 6,
+        "acp+agent_runtime": 2,
+        "acp+agent_runtime+sessions": 1,
+        "acp+coding_agents": 2,
+        "acp+sessions": 8,
+        "acpx+sessions": 1,
+        "agent_runtime+sessions": 1,
+        "chat_integrations+notifications": 2,
+        "chat_integrations+reliability": 3,
+        "coding_agents+sessions": 1,
+        "local_models+model_serving": 1,
+        "memory+reliability": 4,
+        "memory+reliability+sessions": 1,
+        "memory+sessions": 1,
+        "notifications+reliability": 1,
+        "reliability+sessions": 6
+      },
+      "label_count": {
+        "1": 3,
+        "2": 15,
+        "3": 37,
+        "4": 24,
+        "5": 9
+      }
+    },
+    "dev": {
+      "topic": {
+        "acp": 3,
+        "acpx": 2,
+        "agent_runtime": 2,
+        "api_surface": 1,
+        "approvals": 1,
+        "auth_identity": 2,
+        "browser_automation": 1,
+        "chat_integrations": 4,
+        "codex": 2,
+        "config": 2,
+        "cron_automation": 1,
+        "docs": 1,
+        "exec_tools": 1,
+        "gateway": 3,
+        "hooks": 1,
+        "local_model_providers": 1,
+        "local_models": 1,
+        "mcp_tooling": 1,
+        "memory": 2,
+        "model_serving": 1,
+        "notifications": 2,
+        "packaging_deployment": 1,
+        "queueing": 1,
+        "reliability": 7,
+        "sandboxing": 1,
+        "security": 3,
+        "self_hosted_inference": 1,
+        "sessions": 5,
+        "skills_plugins": 1,
+        "telemetry_usage": 1,
+        "tests_ci": 1,
+        "tool_calling": 1,
+        "ui_tui": 3
+      },
+      "item_type": {
+        "github_issue": 10,
+        "github_pr": 9
+      },
+      "source": {
+        "v4": 19
+      },
+      "confusion_family": {
+        "acp+acpx": 1,
+        "acp+sessions": 2,
+        "chat_integrations+notifications": 1,
+        "chat_integrations+reliability": 1,
+        "local_models+self_hosted_inference": 1,
+        "mcp_tooling+tool_calling": 1,
+        "memory+reliability": 1,
+        "reliability+sessions": 1
+      },
+      "label_count": {
+        "1": 1,
+        "2": 2,
+        "3": 9,
+        "4": 6,
+        "5": 1
+      }
+    },
+    "test": {
+      "topic": {
+        "acp": 3,
+        "acpx": 2,
+        "agent_runtime": 1,
+        "api_surface": 1,
+        "approvals": 1,
+        "auth_identity": 2,
+        "browser_automation": 1,
+        "chat_integrations": 3,
+        "codex": 2,
+        "config": 3,
+        "cron_automation": 2,
+        "docs": 1,
+        "exec_tools": 1,
+        "gateway": 2,
+        "hooks": 1,
+        "local_model_providers": 1,
+        "local_models": 1,
+        "mcp_tooling": 1,
+        "memory": 2,
+        "model_serving": 1,
+        "notifications": 1,
+        "packaging_deployment": 2,
+        "queueing": 1,
+        "reliability": 9,
+        "sandboxing": 1,
+        "security": 4,
+        "self_hosted_inference": 2,
+        "sessions": 5,
+        "skills_plugins": 2,
+        "telemetry_usage": 2,
+        "tests_ci": 1,
+        "tool_calling": 1,
+        "ui_tui": 2
+      },
+      "item_type": {
+        "github_issue": 9,
+        "github_pr": 10
+      },
+      "source": {
+        "v4": 19
+      },
+      "confusion_family": {
+        "acp+sessions": 2,
+        "chat_integrations+reliability": 1,
+        "local_model_providers+local_models": 1,
+        "local_model_providers+self_hosted_inference": 1,
+        "memory+reliability": 1,
+        "reliability+sessions": 1
+      },
+      "label_count": {
+        "2": 2,
+        "3": 8,
+        "4": 8,
+        "5": 1
+      }
+    }
+  },
+  "deviations": {
+    "topic": {
+      "acp": {
+        "train": 1.8412698412698418,
+        "dev": -0.9206349206349205,
+        "test": -0.9206349206349205
+      },
+      "acpx": {
+        "train": 0.5238095238095237,
+        "dev": -0.26190476190476186,
+        "test": -0.26190476190476186
+      },
+      "agent_runtime": {
+        "train": 0.6190476190476186,
+        "dev": 0.19047619047619047,
+        "test": -0.8095238095238095
+      },
+      "api_surface": {
+        "train": -0.7936507936507935,
+        "dev": 0.39682539682539686,
+        "test": 0.39682539682539686
+      },
+      "approvals": {
+        "train": 1.0158730158730158,
+        "dev": -0.5079365079365079,
+        "test": -0.5079365079365079
+      },
+      "auth_identity": {
+        "train": 0.22222222222222143,
+        "dev": -0.11111111111111116,
+        "test": -0.11111111111111116
+      },
+      "browser_automation": {
+        "train": -0.7936507936507935,
+        "dev": 0.39682539682539686,
+        "test": 0.39682539682539686
+      },
+      "chat_integrations": {
+        "train": -0.06349206349206327,
+        "dev": 0.5317460317460316,
+        "test": -0.46825396825396837
+      },
+      "codex": {
+        "train": -0.3809523809523814,
+        "dev": 0.19047619047619047,
+        "test": 0.19047619047619047
+      },
+      "config": {
+        "train": 1.0317460317460316,
+        "dev": -1.0158730158730158,
+        "test": -0.015873015873015817
+      },
+      "cron_automation": {
+        "train": -0.2857142857142856,
+        "dev": -0.3571428571428572,
+        "test": 0.6428571428571428
+      },
+      "docs": {
+        "train": -0.1904761904761907,
+        "dev": 0.09523809523809523,
+        "test": 0.09523809523809523
+      },
+      "exec_tools": {
+        "train": 1.3174603174603172,
+        "dev": -0.6587301587301588,
+        "test": -0.6587301587301588
+      },
+      "gateway": {
+        "train": 0.4285714285714288,
+        "dev": 0.2857142857142856,
+        "test": -0.7142857142857144
+      },
+      "hooks": {
+        "train": 0.7142857142857144,
+        "dev": -0.3571428571428572,
+        "test": -0.3571428571428572
+      },
+      "local_model_providers": {
+        "train": -0.7936507936507935,
+        "dev": 0.39682539682539686,
+        "test": 0.39682539682539686
+      },
+      "local_models": {
+        "train": -1.0952380952380953,
+        "dev": 0.5476190476190477,
+        "test": 0.5476190476190477
+      },
+      "mcp_tooling": {
+        "train": -0.1904761904761907,
+        "dev": 0.09523809523809523,
+        "test": 0.09523809523809523
+      },
+      "memory": {
+        "train": -0.07936507936507908,
+        "dev": 0.039682539682539764,
+        "test": 0.039682539682539764
+      },
+      "model_releases": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "model_serving": {
+        "train": -0.1904761904761907,
+        "dev": 0.09523809523809523,
+        "test": 0.09523809523809523
+      },
+      "notifications": {
+        "train": 0.6190476190476186,
+        "dev": 0.19047619047619047,
+        "test": -0.8095238095238095
+      },
+      "packaging_deployment": {
+        "train": -1.492063492063492,
+        "dev": 0.24603174603174605,
+        "test": 1.246031746031746
+      },
+      "queueing": {
+        "train": 0.11111111111111072,
+        "dev": -0.05555555555555558,
+        "test": -0.05555555555555558
+      },
+      "reliability": {
+        "train": 0.2857142857142847,
+        "dev": -1.1428571428571423,
+        "test": 0.8571428571428577
+      },
+      "sandboxing": {
+        "train": -1.0952380952380953,
+        "dev": 0.5476190476190477,
+        "test": 0.5476190476190477
+      },
+      "security": {
+        "train": -1.2698412698412707,
+        "dev": 0.13492063492063489,
+        "test": 1.1349206349206349
+      },
+      "self_hosted_inference": {
+        "train": -1.492063492063492,
+        "dev": 0.24603174603174605,
+        "test": 1.246031746031746
+      },
+      "sessions": {
+        "train": 1.7619047619047628,
+        "dev": -0.8809523809523814,
+        "test": -0.8809523809523814
+      },
+      "skills_plugins": {
+        "train": -1.7936507936507935,
+        "dev": 0.39682539682539686,
+        "test": 1.3968253968253967
+      },
+      "telemetry_usage": {
+        "train": -0.8888888888888893,
+        "dev": -0.05555555555555558,
+        "test": 0.9444444444444444
+      },
+      "tests_ci": {
+        "train": 0.7142857142857144,
+        "dev": -0.3571428571428572,
+        "test": -0.3571428571428572
+      },
+      "tool_calling": {
+        "train": -0.4920634920634921,
+        "dev": 0.24603174603174605,
+        "test": 0.24603174603174605
+      },
+      "ui_tui": {
+        "train": -0.17460317460317398,
+        "dev": 0.5873015873015874,
+        "test": -0.41269841269841256
+      }
+    },
+    "item_type": {
+      "github_issue": {
+        "train": -2.1111111111111143,
+        "dev": 1.5555555555555554,
+        "test": 0.5555555555555554
+      },
+      "github_pr": {
+        "train": 2.1111111111111143,
+        "dev": -1.5555555555555554,
+        "test": -0.5555555555555554
+      }
+    },
+    "source": {
+      "new": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "v4": {
+        "train": -0.30158730158730407,
+        "dev": 0.15079365079365203,
+        "test": 0.15079365079365203
+      }
+    },
+    "confusion_family": {
+      "acp+acpx": {
+        "train": 1.1111111111111107,
+        "dev": -0.05555555555555558,
+        "test": -1.0555555555555556
+      },
+      "acp+agent_runtime": {
+        "train": 0.6031746031746033,
+        "dev": -0.30158730158730157,
+        "test": -0.30158730158730157
+      },
+      "acp+agent_runtime+sessions": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "acp+coding_agents": {
+        "train": 0.6031746031746033,
+        "dev": -0.30158730158730157,
+        "test": -0.30158730158730157
+      },
+      "acp+sessions": {
+        "train": -0.3809523809523814,
+        "dev": 0.19047619047619047,
+        "test": 0.19047619047619047
+      },
+      "acpx+sessions": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "agent_runtime+sessions": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "chat_integrations+notifications": {
+        "train": -0.09523809523809534,
+        "dev": 0.5476190476190477,
+        "test": -0.4523809523809524
+      },
+      "chat_integrations+reliability": {
+        "train": -0.4920634920634921,
+        "dev": 0.24603174603174605,
+        "test": 0.24603174603174605
+      },
+      "coding_agents+sessions": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "local_model_providers+local_models": {
+        "train": -0.6984126984126984,
+        "dev": -0.15079365079365079,
+        "test": 0.8492063492063492
+      },
+      "local_model_providers+self_hosted_inference": {
+        "train": -0.6984126984126984,
+        "dev": -0.15079365079365079,
+        "test": 0.8492063492063492
+      },
+      "local_models+model_serving": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "local_models+self_hosted_inference": {
+        "train": -0.6984126984126984,
+        "dev": 0.8492063492063492,
+        "test": -0.15079365079365079
+      },
+      "mcp_tooling+tool_calling": {
+        "train": -0.6984126984126984,
+        "dev": 0.8492063492063492,
+        "test": -0.15079365079365079
+      },
+      "memory+reliability": {
+        "train": -0.1904761904761907,
+        "dev": 0.09523809523809523,
+        "test": 0.09523809523809523
+      },
+      "memory+reliability+sessions": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "memory+sessions": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "notifications+reliability": {
+        "train": 0.3015873015873016,
+        "dev": -0.15079365079365079,
+        "test": -0.15079365079365079
+      },
+      "reliability+sessions": {
+        "train": 0.412698412698413,
+        "dev": -0.20634920634920628,
+        "test": -0.20634920634920628
+      }
+    },
+    "label_count": {
+      "1": {
+        "train": 0.2063492063492065,
+        "dev": 0.39682539682539686,
+        "test": -0.6031746031746031
+      },
+      "2": {
+        "train": 1.7301587301587293,
+        "dev": -0.8650793650793651,
+        "test": -0.8650793650793651
+      },
+      "3": {
+        "train": -0.7142857142857153,
+        "dev": 0.8571428571428577,
+        "test": -0.14285714285714235
+      },
+      "4": {
+        "train": -2.5396825396825413,
+        "dev": 0.26984126984126977,
+        "test": 2.2698412698412698
+      },
+      "5": {
+        "train": 1.3174603174603172,
+        "dev": -0.6587301587301588,
+        "test": -0.6587301587301588
+      }
+    }
+  },
+  "ids": {
+    "train": [
+      "openclaw-openclaw-40332",
+      "openclaw-openclaw-41892",
+      "openclaw-openclaw-42027",
+      "openclaw-openclaw-42122",
+      "openclaw-openclaw-42408",
+      "openclaw-openclaw-42425",
+      "openclaw-openclaw-43416",
+      "openclaw-openclaw-44379",
+      "openclaw-openclaw-45200",
+      "openclaw-openclaw-45508",
+      "openclaw-openclaw-46552",
+      "openclaw-openclaw-46740",
+      "openclaw-openclaw-47187",
+      "openclaw-openclaw-47243",
+      "openclaw-openclaw-47446",
+      "openclaw-openclaw-48260",
+      "openclaw-openclaw-48580",
+      "openclaw-openclaw-48877",
+      "openclaw-openclaw-48940",
+      "openclaw-openclaw-49310",
+      "openclaw-openclaw-49502",
+      "openclaw-openclaw-50054",
+      "openclaw-openclaw-53319",
+      "openclaw-openclaw-54471",
+      "openclaw-openclaw-55790",
+      "openclaw-openclaw-56532",
+      "openclaw-openclaw-56613",
+      "openclaw-openclaw-57597",
+      "openclaw-openclaw-59208",
+      "openclaw-openclaw-59878",
+      "openclaw-openclaw-60737",
+      "openclaw-openclaw-61775",
+      "openclaw-openclaw-62428",
+      "openclaw-openclaw-62552",
+      "openclaw-openclaw-62769",
+      "openclaw-openclaw-63007",
+      "openclaw-openclaw-63229",
+      "openclaw-openclaw-64181",
+      "openclaw-openclaw-64199",
+      "openclaw-openclaw-64317",
+      "openclaw-openclaw-65187",
+      "openclaw-openclaw-65242",
+      "openclaw-openclaw-66327",
+      "openclaw-openclaw-68187",
+      "openclaw-openclaw-68204",
+      "openclaw-openclaw-68843",
+      "openclaw-openclaw-69260",
+      "openclaw-openclaw-70002",
+      "openclaw-openclaw-71157",
+      "openclaw-openclaw-71216",
+      "openclaw-openclaw-71646",
+      "openclaw-openclaw-71648",
+      "openclaw-openclaw-71803",
+      "openclaw-openclaw-71930",
+      "openclaw-openclaw-71976",
+      "openclaw-openclaw-72015",
+      "openclaw-openclaw-72085",
+      "openclaw-openclaw-72138",
+      "openclaw-openclaw-72262",
+      "openclaw-openclaw-73910",
+      "openclaw-openclaw-74305",
+      "openclaw-openclaw-74484",
+      "openclaw-openclaw-78528",
+      "openclaw-openclaw-78919",
+      "openclaw-openclaw-80431",
+      "openclaw-openclaw-80479",
+      "openclaw-openclaw-81200",
+      "openclaw-openclaw-81488",
+      "openclaw-openclaw-82596",
+      "openclaw-openclaw-82642",
+      "openclaw-openclaw-84094",
+      "openclaw-openclaw-84297",
+      "openclaw-openclaw-84419",
+      "openclaw-openclaw-84567",
+      "openclaw-openclaw-84645",
+      "openclaw-openclaw-84648",
+      "openclaw-openclaw-84681",
+      "openclaw-openclaw-84709",
+      "openclaw-openclaw-84729",
+      "openclaw-openclaw-84732",
+      "openclaw-openclaw-84740",
+      "openclaw-openclaw-84752",
+      "openclaw-openclaw-84763",
+      "openclaw-openclaw-84789",
+      "openclaw-openclaw-84794",
+      "openclaw-openclaw-84802",
+      "openclaw-openclaw-88816",
+      "openclaw-openclaw-90146"
+    ],
+    "dev": [
+      "openclaw-openclaw-48606",
+      "openclaw-openclaw-48851",
+      "openclaw-openclaw-58411",
+      "openclaw-openclaw-60979",
+      "openclaw-openclaw-64718",
+      "openclaw-openclaw-66125",
+      "openclaw-openclaw-67244",
+      "openclaw-openclaw-70882",
+      "openclaw-openclaw-71487",
+      "openclaw-openclaw-71594",
+      "openclaw-openclaw-72001",
+      "openclaw-openclaw-72087",
+      "openclaw-openclaw-75657",
+      "openclaw-openclaw-80255",
+      "openclaw-openclaw-82507",
+      "openclaw-openclaw-84316",
+      "openclaw-openclaw-84385",
+      "openclaw-openclaw-84418",
+      "openclaw-openclaw-84757"
+    ],
+    "test": [
+      "openclaw-openclaw-42606",
+      "openclaw-openclaw-45393",
+      "openclaw-openclaw-45841",
+      "openclaw-openclaw-65640",
+      "openclaw-openclaw-66000",
+      "openclaw-openclaw-69328",
+      "openclaw-openclaw-71784",
+      "openclaw-openclaw-72133",
+      "openclaw-openclaw-79447",
+      "openclaw-openclaw-79897",
+      "openclaw-openclaw-80475",
+      "openclaw-openclaw-82145",
+      "openclaw-openclaw-83333",
+      "openclaw-openclaw-84337",
+      "openclaw-openclaw-84570",
+      "openclaw-openclaw-84583",
+      "openclaw-openclaw-84660",
+      "openclaw-openclaw-84668",
+      "openclaw-openclaw-84715"
+    ]
+  }
+}

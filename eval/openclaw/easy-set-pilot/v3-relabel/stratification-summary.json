@@ -1,0 +1,19 @@
+{
+  "name": "easy-set-pilot",
+  "input": "eval/openclaw/easy-set-pilot/easy-final-v2.jsonl",
+  "raw_output": "eval/openclaw/easy-set-pilot/v3-relabel/teacher-labels.raw.jsonl",
+  "rows_input": 157,
+  "rows_teacher_output": 157,
+  "rows_merged": 157,
+  "invalid_raw_rows": 0,
+  "bucket_counts": {
+    "easy": 156,
+    "medium": 1
+  },
+  "strict_confidence": 0.93,
+  "relaxed_confidence": 0.9,
+  "strict_easy_rows": 149,
+  "relaxed_easy_rows": 149,
+  "review_needed_rows": 0,
+  "strong_previous_disagreement_rows": 0
+}

@@ -264,7 +264,7 @@ Body:
     "tests_ci"
   ],
   "asi_actions": [],
-  "notes": "Probably keep if labels are correct, but add targeted ASI for recurring FP/FN topics."
+  "notes": "Reliability should be used for product reliability issues, not for build infrastructure."
 }
 ```
 
@@ -354,14 +354,13 @@ Meanwhile, the log shows `contentType=text/html; charset=utf-8` but no clear ind
 ```json
 {
   "id": "openclaw-openclaw-84697",
-  "decision": "fix_labels_or_add_asi",
+  "decision": "keep_easy_with_asi",
   "final_labels": [
     "config",
-    "local_model_providers",
     "model_serving"
   ],
   "asi_actions": [],
-  "notes": "Low exact rate. Check whether expected labels are over-specific; otherwise add targeted ASI examples."
+  "notes": "This is a general `model serving` and `config` issue - it is not specific to local_model_providers. "
 }
 ```
 
@@ -444,14 +443,13 @@ Body:
 ```json
 {
   "id": "openclaw-openclaw-70518",
-  "decision": "keep_easy_with_asi",
+  "decision": "drop_to_medium",
   "final_labels": [
     "config",
-    "cron_automation",
     "skills_plugins"
   ],
   "asi_actions": [],
-  "notes": "Probably keep if labels are correct, but add targeted ASI for recurring FP/FN topics."
+  "notes": "Probably keep if labels are correct, but add targeted ASI for recurring FP/FN topics. use cron_automation only for that feature - heartbeat is inbuilt"
 }
 ```
 
@@ -541,7 +539,7 @@ MiMo-V2.5 trains im
 ```json
 {
   "id": "openclaw-openclaw-87277",
-  "decision": "review_or_drop_to_medium",
+  "decision": "drop_to_medium",
   "final_labels": [
     "config",
     "model_releases",
@@ -637,7 +635,7 @@ One of:
 ```json
 {
   "id": "openclaw-openclaw-85660",
-  "decision": "fix_labels_or_add_asi",
+  "decision": "drop_to_medium",
   "final_labels": [
     "config",
     "model_serving",
@@ -732,15 +730,16 @@ The fix (`memory.qmd.update.embedTimeoutMs: 600000`) is only discoverable via `o
 ```json
 {
   "id": "openclaw-openclaw-74204",
-  "decision": "review_or_drop_to_medium",
+  "decision": "drop_to_medium",
   "final_labels": [
     "config",
     "local_models",
     "memory",
-    "reliability"
+    "reliability",
+    "self_hosted_inference"
   ],
   "asi_actions": [],
-  "notes": "Zero exact match with low prediction-set stability. Review labels; likely ASI/boundary material or needs label fix."
+  "notes": "drop_to_medium"
 }
 ```
 
@@ -840,7 +839,7 @@ This PR adds a single documentation bullet to `docs/gateway/configuration-ref
     "docs"
   ],
   "asi_actions": [],
-  "notes": "Probably keep if labels are correct, but add targeted ASI for recurring FP/FN topics."
+  "notes": "This is docs (as only [x] Docs is in the Change Type). This specifically documents configuration"
 }
 ```
 
@@ -1036,7 +1035,7 @@ Keep this open. Current mai
 ```json
 {
   "id": "openclaw-openclaw-75784",
-  "decision": "keep_easy_with_asi",
+  "decision": "drop_to_medium",
   "final_labels": [
     "chat_integrations",
     "gateway",
@@ -1120,7 +1119,7 @@ Add an optional provider-owned prompt hin
 ```json
 {
   "id": "openclaw-openclaw-67539",
-  "decision": "keep_easy_with_asi",
+  "decision": "drop_to_medium",
   "final_labels": [
     "api_surface",
     "self_hosted_inference"
@@ -1202,7 +1201,7 @@ Body:
 ```json
 {
   "id": "openclaw-openclaw-75043",
-  "decision": "fix_labels_or_add_asi",
+  "decision": "drop_to_medium",
   "final_labels": [
     "api_surface",
     "config",
@@ -1290,12 +1289,11 @@ Added a unit test verifying that a LiteLLM proxy endpoint with `storeMode: "disa
   "id": "openclaw-openclaw-78977",
   "decision": "keep_easy_with_asi",
   "final_labels": [
-    "local_model_providers",
     "model_serving",
     "reliability"
   ],
   "asi_actions": [],
-  "notes": "Probably keep if labels are correct, but add targeted ASI for recurring FP/FN topics."
+  "notes": "This is not local_model_serving as it applies to all Responses providers. "
 }
 ```
 
@@ -1377,14 +1375,14 @@ Currently TTS voice is a global setting (`messages.tts.microsoft.voice
 ```json
 {
   "id": "openclaw-openclaw-56613",
-  "decision": "fix_labels_or_add_asi",
+  "decision": "keep_easy_with_asi",
   "final_labels": [
     "config",
     "sessions",
     "ui_tui"
   ],
   "asi_actions": [],
-  "notes": "Low exact rate. Check whether expected labels are over-specific; otherwise add targeted ASI examples."
+  "notes": "This is not self-hosted inference as it does not relate specifically to a self-hosted model; it is a general feature request."
 }
 ```
 
@@ -1469,14 +1467,13 @@ Add WhatsApp-specific config for outbound disappearing-message expiration:
 ```json
 {
   "id": "openclaw-openclaw-71157",
-  "decision": "fix_labels_or_add_asi",
+  "decision": "fix_labels",
   "final_labels": [
     "chat_integrations",
-    "config",
-    "security"
+    "config"
   ],
   "asi_actions": [],
-  "notes": "Low exact rate. Check whether expected labels are over-specific; otherwise add targeted ASI examples."
+  "notes": "This is not security - it is a privacy focussed feature, not related to OpenClaw security itself."
 }
 ```
 
@@ -1720,10 +1717,11 @@ Any idea why the Gateway initializes the connection but the Agent doesn't discov
   "decision": "asi_only",
   "final_labels": [
     "mcp_tooling",
-    "ui_tui"
+    "agent_runtime",
+    "gateway"
   ],
   "asi_actions": [],
-  "notes": "GEPA-candidate instability on train split; do not use for easy exact-match evaluation without manual adjudication."
+  "notes": "This relates to mcp_tooling and the availability of the tools in the agent_harness. although the symptom is visible in the ui_tui, it is the gateway managing the connection ."
 }
 ```
 

@@ -1,0 +1,20 @@
+name: llamacpp-qwen3-5-9b-gguf
+provider: openresponses
+model: unsloth/Qwen3.5-9B-GGUF
+connection:
+  base_url: http://localhost:8080/v1
+  auth: none
+  default_headers: {}
+defaults: {}
+metadata:
+  context_window: 76800
+  tokenizes:
+  - text/plain
+  - image/jpeg
+  - image/png
+  - image/webp
+picker:
+  label: unsloth/Qwen3.5-9B-GGUF
+  description: Imported from llama.cpp
+  current: true
+  featured: false
