@@ -16,15 +16,30 @@ gold for v6.
 - Accept rows into the cumulative build ledger only when the current spec version
   produced stable labels or a human adjudication explicitly resolved the row.
 
-## Directory layout
+## Environment
 
-Each intake batch should live under:
+All run-stable settings (paths, trackio project/dir, models, fast-agent binary)
+live in one sourceable script:
 
-```text
-runs/easy-set-v6/v6-databuild/intake/BATCH_NAME/
+```bash
+source eval/openclaw/easy-set-pilot/v6/env.sh
 ```
 
-Expected files:
+This sets `TRACKIO_DIR` to the repo-local `.trackio/` (untracked), defaults
+`FAST_AGENT_BIN` to the repo venv's dev/0.7.18 install, and exports the `V6_*`
+variables used by the commands below.
+
+## Directory layout
+
+Each intake batch has a raw working dir (untracked) and a curated record dir
+(tracked):
+
+```text
+$V6_RUNS_INTAKE/BATCH_NAME/    runs/easy-set-v6/v6-databuild/intake/ — raw
+$V6_INTAKE/BATCH_NAME/         eval/openclaw/easy-set-pilot/v6/intake/ — tracked
+```
+
+Raw working dir files:
 
 ```text
 row-ids.txt
@@ -34,6 +49,7 @@ spec-manifest.json
 gpt55-3x/
 opus-2x/
 consensus.jsonl
+consensus-summary.json
 review-packet.md
 adjudication.jsonl
 accepted.jsonl
@@ -42,6 +58,17 @@ prompt-deltas.md
 ```
 
 `row-ids.txt` is the source of truth for the batch. All joins use `id`.
+
+After the consensus pass and any adjudication, snapshot the decision-bearing
+files into the tracked dir and commit:
+
+```bash
+v6_intake_snapshot BATCH_NAME    # helper from env.sh
+git add "$V6_INTAKE/BATCH_NAME" "$V6_LEDGER"
+```
+
+Raw teacher repeats and `input.jsonl` stay untracked; `input.jsonl` is
+reproducible from `$V6_SOURCE_ROWS` + `row-ids.txt`.
 
 ## Batch creation
 
@@ -81,22 +108,22 @@ python scripts/openclaw-v6-intake.py \
 Run GPT-5.5 first:
 
 ```bash
-FAST_AGENT_BIN="${FAST_AGENT_BIN:-fast-agent}" \
 python scripts/openclaw-easy-set-stability.py \
   --direct-batch \
-  --input runs/easy-set-v6/v6-databuild/intake/BATCH_NAME/input.jsonl \
-  --agent-card eval/openclaw/easy-set-pilot/v6/teacher-card-v6.md \
+  --input "$V6_RUNS_INTAKE/BATCH_NAME/input.jsonl" \
+  --agent-card "$V6_TEACHER_CARD" \
   --agent-name openclaw_easy_set_pilot_teacher \
-  --template eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md \
-  --schema eval/openclaw/easy-set-pilot/v6/teacher-output.schema.json \
-  --model 'codexresponses.gpt-5.5?reasoning=high' \
+  --template "$V6_TEACHER_TEMPLATE" \
+  --schema "$V6_TEACHER_SCHEMA" \
+  --model "$V6_TEACHER_PRIMARY" \
   --runs 3 \
   --parallel 4 \
-  --run-root runs/easy-set-v6/v6-databuild/intake/BATCH_NAME \
+  --repeat-parallel 3 \
+  --run-root "$V6_RUNS_INTAKE/BATCH_NAME" \
   --run-name gpt55-3x \
-  --trackio-project openclaw-v6-intake \
+  --trackio-project "$V6_TRACKIO_PROJECT" \
   --trackio-group BATCH_NAME \
-  --trackio-every 5 \
+  --trackio-every "$V6_TRACKIO_EVERY" \
   --overwrite
 ```
 
@@ -104,22 +131,22 @@ If GPT-5.5 self-stability is poor, stop and fix the spec before spending Opus
 passes. Then run Opus:
 
 ```bash
-FAST_AGENT_BIN="${FAST_AGENT_BIN:-fast-agent}" \
 python scripts/openclaw-easy-set-stability.py \
   --direct-batch \
-  --input runs/easy-set-v6/v6-databuild/intake/BATCH_NAME/input.jsonl \
-  --agent-card eval/openclaw/easy-set-pilot/v6/teacher-card-v6.md \
+  --input "$V6_RUNS_INTAKE/BATCH_NAME/input.jsonl" \
+  --agent-card "$V6_TEACHER_CARD" \
   --agent-name openclaw_easy_set_pilot_teacher \
-  --template eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md \
-  --schema eval/openclaw/easy-set-pilot/v6/teacher-output.schema.json \
-  --model 'opus' \
+  --template "$V6_TEACHER_TEMPLATE" \
+  --schema "$V6_TEACHER_SCHEMA" \
+  --model "$V6_TEACHER_CROSS" \
   --runs 2 \
   --parallel 4 \
-  --run-root runs/easy-set-v6/v6-databuild/intake/BATCH_NAME \
+  --repeat-parallel 2 \
+  --run-root "$V6_RUNS_INTAKE/BATCH_NAME" \
   --run-name opus-2x \
-  --trackio-project openclaw-v6-intake \
+  --trackio-project "$V6_TRACKIO_PROJECT" \
   --trackio-group BATCH_NAME \
-  --trackio-every 5 \
+  --trackio-every "$V6_TRACKIO_EVERY" \
   --overwrite
 ```
 
@@ -127,12 +154,38 @@ The current stability script can execute the teacher repeats, but its
 `stable_correct` and score fields are not authoritative for stripped v6 inputs.
 Use a dedicated consensus/adjudication builder to compare teacher predictions.
 
-Before the Trackio-enabled `fast-agent batch run` release is installed on PATH,
-point the wrapper at a local checkout:
+`--repeat-parallel` parallelizes independent repeats. Total request concurrency
+is approximately `--repeat-parallel * --parallel`, so reduce one of them if the
+provider or local environment starts throttling.
+
+`env.sh` already points `FAST_AGENT_BIN` at the repo venv, which carries the
+Trackio-enabled dev/0.7.18 editable install; override the variable only to test
+a different checkout.
+
+## Consensus pass
+
+After GPT and Opus repeats finish, build the batch review artifacts:
 
 ```bash
-export FAST_AGENT_BIN=/home/ssmith/source/fast-agent-pr/.venv/bin/fast-agent
+python scripts/openclaw-v6-consensus.py \
+  --batch-dir "$V6_RUNS_INTAKE/BATCH_NAME" \
+  --overwrite
 ```
+
+This writes:
+
+```text
+consensus.jsonl
+consensus-summary.json
+review-packet.md
+adjudication.jsonl
+accepted.jsonl
+deferred.jsonl
+```
+
+`accepted.jsonl` contains only strict teacher consensus rows. `deferred.jsonl`
+and `adjudication.jsonl` are the working queue for human review or prompt/spec
+tuning.
 
 ## Consensus buckets
 
@@ -202,7 +255,7 @@ prompt/spec failures.
 
 ## Cumulative ledger
 
-Accepted rows should be appended to a cumulative ledger, for example:
+Accepted rows are appended to the tracked cumulative ledger (`$V6_LEDGER`):
 
 ```text
 eval/openclaw/easy-set-pilot/v6/v6-build-ledger.jsonl

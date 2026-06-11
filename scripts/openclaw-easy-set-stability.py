@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import itertools
 import json
 import os
@@ -39,6 +40,12 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--model", required=True)
     p.add_argument("--runs", type=int, default=3)
     p.add_argument("--parallel", type=int, default=4)
+    p.add_argument(
+        "--repeat-parallel",
+        type=int,
+        default=1,
+        help="Run this many repeat jobs concurrently. Total row concurrency is repeat_parallel * parallel.",
+    )
     p.add_argument("--run-name", required=True)
     p.add_argument("--run-root", type=Path, default=STABILITY_ROOT, help="Directory under which the stability run directory is created.")
     p.add_argument(
@@ -563,6 +570,8 @@ def main() -> int:
     args = parse_args()
     if args.runs < 1:
         raise SystemExit("--runs must be >= 1")
+    if args.repeat_parallel < 1:
+        raise SystemExit("--repeat-parallel must be >= 1")
     rows = load_jsonl(args.input)
     selected = select_rows(rows, args)
     if not selected:
@@ -588,9 +597,25 @@ def main() -> int:
     (stability_dir / "config.json").write_text(json.dumps(config, indent=2, default=str), encoding="utf-8")
 
     repeats = []
-    for idx in range(1, args.runs + 1):
-        print(f"repeat {idx}/{args.runs}: {args.run_name}-repeat-{idx:02d}", flush=True)
-        repeats.append(run_repeat(args, stability_dir, selected_input, idx))
+    if args.repeat_parallel == 1:
+        for idx in range(1, args.runs + 1):
+            print(f"repeat {idx}/{args.runs}: {args.run_name}-repeat-{idx:02d}", flush=True)
+            repeats.append(run_repeat(args, stability_dir, selected_input, idx))
+    else:
+        max_workers = min(args.repeat_parallel, args.runs)
+        print(
+            f"running {args.runs} repeats with repeat_parallel={max_workers}; "
+            f"total row concurrency <= {max_workers * args.parallel}",
+            flush=True,
+        )
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {}
+            for idx in range(1, args.runs + 1):
+                print(f"repeat {idx}/{args.runs}: {args.run_name}-repeat-{idx:02d}", flush=True)
+                futures[executor.submit(run_repeat, args, stability_dir, selected_input, idx)] = idx
+            for future in concurrent.futures.as_completed(futures):
+                repeats.append(future.result())
+        repeats.sort(key=lambda item: int(item["repeat"]))
 
     report, markdown, unstable = build_report(stability_dir, selected, repeats)
     (stability_dir / "stability-report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")

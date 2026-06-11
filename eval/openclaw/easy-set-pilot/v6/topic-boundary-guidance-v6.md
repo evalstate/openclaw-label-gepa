@@ -272,8 +272,7 @@ provider/engine/model integration is the central subject.
 
 - MUST include: token counts, usage counts, costs, metrics, diagnostics,
   traces, or status reporting are central.
-- Do not include: generic reliability or UI text without measurement/status
-  data.
+- Do not include: generic reliability or UI text without measurement/status data.
 
 ## `api_surface`
 

@@ -29,6 +29,9 @@ phase's inputs depend on their outputs.
 | `vanilla-asi-v6-slim.md` | Slim reflection ASI: overlay contract, no cue tables |
 | `v6-prereview-convergent-disagreements.md` | 8 disputed test rows for human decision before freezing |
 | `V6_INTAKE_LADDER.md` | Reproducible 30-row intake/calibration workflow for the new-label build |
+| `env.sh` | Source me: run-stable settings (paths, trackio project + repo-local `TRACKIO_DIR`, models, `FAST_AGENT_BIN`) + `v6_intake_snapshot` helper |
+| `intake/BATCH/` | Tracked curated batch records (row-ids, spec-manifest, consensus, adjudication, accepted/deferred); raw repeats stay under `runs/` |
+| `v6-build-ledger.jsonl` | Tracked cumulative ledger of accepted rows — the source for final v6 train/test |
 
 Script changes (already applied to `scripts/openclaw-vanilla-f1-gepa.py`):
 
