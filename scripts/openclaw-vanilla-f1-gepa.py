@@ -13,12 +13,20 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from collections.abc import Mapping
 from typing import Any
 
-from fast_agent.batch import BatchRunResult, BatchRunner
+from fast_agent.batch import BatchRunResult
 from fast_agent.eval import CandidateRun
-from fast_agent.integrations.gepa import FastAgentBatchEvaluator, FastAgentReflectionLM
-from fast_agent.utils.async_utils import run_coroutine
+from fast_agent.integrations.gepa import (
+    FastAgentBatchEvaluator,
+    FastAgentReflectionLM,
+    FastAgentRowWiseBatchAdapter,
+    RowWiseEvaluationRun,
+    RowWiseScore,
+    gepa_numeric_metrics,
+    safe_trackio_log,
+)
 from openclaw_gepa.openclaw_benchmark import (
     ENV_DIR,
     ROOT,
@@ -31,7 +39,6 @@ from openclaw_gepa.openclaw_benchmark import (
     parse_label_text,
     score,
     topic_hint,
-    write_jsonl,
 )
 
 
@@ -169,41 +176,14 @@ def finish_trackio(enabled: bool) -> None:
 
 
 def log_candidate(candidate_idx: int, candidate_dir: Path, report: dict[str, Any]) -> None:
-    try:
-        import trackio
-
-        scores = report.get("scores", {})
-        details = report.get("score_details", {})
-        program_idx = candidate_idx - 1
-        payload: dict[str, int | float] = {
-            "gepa/iteration": program_idx,
-            "candidate/local_idx": candidate_idx,
-            "candidate/program_idx": program_idx,
-        }
-        for key in ["gepa_score", "topic_micro_f1", "row_exact_accuracy", "avg_row_jaccard", "row_symdiff_score"]:
-            if isinstance(scores.get(key), int | float):
-                payload[f"candidate/{key}"] = scores[key]
-        for key in [
-            "topic_micro_precision",
-            "topic_micro_recall",
-            "exact_match",
-            "row_exact_accuracy",
-            "avg_row_jaccard",
-            "avg_row_symdiff",
-            "row_symdiff_score",
-            "valid_json",
-            "cardinality_closeness",
-            "avg_expected_topics",
-            "avg_predicted_topics",
-            "false_positives",
-            "false_negatives",
-            "policy_chars",
-        ]:
-            if isinstance(details.get(key), int | float):
-                payload[f"candidate/detail/{key}"] = details[key]
-        trackio.log(payload)
-    except Exception:
-        return
+    program_idx = candidate_idx - 1
+    payload: dict[str, Any] = {
+        "gepa/iteration": program_idx,
+        "candidate/local_idx": candidate_idx,
+        "candidate/program_idx": program_idx,
+    }
+    payload.update(gepa_numeric_metrics(report))
+    safe_trackio_log(payload)
 
 
 def _num(value: Any, default: float = 0.0) -> float:
@@ -512,87 +492,30 @@ def score_row_output(row: dict[str, Any], *, allowed: set[str], score_mode: str)
     return gepa_score, side_info
 
 
-class OpenClawRowWiseAdapter:
-    """GEPA adapter that exposes OpenClaw rows as individual validation instances."""
+def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgentRowWiseBatchAdapter:
+    """Wire the upstream row-wise adapter to OpenClaw row scoring and reflection ASI."""
+    allowed = set(json.loads(SCHEMA.read_text())["properties"]["topics_of_interest"]["items"]["enum"])
+    plain_labels = args.plain_labels
 
-    propose_new_texts = None
-
-    def __init__(self, *, run_dir: Path, args: argparse.Namespace):
-        self.run_dir = run_dir
-        self.args = args
-        self.plain_labels = args.plain_labels
-        self.agent_card = resolve_agent_card(args)
-        self.agent_name = "openclaw_vanilla_labeler_plain" if self.plain_labels else "openclaw_vanilla_labeler"
-        self.allowed = set(json.loads(SCHEMA.read_text())["properties"]["topics_of_interest"]["items"]["enum"])
-        self.eval_idx = 0
-
-    def evaluate(self, batch: list[dict[str, Any]], candidate: dict[str, str], capture_traces: bool = False):
-        from gepa.core.adapter import EvaluationBatch
-
-        self.eval_idx += 1
-        eval_dir = self.run_dir / "row-wise-evals" / f"eval-{self.eval_idx:05d}"
-        eval_dir.mkdir(parents=True, exist_ok=True)
-        input_path = eval_dir / "input.jsonl"
-        write_jsonl(input_path, [dict(row) for row in batch])
-
-        result = run_coroutine(
-            BatchRunner(env_dir=ENV_DIR, backend="process").run(
-                input=input_path,
-                output_path=eval_dir / "results.jsonl",
-                agent_card=self.agent_card,
-                agent=self.agent_name,
-                template_source=TASK_TEMPLATE,
-                json_schema=None if self.plain_labels else SCHEMA,
-                model=self.args.model,
-                parallel=min(self.args.parallel, max(1, len(batch))),
-                include_input=True,
-                variables={"policy": candidate.get("policy", "")},
-                summary_path=eval_dir / "batch-summary.json",
-                telemetry_path=eval_dir / "telemetry.jsonl",
-                overwrite=True,
-            )
-        )
-
-        scores: list[float] = []
-        trajectories: list[dict[str, Any]] = []
-        for output_row in result.rows:
-            row_score, side_info = score_row_output(output_row, allowed=self.allowed, score_mode=self.args.score_mode)
-            scores.append(row_score)
-            trajectories.append(side_info)
-
-        # Be defensive if the batch runner returns fewer rows after a systemic row failure.
-        while len(scores) < len(batch):
-            scores.append(0.0)
-            trajectories.append(
-                {
-                    "scores": {"gepa_score": 0.0, "row_topic_f1": 0.0, "row_exact": 0.0, "row_jaccard": 0.0},
-                    "row_feedback": ["No usable output row was returned for this input."],
-                }
-            )
-
-        objective_scores = [dict(t.get("scores", {})) for t in trajectories]
-        summary = {
-            "eval_idx": self.eval_idx,
-            "batch_size": len(batch),
-            "avg_score": sum(scores) / max(1, len(scores)),
-            "exact": sum(1 for t in trajectories if t.get("scores", {}).get("row_exact") == 1.0),
-            "candidate_policy_chars": len(candidate.get("policy", "")),
+    def row_scorer(
+        output_row: dict[str, Any],
+        input_row: dict[str, Any],
+        candidate: dict[str, str],
+        evaluation: RowWiseEvaluationRun,
+    ) -> RowWiseScore:
+        row_score, side_info = score_row_output(output_row, allowed=allowed, score_mode=args.score_mode)
+        objective_scores = {
+            key: float(value)
+            for key, value in (side_info.get("scores") or {}).items()
+            if isinstance(value, int | float)
         }
-        (eval_dir / "row-wise-score.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
-        print(
-            f"row-wise-eval-{self.eval_idx:05d}: n={len(batch)} "
-            f"avg={summary['avg_score']:.4f} exact={summary['exact']}/{len(batch)}"
-        )
+        return RowWiseScore(score=row_score, trajectory=side_info, objective_scores=objective_scores)
 
-        return EvaluationBatch(
-            outputs=result.rows,
-            scores=scores,
-            trajectories=trajectories if capture_traces else None,
-            objective_scores=objective_scores,
-            num_metric_calls=len(batch),
-        )
-
-    def make_reflective_dataset(self, candidate, eval_batch, components_to_update):
+    def reflective_dataset_builder(
+        candidate: dict[str, str],
+        eval_batch: Any,
+        components_to_update: list[str],
+    ) -> dict[str, list[dict[str, Any]]]:
         scores = eval_batch.scores
         trajectories = eval_batch.trajectories or []
         out: dict[str, list[dict[str, Any]]] = {}
@@ -600,12 +523,28 @@ class OpenClawRowWiseAdapter:
             rows = []
             for score_value, side_info in zip(scores, trajectories, strict=False):
                 row = {}
-                for key, value in side_info.items():
+                for key, value in (side_info or {}).items():
                     row["Scores (Higher is Better)" if key == "scores" else key] = value
                 row["selected_row_score"] = score_value
                 rows.append(row)
             out[component] = rows
         return out
+
+    return FastAgentRowWiseBatchAdapter(
+        env_dir=ENV_DIR,
+        agent_card=resolve_agent_card(args),
+        agent="openclaw_vanilla_labeler_plain" if plain_labels else "openclaw_vanilla_labeler",
+        candidate_variables={"policy": "policy"},
+        template_source=TASK_TEMPLATE,
+        schema=None if plain_labels else SCHEMA,
+        model=args.model,
+        parallel=args.parallel,
+        row_scorer=row_scorer,
+        run_dir=run_dir,
+        id_field="id",
+        backend="process",
+        reflective_dataset_builder=reflective_dataset_builder,
+    )
 
 
 def resolve_parent_lineage(
@@ -663,7 +602,7 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
 
     def score_candidate(
         result: BatchRunResult,
-        candidate: dict[str, str],
+        candidate: Mapping[str, str],
         candidate_run: CandidateRun,
     ) -> tuple[float, dict[str, Any]]:
         policy = str(candidate.get("policy", ""))
@@ -1007,7 +946,7 @@ def main() -> int:
                     "so the run may stop after the seed/full-val evaluation.",
                     file=sys.stderr,
                 )
-            adapter = OpenClawRowWiseAdapter(run_dir=run_dir, args=args)
+            adapter = build_row_wise_adapter(run_dir, args)
             result = optimize(
                 seed_candidate=seed,
                 trainset=rows,

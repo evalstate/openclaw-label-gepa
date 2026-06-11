@@ -28,6 +28,7 @@ phase's inputs depend on their outputs.
 | `seed-policy-overlay-v6.md` | Structured overlay seed (Decision Procedure / Cardinality / Boundary Overlays / Suppression) |
 | `vanilla-asi-v6-slim.md` | Slim reflection ASI: overlay contract, no cue tables |
 | `v6-prereview-convergent-disagreements.md` | 8 disputed test rows for human decision before freezing |
+| `V6_INTAKE_LADDER.md` | Reproducible 30-row intake/calibration workflow for the new-label build |
 
 Script changes (already applied to `scripts/openclaw-vanilla-f1-gepa.py`):
 
@@ -78,6 +79,10 @@ Report back with the 8 decisions (or "all keep") and any guidance edits.
 ---
 
 ## Phase 1 — anchor-free teacher revalidation
+
+For the incremental build, use `V6_INTAKE_LADDER.md` instead of running the full
+195-row revalidation in one shot. The commands below remain useful as the
+full-set pattern after intake batches have stabilized the spec.
 
 Input is `v6/revalidation-input.jsonl` (195 rows; the v5 train+test+dev rows
 stripped to id/title/repo/item_type/number/target/github_context — no label or

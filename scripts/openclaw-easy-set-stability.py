@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import itertools
 import json
+import os
 import random
 import re
 import shutil
@@ -50,6 +51,15 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--score-mode", choices=["f1", "row-aware"], default="row-aware")
     p.add_argument("--no-trackio", action="store_true", default=True, help="Disable Trackio for repeat stability runs (default).")
     p.add_argument("--trackio", dest="no_trackio", action="store_false", help="Enable Trackio in wrapped repeat runs.")
+    p.add_argument(
+        "--trackio-project",
+        default=None,
+        help="Enable fast-agent batch Trackio monitoring for --direct-batch repeats and log under this project.",
+    )
+    p.add_argument("--trackio-group", default=None, help="Trackio group tag; defaults to --run-name.")
+    p.add_argument("--trackio-space-id", default=None)
+    p.add_argument("--trackio-server-url", default=None)
+    p.add_argument("--trackio-every", type=int, default=None, help="Log batch metrics every N rows.")
     p.add_argument("--sample-size", type=int, default=None)
     p.add_argument("--seed", type=int, default=55)
     p.add_argument("--row-ids", nargs="*", default=None)
@@ -229,7 +239,7 @@ def run_direct_batch_repeat(
     telemetry = repeat_dir / "telemetry.jsonl"
     log_path = stability_dir / f"repeat-{idx:02d}.log"
     cmd = [
-        "fast-agent",
+        os.environ.get("FAST_AGENT_BIN", "fast-agent"),
         "--no-update-check",
         "--env",
         str(ROOT / ".fast-agent"),
@@ -260,6 +270,15 @@ def run_direct_batch_repeat(
     ]
     if args.schema and not args.plain_labels:
         cmd.extend(["--json-schema", str(args.schema)])
+    if args.trackio_project:
+        cmd.extend(["--project", args.trackio_project, "--run-name", repeat_name])
+        cmd.extend(["--group", args.trackio_group or args.run_name])
+        if args.trackio_space_id:
+            cmd.extend(["--trackio-space-id", args.trackio_space_id])
+        if args.trackio_server_url:
+            cmd.extend(["--trackio-server-url", args.trackio_server_url])
+        if args.trackio_every:
+            cmd.extend(["--trackio-every", str(args.trackio_every)])
     with log_path.open("w", encoding="utf-8") as log:
         proc = subprocess.run(cmd, cwd=ROOT, text=True, stdout=log, stderr=subprocess.STDOUT)
     if proc.returncode != 0:

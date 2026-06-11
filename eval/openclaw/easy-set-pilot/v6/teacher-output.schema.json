@@ -59,7 +59,7 @@
         ]
       },
       "minItems": 0,
-      "maxItems": 8
+      "maxItems": 5
     },
     "bucket": {
       "type": "string",
