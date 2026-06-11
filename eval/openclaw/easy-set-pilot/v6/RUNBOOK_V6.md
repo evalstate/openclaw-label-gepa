@@ -110,6 +110,8 @@ python scripts/openclaw-easy-set-stability.py \
   --parallel 4 \
   --run-root runs/easy-set-v6/revalidation \
   --run-name v6-gpt55-anchor-free-3x \
+  --trackio-project easy-v6-databuild \
+  --trackio-every 10 \
   --overwrite
 ```
 
@@ -128,6 +130,8 @@ python scripts/openclaw-easy-set-stability.py \
   --parallel 4 \
   --run-root runs/easy-set-v6/revalidation \
   --run-name v6-opus-anchor-free-2x \
+  --trackio-project easy-v6-databuild \
+  --trackio-every 10 \
   --overwrite
 ```
 
