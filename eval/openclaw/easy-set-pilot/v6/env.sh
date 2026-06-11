@@ -15,7 +15,7 @@ export V6_ROOT
 export V6_DIR="$V6_ROOT/eval/openclaw/easy-set-pilot/v6"
 
 # --- run roots ---------------------------------------------------------------
-export V6_RUNS="$V6_ROOT/runs/easy-set-v6"
+export V6_RUNS="$V6_ROOT/runs/easy-set-v6a"
 export V6_RUNS_INTAKE="$V6_RUNS/v6-databuild/intake"   # raw batch workdirs (untracked)
 export V6_INTAKE="$V6_DIR/intake"                      # curated batch records (tracked)
 export V6_LEDGER="$V6_DIR/v6-build-ledger.jsonl"       # cumulative accepted rows (tracked)

@@ -41,7 +41,7 @@ the item changes, not the surfaces where the change is merely visible.
 
 ## Coding-agent boundary
 
-Do not use `coding_agents` merely because the item mentions agents, subagents,
+Do not use `coding_agent_integrations` merely because the item mentions agents, subagents,
 `sessions_spawn`, agent runs, tool use, approvals, sandboxing, compaction,
 traces, or orchestration inside OpenClaw. Route those internal OpenClaw
 concerns to the concrete owning surface instead: `agent_runtime`, `acp`,
@@ -49,7 +49,7 @@ concerns to the concrete owning surface instead: `agent_runtime`, `acp`,
 `telemetry_usage`.
 
 ACP is an integration protocol. It may be used by coding agents, but ACP work
-is not `coding_agents` unless the issue or PR is specifically about a
+is not `coding_agent_integrations` unless the issue or PR is specifically about a
 coding-agent integration through ACP.
 
 ## Inference family disambiguation
@@ -134,10 +134,10 @@ provider/engine/model integration is the central subject.
 - MUST include: ACP runtime/protocol, ACP session, ACP binding, ACP
   parent/child behavior, or ACP delivery is central.
 - Do not include: merely because an item mentions an agent session or internal
-  runtime behavior. ACP work is not `coding_agents` unless the item is
+  runtime behavior. ACP work is not `coding_agent_integrations` unless the item is
   specifically about a coding-agent integration through ACP.
 
-## `coding_agents`
+## `coding_agent_integrations`
 
 - MUST include: integrations with external coding agents in general, or with a
   specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi — their
@@ -167,7 +167,7 @@ provider/engine/model integration is the central subject.
 - MUST include: OpenClaw's internal agent machinery — runtime startup, loop,
   backends, model call orchestration, runtime adapter behavior, subagent
   execution and orchestration, or runtime ownership/execution architecture.
-- Do not include: external coding-agent integrations (`coding_agents`), ACP
+- Do not include: external coding-agent integrations (`coding_agent_integrations`), ACP
   protocol/session/delivery work (`acp`/`acpx`), or any agent-adjacent
   provider/UI/config change.
 

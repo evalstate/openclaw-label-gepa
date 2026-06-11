@@ -52,18 +52,32 @@ integration is the central subject.
   If the item changes WHAT an external contract promises, label api_surface
   even when the implementation lives in the gateway or a serving endpoint.
 - `config`: schemas, persisted shape, loading/validation/repair, defaults,
-  operator-facing options, allow/deny configuration, policy settings. A config
-  key as mere mechanism of another surface does not qualify.
+  allow/deny configuration, policy settings, and adding or changing user- or
+  operator-facing settings — toggles, pickers, defaults, persisted
+  preferences, including when surfaced through a settings UI. A config key as
+  mere mechanism of another surface does not qualify.
 - `security`: SSRF, private-network access, credential/auth boundaries,
   permissions, secret leakage, sandbox escape, supply-chain hardening, access
   control. Credential/auth-boundary rows take `security` AND `auth_identity`
   (mechanics); isolation behavior also takes `sandboxing`.
-- `coding_agents` vs `agent_runtime`/`acp`: use `coding_agents` only for
+- `auth_identity`: only when OpenClaw's own authentication/identity surface is
+  the subject — login, auth profiles, OAuth flows, tokens, account binding,
+  credential propagation. Authentication of external services touched
+  incidentally by another surface's change does not qualify.
+- `ui_tui`: only when the UI display, interaction, navigation, rendering, or
+  user-facing control behavior is itself the failing or changed surface. A
+  defect merely observed or triggered through a dashboard, button, status
+  count, tool list, or footer belongs to the surface that actually fails.
+- `telemetry_usage`: only when OpenClaw's own telemetry/usage surface is the
+  subject — token/usage/cost accounting, diagnostics, trace production and
+  observability coverage, status reporting. Benchmark or measurement
+  vocabulary adjacent to another surface's change does not qualify.
+- `coding_agent_integrations` vs `agent_runtime`/`acp`: use `coding_agent_integrations` only for
   integrations with external coding agents in general or with a specific coding
   agent such as Codex, Claude Code, Gemini CLI, or Pi. Internal OpenClaw
   subagents, `sessions_spawn` plumbing, ACP parent/child behavior, queue lanes,
   trace producers, tool-use mechanics, approval flows, sandboxing, compaction,
-  and runtime machinery do not imply `coding_agents`; route those to `acp`,
+  and runtime machinery do not imply `coding_agent_integrations`; route those to `acp`,
   `acpx`, `agent_runtime`, `sessions`, `queueing`, `tool_calling`,
   `approvals`, or `sandboxing` as appropriate.
 - `acpx`/`acp`: ACPX worker/transport/binding internals → `acpx`; add `acp`

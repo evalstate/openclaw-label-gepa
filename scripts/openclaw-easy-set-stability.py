@@ -246,7 +246,7 @@ def run_direct_batch_repeat(
     telemetry = repeat_dir / "telemetry.jsonl"
     log_path = stability_dir / f"repeat-{idx:02d}.log"
     cmd = [
-        os.environ.get("FAST_AGENT_BIN", "fast-agent"),
+        os.environ.get("FAST_AGENT_BIN", str(ROOT / ".venv/bin/fast-agent")),
         "--no-update-check",
         "--env",
         str(ROOT / ".fast-agent"),

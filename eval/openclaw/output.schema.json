@@ -20,7 +20,7 @@
           "self_hosted_inference",
           "acpx",
           "acp",
-          "coding_agents",
+          "coding_agent_integrations",
           "mcp_tooling",
           "model_lifecycle",
           "codex",

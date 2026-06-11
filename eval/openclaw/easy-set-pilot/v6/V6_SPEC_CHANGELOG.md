@@ -71,18 +71,20 @@ these under the v6 enum; the builder compares via this crosswalk.
 
 Current label-generation spec: `topic-boundary-guidance-v6a.md` +
 `allowed-topics-v6a.md` (teacher card and env.sh point here). Enum unchanged
-(34). Changes from the batch 001-002 review packet:
+from v6 (34). Changes from the batch 001-002 review packet:
 
-- `coding_agents` NARROWED to external coding-agent integrations only (Codex,
-  Claude Code, Gemini CLI, Pi, or external coding agents in general). Internal
-  subagents, `sessions_spawn`, tool use, approvals, sandboxing, compaction,
-  traces, and orchestration route to their owning surfaces. New top-level
-  "Coding-agent boundary" section; `agent_runtime` now owns internal subagent
-  execution/orchestration. NOTE: this deliberately diverges from the
+- `coding_agent_integrations` replaces the v6 topic id `coding_agents`; the
+  rename is intended to make the external-integration boundary explicit.
+  Semantics are also NARROWED to external coding-agent integrations only
+  (Codex, Claude Code, Gemini CLI, Pi, or external coding agents in general).
+  Internal subagents, `sessions_spawn`, tool use, approvals, sandboxing,
+  compaction, traces, and orchestration route to their owning surfaces. New
+  top-level "Coding-agent boundary" section; `agent_runtime` now owns internal
+  subagent execution/orchestration. NOTE: this deliberately diverges from the
   maintainer's production MUST rule ("subagents... agent orchestration"),
   which had been adopted in v6 — prior prompt-hacking had produced
   overlabelling on this topic. Adjudications applied: 68204 and 10467 drop
-  coding_agents.
+  `coding_agent_integrations`.
 - `telemetry_usage` scoped to OpenClaw's own telemetry/usage surface; benchmark
   adjacency excluded (42408); trace/observability producer coverage included
   (68204 keeps telemetry_usage + agent_runtime).

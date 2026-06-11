@@ -35,7 +35,7 @@ Each intake batch has a raw working dir (untracked) and a curated record dir
 (tracked):
 
 ```text
-$V6_RUNS_INTAKE/BATCH_NAME/    runs/easy-set-v6/v6-databuild/intake/ — raw
+$V6_RUNS_INTAKE/BATCH_NAME/    runs/easy-set-v6a/v6a-databuild/intake/ — raw
 $V6_INTAKE/BATCH_NAME/         eval/openclaw/easy-set-pilot/v6/intake/ — tracked
 ```
 
@@ -268,7 +268,7 @@ Each record should include:
   "id": "openclaw-openclaw-10467",
   "batch": "batch-001",
   "status": "accepted_consensus",
-  "labels": ["coding_agents", "sessions", "queueing", "config"],
+  "labels": ["coding_agent_integrations", "sessions", "queueing", "config"],
   "source": "teacher_consensus",
   "spec_manifest": "runs/easy-set-v6/v6-databuild/intake/batch-001/spec-manifest.json",
   "legacy_v5_labels": ["coding_agents", "sessions", "queueing", "config"],

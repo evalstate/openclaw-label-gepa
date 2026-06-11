@@ -35,9 +35,9 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fp": "Tighten notifications: do not use for named Discord/Telegram/Slack behavior or delivery recovery. Use chat_integrations for named chat surfaces and reliability for loss/fallback/recovery.",
         "fn": "Add notifications for generic notification policy, routing, delivery gates, notifier behavior, announcements, or maintainer notification mechanics.",
     },
-    "coding_agents": {
-        "fp": "Tighten coding_agents: require an external coding-agent backend/run such as Codex, Claude Code, Gemini CLI/coding agents, Pi, or coding-agent harness/tools/approvals. Do not use for internal OpenClaw subagent/session/queue/lock orchestration; prefer agent_runtime/sessions/queueing.",
-        "fn": "Improve coding_agents recall: add when Codex, Claude Code, Gemini CLI/coding agents, Pi, external coding-agent harnesses, coding-agent approvals/sandboxing/tools, or provider behavior breaking an external coding-agent turn is central.",
+    "coding_agent_integrations": {
+        "fp": "Tighten coding_agent_integrations: require an external coding-agent backend/run such as Codex, Claude Code, Gemini CLI/coding agents, Pi, or coding-agent harness/tools/approvals. Do not use for internal OpenClaw subagent/session/queue/lock orchestration; prefer agent_runtime/sessions/queueing.",
+        "fn": "Improve coding_agent_integrations recall: add when Codex, Claude Code, Gemini CLI/coding agents, Pi, external coding-agent harnesses, coding-agent approvals/sandboxing/tools, or provider behavior breaking an external coding-agent turn is central.",
     },
     "local_model_providers": {
         "fp": "Tighten local_model_providers: require local, self-hosted, or user-configured OpenAI-compatible provider setup/routing/auth/discovery/compatibility. Do not use for ordinary hosted cloud providers such as Vertex/Azure/Bedrock/Anthropic/DeepInfra/OpenRouter, local lifecycle knobs, model serving endpoint behavior, hosted catalogs, or generic local model mentions.",
