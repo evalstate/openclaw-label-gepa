@@ -58,12 +58,14 @@ integration is the central subject.
   permissions, secret leakage, sandbox escape, supply-chain hardening, access
   control. Credential/auth-boundary rows take `security` AND `auth_identity`
   (mechanics); isolation behavior also takes `sandboxing`.
-- `coding_agents` vs `agent_runtime`: subagents, coding-agent runs, harness
-  behavior, compaction, tool-use approvals, agent sandboxing, and agent
-  orchestration → `coding_agents` (external backend NOT required). Runtime
-  machinery — startup, loop, backends, model-call orchestration, runtime
-  adapters, execution architecture → `agent_runtime`. Co-label only when both
-  layers are central.
+- `coding_agents` vs `agent_runtime`/`acp`: use `coding_agents` only for
+  integrations with external coding agents in general or with a specific coding
+  agent such as Codex, Claude Code, Gemini CLI, or Pi. Internal OpenClaw
+  subagents, `sessions_spawn` plumbing, ACP parent/child behavior, queue lanes,
+  trace producers, tool-use mechanics, approval flows, sandboxing, compaction,
+  and runtime machinery do not imply `coding_agents`; route those to `acp`,
+  `acpx`, `agent_runtime`, `sessions`, `queueing`, `tool_calling`,
+  `approvals`, or `sandboxing` as appropriate.
 - `acpx`/`acp`: ACPX worker/transport/binding internals → `acpx`; add `acp`
   when protocol-level binding/override/delivery semantics are involved. ACPX
   internals alone do not imply `agent_runtime` or `exec_tools`.

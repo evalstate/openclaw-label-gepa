@@ -3,7 +3,9 @@
 Apply these rules as boundary overlays on top of the allowed-topic taxonomy.
 They are not extra labels and do not replace the topic definitions.
 
-Classify for maintainer topic inventory and evaluation, not code search.
+Classify for maintainer topic inventory and evaluation, not code search. Each
+topic names a surface a maintainer owns; a label is correct when that owner
+would need to act on or review the item.
 
 ## Cardinality law
 
@@ -20,7 +22,8 @@ Classify for maintainer topic inventory and evaluation, not code search.
 Do not add topics supported only by changed files, tests added alongside a
 change, examples, incidental helper code, file paths, helper names, or weak
 downstream consequences. A MUST rule is satisfied only when its subject is
-central to the item, not merely mentioned.
+central to the item, not merely mentioned. Label the surface whose behavior
+the item changes, not the surfaces where the change is merely visible.
 
 ## Conformance and policy rows (compositional co-label rules)
 
@@ -35,6 +38,19 @@ central to the item, not merely mentioned.
   provider routing/setup, `inference_api` MUST be included.
 - If the checks include MCP servers or MCP tools, `mcp_tooling` MUST be
   included.
+
+## Coding-agent boundary
+
+Do not use `coding_agents` merely because the item mentions agents, subagents,
+`sessions_spawn`, agent runs, tool use, approvals, sandboxing, compaction,
+traces, or orchestration inside OpenClaw. Route those internal OpenClaw
+concerns to the concrete owning surface instead: `agent_runtime`, `acp`,
+`acpx`, `sessions`, `queueing`, `tool_calling`, `approvals`, `sandboxing`, or
+`telemetry_usage`.
+
+ACP is an integration protocol. It may be used by coding agents, but ACP work
+is not `coding_agents` unless the issue or PR is specifically about a
+coding-agent integration through ACP.
 
 ## Inference family disambiguation
 
@@ -118,26 +134,26 @@ provider/engine/model integration is the central subject.
 - MUST include: ACP runtime/protocol, ACP session, ACP binding, ACP
   parent/child behavior, or ACP delivery is central.
 - Do not include: merely because an item mentions an agent session or internal
-  runtime behavior.
+  runtime behavior. ACP work is not `coding_agents` unless the item is
+  specifically about a coding-agent integration through ACP.
 
 ## `coding_agents`
 
 - MUST include: integrations with external coding agents in general, or with a
-  specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi.
-- Do not include: internal OpenClaw subagents, `sessions_spawn` plumbing, ACP
-  parent/child behavior, queue lanes, trace producers, tool-use mechanics,
-  approval flows, sandboxing, compaction, or agent runtime machinery unless the
-  item is specifically about a coding-agent integration.
-- Boundary: ACP is an integration protocol and is distinct from coding-agent
-  integrations; route ACP protocol/session/delivery work to `acp`/`acpx`.
-  OpenClaw's internal agent runtime is a core product surface; route startup,
-  loop, backend, model-call orchestration, and adapter machinery to
-  `agent_runtime`.
+  specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi — their
+  backends, runs, auth, harness compatibility, or integration behavior.
+- Do not include: internal OpenClaw subagents, `sessions_spawn` plumbing, agent
+  runs, tool use, approvals, sandboxing, compaction, traces, or orchestration
+  inside OpenClaw. Those belong to their owning surfaces: `agent_runtime`,
+  `acp`, `acpx`, `sessions`, `queueing`, `tool_calling`, `approvals`,
+  `sandboxing`, or `telemetry_usage`. The owner of this topic maintains the
+  external coding-agent integrations, not OpenClaw's internal agent machinery.
 
 ## `mcp_tooling`
 
 - MUST include: MCP server allow/deny rules, MCP conformance checks, MCP
-  handshake/tool behavior, MCP config, or MCP tool routing.
+  handshake/tool behavior, MCP config, MCP tool discovery/materialization
+  (tools/list), or MCP tool routing.
 - Do not include: MCP appearing only in examples or incidental config.
 
 ## `codex`
@@ -148,13 +164,12 @@ provider/engine/model integration is the central subject.
 
 ## `agent_runtime`
 
-- MUST include: agent runtime startup, loop, backend, model call orchestration,
-  runtime adapter behavior, or runtime ownership/execution architecture is
-  central.
-- Do not include: ACPX worker internals alone (`acpx`) or any agent-adjacent
-  provider/UI/config change. Do not route internal runtime work to
-  `coding_agents` unless the item is specifically about an external coding-agent
-  integration.
+- MUST include: OpenClaw's internal agent machinery — runtime startup, loop,
+  backends, model call orchestration, runtime adapter behavior, subagent
+  execution and orchestration, or runtime ownership/execution architecture.
+- Do not include: external coding-agent integrations (`coding_agents`), ACP
+  protocol/session/delivery work (`acp`/`acpx`), or any agent-adjacent
+  provider/UI/config change.
 
 ## `sessions`
 
@@ -165,7 +180,8 @@ provider/engine/model integration is the central subject.
 ## `gateway`
 
 - MUST include: gateway routing, gateway state, gateway startup, gateway
-  protocol, or gateway-owned execution is central.
+  protocol, or gateway-owned execution is central — including when the issue
+  identifies the gateway process as the source of the failure.
 - Do not include: ordinary provider proxy, HTTP compatibility, or app-runtime
   bugs unless the gateway is the owning boundary.
 
@@ -214,10 +230,13 @@ provider/engine/model integration is the central subject.
 
 ## `ui_tui`
 
-- MUST include: UI/TUI display, status, footer, mobile UI, or visual
-  interaction is central.
-- Do not include: command internals, telemetry fields, or API behavior not
-  shown to users.
+- MUST include: UI/TUI display, interaction, navigation, rendering, or
+  user-facing control behavior is itself the failing or changed surface —
+  including status views, footer, mobile UI, and settings screens.
+- Do not include: a defect merely observed or triggered through a dashboard,
+  button, status count, tool list, footer, or other visible UI surface when
+  the failing behavior belongs to another owner. The UI being where the user
+  sees the problem does not make the UI the problem.
 
 ## `browser_automation`
 
@@ -246,11 +265,12 @@ provider/engine/model integration is the central subject.
 ## `config`
 
 - MUST include: configuration schemas, persisted config shape, config loading,
-  config validation, config repair, environment/config defaults,
-  operator-facing config options, allow/deny configuration, or policy settings.
+  config validation, config repair, environment/config defaults, allow/deny
+  configuration, policy settings, or adding/changing user- or operator-facing
+  settings — new toggles, pickers, defaults, and persisted preferences qualify,
+  including when they are surfaced through a settings UI.
 - Do not include: a config key that is merely the internal mechanism, example,
   or implementation detail of another surface's change.
-- Boundary: operator-facing config options qualify on their own.
 
 ## `packaging_deployment`
 
@@ -273,9 +293,13 @@ provider/engine/model integration is the central subject.
 
 ## `telemetry_usage`
 
-- MUST include: token counts, usage counts, costs, metrics, diagnostics,
-  traces, or status reporting are central.
-- Do not include: generic reliability or UI text without measurement/status data.
+- MUST include: OpenClaw's own telemetry and usage surface is the subject —
+  token/usage/cost accounting, metrics, diagnostics, trace production and
+  observability coverage, or status reporting of the OpenClaw product.
+- Do not include: measurement or benchmark vocabulary appearing near another
+  surface's change. Being adjacent to benchmarking, evaluation, or numbers is
+  not telemetry; the item must change or centrally concern what OpenClaw
+  measures, records, or reports about itself.
 
 ## `api_surface`
 
@@ -317,9 +341,13 @@ provider/engine/model integration is the central subject.
 
 ## `auth_identity`
 
-- MUST include: authentication, OAuth, credential propagation, identity
-  overlay, auth profile selection, or account/user identity is central.
-- Do not include: generic provider config without identity/auth mechanics.
+- MUST include: OpenClaw's own authentication and identity surface is the
+  subject — login, auth profiles, OAuth flows, tokens, account binding,
+  credential propagation, or user/device identity within the product.
+- Do not include: authentication of external services touched incidentally by
+  another surface's change, or generic provider config without identity/auth
+  mechanics. The owner of this topic maintains how users and devices
+  authenticate to OpenClaw, not every credential the product handles.
 - Co-label: add `security` when credential/auth boundaries or permission
   posture are involved (see security).
 
@@ -337,5 +365,3 @@ provider/engine/model integration is the central subject.
   function/tool schema, or tool-call rendering is central.
 - Do not include: generic command output, TTS, browser screenshot/vision, or
   config-like options.
-- Co-label: parameter coercion/normalization for tool invocation is
-  tool_calling, even inside an MCP bundle or adapter.

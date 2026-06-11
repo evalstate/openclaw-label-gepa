@@ -67,6 +67,42 @@ self_hosted_inference 10, local_models 9, model_releases 2, open_weight_models
 1; 10 rows carried 2+ family labels. The anchor-free revalidation relabels
 these under the v6 enum; the builder compares via this crosswalk.
 
+## v6a (2026-06-11) — review-packet feedback from intake batches 001-002
+
+Current label-generation spec: `topic-boundary-guidance-v6a.md` +
+`allowed-topics-v6a.md` (teacher card and env.sh point here). Enum unchanged
+(34). Changes from the batch 001-002 review packet:
+
+- `coding_agents` NARROWED to external coding-agent integrations only (Codex,
+  Claude Code, Gemini CLI, Pi, or external coding agents in general). Internal
+  subagents, `sessions_spawn`, tool use, approvals, sandboxing, compaction,
+  traces, and orchestration route to their owning surfaces. New top-level
+  "Coding-agent boundary" section; `agent_runtime` now owns internal subagent
+  execution/orchestration. NOTE: this deliberately diverges from the
+  maintainer's production MUST rule ("subagents... agent orchestration"),
+  which had been adopted in v6 — prior prompt-hacking had produced
+  overlabelling on this topic. Adjudications applied: 68204 and 10467 drop
+  coding_agents.
+- `telemetry_usage` scoped to OpenClaw's own telemetry/usage surface; benchmark
+  adjacency excluded (42408); trace/observability producer coverage included
+  (68204 keeps telemetry_usage + agent_runtime).
+- `ui_tui` observation-vs-surface rule: UI must be the failing/changed surface,
+  not merely where a defect is observed/triggered (76724 drops ui_tui;
+  mcp_tooling confirmed — tools/list discovery added to mcp_tooling MUST).
+- `config` wording: user/operator-facing settings additions (toggles, pickers,
+  defaults, persisted preferences) qualify, including via a settings UI
+  (71487 Opus wobble).
+- `auth_identity` scoped to OpenClaw's own auth/identity surface; incidental
+  external-service auth excluded (78528 drops auth_identity).
+- `gateway` confirmed unchanged (68916 correct as labeled).
+- Style: ownership-rationale phrasing ("label the surface whose behavior the
+  item changes, not where it is visible") for frontier-teacher reasoning;
+  caveat count kept flat.
+
+Files `topic-boundary-guidance-v6.md` / `allowed-topics-v6.md` remain as the
+pre-feedback spec used by intake batches 001-002 (their spec-manifests
+reference them); do not edit them further.
+
 ## Divergence from the maintainer's production enum
 
 The maintainer's DS4 guidance uses the v4 enum (`model_serving`,

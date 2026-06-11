@@ -30,8 +30,8 @@ export V6_TRACKIO_PROJECT="openclaw-v6-intake"
 export V6_TRACKIO_EVERY=5
 
 # --- frozen spec & prompt assets (tracked) ------------------------------------
-export V6_SPEC="$V6_DIR/topic-boundary-guidance-v6.md"
-export V6_TAXONOMY="$V6_DIR/allowed-topics-v6.md"
+export V6_SPEC="$V6_DIR/topic-boundary-guidance-v6a.md"
+export V6_TAXONOMY="$V6_DIR/allowed-topics-v6a.md"
 export V6_OVERLAY="$V6_DIR/task-boundary-overlay-v6.md"
 export V6_TEACHER_CARD="$V6_DIR/teacher-card-v6.md"
 export V6_TEACHER_TEMPLATE="$V6_DIR/teacher-template-v6-anchor-free.md"

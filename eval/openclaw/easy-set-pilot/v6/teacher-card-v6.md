@@ -18,7 +18,7 @@ You are not shown any previous or canonical labels. Label each row from the
 item content, the taxonomy, and the boundary guidance alone. Labels must be
 reproducible from those inputs.
 
-{{file:eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md}}
+{{file:eval/openclaw/easy-set-pilot/v6/allowed-topics-v6a.md}}
 
 ## Task
 
@@ -62,7 +62,7 @@ Use the following boundary overlays as tie-breakers on top of the
 allowed-topic taxonomy; they are not extra labels and do not replace the topic
 definitions.
 
-{{file:eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6.md}}
+{{file:eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6a.md}}
 
 ## Required JSON fields
 

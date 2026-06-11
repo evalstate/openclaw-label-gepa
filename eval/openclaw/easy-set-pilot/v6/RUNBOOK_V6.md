@@ -7,7 +7,7 @@ V6 makes two changes relative to v5, in order:
    (row, taxonomy, guidance) without seeing the previous answer.
 2. **GEPA side:** remove the teacher/task information asymmetry (Arm A gives the
    task model the boundary overlay as fixed context) and constrain the mutable
-   policy to a compact overlay (hygiene penalty + 4k budget), with Arm B as the
+   policy to a compact overlay (hygiene penalty + 8k budget), with Arm B as the
    v5-style compression control.
 
 Run phases in order. Phases marked CHECKPOINT end with "report back" — the next
@@ -228,7 +228,7 @@ python scripts/openclaw-vanilla-f1-gepa.py \
   --max-metric-calls 25 \
   --score-mode row-aware \
   --hygiene-penalty 0.03 \
-  --policy-char-budget 4000 \
+  --policy-char-budget 8000 \
   --parallel 4 \
   --project easy-v6-gepa
 ```
