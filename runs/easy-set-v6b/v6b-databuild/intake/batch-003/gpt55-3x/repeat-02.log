@@ -1,0 +1,35 @@
+
+▲ Provider Error: WebSocket stream closed before completion event 
+(close_code=1006; events_seen=4; 
+last_frame={"type":"response.output_item.added","item":{"id":"rs_05c5f4fed061932
+d016a2b6de2032c81918b1f2e1f9c9f31ec","type":"reasoning","content":[],"encrypted_
+content":"gAAAAABqK23idH6hxbXJLm4VcWvZyqQAopDGHt1aQ57-zLcLr...
+⟳ Retrying in 10.0s... (Attempt 1/2)
+
+▲ Provider Error: WebSocket stream closed before completion event 
+(close_code=1006; events_seen=4; 
+last_frame={"type":"response.output_item.added","item":{"id":"rs_07a6ea28bd19cbd
+2016a2b6dddb5dc8191a8aba7815e12aa75","type":"reasoning","content":[],"encrypted_
+content":"gAAAAABqK23djLADMasxDwV-KbAoOEa2nhEVIe8dI13b9l5Qc...
+⟳ Retrying in 10.0s... (Attempt 1/2)
+
+▲ Provider Error: WebSocket stream closed before completion event 
+(close_code=1012; events_seen=297; 
+last_frame={"type":"response.reasoning_summary_text.delta","delta":".","item_id"
+:"rs_0004cdaf0e1660e7016a2b708a473c819192ce50fa8721ee14","obfuscation":"vgnsc637
+vr3Kk4G","output_index":0,"sequence_number":295,"summary_...
+⟳ Retrying in 10.0s... (Attempt 1/2)
+
+▲ Provider Error: WebSocket stream closed before completion event 
+(close_code=1006; events_seen=4; 
+last_frame={"type":"response.output_item.added","item":{"id":"rs_0f3a2e0e412ba70
+f016a2b70a1560c81919c6acb2f0e25ede3","type":"reasoning","content":[],"encrypted_
+content":"gAAAAABqK3ChtnP0MB_VZcqsG8RDe8VtjiJxH0sOVPD6GW8f-...
+⟳ Retrying in 10.0s... (Attempt 1/2)
+* Trackio project initialized: openclaw-v6b-intake
+* Trackio metrics logged to: /home/ssmith/temp/gepa-batch-openclaw/.trackio
+* View dashboard by running in your terminal:
+[1m[38;5;208mtrackio show --project "openclaw-v6b-intake"[0m
+* or by running in Python: trackio.show(project="openclaw-v6b-intake")
+* Created new run: gpt55-3x-repeat-02
+* Run finished. Uploading logs to Trackio (please wait...)

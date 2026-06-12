@@ -1,0 +1,46 @@
+{
+  "input": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/input.jsonl",
+  "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/results.jsonl",
+  "parallel": 4,
+  "input_rows": 32,
+  "selected_rows": 32,
+  "created_at": "2026-06-11T21:14:42Z",
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/part-000.jsonl",
+      "error_output": null,
+      "telemetry_output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/telemetry.part-000.jsonl",
+      "summary_output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/summary.part-000.json"
+    },
+    {
+      "index": 1,
+      "offset": 8,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/part-001.jsonl",
+      "error_output": null,
+      "telemetry_output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/telemetry.part-001.jsonl",
+      "summary_output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/summary.part-001.json"
+    },
+    {
+      "index": 2,
+      "offset": 16,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/part-002.jsonl",
+      "error_output": null,
+      "telemetry_output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/telemetry.part-002.jsonl",
+      "summary_output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/summary.part-002.json"
+    },
+    {
+      "index": 3,
+      "offset": 24,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/part-003.jsonl",
+      "error_output": null,
+      "telemetry_output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/telemetry.part-003.jsonl",
+      "summary_output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T211442Z-a6baa101/summary.part-003.json"
+    }
+  ]
+}

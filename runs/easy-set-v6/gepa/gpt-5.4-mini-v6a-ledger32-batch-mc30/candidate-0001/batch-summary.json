@@ -1,0 +1,101 @@
+{
+  "model": "codexresponses.gpt-5.4-mini",
+  "input": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/input.jsonl",
+  "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0001/results.jsonl",
+  "schema": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/output.schema.json",
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6a.md",
+  "agent": "openclaw_vanilla_labeler",
+  "template": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/task-template.md",
+  "shell_runtime": false,
+  "output_mode": "structured",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "parallel": 4,
+  "work_dir": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T210455Z-2af1080e",
+  "started_at": "2026-06-11T21:04:55Z",
+  "completed_at": "2026-06-11T21:06:05Z",
+  "input_rows": 32,
+  "selected_rows": 32,
+  "processed_rows": 32,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 66650.17,
+  "timing_ms": {
+    "duration": {
+      "count": 32,
+      "min": 3200.22,
+      "mean": 6976.8865625,
+      "median_approx": 6368.6975,
+      "max": 16873.65
+    },
+    "ttft": {
+      "count": 32,
+      "min": 2252.55,
+      "mean": 4614.826875,
+      "median_approx": 3749.31875,
+      "max": 15041.21
+    },
+    "time_to_response": {
+      "count": 32,
+      "min": 2457.45,
+      "mean": 6459.8515625,
+      "median_approx": 5986.327499999999,
+      "max": 15041.21
+    }
+  },
+  "usage": {
+    "input_tokens": 163522,
+    "output_tokens": 13166,
+    "total_tokens": 176688,
+    "billing_tokens": 176688,
+    "reasoning_tokens": 10552,
+    "tool_use_tokens": 0,
+    "tool_calls": 0,
+    "rows_with_usage": 32,
+    "usage_coverage_percent": 100.0
+  },
+  "cache": {
+    "read_tokens": 0,
+    "write_tokens": 0,
+    "hit_tokens": 78848,
+    "served_tokens": 78848,
+    "activity_tokens": 78848,
+    "effective_input_tokens": 84674,
+    "hit_rate_percent": 48.2185883245068,
+    "write_rate_percent": 0.0,
+    "activity_rate_percent": 48.2185883245068,
+    "rows_with_cache_activity": 28,
+    "row_cache_activity_percent": 87.5,
+    "non_cached_input_tokens": 84674,
+    "served_to_effective_input_ratio": 0.9311949358716961
+  },
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T210455Z-2af1080e/part-000.jsonl"
+    },
+    {
+      "index": 1,
+      "offset": 8,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T210455Z-2af1080e/part-001.jsonl"
+    },
+    {
+      "index": 2,
+      "offset": 16,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T210455Z-2af1080e/part-002.jsonl"
+    },
+    {
+      "index": 3,
+      "offset": 24,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0001/.results.jsonl.batch/20260611T210455Z-2af1080e/part-003.jsonl"
+    }
+  ]
+}

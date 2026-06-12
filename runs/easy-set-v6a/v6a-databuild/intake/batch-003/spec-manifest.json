@@ -1,0 +1,44 @@
+{
+  "batch": "batch-003",
+  "source": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/revalidation-input.jsonl",
+  "v5_gold": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/v5-gold-reference.jsonl",
+  "row_count": 30,
+  "row_ids_sha256": "eedc15124a9c878b8e7321a16c35794fb26369cdc9575d66d9bac0f1c17f9c05",
+  "spec_files": [
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/allowed-topics-v6a.md",
+      "sha256": "859bd507893851ed779526b4b73f0f4686ecdf23d4a032a2642c360cca5cfe96",
+      "bytes": 8127
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6a.md",
+      "sha256": "0488b39cb0e9a596d726e8de93b27980e14dcccbc31b9a06699a6c8b0b2af508",
+      "bytes": 16721
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/task-boundary-overlay-v6.md",
+      "sha256": "e3d668624667579726ec2c9fbb30a6b33cebce0f49ef8566d0b57a888eb0baf2",
+      "bytes": 6332
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/teacher-card-v6.md",
+      "sha256": "f9864882151618e1666c09148bcc24e1695a5ee535459e08fd9e7ac2bfc32436",
+      "bytes": 3141
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+      "sha256": "2a4cd9f7ddcf5f1a5b9223509a940decd81dedefd8a9b97daea832c298a5a74b",
+      "bytes": 80
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/teacher-output.schema.json",
+      "sha256": "901139a2843d9bc6aa307c6199b500034025765da9a9d994d000504208ecb8f7",
+      "bytes": 4062
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/V6_SPEC_CHANGELOG.md",
+      "sha256": "a6b2ac6faf8bee839bcddba478516b184a6f6ccfaad3d66517491acbac67e1d6",
+      "bytes": 6541
+    }
+  ]
+}

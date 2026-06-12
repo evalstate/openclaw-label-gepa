@@ -1,0 +1,101 @@
+{
+  "model": "gemma-e4",
+  "input": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/input.jsonl",
+  "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0003/results.jsonl",
+  "schema": null,
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-plain-v6a.md",
+  "agent": "openclaw_vanilla_labeler_plain",
+  "template": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/task-template.md",
+  "shell_runtime": false,
+  "output_mode": "text",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "parallel": 4,
+  "work_dir": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0003/.results.jsonl.batch/20260611T211826Z-af368b82",
+  "started_at": "2026-06-11T21:18:26Z",
+  "completed_at": "2026-06-11T21:19:01Z",
+  "input_rows": 32,
+  "selected_rows": 32,
+  "processed_rows": 32,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 33262.13,
+  "timing_ms": {
+    "duration": {
+      "count": 32,
+      "min": 1489.23,
+      "mean": 3965.59,
+      "median_approx": 3942.90125,
+      "max": 5314.73
+    },
+    "ttft": {
+      "count": 32,
+      "min": 691.34,
+      "mean": 2717.1978125,
+      "median_approx": 2823.33875,
+      "max": 4822.81
+    },
+    "time_to_response": {
+      "count": 32,
+      "min": 691.34,
+      "mean": 2717.1978125,
+      "median_approx": 2823.33875,
+      "max": 4822.81
+    }
+  },
+  "usage": {
+    "input_tokens": 215008,
+    "output_tokens": 258,
+    "total_tokens": 215266,
+    "billing_tokens": 215266,
+    "reasoning_tokens": 0,
+    "tool_use_tokens": 0,
+    "tool_calls": 0,
+    "rows_with_usage": 32,
+    "usage_coverage_percent": 100.0
+  },
+  "cache": {
+    "read_tokens": 0,
+    "write_tokens": 0,
+    "hit_tokens": 148992,
+    "served_tokens": 148992,
+    "activity_tokens": 148992,
+    "effective_input_tokens": 66016,
+    "hit_rate_percent": 69.29602619437416,
+    "write_rate_percent": 0.0,
+    "activity_rate_percent": 69.29602619437416,
+    "rows_with_cache_activity": 32,
+    "row_cache_activity_percent": 100.0,
+    "non_cached_input_tokens": 66016,
+    "served_to_effective_input_ratio": 2.256907416383907
+  },
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0003/.results.jsonl.batch/20260611T211826Z-af368b82/part-000.jsonl"
+    },
+    {
+      "index": 1,
+      "offset": 8,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0003/.results.jsonl.batch/20260611T211826Z-af368b82/part-001.jsonl"
+    },
+    {
+      "index": 2,
+      "offset": 16,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0003/.results.jsonl.batch/20260611T211826Z-af368b82/part-002.jsonl"
+    },
+    {
+      "index": 3,
+      "offset": 24,
+      "limit": 8,
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0003/.results.jsonl.batch/20260611T211826Z-af368b82/part-003.jsonl"
+    }
+  ]
+}

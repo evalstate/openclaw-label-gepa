@@ -1,0 +1,1966 @@
+{
+  "score": 0.642494799382716,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.642494799382716,
+      "composite_score": 0.652559799382716,
+      "topic_micro_f1": 0.7654320987654321,
+      "row_exact_accuracy": 0.34375,
+      "avg_row_jaccard": 0.6703124999999999,
+      "row_symdiff_score": 0.45714285714285713,
+      "policy_length_compliance": 0.89935,
+      "policy_hygiene_compliance": 1.0
+    },
+    "score_details": {
+      "false_positives": 23,
+      "false_negatives": 15,
+      "row_exact_accuracy": 0.34375,
+      "avg_row_jaccard": 0.6703124999999999,
+      "avg_row_symdiff": 1.1875,
+      "avg_expected_topics": 2.40625,
+      "avg_predicted_topics": 2.65625,
+      "asi_score": 1.0,
+      "topic_micro_precision": 0.7294117647058823,
+      "topic_micro_recall": 0.8051948051948052,
+      "exact_match": 0.34375,
+      "row_symdiff_score": 0.45714285714285713,
+      "composite_score": 0.652559799382716,
+      "gepa_score": 0.642494799382716,
+      "score_mode": "row-aware",
+      "valid_json": 1.0,
+      "cardinality_closeness": 0.8961038961038961,
+      "avg_topic_count_delta": 0.25,
+      "policy_chars": 6013,
+      "policy_char_budget": 4000,
+      "policy_length_over_budget": 2013,
+      "policy_length_penalty": 0.010065000000000001,
+      "policy_length_compliance": 0.89935,
+      "hygiene_penalty": 0.0,
+      "hygiene_findings_count": 0
+    },
+    "evaluated": 32,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-43416",
+        "title": "feat(ui): add copy button for assistant messages",
+        "expected": [
+          "ui_tui"
+        ],
+        "actual": [
+          "chat_integrations",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "chat_integrations"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      },
+      {
+        "id": "openclaw-openclaw-47083",
+        "title": "fix: respect totalTokensFresh flag to avoid showing stale token counts",
+        "expected": [
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "actual": [
+          "reliability",
+          "sessions",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [
+          "telemetry_usage"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.4
+      },
+      {
+        "id": "openclaw-openclaw-48877",
+        "title": "feat(telegram): add multi-level menu support to customCommands",
+        "expected": [
+          "chat_integrations",
+          "config"
+        ],
+        "actual": [
+          "api_surface",
+          "chat_integrations",
+          "config"
+        ],
+        "false_positives": [
+          "api_surface"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-53997",
+        "title": "acpx: add terminal-truth artifacts and strict terminal states",
+        "expected": [
+          "acpx",
+          "reliability"
+        ],
+        "actual": [
+          "acpx",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "sessions"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-71646",
+        "title": "mcp/channel-bridge: pendingClaudePermissions / pendingApprovals leak — no TTL, no close-clear, no cap",
+        "expected": [
+          "approvals",
+          "mcp_tooling",
+          "reliability"
+        ],
+        "actual": [
+          "mcp_tooling",
+          "memory",
+          "reliability"
+        ],
+        "false_positives": [
+          "memory"
+        ],
+        "false_negatives": [
+          "approvals"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      },
+      {
+        "id": "openclaw-openclaw-71976",
+        "title": "Memory Dreaming: Light sleep sort prioritizes recency over recallCount, hiding real recall data",
+        "expected": [
+          "memory"
+        ],
+        "actual": [
+          "memory",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      },
+      {
+        "id": "openclaw-openclaw-72138",
+        "title": "fix(feishu): emit sent hooks for normal replies",
+        "expected": [
+          "chat_integrations",
+          "hooks",
+          "notifications"
+        ],
+        "actual": [
+          "chat_integrations",
+          "notifications",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [
+          "hooks"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      },
+      {
+        "id": "openclaw-openclaw-77694",
+        "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+        "expected": [
+          "acp",
+          "acpx"
+        ],
+        "actual": [
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [
+          "acp"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.5
+      },
+      {
+        "id": "openclaw-openclaw-82145",
+        "title": "cron: allow retries for local model preflight",
+        "expected": [
+          "config",
+          "cron_automation",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "actual": [
+          "config",
+          "cron_automation",
+          "reliability"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "self_hosted_inference"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8571428571428571
+      },
+      {
+        "id": "openclaw-openclaw-82642",
+        "title": "Fix iMessage slash command acknowledgements",
+        "expected": [
+          "chat_integrations",
+          "notifications"
+        ],
+        "actual": [
+          "chat_integrations",
+          "notifications",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-84385",
+        "title": "[codex] Fix macOS app copyright year",
+        "expected": [
+          "ui_tui"
+        ],
+        "actual": [
+          "codex",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "codex"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      },
+      {
+        "id": "openclaw-openclaw-84732",
+        "title": "Slack channel sends fail: `reconcileUnknownSend` required but no channel adapter implements it",
+        "expected": [
+          "chat_integrations",
+          "notifications",
+          "reliability"
+        ],
+        "actual": [
+          "chat_integrations",
+          "reliability",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "tool_calling"
+        ],
+        "false_negatives": [
+          "notifications"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      }
+    ],
+    "worst_failures": [
+      {
+        "id": "openclaw-openclaw-69669",
+        "title": "ACP: keep thread-bound follow-ups parent-orchestrated by default, not raw pass-through",
+        "expected": [
+          "acp",
+          "coding_agents",
+          "sessions"
+        ],
+        "actual": [
+          "acp",
+          "agent_runtime",
+          "reliability"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "reliability"
+        ],
+        "false_negatives": [
+          "coding_agents",
+          "sessions"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.3333333333333333
+      },
+      {
+        "id": "openclaw-openclaw-47083",
+        "title": "fix: respect totalTokensFresh flag to avoid showing stale token counts",
+        "expected": [
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "actual": [
+          "reliability",
+          "sessions",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [
+          "telemetry_usage"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.4
+      },
+      {
+        "id": "openclaw-openclaw-42122",
+        "title": "Speed up install smoke Docker builds",
+        "expected": [
+          "packaging_deployment",
+          "tests_ci"
+        ],
+        "actual": [
+          "config",
+          "packaging_deployment",
+          "reliability"
+        ],
+        "false_positives": [
+          "config",
+          "reliability"
+        ],
+        "false_negatives": [
+          "tests_ci"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.4
+      },
+      {
+        "id": "openclaw-openclaw-77694",
+        "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+        "expected": [
+          "acp",
+          "acpx"
+        ],
+        "actual": [
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [
+          "acp"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.5
+      },
+      {
+        "id": "openclaw-openclaw-67539",
+        "title": "[Feature]: Add provider-specific TTS prompt hints",
+        "expected": [
+          "inference_api"
+        ],
+        "actual": [
+          "inference_api",
+          "skills_plugins",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "skills_plugins",
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.5
+      },
+      {
+        "id": "openclaw-openclaw-77827",
+        "title": "fix: LM Studio thinking blocks invisible with Responses API",
+        "expected": [
+          "inference_api"
+        ],
+        "actual": [
+          "inference_api",
+          "reliability",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "reliability",
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.5
+      },
+      {
+        "id": "openclaw-openclaw-73910",
+        "title": "BUG: OpenClaw-managed Codex ACP uses isolated CODEX_HOME without auth bridge and sends unsupported timeout config",
+        "expected": [
+          "acp",
+          "acpx",
+          "auth_identity",
+          "codex",
+          "security"
+        ],
+        "actual": [
+          "acp",
+          "auth_identity",
+          "codex",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [
+          "acpx",
+          "security"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      },
+      {
+        "id": "openclaw-openclaw-71646",
+        "title": "mcp/channel-bridge: pendingClaudePermissions / pendingApprovals leak — no TTL, no close-clear, no cap",
+        "expected": [
+          "approvals",
+          "mcp_tooling",
+          "reliability"
+        ],
+        "actual": [
+          "mcp_tooling",
+          "memory",
+          "reliability"
+        ],
+        "false_positives": [
+          "memory"
+        ],
+        "false_negatives": [
+          "approvals"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      }
+    ],
+    "topic_error_patterns": [
+      {
+        "topic": "reliability",
+        "problem": "over_predicted",
+        "expected": 10,
+        "actual": 19,
+        "true_positives": 10,
+        "false_positives": 9,
+        "false_negatives": 0,
+        "precision": 0.526,
+        "recall": 1.0,
+        "f1": 0.69,
+        "action": "`reliability` over_predicted: expected in 10 rows, predicted in 19, TP=10, FP=9, FN=0, precision=0.526, recall=1.000. Precision is the bottleneck. a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface.",
+        "examples": [
+          {
+            "expected": [
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "reliability",
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          },
+          {
+            "expected": [
+              "memory"
+            ],
+            "actual": [
+              "memory",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          },
+          {
+            "expected": [
+              "chat_integrations",
+              "hooks",
+              "notifications"
+            ],
+            "actual": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "acpx",
+              "reliability"
+            ],
+            "actual": [
+              "acpx",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          },
+          {
+            "expected": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          },
+          {
+            "expected": [
+              "approvals",
+              "mcp_tooling",
+              "reliability"
+            ],
+            "actual": [
+              "mcp_tooling",
+              "memory",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "reliability",
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.4
+          },
+          {
+            "expected": [
+              "memory"
+            ],
+            "actual": [
+              "memory",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          },
+          {
+            "expected": [
+              "chat_integrations",
+              "hooks",
+              "notifications"
+            ],
+            "actual": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ],
+        "false_negative_examples": []
+      },
+      {
+        "topic": "tool_calling",
+        "problem": "over_predicted",
+        "expected": 0,
+        "actual": 4,
+        "true_positives": 0,
+        "false_positives": 4,
+        "false_negatives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "action": "`tool_calling` over_predicted: expected in 0 rows, predicted in 4, TP=0, FP=4, FN=0, precision=0.000, recall=0.000. Precision is the bottleneck. generic command output, TTS, browser screenshot/vision, or config-like options. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter.",
+        "examples": [
+          {
+            "expected": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "actual": [
+              "chat_integrations",
+              "reliability",
+              "tool_calling"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          },
+          {
+            "expected": [
+              "sessions",
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "sessions",
+              "tool_calling",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          },
+          {
+            "expected": [
+              "inference_api"
+            ],
+            "actual": [
+              "inference_api",
+              "skills_plugins",
+              "tool_calling"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          }
+        ],
+        "true_positive_examples": [],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "actual": [
+              "chat_integrations",
+              "reliability",
+              "tool_calling"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          },
+          {
+            "expected": [
+              "sessions",
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "sessions",
+              "tool_calling",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          },
+          {
+            "expected": [
+              "inference_api"
+            ],
+            "actual": [
+              "inference_api",
+              "skills_plugins",
+              "tool_calling"
+            ],
+            "keywords": [],
+            "row_score": 0.5
+          }
+        ],
+        "false_negative_examples": []
+      },
+      {
+        "topic": "sessions",
+        "problem": "mixed",
+        "expected": 6,
+        "actual": 7,
+        "true_positives": 5,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "precision": 0.714,
+        "recall": 0.833,
+        "f1": 0.769,
+        "action": "`sessions` mixed: expected in 6 rows, predicted in 7, TP=5, FP=2, FN=1, precision=0.714, recall=0.833. Both precision and recall need boundary work. Mixed `sessions` errors. every mention of session context or session files. MUST include when central: session lifecycle, state, storage, identity, binding, or cleanup is central.",
+        "examples": [
+          {
+            "expected": [
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "reliability",
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          },
+          {
+            "expected": [
+              "acpx",
+              "reliability"
+            ],
+            "actual": [
+              "acpx",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          },
+          {
+            "expected": [
+              "acp",
+              "coding_agents",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "agent_runtime",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          },
+          {
+            "expected": [
+              "sessions",
+              "ui_tui"
+            ],
+            "actual": [
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          },
+          {
+            "expected": [
+              "sessions",
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "sessions",
+              "tool_calling",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "reliability",
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.4
+          },
+          {
+            "expected": [
+              "acpx",
+              "reliability"
+            ],
+            "actual": [
+              "acpx",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          }
+        ],
+        "false_negative_examples": [
+          {
+            "expected": [
+              "acp",
+              "coding_agents",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "agent_runtime",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.333
+          }
+        ]
+      },
+      {
+        "topic": "coding_agents",
+        "problem": "under_predicted",
+        "expected": 3,
+        "actual": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 3,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "action": "`coding_agents` under_predicted: expected in 3 rows, predicted in 0, TP=0, FP=0, FN=3, precision=0.000, recall=0.000. Recall is the bottleneck. MUST include when central: integrations with external coding agents in general, or with a specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`.",
+        "examples": [
+          {
+            "expected": [
+              "coding_agents",
+              "notifications",
+              "reliability"
+            ],
+            "actual": [
+              "gateway",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          },
+          {
+            "expected": [
+              "coding_agents",
+              "cron_automation",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "cron_automation",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          },
+          {
+            "expected": [
+              "acp",
+              "coding_agents",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "agent_runtime",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          }
+        ],
+        "true_positive_examples": [],
+        "false_positive_examples": [],
+        "false_negative_examples": [
+          {
+            "expected": [
+              "coding_agents",
+              "notifications",
+              "reliability"
+            ],
+            "actual": [
+              "gateway",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          },
+          {
+            "expected": [
+              "coding_agents",
+              "cron_automation",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "cron_automation",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 0.857
+          },
+          {
+            "expected": [
+              "acp",
+              "coding_agents",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "agent_runtime",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.333
+          }
+        ]
+      },
+      {
+        "topic": "telemetry_usage",
+        "problem": "mixed",
+        "expected": 3,
+        "actual": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 2,
+        "precision": 1.0,
+        "recall": 0.333,
+        "f1": 0.5,
+        "action": "`telemetry_usage` mixed: expected in 3 rows, predicted in 1, TP=1, FP=0, FN=2, precision=1.000, recall=0.333. Both precision and recall need boundary work. Mixed `telemetry_usage` errors. generic reliability or UI text without measurement/status data. MUST include when central: token counts, usage counts, costs, metrics, diagnostics, traces, or status reporting are central.",
+        "examples": [
+          {
+            "expected": [
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "reliability",
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          },
+          {
+            "expected": [
+              "sessions",
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "sessions",
+              "tool_calling",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "api_surface",
+              "gateway",
+              "telemetry_usage"
+            ],
+            "actual": [
+              "api_surface",
+              "gateway",
+              "telemetry_usage"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          }
+        ],
+        "false_positive_examples": [],
+        "false_negative_examples": [
+          {
+            "expected": [
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "reliability",
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.4
+          },
+          {
+            "expected": [
+              "sessions",
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "sessions",
+              "tool_calling",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ]
+      },
+      {
+        "topic": "chat_integrations",
+        "problem": "mixed",
+        "expected": 5,
+        "actual": 6,
+        "true_positives": 5,
+        "false_positives": 1,
+        "false_negatives": 0,
+        "precision": 0.833,
+        "recall": 1.0,
+        "f1": 0.909,
+        "action": "`chat_integrations` mixed: expected in 5 rows, predicted in 6, TP=5, FP=1, FN=0, precision=0.833, recall=1.000. Both precision and recall need boundary work. Mixed `chat_integrations` errors. generic message delivery/recovery without a named chat surface. MUST include when central: a named chat platform, channel adapter, message ingestion, or chat delivery surface is central.",
+        "examples": [
+          {
+            "expected": [
+              "ui_tui"
+            ],
+            "actual": [
+              "chat_integrations",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "chat_integrations",
+              "config"
+            ],
+            "actual": [
+              "api_surface",
+              "chat_integrations",
+              "config"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          },
+          {
+            "expected": [
+              "chat_integrations",
+              "config",
+              "notifications"
+            ],
+            "actual": [
+              "chat_integrations",
+              "config",
+              "notifications"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          },
+          {
+            "expected": [
+              "chat_integrations",
+              "hooks",
+              "notifications"
+            ],
+            "actual": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "ui_tui"
+            ],
+            "actual": [
+              "chat_integrations",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ],
+        "false_negative_examples": []
+      },
+      {
+        "topic": "config",
+        "problem": "mixed",
+        "expected": 5,
+        "actual": 6,
+        "true_positives": 5,
+        "false_positives": 1,
+        "false_negatives": 0,
+        "precision": 0.833,
+        "recall": 1.0,
+        "f1": 0.909,
+        "action": "`config` mixed: expected in 5 rows, predicted in 6, TP=5, FP=1, FN=0, precision=0.833, recall=1.000. Both precision and recall need boundary work. Mixed `config` errors. a config key that is merely the internal mechanism, example, or implementation detail of another surface's change. Boundary: operator-facing config options qualify on their own. MUST include when central: configuration schemas, persisted config shape, config loading, config validation, config repair, environment/config defaults, operator-facing config options, allow/deny configuration, or policy settings. Boundary: operator-facing config options qualify on their own.",
+        "examples": [
+          {
+            "expected": [
+              "packaging_deployment",
+              "tests_ci"
+            ],
+            "actual": [
+              "config",
+              "packaging_deployment",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "chat_integrations",
+              "config"
+            ],
+            "actual": [
+              "api_surface",
+              "chat_integrations",
+              "config"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          },
+          {
+            "expected": [
+              "chat_integrations",
+              "config",
+              "notifications"
+            ],
+            "actual": [
+              "chat_integrations",
+              "config",
+              "notifications"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          },
+          {
+            "expected": [
+              "config",
+              "cron_automation",
+              "reliability",
+              "self_hosted_inference"
+            ],
+            "actual": [
+              "config",
+              "cron_automation",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.857
+          }
+        ],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "packaging_deployment",
+              "tests_ci"
+            ],
+            "actual": [
+              "config",
+              "packaging_deployment",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.4
+          }
+        ],
+        "false_negative_examples": []
+      },
+      {
+        "topic": "acp",
+        "problem": "mixed",
+        "expected": 6,
+        "actual": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "precision": 1.0,
+        "recall": 0.833,
+        "f1": 0.909,
+        "action": "`acp` mixed: expected in 6 rows, predicted in 5, TP=5, FP=0, FN=1, precision=1.000, recall=0.833. Both precision and recall need boundary work. Mixed `acp` errors. merely because an item mentions an agent session or internal runtime behavior. MUST include when central: ACP runtime/protocol, ACP session, ACP binding, ACP parent/child behavior, or ACP delivery is central.",
+        "examples": [
+          {
+            "expected": [
+              "acp",
+              "acpx"
+            ],
+            "actual": [
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          },
+          {
+            "expected": [
+              "acp",
+              "config",
+              "queueing",
+              "reliability"
+            ],
+            "actual": [
+              "acp",
+              "config",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.857
+          },
+          {
+            "expected": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          }
+        ],
+        "false_positive_examples": [],
+        "false_negative_examples": [
+          {
+            "expected": [
+              "acp",
+              "acpx"
+            ],
+            "actual": [
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.5
+          }
+        ]
+      }
+    ],
+    "confusions": [
+      {
+        "expected": "telemetry_usage",
+        "predicted": "sessions",
+        "count": 1,
+        "action": "Clarify `telemetry_usage` vs `sessions`. For missed `telemetry_usage`: MUST include when central: token counts, usage counts, costs, metrics, diagnostics, traces, or status reporting are central. For extra `sessions`: every mention of session context or session files.",
+        "examples": [
+          {
+            "expected": [
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "reliability",
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.4
+          }
+        ]
+      },
+      {
+        "expected": "telemetry_usage",
+        "predicted": "reliability",
+        "count": 1,
+        "action": "Clarify `telemetry_usage` vs `reliability`. For missed `telemetry_usage`: MUST include when central: token counts, usage counts, costs, metrics, diagnostics, traces, or status reporting are central. For extra `reliability`: a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface.",
+        "examples": [
+          {
+            "expected": [
+              "telemetry_usage",
+              "ui_tui"
+            ],
+            "actual": [
+              "reliability",
+              "sessions",
+              "ui_tui"
+            ],
+            "keywords": [],
+            "row_score": 0.4
+          }
+        ]
+      },
+      {
+        "expected": "approvals",
+        "predicted": "memory",
+        "count": 1,
+        "action": "Clarify `approvals` vs `memory`. For missed `approvals`: MUST include when central: approval prompts, permission decisions, or approval mode behavior is central. Co-label: bounding/expiring/persisting pending-approval state is approvals surface even when motivated by a memory/reliability fix. For extra `memory`: context window, session state, transcript, or generic remembering.",
+        "examples": [
+          {
+            "expected": [
+              "approvals",
+              "mcp_tooling",
+              "reliability"
+            ],
+            "actual": [
+              "mcp_tooling",
+              "memory",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ]
+      },
+      {
+        "expected": "hooks",
+        "predicted": "reliability",
+        "count": 1,
+        "action": "Clarify `hooks` vs `reliability`. For missed `hooks`: MUST include when central: hook registration, hook priority, hook execution, or hook security is central. For extra `reliability`: a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface.",
+        "examples": [
+          {
+            "expected": [
+              "chat_integrations",
+              "hooks",
+              "notifications"
+            ],
+            "actual": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ]
+      },
+      {
+        "expected": "acp",
+        "predicted": "reliability",
+        "count": 1,
+        "action": "Clarify `acp` vs `reliability`. For missed `acp`: MUST include when central: ACP runtime/protocol, ACP session, ACP binding, ACP parent/child behavior, or ACP delivery is central. For extra `reliability`: a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface.",
+        "examples": [
+          {
+            "expected": [
+              "acp",
+              "acpx"
+            ],
+            "actual": [
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.5
+          }
+        ]
+      },
+      {
+        "expected": "notifications",
+        "predicted": "tool_calling",
+        "count": 1,
+        "action": "Clarify `notifications` vs `tool_calling`. For missed `notifications`: MUST include when central: generic outbound notifications, completion delivery, message delivery gates, announcements, or notify behavior is central. Co-label: when a chat-surface change implements or alters a delivery payload/path or delivery gates, add notifications alongside the chat label. For extra `tool_calling`: generic command output, TTS, browser screenshot/vision, or config-like options. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter.",
+        "examples": [
+          {
+            "expected": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "actual": [
+              "chat_integrations",
+              "reliability",
+              "tool_calling"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ]
+      }
+    ],
+    "invalid_topics": {},
+    "actionable_feedback": [
+      "Pure-F1 objective: optimize exact topic membership, not recall-biased F-beta. Current precision=0.729, recall=0.805, F1=0.765.",
+      "Cardinality diagnosis: over_labeling; avg predicted 2.66 vs expected 2.41. Tighten incidental-evidence gates and remove labels supported only by files, tests, examples, or side effects.",
+      "Policy length penalty: policy is 2013 chars over the 4000 char budget; GEPA score was reduced by 0.0101.",
+      "Topic cardinality is close: avg predicted topics 2.66 vs expected 2.41. Focus on boundary-specific errors.",
+      "`reliability` over_predicted: expected in 10 rows, predicted in 19, TP=10, FP=9, FN=0, precision=0.526, recall=1.000. Precision is the bottleneck. a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface.",
+      "`tool_calling` over_predicted: expected in 0 rows, predicted in 4, TP=0, FP=4, FN=0, precision=0.000, recall=0.000. Precision is the bottleneck. generic command output, TTS, browser screenshot/vision, or config-like options. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter.",
+      "`sessions` mixed: expected in 6 rows, predicted in 7, TP=5, FP=2, FN=1, precision=0.714, recall=0.833. Both precision and recall need boundary work. Mixed `sessions` errors. every mention of session context or session files. MUST include when central: session lifecycle, state, storage, identity, binding, or cleanup is central.",
+      "`coding_agents` under_predicted: expected in 3 rows, predicted in 0, TP=0, FP=0, FN=3, precision=0.000, recall=0.000. Recall is the bottleneck. MUST include when central: integrations with external coding agents in general, or with a specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`.",
+      "`telemetry_usage` mixed: expected in 3 rows, predicted in 1, TP=1, FP=0, FN=2, precision=1.000, recall=0.333. Both precision and recall need boundary work. Mixed `telemetry_usage` errors. generic reliability or UI text without measurement/status data. MUST include when central: token counts, usage counts, costs, metrics, diagnostics, traces, or status reporting are central.",
+      "`chat_integrations` mixed: expected in 5 rows, predicted in 6, TP=5, FP=1, FN=0, precision=0.833, recall=1.000. Both precision and recall need boundary work. Mixed `chat_integrations` errors. generic message delivery/recovery without a named chat surface. MUST include when central: a named chat platform, channel adapter, message ingestion, or chat delivery surface is central."
+    ],
+    "vanilla_f1_asi": {
+      "global_diagnosis": {
+        "precision": 0.7294117647058823,
+        "recall": 0.8051948051948052,
+        "f1": 0.7654320987654321,
+        "gepa_score": 0.642494799382716,
+        "score_mode": "row-aware",
+        "exact_match": 0.34375,
+        "row_exact_accuracy": 0.34375,
+        "avg_row_jaccard": 0.6703124999999999,
+        "avg_row_symdiff": 1.1875,
+        "row_symdiff_score": 0.45714285714285713,
+        "composite_score": 0.652559799382716,
+        "valid_json": 1.0,
+        "cardinality_closeness": 0.8961038961038961,
+        "avg_expected_topics": 2.40625,
+        "avg_predicted_topics": 2.65625,
+        "false_positives": 23,
+        "false_negatives": 15,
+        "policy_chars": 6013,
+        "policy_char_budget": 4000,
+        "policy_length_over_budget": 2013,
+        "policy_length_penalty": 0.010065000000000001,
+        "policy_length_compliance": 0.89935,
+        "diagnosis": "over_labeling",
+        "action": "Tighten incidental-evidence gates and remove labels supported only by files, tests, examples, or side effects."
+      },
+      "topic_priorities": [
+        {
+          "topic": "reliability",
+          "problem": "over_predicted",
+          "false_positives": 9,
+          "false_negatives": 0,
+          "precision": 0.526,
+          "recall": 1.0,
+          "action": "`reliability` over_predicted: expected in 10 rows, predicted in 19, TP=10, FP=9, FN=0, precision=0.526, recall=1.000. Precision is the bottleneck. a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface."
+        },
+        {
+          "topic": "tool_calling",
+          "problem": "over_predicted",
+          "false_positives": 4,
+          "false_negatives": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "action": "`tool_calling` over_predicted: expected in 0 rows, predicted in 4, TP=0, FP=4, FN=0, precision=0.000, recall=0.000. Precision is the bottleneck. generic command output, TTS, browser screenshot/vision, or config-like options. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter."
+        },
+        {
+          "topic": "sessions",
+          "problem": "mixed",
+          "false_positives": 2,
+          "false_negatives": 1,
+          "precision": 0.714,
+          "recall": 0.833,
+          "action": "`sessions` mixed: expected in 6 rows, predicted in 7, TP=5, FP=2, FN=1, precision=0.714, recall=0.833. Both precision and recall need boundary work. Mixed `sessions` errors. every mention of session context or session files. MUST include when central: session lifecycle, state, storage, identity, binding, or cleanup is central."
+        },
+        {
+          "topic": "coding_agents",
+          "problem": "under_predicted",
+          "false_positives": 0,
+          "false_negatives": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "action": "`coding_agents` under_predicted: expected in 3 rows, predicted in 0, TP=0, FP=0, FN=3, precision=0.000, recall=0.000. Recall is the bottleneck. MUST include when central: integrations with external coding agents in general, or with a specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`."
+        },
+        {
+          "topic": "telemetry_usage",
+          "problem": "mixed",
+          "false_positives": 0,
+          "false_negatives": 2,
+          "precision": 1.0,
+          "recall": 0.333,
+          "action": "`telemetry_usage` mixed: expected in 3 rows, predicted in 1, TP=1, FP=0, FN=2, precision=1.000, recall=0.333. Both precision and recall need boundary work. Mixed `telemetry_usage` errors. generic reliability or UI text without measurement/status data. MUST include when central: token counts, usage counts, costs, metrics, diagnostics, traces, or status reporting are central."
+        },
+        {
+          "topic": "chat_integrations",
+          "problem": "mixed",
+          "false_positives": 1,
+          "false_negatives": 0,
+          "precision": 0.833,
+          "recall": 1.0,
+          "action": "`chat_integrations` mixed: expected in 5 rows, predicted in 6, TP=5, FP=1, FN=0, precision=0.833, recall=1.000. Both precision and recall need boundary work. Mixed `chat_integrations` errors. generic message delivery/recovery without a named chat surface. MUST include when central: a named chat platform, channel adapter, message ingestion, or chat delivery surface is central."
+        },
+        {
+          "topic": "config",
+          "problem": "mixed",
+          "false_positives": 1,
+          "false_negatives": 0,
+          "precision": 0.833,
+          "recall": 1.0,
+          "action": "`config` mixed: expected in 5 rows, predicted in 6, TP=5, FP=1, FN=0, precision=0.833, recall=1.000. Both precision and recall need boundary work. Mixed `config` errors. a config key that is merely the internal mechanism, example, or implementation detail of another surface's change. Boundary: operator-facing config options qualify on their own. MUST include when central: configuration schemas, persisted config shape, config loading, config validation, config repair, environment/config defaults, operator-facing config options, allow/deny configuration, or policy settings. Boundary: operator-facing config options qualify on their own."
+        },
+        {
+          "topic": "acp",
+          "problem": "mixed",
+          "false_positives": 0,
+          "false_negatives": 1,
+          "precision": 1.0,
+          "recall": 0.833,
+          "action": "`acp` mixed: expected in 6 rows, predicted in 5, TP=5, FP=0, FN=1, precision=1.000, recall=0.833. Both precision and recall need boundary work. Mixed `acp` errors. merely because an item mentions an agent session or internal runtime behavior. MUST include when central: ACP runtime/protocol, ACP session, ACP binding, ACP parent/child behavior, or ACP delivery is central."
+        }
+      ],
+      "confusions": [
+        {
+          "expected": "telemetry_usage",
+          "predicted": "sessions",
+          "count": 1,
+          "action": "Clarify `telemetry_usage` vs `sessions`. For missed `telemetry_usage`: MUST include when central: token counts, usage counts, costs, metrics, diagnostics, traces, or status reporting are central. For extra `sessions`: every mention of session context or session files.",
+          "examples": [
+            {
+              "expected": [
+                "telemetry_usage",
+                "ui_tui"
+              ],
+              "actual": [
+                "reliability",
+                "sessions",
+                "ui_tui"
+              ],
+              "keywords": [],
+              "row_score": 0.4
+            }
+          ]
+        },
+        {
+          "expected": "telemetry_usage",
+          "predicted": "reliability",
+          "count": 1,
+          "action": "Clarify `telemetry_usage` vs `reliability`. For missed `telemetry_usage`: MUST include when central: token counts, usage counts, costs, metrics, diagnostics, traces, or status reporting are central. For extra `reliability`: a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface.",
+          "examples": [
+            {
+              "expected": [
+                "telemetry_usage",
+                "ui_tui"
+              ],
+              "actual": [
+                "reliability",
+                "sessions",
+                "ui_tui"
+              ],
+              "keywords": [],
+              "row_score": 0.4
+            }
+          ]
+        },
+        {
+          "expected": "approvals",
+          "predicted": "memory",
+          "count": 1,
+          "action": "Clarify `approvals` vs `memory`. For missed `approvals`: MUST include when central: approval prompts, permission decisions, or approval mode behavior is central. Co-label: bounding/expiring/persisting pending-approval state is approvals surface even when motivated by a memory/reliability fix. For extra `memory`: context window, session state, transcript, or generic remembering.",
+          "examples": [
+            {
+              "expected": [
+                "approvals",
+                "mcp_tooling",
+                "reliability"
+              ],
+              "actual": [
+                "mcp_tooling",
+                "memory",
+                "reliability"
+              ],
+              "keywords": [],
+              "row_score": 0.667
+            }
+          ]
+        },
+        {
+          "expected": "hooks",
+          "predicted": "reliability",
+          "count": 1,
+          "action": "Clarify `hooks` vs `reliability`. For missed `hooks`: MUST include when central: hook registration, hook priority, hook execution, or hook security is central. For extra `reliability`: a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface.",
+          "examples": [
+            {
+              "expected": [
+                "chat_integrations",
+                "hooks",
+                "notifications"
+              ],
+              "actual": [
+                "chat_integrations",
+                "notifications",
+                "reliability"
+              ],
+              "keywords": [],
+              "row_score": 0.667
+            }
+          ]
+        },
+        {
+          "expected": "acp",
+          "predicted": "reliability",
+          "count": 1,
+          "action": "Clarify `acp` vs `reliability`. For missed `acp`: MUST include when central: ACP runtime/protocol, ACP session, ACP binding, ACP parent/child behavior, or ACP delivery is central. For extra `reliability`: a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface.",
+          "examples": [
+            {
+              "expected": [
+                "acp",
+                "acpx"
+              ],
+              "actual": [
+                "acpx",
+                "reliability"
+              ],
+              "keywords": [],
+              "row_score": 0.5
+            }
+          ]
+        },
+        {
+          "expected": "notifications",
+          "predicted": "tool_calling",
+          "count": 1,
+          "action": "Clarify `notifications` vs `tool_calling`. For missed `notifications`: MUST include when central: generic outbound notifications, completion delivery, message delivery gates, announcements, or notify behavior is central. Co-label: when a chat-surface change implements or alters a delivery payload/path or delivery gates, add notifications alongside the chat label. For extra `tool_calling`: generic command output, TTS, browser screenshot/vision, or config-like options. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter.",
+          "examples": [
+            {
+              "expected": [
+                "chat_integrations",
+                "notifications",
+                "reliability"
+              ],
+              "actual": [
+                "chat_integrations",
+                "reliability",
+                "tool_calling"
+              ],
+              "keywords": [],
+              "row_score": 0.667
+            }
+          ]
+        }
+      ],
+      "row_examples": [
+        {
+          "id": "openclaw-openclaw-69669",
+          "title": "ACP: keep thread-bound follow-ups parent-orchestrated by default, not raw pass-through",
+          "expected": [
+            "acp",
+            "coding_agents",
+            "sessions"
+          ],
+          "actual": [
+            "acp",
+            "agent_runtime",
+            "reliability"
+          ],
+          "false_positives": [
+            "agent_runtime",
+            "reliability"
+          ],
+          "false_negatives": [
+            "coding_agents",
+            "sessions"
+          ],
+          "row_score": 0.3333333333333333
+        },
+        {
+          "id": "openclaw-openclaw-47083",
+          "title": "fix: respect totalTokensFresh flag to avoid showing stale token counts",
+          "expected": [
+            "telemetry_usage",
+            "ui_tui"
+          ],
+          "actual": [
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          "false_positives": [
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": [
+            "telemetry_usage"
+          ],
+          "row_score": 0.4
+        },
+        {
+          "id": "openclaw-openclaw-42122",
+          "title": "Speed up install smoke Docker builds",
+          "expected": [
+            "packaging_deployment",
+            "tests_ci"
+          ],
+          "actual": [
+            "config",
+            "packaging_deployment",
+            "reliability"
+          ],
+          "false_positives": [
+            "config",
+            "reliability"
+          ],
+          "false_negatives": [
+            "tests_ci"
+          ],
+          "row_score": 0.4
+        },
+        {
+          "id": "openclaw-openclaw-77694",
+          "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+          "expected": [
+            "acp",
+            "acpx"
+          ],
+          "actual": [
+            "acpx",
+            "reliability"
+          ],
+          "false_positives": [
+            "reliability"
+          ],
+          "false_negatives": [
+            "acp"
+          ],
+          "row_score": 0.5
+        },
+        {
+          "id": "openclaw-openclaw-67539",
+          "title": "[Feature]: Add provider-specific TTS prompt hints",
+          "expected": [
+            "inference_api"
+          ],
+          "actual": [
+            "inference_api",
+            "skills_plugins",
+            "tool_calling"
+          ],
+          "false_positives": [
+            "skills_plugins",
+            "tool_calling"
+          ],
+          "false_negatives": [],
+          "row_score": 0.5
+        },
+        {
+          "id": "openclaw-openclaw-77827",
+          "title": "fix: LM Studio thinking blocks invisible with Responses API",
+          "expected": [
+            "inference_api"
+          ],
+          "actual": [
+            "inference_api",
+            "reliability",
+            "tool_calling"
+          ],
+          "false_positives": [
+            "reliability",
+            "tool_calling"
+          ],
+          "false_negatives": [],
+          "row_score": 0.5
+        },
+        {
+          "id": "openclaw-openclaw-73910",
+          "title": "BUG: OpenClaw-managed Codex ACP uses isolated CODEX_HOME without auth bridge and sends unsupported timeout config",
+          "expected": [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "codex",
+            "security"
+          ],
+          "actual": [
+            "acp",
+            "auth_identity",
+            "codex",
+            "reliability"
+          ],
+          "false_positives": [
+            "reliability"
+          ],
+          "false_negatives": [
+            "acpx",
+            "security"
+          ],
+          "row_score": 0.6666666666666666
+        },
+        {
+          "id": "openclaw-openclaw-71646",
+          "title": "mcp/channel-bridge: pendingClaudePermissions / pendingApprovals leak — no TTL, no close-clear, no cap",
+          "expected": [
+            "approvals",
+            "mcp_tooling",
+            "reliability"
+          ],
+          "actual": [
+            "mcp_tooling",
+            "memory",
+            "reliability"
+          ],
+          "false_positives": [
+            "memory"
+          ],
+          "false_negatives": [
+            "approvals"
+          ],
+          "row_score": 0.6666666666666666
+        }
+      ],
+      "prompt_hygiene": {
+        "ok": true,
+        "findings": [],
+        "policy_chars": 6013
+      },
+      "reflection_hint": "Make concise reusable routing rules. Do not copy the fixed allowed-topic taxonomy, do not add row-specific examples, and do not optimize for recall at the expense of F1."
+    },
+    "static_asi_path": "eval/openclaw/easy-set-pilot/v6/vanilla-asi-v6-slim.md",
+    "candidate_idx": 7,
+    "batch_summary": {
+      "model": "gemma-e4",
+      "input": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/input.jsonl",
+      "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0007/results.jsonl",
+      "schema": null,
+      "schema_model": null,
+      "instruction": null,
+      "agent_card": "eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-plain-v6a.md",
+      "agent": "openclaw_vanilla_labeler_plain",
+      "template": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/task-template.md",
+      "shell_runtime": false,
+      "output_mode": "text",
+      "export_traces": null,
+      "hf_dataset": null,
+      "hf_dataset_path": null,
+      "parallel": 4,
+      "work_dir": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0007/.results.jsonl.batch/20260611T212545Z-cb61812b",
+      "started_at": "2026-06-11T21:25:45Z",
+      "completed_at": "2026-06-11T21:26:20Z",
+      "input_rows": 32,
+      "selected_rows": 32,
+      "processed_rows": 32,
+      "skipped_rows": 0,
+      "failed_rows": 0,
+      "duration_ms": 33464.88,
+      "timing_ms": {
+        "duration": {
+          "count": 32,
+          "min": 3396.18,
+          "mean": 4076.3640625,
+          "median_approx": 4127.555,
+          "max": 4913.0
+        },
+        "ttft": {
+          "count": 32,
+          "min": 798.49,
+          "mean": 2808.5696875,
+          "median_approx": 2892.89375,
+          "max": 4835.51
+        },
+        "time_to_response": {
+          "count": 32,
+          "min": 798.49,
+          "mean": 2808.5696875,
+          "median_approx": 2892.89375,
+          "max": 4835.51
+        }
+      },
+      "usage": {
+        "input_tokens": 208544,
+        "output_tokens": 262,
+        "total_tokens": 208806,
+        "billing_tokens": 208806,
+        "reasoning_tokens": 0,
+        "tool_use_tokens": 0,
+        "tool_calls": 0,
+        "rows_with_usage": 32,
+        "usage_coverage_percent": 100.0
+      },
+      "cache": {
+        "read_tokens": 0,
+        "write_tokens": 0,
+        "hit_tokens": 142976,
+        "served_tokens": 142976,
+        "activity_tokens": 142976,
+        "effective_input_tokens": 65568,
+        "hit_rate_percent": 68.55915298450206,
+        "write_rate_percent": 0.0,
+        "activity_rate_percent": 68.55915298450206,
+        "rows_with_cache_activity": 32,
+        "row_cache_activity_percent": 100.0,
+        "non_cached_input_tokens": 65568,
+        "served_to_effective_input_ratio": 2.1805758906783796
+      },
+      "shards": [
+        {
+          "index": 0,
+          "offset": 0,
+          "limit": 8,
+          "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0007/.results.jsonl.batch/20260611T212545Z-cb61812b/part-000.jsonl"
+        },
+        {
+          "index": 1,
+          "offset": 8,
+          "limit": 8,
+          "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0007/.results.jsonl.batch/20260611T212545Z-cb61812b/part-001.jsonl"
+        },
+        {
+          "index": 2,
+          "offset": 16,
+          "limit": 8,
+          "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0007/.results.jsonl.batch/20260611T212545Z-cb61812b/part-002.jsonl"
+        },
+        {
+          "index": 3,
+          "offset": 24,
+          "limit": 8,
+          "output": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/candidate-0007/.results.jsonl.batch/20260611T212545Z-cb61812b/part-003.jsonl"
+        }
+      ]
+    },
+    "lineage": {
+      "policy_sha256": "ebff9a112785e225ebe29647b2fd064bb5719d16c2f0224b5416cf7e3113d579",
+      "parent_candidate_idx": 3,
+      "reflection_call": "call-0006"
+    }
+  },
+  "metadata": {}
+}

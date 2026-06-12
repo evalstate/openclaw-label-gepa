@@ -1,0 +1,43 @@
+{
+  "turns": [
+    {
+      "provider": "codexresponses",
+      "model": "gpt-5.5",
+      "input_tokens": 20238,
+      "output_tokens": 1895,
+      "total_tokens": 22133,
+      "timestamp": 1781213220.3483539,
+      "cache_usage": {
+        "cache_read_tokens": 0,
+        "cache_write_tokens": 0,
+        "cache_hit_tokens": 19968,
+        "total_cache_tokens": 19968,
+        "has_cache_activity": true
+      },
+      "tool_use_tokens": 0,
+      "reasoning_tokens": 516,
+      "tool_calls": 0,
+      "current_context_tokens": 22133,
+      "effective_input_tokens": 270,
+      "display_input_tokens": 20238
+    }
+  ],
+  "summary": {
+    "model": "gpt-5.5",
+    "turn_count": 1,
+    "cumulative_input_tokens": 20238,
+    "cumulative_output_tokens": 1895,
+    "cumulative_billing_tokens": 22133,
+    "cumulative_tool_use_tokens": 0,
+    "cumulative_reasoning_tokens": 516,
+    "cumulative_tool_calls": 0,
+    "current_context_tokens": 22133,
+    "context_window_size": 272000,
+    "context_usage_percentage": 8.137132352941176,
+    "cumulative_cache_read_tokens": 0,
+    "cumulative_cache_write_tokens": 0,
+    "cumulative_cache_hit_tokens": 19968,
+    "cache_hit_rate_percent": 98.66587607471095,
+    "cumulative_effective_input_tokens": 270
+  }
+}

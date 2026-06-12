@@ -1,0 +1,346 @@
+{
+  "score": 0.0,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "row_symdiff_score": 0.3
+    },
+    "score_details": {
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 2.3333333333333335,
+      "valid_json": 1.0,
+      "false_positives": 70,
+      "false_negatives": 0,
+      "avg_predicted_topics": 2.3333333333333335,
+      "avg_expected_topics": 0
+    },
+    "evaluated": 30,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-41892",
+        "title": "feat(control-ui): add cron calendar timeline view",
+        "expected": [],
+        "actual": [
+          "cron_automation",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "cron_automation",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-42408",
+        "title": "[Bug/Docs]: local+hybrid memory_search quality can appear unstable due to extraPaths path drift + benchmark-file contamination",
+        "expected": [],
+        "actual": [
+          "config",
+          "docs",
+          "memory"
+        ],
+        "false_positives": [
+          "config",
+          "docs",
+          "memory"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43416",
+        "title": "feat(ui): add copy button for assistant messages",
+        "expected": [],
+        "actual": [
+          "ui_tui"
+        ],
+        "false_positives": [
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-47083",
+        "title": "fix: respect totalTokensFresh flag to avoid showing stale token counts",
+        "expected": [],
+        "actual": [
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48877",
+        "title": "feat(telegram): add multi-level menu support to customCommands",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "config"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "config"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-51849",
+        "title": "Docs: add freeCodeCamp OpenClaw full tutorial to showcase",
+        "expected": [],
+        "actual": [
+          "docs"
+        ],
+        "false_positives": [
+          "docs"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-53997",
+        "title": "acpx: add terminal-truth artifacts and strict terminal states",
+        "expected": [],
+        "actual": [
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "acpx",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-65640",
+        "title": "fix(acp): persistent session recovery for --bind here sessions",
+        "expected": [],
+        "actual": [
+          "acp",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-68204",
+        "title": "Unified run trace schema across agent, ACP, subagent, and task flows",
+        "expected": [],
+        "actual": [
+          "acp",
+          "agent_runtime",
+          "queueing",
+          "telemetry_usage"
+        ],
+        "false_positives": [
+          "acp",
+          "agent_runtime",
+          "queueing",
+          "telemetry_usage"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-68916",
+        "title": "[Bug]: ACP oneshot sessions leave orphaned processes \u2014 session reset does not clean up child ACP session keys",
+        "expected": [],
+        "actual": [
+          "acp",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71157",
+        "title": "[Feature]: Support WhatsApp disappearing-message expiration for outbound replies",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "config",
+          "notifications",
+          "security"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "config",
+          "notifications",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71487",
+        "title": "Web UI: add a clear TTS toggle and default voice picker in Settings",
+        "expected": [],
+        "actual": [
+          "config",
+          "inference_api",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "config",
+          "inference_api",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71646",
+        "title": "mcp/channel-bridge: pendingClaudePermissions / pendingApprovals leak \u2014 no TTL, no close-clear, no cap",
+        "expected": [],
+        "actual": [
+          "approvals",
+          "mcp_tooling",
+          "reliability"
+        ],
+        "false_positives": [
+          "approvals",
+          "mcp_tooling",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71976",
+        "title": "Memory Dreaming: Light sleep sort prioritizes recency over recallCount, hiding real recall data",
+        "expected": [],
+        "actual": [
+          "memory"
+        ],
+        "false_positives": [
+          "memory"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-72138",
+        "title": "fix(feishu): emit sent hooks for normal replies",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "hooks"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "hooks"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-76724",
+        "title": "[Bug]: MCP tools not discovered by Agent despite successful handshake (200 OK)",
+        "expected": [],
+        "actual": [
+          "mcp_tooling"
+        ],
+        "false_positives": [
+          "mcp_tooling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-77694",
+        "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-78528",
+        "title": "Security: skill SecretRef API keys still leak into exec child environments",
+        "expected": [],
+        "actual": [
+          "exec_tools",
+          "security",
+          "skills_plugins"
+        ],
+        "false_positives": [
+          "exec_tools",
+          "security",
+          "skills_plugins"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-81488",
+        "title": "Harden node exec approval precheck env [AI]",
+        "expected": [],
+        "actual": [
+          "approvals",
+          "exec_tools",
+          "security"
+        ],
+        "false_positives": [
+          "approvals",
+          "exec_tools",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-82145",
+        "title": "cron: allow retries for local model preflight",
+        "expected": [],
+        "actual": [
+          "config",
+          "cron_automation",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "config",
+          "cron_automation",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      }
+    ]
+  }
+}

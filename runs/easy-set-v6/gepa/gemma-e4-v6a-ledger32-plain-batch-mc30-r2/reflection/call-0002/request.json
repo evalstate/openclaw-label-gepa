@@ -1,0 +1,6 @@
+{
+  "model": "codexresponses.gpt-5.5?reasoning=high",
+  "agent": null,
+  "env_dir": "/home/ssmith/temp/gepa-batch-openclaw/.fast-agent",
+  "backend": "process"
+}

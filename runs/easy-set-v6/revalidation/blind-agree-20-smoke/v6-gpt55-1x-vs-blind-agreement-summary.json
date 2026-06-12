@@ -1,0 +1,525 @@
+{
+  "rows": 20,
+  "v6_equals_current": 5,
+  "v6_equals_blind_agreement": 8,
+  "v6_other": 7,
+  "items": [
+    {
+      "id": "openclaw-openclaw-47083",
+      "title": "fix: respect totalTokensFresh flag to avoid showing stale token counts",
+      "current": [
+        "sessions",
+        "telemetry_usage",
+        "ui_tui"
+      ],
+      "blind_agreement": [
+        "telemetry_usage",
+        "ui_tui"
+      ],
+      "v6": [
+        "telemetry_usage",
+        "ui_tui"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": true,
+      "gpt_bucket": "easy",
+      "opus_bucket": "easy",
+      "dropped_vs_current": [
+        "sessions"
+      ],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-51849",
+      "title": "Docs: add freeCodeCamp OpenClaw full tutorial to showcase",
+      "current": [
+        "agent_demos",
+        "docs"
+      ],
+      "blind_agreement": [
+        "docs"
+      ],
+      "v6": [
+        "docs"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": true,
+      "gpt_bucket": "easy",
+      "opus_bucket": "easy",
+      "dropped_vs_current": [
+        "agent_demos"
+      ],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-53997",
+      "title": "acpx: add terminal-truth artifacts and strict terminal states",
+      "current": [
+        "acp",
+        "acpx",
+        "reliability"
+      ],
+      "blind_agreement": [
+        "acpx",
+        "reliability"
+      ],
+      "v6": [
+        "acpx",
+        "agent_runtime",
+        "exec_tools",
+        "reliability"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [
+        "acp"
+      ],
+      "added_vs_current": [
+        "agent_runtime",
+        "exec_tools"
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68916",
+      "title": "[Bug]: ACP oneshot sessions leave orphaned processes — session reset does not clean up child ACP session keys",
+      "current": [
+        "acp",
+        "reliability",
+        "sessions"
+      ],
+      "blind_agreement": [
+        "acp",
+        "gateway",
+        "reliability",
+        "sessions"
+      ],
+      "v6": [
+        "acp",
+        "gateway",
+        "reliability",
+        "sessions"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": true,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [],
+      "added_vs_current": [
+        "gateway"
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71157",
+      "title": "[Feature]: Support WhatsApp disappearing-message expiration for outbound replies",
+      "current": [
+        "chat_integrations",
+        "config",
+        "security"
+      ],
+      "blind_agreement": [
+        "chat_integrations",
+        "config"
+      ],
+      "v6": [
+        "chat_integrations",
+        "config",
+        "notifications"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "easy",
+      "dropped_vs_current": [
+        "security"
+      ],
+      "added_vs_current": [
+        "notifications"
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71487",
+      "title": "Web UI: add a clear TTS toggle and default voice picker in Settings",
+      "current": [
+        "config",
+        "self_hosted_inference",
+        "ui_tui"
+      ],
+      "blind_agreement": [
+        "config",
+        "ui_tui"
+      ],
+      "v6": [
+        "config",
+        "ui_tui"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": true,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [
+        "self_hosted_inference"
+      ],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-71976",
+      "title": "Memory Dreaming: Light sleep sort prioritizes recency over recallCount, hiding real recall data",
+      "current": [
+        "memory",
+        "reliability"
+      ],
+      "blind_agreement": [
+        "memory"
+      ],
+      "v6": [
+        "memory"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": true,
+      "gpt_bucket": "easy",
+      "opus_bucket": "easy",
+      "dropped_vs_current": [
+        "reliability"
+      ],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-72138",
+      "title": "fix(feishu): emit sent hooks for normal replies",
+      "current": [
+        "chat_integrations",
+        "hooks",
+        "notifications"
+      ],
+      "blind_agreement": [
+        "chat_integrations",
+        "hooks"
+      ],
+      "v6": [
+        "chat_integrations",
+        "hooks",
+        "notifications",
+        "skills_plugins"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "easy",
+      "dropped_vs_current": [],
+      "added_vs_current": [
+        "skills_plugins"
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-77694",
+      "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+      "current": [
+        "acp",
+        "acpx",
+        "agent_runtime",
+        "reliability"
+      ],
+      "blind_agreement": [
+        "acp",
+        "acpx"
+      ],
+      "v6": [
+        "acp",
+        "acpx",
+        "coding_agents"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [
+        "agent_runtime",
+        "reliability"
+      ],
+      "added_vs_current": [
+        "coding_agents"
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-78528",
+      "title": "Security: skill SecretRef API keys still leak into exec child environments",
+      "current": [
+        "auth_identity",
+        "exec_tools",
+        "security",
+        "skills_plugins"
+      ],
+      "blind_agreement": [
+        "exec_tools",
+        "security",
+        "skills_plugins"
+      ],
+      "v6": [
+        "exec_tools",
+        "security",
+        "skills_plugins"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": true,
+      "gpt_bucket": "easy",
+      "opus_bucket": "easy",
+      "dropped_vs_current": [
+        "auth_identity"
+      ],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-82642",
+      "title": "Fix iMessage slash command acknowledgements",
+      "current": [
+        "chat_integrations",
+        "notifications",
+        "reliability"
+      ],
+      "blind_agreement": [
+        "chat_integrations"
+      ],
+      "v6": [
+        "chat_integrations",
+        "notifications"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "medium",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [
+        "reliability"
+      ],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-84761",
+      "title": "feat(secrets): scan backup files for plaintext provider apiKey values",
+      "current": [
+        "auth_identity",
+        "config",
+        "security"
+      ],
+      "blind_agreement": [
+        "security"
+      ],
+      "v6": [
+        "security"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": true,
+      "gpt_bucket": "medium",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [
+        "auth_identity",
+        "config"
+      ],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-84771",
+      "title": "Event loop saturation during startup: synchronous model-prewarm and session-locks block event loop for 28-64 seconds",
+      "current": [
+        "gateway",
+        "model_serving",
+        "reliability",
+        "sessions"
+      ],
+      "blind_agreement": [
+        "gateway",
+        "reliability",
+        "sessions"
+      ],
+      "v6": [
+        "gateway",
+        "model_serving",
+        "queueing",
+        "reliability",
+        "sessions"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [],
+      "added_vs_current": [
+        "queueing"
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84997",
+      "title": "[AI-assisted] Add NEAR AI Cloud provider",
+      "current": [
+        "auth_identity",
+        "model_serving"
+      ],
+      "blind_agreement": [
+        "auth_identity",
+        "model_releases",
+        "model_serving"
+      ],
+      "v6": [
+        "api_surface",
+        "auth_identity",
+        "model_releases",
+        "model_serving"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [],
+      "added_vs_current": [
+        "api_surface",
+        "model_releases"
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-88400",
+      "title": "fix(config): accept overlays for bundled provider aliases",
+      "current": [
+        "config",
+        "model_serving"
+      ],
+      "blind_agreement": [
+        "config"
+      ],
+      "v6": [
+        "config"
+      ],
+      "v6_equals_current": false,
+      "v6_equals_blind_agreement": true,
+      "gpt_bucket": "easy",
+      "opus_bucket": "easy",
+      "dropped_vs_current": [
+        "model_serving"
+      ],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-65640",
+      "title": "fix(acp): persistent session recovery for --bind here sessions",
+      "current": [
+        "acp",
+        "acpx",
+        "reliability",
+        "sessions"
+      ],
+      "blind_agreement": [
+        "acp",
+        "reliability",
+        "sessions"
+      ],
+      "v6": [
+        "acp",
+        "acpx",
+        "reliability",
+        "sessions"
+      ],
+      "v6_equals_current": true,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-68204",
+      "title": "Unified run trace schema across agent, ACP, subagent, and task flows",
+      "current": [
+        "acp",
+        "agent_runtime",
+        "sessions",
+        "telemetry_usage"
+      ],
+      "blind_agreement": [
+        "acp",
+        "agent_runtime",
+        "telemetry_usage"
+      ],
+      "v6": [
+        "acp",
+        "agent_runtime",
+        "sessions",
+        "telemetry_usage"
+      ],
+      "v6_equals_current": true,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "medium",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-76724",
+      "title": "[Bug]: MCP tools not discovered by Agent despite successful handshake (200 OK)",
+      "current": [
+        "mcp_tooling",
+        "ui_tui"
+      ],
+      "blind_agreement": [
+        "mcp_tooling"
+      ],
+      "v6": [
+        "mcp_tooling",
+        "ui_tui"
+      ],
+      "v6_equals_current": true,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-84732",
+      "title": "Slack channel sends fail: `reconcileUnknownSend` required but no channel adapter implements it",
+      "current": [
+        "chat_integrations",
+        "notifications",
+        "reliability"
+      ],
+      "blind_agreement": [
+        "chat_integrations",
+        "reliability"
+      ],
+      "v6": [
+        "chat_integrations",
+        "notifications",
+        "reliability"
+      ],
+      "v6_equals_current": true,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [],
+      "added_vs_current": []
+    },
+    {
+      "id": "openclaw-openclaw-87277",
+      "title": "[Feature] Add MiMo-V2.5 to Xiaomi catalog + automatic multimodal routing when DeepSeek V4-Pro is primary model",
+      "current": [
+        "model_releases",
+        "model_serving",
+        "reliability"
+      ],
+      "blind_agreement": [
+        "model_releases",
+        "model_serving"
+      ],
+      "v6": [
+        "model_releases",
+        "model_serving",
+        "reliability"
+      ],
+      "v6_equals_current": true,
+      "v6_equals_blind_agreement": false,
+      "gpt_bucket": "easy",
+      "opus_bucket": "medium",
+      "dropped_vs_current": [],
+      "added_vs_current": []
+    }
+  ]
+}

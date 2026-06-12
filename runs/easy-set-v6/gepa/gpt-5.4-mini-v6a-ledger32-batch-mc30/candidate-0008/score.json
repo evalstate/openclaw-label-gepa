@@ -1,0 +1,1149 @@
+{
+  "score": 0.8926839743589744,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.8926839743589744,
+      "composite_score": 0.8993589743589744,
+      "topic_micro_f1": 0.9487179487179487,
+      "row_exact_accuracy": 0.75,
+      "avg_row_jaccard": 0.9166666666666667,
+      "row_symdiff_score": 0.8,
+      "policy_length_compliance": 0.93325,
+      "policy_hygiene_compliance": 1.0
+    },
+    "score_details": {
+      "false_positives": 5,
+      "false_negatives": 3,
+      "row_exact_accuracy": 0.75,
+      "avg_row_jaccard": 0.9166666666666667,
+      "avg_row_symdiff": 0.25,
+      "avg_expected_topics": 2.40625,
+      "avg_predicted_topics": 2.46875,
+      "asi_score": 0.52,
+      "topic_micro_precision": 0.9367088607594937,
+      "topic_micro_recall": 0.961038961038961,
+      "exact_match": 0.75,
+      "row_symdiff_score": 0.8,
+      "composite_score": 0.8993589743589744,
+      "gepa_score": 0.8926839743589744,
+      "score_mode": "row-aware",
+      "valid_json": 1.0,
+      "cardinality_closeness": 0.974025974025974,
+      "avg_topic_count_delta": 0.0625,
+      "policy_chars": 5335,
+      "policy_char_budget": 4000,
+      "policy_length_over_budget": 1335,
+      "policy_length_penalty": 0.006675,
+      "policy_length_compliance": 0.93325,
+      "hygiene_penalty": 0.0,
+      "hygiene_findings_count": 0
+    },
+    "evaluated": 32,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-53997",
+        "title": "acpx: add terminal-truth artifacts and strict terminal states",
+        "expected": [
+          "acpx",
+          "reliability"
+        ],
+        "actual": [
+          "acp",
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "acp"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-77694",
+        "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+        "expected": [
+          "acp",
+          "acpx"
+        ],
+        "actual": [
+          "acp",
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-82145",
+        "title": "cron: allow retries for local model preflight",
+        "expected": [
+          "config",
+          "cron_automation",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "actual": [
+          "config",
+          "cron_automation",
+          "self_hosted_inference"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "reliability"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8571428571428571
+      },
+      {
+        "id": "openclaw-openclaw-82642",
+        "title": "Fix iMessage slash command acknowledgements",
+        "expected": [
+          "chat_integrations",
+          "notifications"
+        ],
+        "actual": [
+          "chat_integrations",
+          "notifications",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-46552",
+        "title": "docs(queue): clarify steer behavior with partial streaming and tool boundaries",
+        "expected": [
+          "docs",
+          "queueing"
+        ],
+        "actual": [
+          "docs",
+          "queueing",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-69256",
+        "title": "fix(cron): prevent premature session cleanup when subagents are running",
+        "expected": [
+          "coding_agents",
+          "cron_automation",
+          "reliability",
+          "sessions"
+        ],
+        "actual": [
+          "cron_automation",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "coding_agents"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8571428571428571
+      },
+      {
+        "id": "openclaw-openclaw-69669",
+        "title": "ACP: keep thread-bound follow-ups parent-orchestrated by default, not raw pass-through",
+        "expected": [
+          "acp",
+          "coding_agents",
+          "sessions"
+        ],
+        "actual": [
+          "acp",
+          "sessions"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "coding_agents"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-77827",
+        "title": "fix: LM Studio thinking blocks invisible with Responses API",
+        "expected": [
+          "inference_api"
+        ],
+        "actual": [
+          "api_surface",
+          "inference_api"
+        ],
+        "false_positives": [
+          "api_surface"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      }
+    ],
+    "worst_failures": [
+      {
+        "id": "openclaw-openclaw-77827",
+        "title": "fix: LM Studio thinking blocks invisible with Responses API",
+        "expected": [
+          "inference_api"
+        ],
+        "actual": [
+          "api_surface",
+          "inference_api"
+        ],
+        "false_positives": [
+          "api_surface"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.6666666666666666
+      },
+      {
+        "id": "openclaw-openclaw-53997",
+        "title": "acpx: add terminal-truth artifacts and strict terminal states",
+        "expected": [
+          "acpx",
+          "reliability"
+        ],
+        "actual": [
+          "acp",
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "acp"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-77694",
+        "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+        "expected": [
+          "acp",
+          "acpx"
+        ],
+        "actual": [
+          "acp",
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-82642",
+        "title": "Fix iMessage slash command acknowledgements",
+        "expected": [
+          "chat_integrations",
+          "notifications"
+        ],
+        "actual": [
+          "chat_integrations",
+          "notifications",
+          "reliability"
+        ],
+        "false_positives": [
+          "reliability"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-46552",
+        "title": "docs(queue): clarify steer behavior with partial streaming and tool boundaries",
+        "expected": [
+          "docs",
+          "queueing"
+        ],
+        "actual": [
+          "docs",
+          "queueing",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-69669",
+        "title": "ACP: keep thread-bound follow-ups parent-orchestrated by default, not raw pass-through",
+        "expected": [
+          "acp",
+          "coding_agents",
+          "sessions"
+        ],
+        "actual": [
+          "acp",
+          "sessions"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "coding_agents"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8
+      },
+      {
+        "id": "openclaw-openclaw-82145",
+        "title": "cron: allow retries for local model preflight",
+        "expected": [
+          "config",
+          "cron_automation",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "actual": [
+          "config",
+          "cron_automation",
+          "self_hosted_inference"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "reliability"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8571428571428571
+      },
+      {
+        "id": "openclaw-openclaw-69256",
+        "title": "fix(cron): prevent premature session cleanup when subagents are running",
+        "expected": [
+          "coding_agents",
+          "cron_automation",
+          "reliability",
+          "sessions"
+        ],
+        "actual": [
+          "cron_automation",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [],
+        "false_negatives": [
+          "coding_agents"
+        ],
+        "invalid_topics": [],
+        "keywords": [],
+        "row_score": 0.8571428571428571
+      }
+    ],
+    "topic_error_patterns": [
+      {
+        "topic": "reliability",
+        "problem": "mixed",
+        "expected": 10,
+        "actual": 11,
+        "true_positives": 9,
+        "false_positives": 2,
+        "false_negatives": 1,
+        "precision": 0.818,
+        "recall": 0.9,
+        "f1": 0.857,
+        "action": "`reliability` mixed: expected in 10 rows, predicted in 11, TP=9, FP=2, FN=1, precision=0.818, recall=0.900. Both precision and recall need boundary work. Mixed `reliability` errors. a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface. MUST include when central: timeout, crash, leak, stuck state, retry, data loss, lifecycle cleanup, recovery, overload, or operational failure mode.",
+        "examples": [
+          {
+            "expected": [
+              "acp",
+              "acpx"
+            ],
+            "actual": [
+              "acp",
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          },
+          {
+            "expected": [
+              "config",
+              "cron_automation",
+              "reliability",
+              "self_hosted_inference"
+            ],
+            "actual": [
+              "config",
+              "cron_automation",
+              "self_hosted_inference"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          },
+          {
+            "expected": [
+              "chat_integrations",
+              "notifications"
+            ],
+            "actual": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "acpx",
+              "reliability"
+            ],
+            "actual": [
+              "acp",
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          },
+          {
+            "expected": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          },
+          {
+            "expected": [
+              "approvals",
+              "mcp_tooling",
+              "reliability"
+            ],
+            "actual": [
+              "approvals",
+              "mcp_tooling",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          }
+        ],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "acp",
+              "acpx"
+            ],
+            "actual": [
+              "acp",
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          },
+          {
+            "expected": [
+              "chat_integrations",
+              "notifications"
+            ],
+            "actual": [
+              "chat_integrations",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          }
+        ],
+        "false_negative_examples": [
+          {
+            "expected": [
+              "config",
+              "cron_automation",
+              "reliability",
+              "self_hosted_inference"
+            ],
+            "actual": [
+              "config",
+              "cron_automation",
+              "self_hosted_inference"
+            ],
+            "keywords": [],
+            "row_score": 0.857
+          }
+        ]
+      },
+      {
+        "topic": "coding_agents",
+        "problem": "mixed",
+        "expected": 3,
+        "actual": 1,
+        "true_positives": 1,
+        "false_positives": 0,
+        "false_negatives": 2,
+        "precision": 1.0,
+        "recall": 0.333,
+        "f1": 0.5,
+        "action": "`coding_agents` mixed: expected in 3 rows, predicted in 1, TP=1, FP=0, FN=2, precision=1.000, recall=0.333. Both precision and recall need boundary work. Mixed `coding_agents` errors. internal OpenClaw subagents, `sessions_spawn` plumbing, ACP parent/child behavior, queue lanes, trace producers, tool-use mechanics, approval flows, sandboxing, compaction, or agent runtime machinery unless the item is specifically about a coding-agent integration. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`. MUST include when central: integrations with external coding agents in general, or with a specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`.",
+        "examples": [
+          {
+            "expected": [
+              "coding_agents",
+              "cron_automation",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "cron_automation",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          },
+          {
+            "expected": [
+              "acp",
+              "coding_agents",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "sessions"
+            ],
+            "keywords": [],
+            "error_type": "false_negative"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "coding_agents",
+              "notifications",
+              "reliability"
+            ],
+            "actual": [
+              "coding_agents",
+              "notifications",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          }
+        ],
+        "false_positive_examples": [],
+        "false_negative_examples": [
+          {
+            "expected": [
+              "coding_agents",
+              "cron_automation",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "cron_automation",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 0.857
+          },
+          {
+            "expected": [
+              "acp",
+              "coding_agents",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          }
+        ]
+      },
+      {
+        "topic": "acp",
+        "problem": "mixed",
+        "expected": 6,
+        "actual": 7,
+        "true_positives": 6,
+        "false_positives": 1,
+        "false_negatives": 0,
+        "precision": 0.857,
+        "recall": 1.0,
+        "f1": 0.923,
+        "action": "`acp` mixed: expected in 6 rows, predicted in 7, TP=6, FP=1, FN=0, precision=0.857, recall=1.000. Both precision and recall need boundary work. Mixed `acp` errors. merely because an item mentions an agent session or internal runtime behavior. MUST include when central: ACP runtime/protocol, ACP session, ACP binding, ACP parent/child behavior, or ACP delivery is central.",
+        "examples": [
+          {
+            "expected": [
+              "acpx",
+              "reliability"
+            ],
+            "actual": [
+              "acp",
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "actual": [
+              "acp",
+              "reliability",
+              "sessions"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          },
+          {
+            "expected": [
+              "acp",
+              "acpx"
+            ],
+            "actual": [
+              "acp",
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          },
+          {
+            "expected": [
+              "acp",
+              "config",
+              "queueing",
+              "reliability"
+            ],
+            "actual": [
+              "acp",
+              "config",
+              "queueing",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          }
+        ],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "acpx",
+              "reliability"
+            ],
+            "actual": [
+              "acp",
+              "acpx",
+              "reliability"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          }
+        ],
+        "false_negative_examples": []
+      },
+      {
+        "topic": "api_surface",
+        "problem": "mixed",
+        "expected": 1,
+        "actual": 2,
+        "true_positives": 1,
+        "false_positives": 1,
+        "false_negatives": 0,
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.667,
+        "action": "`api_surface` mixed: expected in 1 rows, predicted in 2, TP=1, FP=1, FN=0, precision=0.500, recall=1.000. Both precision and recall need boundary work. Mixed `api_surface` errors. internal helpers, payload parsing, status text, UI events, ordinary commands, inference-integration behavior (`inference_api`), or gateway process ownership (`gateway`). Decision rule: if the item changes WHAT an external contract promises (shape, fields, status, compatibility), api_surface applies even when the implementation lives in the gateway or a serving endpoint; `docs` only when the contract text itself is the subject. MUST include when central: external API, CLI, HTTP, SDK, or documented command contracts. Decision rule: if the item changes WHAT an external contract promises (shape, fields, status, compatibility), api_surface applies even when the implementation lives in the gateway or a serving endpoint; `docs` only when the contract text itself is the subject.",
+        "examples": [
+          {
+            "expected": [
+              "inference_api"
+            ],
+            "actual": [
+              "api_surface",
+              "inference_api"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          }
+        ],
+        "true_positive_examples": [
+          {
+            "expected": [
+              "api_surface",
+              "gateway",
+              "telemetry_usage"
+            ],
+            "actual": [
+              "api_surface",
+              "gateway",
+              "telemetry_usage"
+            ],
+            "keywords": [],
+            "row_score": 1.0
+          }
+        ],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "inference_api"
+            ],
+            "actual": [
+              "api_surface",
+              "inference_api"
+            ],
+            "keywords": [],
+            "row_score": 0.667
+          }
+        ],
+        "false_negative_examples": []
+      },
+      {
+        "topic": "tool_calling",
+        "problem": "mixed",
+        "expected": 0,
+        "actual": 1,
+        "true_positives": 0,
+        "false_positives": 1,
+        "false_negatives": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "action": "`tool_calling` mixed: expected in 0 rows, predicted in 1, TP=0, FP=1, FN=0, precision=0.000, recall=0.000. Both precision and recall need boundary work. Mixed `tool_calling` errors. generic command output, TTS, browser screenshot/vision, or config-like options. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter. MUST include when central: tool-call protocol, tool result transcript handling, function/tool schema, or tool-call rendering is central. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter.",
+        "examples": [
+          {
+            "expected": [
+              "docs",
+              "queueing"
+            ],
+            "actual": [
+              "docs",
+              "queueing",
+              "tool_calling"
+            ],
+            "keywords": [],
+            "error_type": "false_positive"
+          }
+        ],
+        "true_positive_examples": [],
+        "false_positive_examples": [
+          {
+            "expected": [
+              "docs",
+              "queueing"
+            ],
+            "actual": [
+              "docs",
+              "queueing",
+              "tool_calling"
+            ],
+            "keywords": [],
+            "row_score": 0.8
+          }
+        ],
+        "false_negative_examples": []
+      }
+    ],
+    "confusions": [],
+    "invalid_topics": {},
+    "actionable_feedback": [
+      "Pure-F1 objective: optimize exact topic membership, not recall-biased F-beta. Current precision=0.937, recall=0.961, F1=0.949.",
+      "Cardinality diagnosis: over_labeling; avg predicted 2.47 vs expected 2.41. Tighten incidental-evidence gates and remove labels supported only by files, tests, examples, or side effects.",
+      "Policy length penalty: policy is 1335 chars over the 4000 char budget; GEPA score was reduced by 0.0067.",
+      "Topic cardinality is close: avg predicted topics 2.47 vs expected 2.41. Focus on boundary-specific errors.",
+      "`reliability` mixed: expected in 10 rows, predicted in 11, TP=9, FP=2, FN=1, precision=0.818, recall=0.900. Both precision and recall need boundary work. Mixed `reliability` errors. a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface. MUST include when central: timeout, crash, leak, stuck state, retry, data loss, lifecycle cleanup, recovery, overload, or operational failure mode.",
+      "`coding_agents` mixed: expected in 3 rows, predicted in 1, TP=1, FP=0, FN=2, precision=1.000, recall=0.333. Both precision and recall need boundary work. Mixed `coding_agents` errors. internal OpenClaw subagents, `sessions_spawn` plumbing, ACP parent/child behavior, queue lanes, trace producers, tool-use mechanics, approval flows, sandboxing, compaction, or agent runtime machinery unless the item is specifically about a coding-agent integration. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`. MUST include when central: integrations with external coding agents in general, or with a specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`.",
+      "`acp` mixed: expected in 6 rows, predicted in 7, TP=6, FP=1, FN=0, precision=0.857, recall=1.000. Both precision and recall need boundary work. Mixed `acp` errors. merely because an item mentions an agent session or internal runtime behavior. MUST include when central: ACP runtime/protocol, ACP session, ACP binding, ACP parent/child behavior, or ACP delivery is central.",
+      "`api_surface` mixed: expected in 1 rows, predicted in 2, TP=1, FP=1, FN=0, precision=0.500, recall=1.000. Both precision and recall need boundary work. Mixed `api_surface` errors. internal helpers, payload parsing, status text, UI events, ordinary commands, inference-integration behavior (`inference_api`), or gateway process ownership (`gateway`). Decision rule: if the item changes WHAT an external contract promises (shape, fields, status, compatibility), api_surface applies even when the implementation lives in the gateway or a serving endpoint; `docs` only when the contract text itself is the subject. MUST include when central: external API, CLI, HTTP, SDK, or documented command contracts. Decision rule: if the item changes WHAT an external contract promises (shape, fields, status, compatibility), api_surface applies even when the implementation lives in the gateway or a serving endpoint; `docs` only when the contract text itself is the subject.",
+      "`tool_calling` mixed: expected in 0 rows, predicted in 1, TP=0, FP=1, FN=0, precision=0.000, recall=0.000. Both precision and recall need boundary work. Mixed `tool_calling` errors. generic command output, TTS, browser screenshot/vision, or config-like options. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter. MUST include when central: tool-call protocol, tool result transcript handling, function/tool schema, or tool-call rendering is central. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter."
+    ],
+    "vanilla_f1_asi": {
+      "global_diagnosis": {
+        "precision": 0.9367088607594937,
+        "recall": 0.961038961038961,
+        "f1": 0.9487179487179487,
+        "gepa_score": 0.8926839743589744,
+        "score_mode": "row-aware",
+        "exact_match": 0.75,
+        "row_exact_accuracy": 0.75,
+        "avg_row_jaccard": 0.9166666666666667,
+        "avg_row_symdiff": 0.25,
+        "row_symdiff_score": 0.8,
+        "composite_score": 0.8993589743589744,
+        "valid_json": 1.0,
+        "cardinality_closeness": 0.974025974025974,
+        "avg_expected_topics": 2.40625,
+        "avg_predicted_topics": 2.46875,
+        "false_positives": 5,
+        "false_negatives": 3,
+        "policy_chars": 5335,
+        "policy_char_budget": 4000,
+        "policy_length_over_budget": 1335,
+        "policy_length_penalty": 0.006675,
+        "policy_length_compliance": 0.93325,
+        "diagnosis": "over_labeling",
+        "action": "Tighten incidental-evidence gates and remove labels supported only by files, tests, examples, or side effects."
+      },
+      "topic_priorities": [
+        {
+          "topic": "reliability",
+          "problem": "mixed",
+          "false_positives": 2,
+          "false_negatives": 1,
+          "precision": 0.818,
+          "recall": 0.9,
+          "action": "`reliability` mixed: expected in 10 rows, predicted in 11, TP=9, FP=2, FN=1, precision=0.818, recall=0.900. Both precision and recall need boundary work. Mixed `reliability` errors. a generic bug tag, CI-only or test-environment failures (`tests_ci`), or a failure that merely motivates a change whose deliverable belongs entirely to another surface. MUST include when central: timeout, crash, leak, stuck state, retry, data loss, lifecycle cleanup, recovery, overload, or operational failure mode."
+        },
+        {
+          "topic": "coding_agents",
+          "problem": "mixed",
+          "false_positives": 0,
+          "false_negatives": 2,
+          "precision": 1.0,
+          "recall": 0.333,
+          "action": "`coding_agents` mixed: expected in 3 rows, predicted in 1, TP=1, FP=0, FN=2, precision=1.000, recall=0.333. Both precision and recall need boundary work. Mixed `coding_agents` errors. internal OpenClaw subagents, `sessions_spawn` plumbing, ACP parent/child behavior, queue lanes, trace producers, tool-use mechanics, approval flows, sandboxing, compaction, or agent runtime machinery unless the item is specifically about a coding-agent integration. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`. MUST include when central: integrations with external coding agents in general, or with a specific coding agent such as Codex, Claude Code, Gemini CLI, or Pi. Boundary: ACP is an integration protocol and is distinct from coding-agent integrations; route ACP protocol/session/delivery work to `acp`/`acpx`. OpenClaw's internal agent runtime is a core product surface; route startup, loop, backend, model-call orchestration, and adapter machinery to `agent_runtime`."
+        },
+        {
+          "topic": "acp",
+          "problem": "mixed",
+          "false_positives": 1,
+          "false_negatives": 0,
+          "precision": 0.857,
+          "recall": 1.0,
+          "action": "`acp` mixed: expected in 6 rows, predicted in 7, TP=6, FP=1, FN=0, precision=0.857, recall=1.000. Both precision and recall need boundary work. Mixed `acp` errors. merely because an item mentions an agent session or internal runtime behavior. MUST include when central: ACP runtime/protocol, ACP session, ACP binding, ACP parent/child behavior, or ACP delivery is central."
+        },
+        {
+          "topic": "api_surface",
+          "problem": "mixed",
+          "false_positives": 1,
+          "false_negatives": 0,
+          "precision": 0.5,
+          "recall": 1.0,
+          "action": "`api_surface` mixed: expected in 1 rows, predicted in 2, TP=1, FP=1, FN=0, precision=0.500, recall=1.000. Both precision and recall need boundary work. Mixed `api_surface` errors. internal helpers, payload parsing, status text, UI events, ordinary commands, inference-integration behavior (`inference_api`), or gateway process ownership (`gateway`). Decision rule: if the item changes WHAT an external contract promises (shape, fields, status, compatibility), api_surface applies even when the implementation lives in the gateway or a serving endpoint; `docs` only when the contract text itself is the subject. MUST include when central: external API, CLI, HTTP, SDK, or documented command contracts. Decision rule: if the item changes WHAT an external contract promises (shape, fields, status, compatibility), api_surface applies even when the implementation lives in the gateway or a serving endpoint; `docs` only when the contract text itself is the subject."
+        },
+        {
+          "topic": "tool_calling",
+          "problem": "mixed",
+          "false_positives": 1,
+          "false_negatives": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "action": "`tool_calling` mixed: expected in 0 rows, predicted in 1, TP=0, FP=1, FN=0, precision=0.000, recall=0.000. Both precision and recall need boundary work. Mixed `tool_calling` errors. generic command output, TTS, browser screenshot/vision, or config-like options. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter. MUST include when central: tool-call protocol, tool result transcript handling, function/tool schema, or tool-call rendering is central. Co-label: parameter coercion/normalization for tool invocation is tool_calling, even inside an MCP bundle or adapter."
+        }
+      ],
+      "confusions": [],
+      "row_examples": [
+        {
+          "id": "openclaw-openclaw-77827",
+          "title": "fix: LM Studio thinking blocks invisible with Responses API",
+          "expected": [
+            "inference_api"
+          ],
+          "actual": [
+            "api_surface",
+            "inference_api"
+          ],
+          "false_positives": [
+            "api_surface"
+          ],
+          "false_negatives": [],
+          "row_score": 0.6666666666666666
+        },
+        {
+          "id": "openclaw-openclaw-53997",
+          "title": "acpx: add terminal-truth artifacts and strict terminal states",
+          "expected": [
+            "acpx",
+            "reliability"
+          ],
+          "actual": [
+            "acp",
+            "acpx",
+            "reliability"
+          ],
+          "false_positives": [
+            "acp"
+          ],
+          "false_negatives": [],
+          "row_score": 0.8
+        },
+        {
+          "id": "openclaw-openclaw-77694",
+          "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+          "expected": [
+            "acp",
+            "acpx"
+          ],
+          "actual": [
+            "acp",
+            "acpx",
+            "reliability"
+          ],
+          "false_positives": [
+            "reliability"
+          ],
+          "false_negatives": [],
+          "row_score": 0.8
+        },
+        {
+          "id": "openclaw-openclaw-82642",
+          "title": "Fix iMessage slash command acknowledgements",
+          "expected": [
+            "chat_integrations",
+            "notifications"
+          ],
+          "actual": [
+            "chat_integrations",
+            "notifications",
+            "reliability"
+          ],
+          "false_positives": [
+            "reliability"
+          ],
+          "false_negatives": [],
+          "row_score": 0.8
+        },
+        {
+          "id": "openclaw-openclaw-46552",
+          "title": "docs(queue): clarify steer behavior with partial streaming and tool boundaries",
+          "expected": [
+            "docs",
+            "queueing"
+          ],
+          "actual": [
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          "false_positives": [
+            "tool_calling"
+          ],
+          "false_negatives": [],
+          "row_score": 0.8
+        },
+        {
+          "id": "openclaw-openclaw-69669",
+          "title": "ACP: keep thread-bound follow-ups parent-orchestrated by default, not raw pass-through",
+          "expected": [
+            "acp",
+            "coding_agents",
+            "sessions"
+          ],
+          "actual": [
+            "acp",
+            "sessions"
+          ],
+          "false_positives": [],
+          "false_negatives": [
+            "coding_agents"
+          ],
+          "row_score": 0.8
+        },
+        {
+          "id": "openclaw-openclaw-82145",
+          "title": "cron: allow retries for local model preflight",
+          "expected": [
+            "config",
+            "cron_automation",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "actual": [
+            "config",
+            "cron_automation",
+            "self_hosted_inference"
+          ],
+          "false_positives": [],
+          "false_negatives": [
+            "reliability"
+          ],
+          "row_score": 0.8571428571428571
+        },
+        {
+          "id": "openclaw-openclaw-69256",
+          "title": "fix(cron): prevent premature session cleanup when subagents are running",
+          "expected": [
+            "coding_agents",
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "actual": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "false_positives": [],
+          "false_negatives": [
+            "coding_agents"
+          ],
+          "row_score": 0.8571428571428571
+        }
+      ],
+      "prompt_hygiene": {
+        "ok": true,
+        "findings": [],
+        "policy_chars": 5335
+      },
+      "reflection_hint": "Make concise reusable routing rules. Do not copy the fixed allowed-topic taxonomy, do not add row-specific examples, and do not optimize for recall at the expense of F1."
+    },
+    "static_asi_path": "eval/openclaw/easy-set-pilot/v6/vanilla-asi-v6-slim.md",
+    "candidate_idx": 8,
+    "batch_summary": {
+      "model": "codexresponses.gpt-5.4-mini",
+      "input": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/input.jsonl",
+      "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0008/results.jsonl",
+      "schema": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/output.schema.json",
+      "schema_model": null,
+      "instruction": null,
+      "agent_card": "eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6a.md",
+      "agent": "openclaw_vanilla_labeler",
+      "template": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/task-template.md",
+      "shell_runtime": false,
+      "output_mode": "structured",
+      "export_traces": null,
+      "hf_dataset": null,
+      "hf_dataset_path": null,
+      "parallel": 4,
+      "work_dir": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0008/.results.jsonl.batch/20260611T211712Z-d17d1646",
+      "started_at": "2026-06-11T21:17:12Z",
+      "completed_at": "2026-06-11T21:18:15Z",
+      "input_rows": 32,
+      "selected_rows": 32,
+      "processed_rows": 32,
+      "skipped_rows": 0,
+      "failed_rows": 0,
+      "duration_ms": 58570.75,
+      "timing_ms": {
+        "duration": {
+          "count": 32,
+          "min": 2810.83,
+          "mean": 6384.21,
+          "median_approx": 5512.9974999999995,
+          "max": 23197.13
+        },
+        "ttft": {
+          "count": 32,
+          "min": 1795.31,
+          "mean": 4257.3734375,
+          "median_approx": 3781.1775000000002,
+          "max": 20696.52
+        },
+        "time_to_response": {
+          "count": 32,
+          "min": 2462.04,
+          "mean": 6143.8790625,
+          "median_approx": 5288.76625,
+          "max": 22994.32
+        }
+      },
+      "usage": {
+        "input_tokens": 193858,
+        "output_tokens": 12291,
+        "total_tokens": 206149,
+        "billing_tokens": 206149,
+        "reasoning_tokens": 9843,
+        "tool_use_tokens": 0,
+        "tool_calls": 0,
+        "rows_with_usage": 32,
+        "usage_coverage_percent": 100.0
+      },
+      "cache": {
+        "read_tokens": 0,
+        "write_tokens": 0,
+        "hit_tokens": 100608,
+        "served_tokens": 100608,
+        "activity_tokens": 100608,
+        "effective_input_tokens": 93250,
+        "hit_rate_percent": 51.89778084990044,
+        "write_rate_percent": 0.0,
+        "activity_rate_percent": 51.89778084990044,
+        "rows_with_cache_activity": 27,
+        "row_cache_activity_percent": 84.375,
+        "non_cached_input_tokens": 93250,
+        "served_to_effective_input_ratio": 1.0789061662198391
+      },
+      "shards": [
+        {
+          "index": 0,
+          "offset": 0,
+          "limit": 8,
+          "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0008/.results.jsonl.batch/20260611T211712Z-d17d1646/part-000.jsonl"
+        },
+        {
+          "index": 1,
+          "offset": 8,
+          "limit": 8,
+          "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0008/.results.jsonl.batch/20260611T211712Z-d17d1646/part-001.jsonl"
+        },
+        {
+          "index": 2,
+          "offset": 16,
+          "limit": 8,
+          "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0008/.results.jsonl.batch/20260611T211712Z-d17d1646/part-002.jsonl"
+        },
+        {
+          "index": 3,
+          "offset": 24,
+          "limit": 8,
+          "output": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/candidate-0008/.results.jsonl.batch/20260611T211712Z-d17d1646/part-003.jsonl"
+        }
+      ]
+    },
+    "lineage": {
+      "policy_sha256": "feabff58a88d58df23fa6bf985aaace6773a061aac1c31665f75f72aec4dd23c",
+      "parent_candidate_idx": 5,
+      "reflection_call": "call-0007"
+    }
+  },
+  "metadata": {}
+}

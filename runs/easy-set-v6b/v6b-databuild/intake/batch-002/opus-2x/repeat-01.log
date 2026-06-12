@@ -1,0 +1,7 @@
+* Trackio project initialized: openclaw-v6b-intake
+* Trackio metrics logged to: /home/ssmith/temp/gepa-batch-openclaw/.trackio
+* View dashboard by running in your terminal:
+[1m[38;5;208mtrackio show --project "openclaw-v6b-intake"[0m
+* or by running in Python: trackio.show(project="openclaw-v6b-intake")
+* Created new run: opus-2x-repeat-01
+* Run finished. Uploading logs to Trackio (please wait...)
