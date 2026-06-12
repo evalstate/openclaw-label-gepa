@@ -1,0 +1,101 @@
+{
+  "model": "opus",
+  "input": "runs/easy-set-v6g/reinforce-50/opus-2x/selected-input.jsonl",
+  "output": "runs/easy-set-v6g/reinforce-50/opus-2x/repeat-01/results.jsonl",
+  "schema": "eval/openclaw/easy-set-pilot/v6/teacher-output-v6g.schema.json",
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/teacher-card-v6g.md",
+  "agent": "openclaw_easy_set_pilot_teacher",
+  "template": "eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+  "shell_runtime": false,
+  "output_mode": "structured",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "parallel": 4,
+  "work_dir": "runs/easy-set-v6g/reinforce-50/opus-2x/repeat-01/.results.jsonl.batch/20260612T170121Z-dceef6c1",
+  "started_at": "2026-06-12T17:01:21Z",
+  "completed_at": "2026-06-12T17:05:32Z",
+  "input_rows": 50,
+  "selected_rows": 50,
+  "processed_rows": 50,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 229883.77,
+  "timing_ms": {
+    "duration": {
+      "count": 50,
+      "min": 5268.37,
+      "mean": 17529.0818,
+      "median_approx": 17093.708,
+      "max": 31561.83
+    },
+    "ttft": {
+      "count": 50,
+      "min": 1398.17,
+      "mean": 12141.3654,
+      "median_approx": 11520.588,
+      "max": 24884.14
+    },
+    "time_to_response": {
+      "count": 50,
+      "min": 1398.17,
+      "mean": 12141.3654,
+      "median_approx": 11520.588,
+      "max": 24884.14
+    }
+  },
+  "usage": {
+    "input_tokens": 843563,
+    "output_tokens": 69363,
+    "total_tokens": 210276,
+    "billing_tokens": 210276,
+    "reasoning_tokens": 0,
+    "tool_use_tokens": 0,
+    "tool_calls": 0,
+    "rows_with_usage": 50,
+    "usage_coverage_percent": 100.0
+  },
+  "cache": {
+    "read_tokens": 646438,
+    "write_tokens": 56212,
+    "hit_tokens": 0,
+    "served_tokens": 646438,
+    "activity_tokens": 702650,
+    "effective_input_tokens": 140913,
+    "hit_rate_percent": 76.63185796437256,
+    "write_rate_percent": 6.663639822988918,
+    "activity_rate_percent": 83.29549778736146,
+    "rows_with_cache_activity": 50,
+    "row_cache_activity_percent": 100.0,
+    "non_cached_input_tokens": 197125,
+    "served_to_effective_input_ratio": 4.5874972500762885
+  },
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 13,
+      "output": "runs/easy-set-v6g/reinforce-50/opus-2x/repeat-01/.results.jsonl.batch/20260612T170121Z-dceef6c1/part-000.jsonl"
+    },
+    {
+      "index": 1,
+      "offset": 13,
+      "limit": 13,
+      "output": "runs/easy-set-v6g/reinforce-50/opus-2x/repeat-01/.results.jsonl.batch/20260612T170121Z-dceef6c1/part-001.jsonl"
+    },
+    {
+      "index": 2,
+      "offset": 26,
+      "limit": 12,
+      "output": "runs/easy-set-v6g/reinforce-50/opus-2x/repeat-01/.results.jsonl.batch/20260612T170121Z-dceef6c1/part-002.jsonl"
+    },
+    {
+      "index": 3,
+      "offset": 38,
+      "limit": 12,
+      "output": "runs/easy-set-v6g/reinforce-50/opus-2x/repeat-01/.results.jsonl.batch/20260612T170121Z-dceef6c1/part-003.jsonl"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "model": "codexresponses.gpt-5.5?reasoning=high",
+  "input": "runs/easy-set-v6g/intake-100-slim/gpt55-1x/selected-input.jsonl",
+  "output": "runs/easy-set-v6g/intake-100-slim/gpt55-1x/repeat-01/results.jsonl",
+  "schema": "eval/openclaw/easy-set-pilot/v6/teacher-output-v6g.schema.json",
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/teacher-card-v6g.md",
+  "agent": "openclaw_easy_set_pilot_teacher",
+  "template": "eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+  "shell_runtime": false,
+  "output_mode": "structured",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "parallel": 4,
+  "work_dir": "runs/easy-set-v6g/intake-100-slim/gpt55-1x/repeat-01/.results.jsonl.batch/20260612T163741Z-9d0db2f6",
+  "started_at": "2026-06-12T16:37:41Z",
+  "completed_at": "2026-06-12T17:00:16Z",
+  "input_rows": 100,
+  "selected_rows": 100,
+  "processed_rows": 100,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 1246299.42,
+  "timing_ms": {
+    "duration": {
+      "count": 100,
+      "min": 7294.11,
+      "mean": 46075.193100000004,
+      "median_approx": 43540.2725,
+      "max": 126831.71
+    },
+    "ttft": {
+      "count": 100,
+      "min": 4291.85,
+      "mean": 15012.4376,
+      "median_approx": 10595.9025,
+      "max": 50828.23
+    },
+    "time_to_response": {
+      "count": 100,
+      "min": 4929.08,
+      "mean": 43777.617300000005,
+      "median_approx": 41523.8675,
+      "max": 120741.11
+    }
+  },
+  "usage": {
+    "input_tokens": 971440,
+    "output_tokens": 260092,
+    "total_tokens": 1231532,
+    "billing_tokens": 1231532,
+    "reasoning_tokens": 233017,
+    "tool_use_tokens": 0,
+    "tool_calls": 0,
+    "rows_with_usage": 100,
+    "usage_coverage_percent": 100.0
+  },
+  "cache": {
+    "read_tokens": 0,
+    "write_tokens": 0,
+    "hit_tokens": 690432,
+    "served_tokens": 690432,
+    "activity_tokens": 690432,
+    "effective_input_tokens": 281008,
+    "hit_rate_percent": 71.07304619945648,
+    "write_rate_percent": 0.0,
+    "activity_rate_percent": 71.07304619945648,
+    "rows_with_cache_activity": 87,
+    "row_cache_activity_percent": 87.0,
+    "non_cached_input_tokens": 281008,
+    "served_to_effective_input_ratio": 2.4569834310766954
+  },
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 25,
+      "output": "runs/easy-set-v6g/intake-100-slim/gpt55-1x/repeat-01/.results.jsonl.batch/20260612T163741Z-9d0db2f6/part-000.jsonl"
+    },
+    {
+      "index": 1,
+      "offset": 25,
+      "limit": 25,
+      "output": "runs/easy-set-v6g/intake-100-slim/gpt55-1x/repeat-01/.results.jsonl.batch/20260612T163741Z-9d0db2f6/part-001.jsonl"
+    },
+    {
+      "index": 2,
+      "offset": 50,
+      "limit": 25,
+      "output": "runs/easy-set-v6g/intake-100-slim/gpt55-1x/repeat-01/.results.jsonl.batch/20260612T163741Z-9d0db2f6/part-002.jsonl"
+    },
+    {
+      "index": 3,
+      "offset": 75,
+      "limit": 25,
+      "output": "runs/easy-set-v6g/intake-100-slim/gpt55-1x/repeat-01/.results.jsonl.batch/20260612T163741Z-9d0db2f6/part-003.jsonl"
+    }
+  ]
+}

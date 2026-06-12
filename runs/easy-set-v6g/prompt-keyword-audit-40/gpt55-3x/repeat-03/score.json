@@ -1,0 +1,322 @@
+{
+  "score": 0.0,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "row_symdiff_score": 0.3125
+    },
+    "score_details": {
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 2.2,
+      "valid_json": 1.0,
+      "false_positives": 88,
+      "false_negatives": 0,
+      "avg_predicted_topics": 2.2,
+      "avg_expected_topics": 0
+    },
+    "evaluated": 40,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-42408",
+        "title": "[Bug/Docs]: local+hybrid memory_search quality can appear unstable due to extraPaths path drift + benchmark-file contamination",
+        "expected": [],
+        "actual": [
+          "config",
+          "docs",
+          "memory"
+        ],
+        "false_positives": [
+          "config",
+          "docs",
+          "memory"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43416",
+        "title": "feat(ui): add copy button for assistant messages",
+        "expected": [],
+        "actual": [
+          "ui_tui"
+        ],
+        "false_positives": [
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-47083",
+        "title": "fix: respect totalTokensFresh flag to avoid showing stale token counts",
+        "expected": [],
+        "actual": [
+          "ui_tui"
+        ],
+        "false_positives": [
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48877",
+        "title": "feat(telegram): add multi-level menu support to customCommands",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "config"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "config"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-51849",
+        "title": "Docs: add freeCodeCamp OpenClaw full tutorial to showcase",
+        "expected": [],
+        "actual": [
+          "docs"
+        ],
+        "false_positives": [
+          "docs"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71487",
+        "title": "Web UI: add a clear TTS toggle and default voice picker in Settings",
+        "expected": [],
+        "actual": [
+          "config",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "config",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71646",
+        "title": "mcp/channel-bridge: pendingClaudePermissions / pendingApprovals leak \u2014 no TTL, no close-clear, no cap",
+        "expected": [],
+        "actual": [
+          "approvals",
+          "mcp_tooling",
+          "reliability"
+        ],
+        "false_positives": [
+          "approvals",
+          "mcp_tooling",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71976",
+        "title": "Memory Dreaming: Light sleep sort prioritizes recency over recallCount, hiding real recall data",
+        "expected": [],
+        "actual": [
+          "memory"
+        ],
+        "false_positives": [
+          "memory"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-72138",
+        "title": "fix(feishu): emit sent hooks for normal replies",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "hooks"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "hooks"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-76724",
+        "title": "[Bug]: MCP tools not discovered by Agent despite successful handshake (200 OK)",
+        "expected": [],
+        "actual": [
+          "mcp_tooling"
+        ],
+        "false_positives": [
+          "mcp_tooling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-78528",
+        "title": "Security: skill SecretRef API keys still leak into exec child environments",
+        "expected": [],
+        "actual": [
+          "exec_tools",
+          "security",
+          "skills_plugins"
+        ],
+        "false_positives": [
+          "exec_tools",
+          "security",
+          "skills_plugins"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-81488",
+        "title": "Harden node exec approval precheck env [AI]",
+        "expected": [],
+        "actual": [
+          "approvals",
+          "exec_tools",
+          "security"
+        ],
+        "false_positives": [
+          "approvals",
+          "exec_tools",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-82642",
+        "title": "Fix iMessage slash command acknowledgements",
+        "expected": [],
+        "actual": [
+          "chat_integrations"
+        ],
+        "false_positives": [
+          "chat_integrations"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84385",
+        "title": "[codex] Fix macOS app copyright year",
+        "expected": [],
+        "actual": [
+          "ui_tui"
+        ],
+        "false_positives": [
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84761",
+        "title": "feat(secrets): scan backup files for plaintext provider apiKey values",
+        "expected": [],
+        "actual": [
+          "security"
+        ],
+        "false_positives": [
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-88400",
+        "title": "fix(config): accept overlays for bundled provider aliases",
+        "expected": [],
+        "actual": [
+          "config",
+          "inference_api"
+        ],
+        "false_positives": [
+          "config",
+          "inference_api"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-42122",
+        "title": "Speed up install smoke Docker builds",
+        "expected": [],
+        "actual": [
+          "packaging_deployment",
+          "tests_ci"
+        ],
+        "false_positives": [
+          "packaging_deployment",
+          "tests_ci"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-46552",
+        "title": "docs(queue): clarify steer behavior with partial streaming and tool boundaries",
+        "expected": [],
+        "actual": [
+          "docs",
+          "queueing"
+        ],
+        "false_positives": [
+          "docs",
+          "queueing"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-49502",
+        "title": "feat(gateway): include usage/cost metadata in agent.wait terminal response",
+        "expected": [],
+        "actual": [
+          "api_surface",
+          "gateway",
+          "telemetry_usage"
+        ],
+        "false_positives": [
+          "api_surface",
+          "gateway",
+          "telemetry_usage"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-59208",
+        "title": "fix(status): honor selected usage auth profile",
+        "expected": [],
+        "actual": [
+          "auth_identity",
+          "telemetry_usage"
+        ],
+        "false_positives": [
+          "auth_identity",
+          "telemetry_usage"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      }
+    ]
+  }
+}

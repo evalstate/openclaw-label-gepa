@@ -1,0 +1,46 @@
+{
+  "input": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/selected-input.jsonl",
+  "output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/results.jsonl",
+  "parallel": 4,
+  "input_rows": 40,
+  "selected_rows": 40,
+  "created_at": "2026-06-10T08:55:56Z",
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 10,
+      "output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/part-000.jsonl",
+      "error_output": null,
+      "telemetry_output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/telemetry.part-000.jsonl",
+      "summary_output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/summary.part-000.json"
+    },
+    {
+      "index": 1,
+      "offset": 10,
+      "limit": 10,
+      "output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/part-001.jsonl",
+      "error_output": null,
+      "telemetry_output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/telemetry.part-001.jsonl",
+      "summary_output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/summary.part-001.json"
+    },
+    {
+      "index": 2,
+      "offset": 20,
+      "limit": 10,
+      "output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/part-002.jsonl",
+      "error_output": null,
+      "telemetry_output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/telemetry.part-002.jsonl",
+      "summary_output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/summary.part-002.json"
+    },
+    {
+      "index": 3,
+      "offset": 30,
+      "limit": 10,
+      "output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/part-003.jsonl",
+      "error_output": null,
+      "telemetry_output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/telemetry.part-003.jsonl",
+      "summary_output": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability/repeat-01/.results.jsonl.batch/20260610T085556Z-5276cb0b/summary.part-003.json"
+    }
+  ]
+}

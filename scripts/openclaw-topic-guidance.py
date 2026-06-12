@@ -7,7 +7,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from openclaw_gepa.openclaw_benchmark import ENV_DIR, REF, evidence_excerpt, load_jsonl
+from openclaw_gepa.openclaw_benchmark import ENV_DIR, SOURCE, evidence_excerpt, load_jsonl
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Ask a strong model for topic-boundary guidance from scored failures.")
     p.add_argument("score", type=Path, help="candidate score.json")
-    p.add_argument("--source", type=Path, default=REF / "seed.jsonl")
+    p.add_argument("--source", type=Path, default=SOURCE)
     p.add_argument("--model", default="codexresponses.gpt-5.5?reasoning=high")
     p.add_argument("--fast-agent-bin", default="fast-agent")
     p.add_argument("--topics", nargs="*", default=None, help="Optional topics to focus on; defaults to top error patterns.")

@@ -8,7 +8,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from openclaw_gepa.openclaw_benchmark import ENV_DIR, REF, evidence_excerpt, load_jsonl
+from openclaw_gepa.openclaw_benchmark import ENV_DIR, SOURCE, evidence_excerpt, load_jsonl
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +26,7 @@ DEFAULT_CUES: dict[str, list[str]] = {
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Distill human label rationales from seed rows using a strong model.")
     p.add_argument("labels", nargs="+")
-    p.add_argument("--source", type=Path, default=REF / "seed.jsonl")
+    p.add_argument("--source", type=Path, default=SOURCE)
     p.add_argument("--score", type=Path, default=None, help="Optional score.json with validation failures.")
     p.add_argument("--model", default="codexresponses.gpt-5.5?reasoning=high")
     p.add_argument("--fast-agent-bin", default="fast-agent")

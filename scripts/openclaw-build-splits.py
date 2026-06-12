@@ -8,7 +8,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from openclaw_gepa.openclaw_benchmark import REF, github_context, load_jsonl, write_jsonl
+from openclaw_gepa.openclaw_benchmark import SOURCE, github_context, load_jsonl, write_jsonl
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +26,7 @@ CONFUSION_FAMILIES = [
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Build OpenClaw GEPA train/validation splits.")
-    p.add_argument("--source", type=Path, default=REF / "seed.jsonl")
+    p.add_argument("--source", type=Path, default=SOURCE)
     p.add_argument("--output-dir", type=Path, default=DEFAULT_OUT)
     p.add_argument("--train-size", type=int, default=120)
     p.add_argument("--validation-size", type=int, default=300)

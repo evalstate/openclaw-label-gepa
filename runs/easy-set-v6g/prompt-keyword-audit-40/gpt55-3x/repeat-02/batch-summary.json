@@ -1,0 +1,101 @@
+{
+  "model": "codexresponses.gpt-5.5?reasoning=high",
+  "input": "runs/easy-set-v6g/prompt-keyword-audit-40/gpt55-3x/selected-input.jsonl",
+  "output": "runs/easy-set-v6g/prompt-keyword-audit-40/gpt55-3x/repeat-02/results.jsonl",
+  "schema": "eval/openclaw/easy-set-pilot/v6/teacher-output-v6g.schema.json",
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/teacher-card-v6g.md",
+  "agent": "openclaw_easy_set_pilot_teacher",
+  "template": "eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+  "shell_runtime": false,
+  "output_mode": "structured",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "parallel": 4,
+  "work_dir": "runs/easy-set-v6g/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T155935Z-1c0c6a96",
+  "started_at": "2026-06-12T15:59:35Z",
+  "completed_at": "2026-06-12T16:09:17Z",
+  "input_rows": 40,
+  "selected_rows": 40,
+  "processed_rows": 40,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 541054.97,
+  "timing_ms": {
+    "duration": {
+      "count": 40,
+      "min": 5559.42,
+      "mean": 36525.051250000004,
+      "median_approx": 34830.1425,
+      "max": 90796.44
+    },
+    "ttft": {
+      "count": 40,
+      "min": 4203.88,
+      "mean": 11890.5545,
+      "median_approx": 10661.73625,
+      "max": 42187.02
+    },
+    "time_to_response": {
+      "count": 40,
+      "min": 5325.99,
+      "mean": 34666.78875,
+      "median_approx": 32476.784999999996,
+      "max": 87630.81
+    }
+  },
+  "usage": {
+    "input_tokens": 384616,
+    "output_tokens": 78548,
+    "total_tokens": 463164,
+    "billing_tokens": 463164,
+    "reasoning_tokens": 68979,
+    "tool_use_tokens": 0,
+    "tool_calls": 0,
+    "rows_with_usage": 40,
+    "usage_coverage_percent": 100.0
+  },
+  "cache": {
+    "read_tokens": 0,
+    "write_tokens": 0,
+    "hit_tokens": 261888,
+    "served_tokens": 261888,
+    "activity_tokens": 261888,
+    "effective_input_tokens": 122728,
+    "hit_rate_percent": 68.09077105476631,
+    "write_rate_percent": 0.0,
+    "activity_rate_percent": 68.09077105476631,
+    "rows_with_cache_activity": 33,
+    "row_cache_activity_percent": 82.5,
+    "non_cached_input_tokens": 122728,
+    "served_to_effective_input_ratio": 2.133889576950655
+  },
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 10,
+      "output": "runs/easy-set-v6g/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T155935Z-1c0c6a96/part-000.jsonl"
+    },
+    {
+      "index": 1,
+      "offset": 10,
+      "limit": 10,
+      "output": "runs/easy-set-v6g/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T155935Z-1c0c6a96/part-001.jsonl"
+    },
+    {
+      "index": 2,
+      "offset": 20,
+      "limit": 10,
+      "output": "runs/easy-set-v6g/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T155935Z-1c0c6a96/part-002.jsonl"
+    },
+    {
+      "index": 3,
+      "offset": 30,
+      "limit": 10,
+      "output": "runs/easy-set-v6g/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T155935Z-1c0c6a96/part-003.jsonl"
+    }
+  ]
+}

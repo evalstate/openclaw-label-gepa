@@ -6,7 +6,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from openclaw_gepa.openclaw_benchmark import REF, load_jsonl
+from openclaw_gepa.openclaw_benchmark import SOURCE, load_jsonl
 
 
 DEFAULT_CUES: dict[str, list[str]] = {
@@ -22,7 +22,7 @@ DEFAULT_CUES: dict[str, list[str]] = {
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Summarize seed rows for selected OpenClaw labels.")
     p.add_argument("labels", nargs="+")
-    p.add_argument("--source", type=Path, default=REF / "seed.jsonl")
+    p.add_argument("--source", type=Path, default=SOURCE)
     p.add_argument("--examples", type=int, default=20)
     p.add_argument("--json", action="store_true", help="Emit JSON instead of markdown-ish text.")
     return p.parse_args()
