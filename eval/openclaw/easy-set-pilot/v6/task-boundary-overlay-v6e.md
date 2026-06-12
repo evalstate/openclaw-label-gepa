@@ -13,6 +13,16 @@ top of the topic definitions; they are not extra labels.
 - Do not add topics supported only by changed files, tests added alongside a
   change, examples, incidental helper code, or weak downstream consequences.
 
+### Benchmark eligibility
+
+All allowed topics remain valid. For easy-set train/test selection, treat
+`coding_agent_integrations`, `model_lifecycle`, `skills_plugins`,
+`sandboxing`, `queueing`, `tool_calling`, `auth_identity`, and `codex` as
+low-support or high-confusion topics. Include one only when it is a central,
+unambiguous owner surface. If it is merely plausible, adjacent, or keyword-led,
+exclude it; if it is central but still boundary-sensitive, the row should not
+be considered easy.
+
 ### Conformance and policy rows
 
 - Allow/deny rules, conformance checks, or doctor checks: include the checked

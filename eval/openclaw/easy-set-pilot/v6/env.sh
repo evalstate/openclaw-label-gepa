@@ -15,7 +15,7 @@ export V6_ROOT
 export V6_DIR="$V6_ROOT/eval/openclaw/easy-set-pilot/v6"
 
 # --- run roots ---------------------------------------------------------------
-export V6_RUNS="$V6_ROOT/runs/easy-set-v6d"
+export V6_RUNS="$V6_ROOT/runs/easy-set-v6h"
 export V6_RUNS_INTAKE="$V6_RUNS/v6b-databuild/intake"  # raw batch workdirs (untracked)
 export V6_INTAKE="$V6_DIR/intake-v6b"                  # curated batch records (tracked)
 export V6_LEDGER="$V6_DIR/v6b-build-ledger.jsonl"      # cumulative accepted rows (tracked)
@@ -30,17 +30,20 @@ export V6_TRACKIO_PROJECT="openclaw-v6b-intake"
 export V6_TRACKIO_EVERY=5
 
 # --- frozen spec & prompt assets (tracked) ------------------------------------
-export V6_SPEC="$V6_DIR/topic-boundary-guidance-v6d.md"
-export V6_TAXONOMY="$V6_DIR/allowed-topics-v6d.md"
-export V6_OVERLAY="$V6_DIR/task-boundary-overlay-v6d.md"
-export V6_TEACHER_CARD="$V6_DIR/teacher-card-v6d.md"
+# v6h standard: v6g (deliverable test + specific-beats-generic + 3-label cap)
+# + reliability-mechanism and inference-dispatch tie-breaks
+# (see V6_SPEC_CHANGELOG.md; verified on runs/easy-set-v6g/prompt-keyword-audit-40 + runs/easy-set-v6h/tiebreak-probe)
+export V6_SPEC="$V6_DIR/topic-boundary-guidance-v6h.md"
+export V6_TAXONOMY="$V6_DIR/allowed-topics-v6f.md"
+export V6_OVERLAY="$V6_DIR/task-boundary-overlay-v6h.md"
+export V6_TEACHER_CARD="$V6_DIR/teacher-card-v6h.md"
 export V6_TEACHER_TEMPLATE="$V6_DIR/teacher-template-v6-anchor-free.md"
-export V6_TEACHER_SCHEMA="$V6_DIR/teacher-output-v6d.schema.json"
-export V6_LABELER_A="$V6_DIR/openclaw-vanilla-labeler-v6b.md"   # fair-context arm
-export V6_LABELER_B="$V6_DIR/openclaw-vanilla-labeler-v6b.md"   # compression arm not split for v6b
-export V6_SEED_OVERLAY="$V6_DIR/seed-policy-overlay-v6b.md"
-export V6_SEED_VANILLA="$V6_DIR/seed-policy-vanilla-v6b.md"
-export V6_SLIM_ASI="$V6_DIR/vanilla-asi-v6b-slim.md"
+export V6_TEACHER_SCHEMA="$V6_DIR/teacher-output-v6h.schema.json"
+export V6_LABELER_A="$V6_DIR/openclaw-vanilla-labeler-v6h.md"   # fair-context arm
+export V6_LABELER_B="$V6_DIR/openclaw-vanilla-labeler-v6h.md"   # compression arm not split
+export V6_SEED_OVERLAY="$V6_DIR/seed-policy-overlay-v6h.md"
+export V6_SEED_VANILLA="$V6_DIR/seed-policy-vanilla-v6h.md"
+export V6_SLIM_ASI="$V6_DIR/vanilla-asi-v6h-slim.md"
 
 # --- source rows -------------------------------------------------------------
 export V6_SOURCE_ROWS="$V6_DIR/revalidation-input.jsonl"   # 195 stripped rows

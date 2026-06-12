@@ -5,13 +5,39 @@ top of the topic definitions; they are not extra labels.
 
 ### Cardinality law
 
-- Use 1-3 topics by default; 4-5 only when the item is genuinely cross-cutting
-  and each topic is central. Never more than 5; if more qualify, keep the 5
-  strongest central owner boundaries. Return [] when no topic applies.
-- Include every topic whose inclusion rule is satisfied — do not drop a
-  qualifying topic to keep the output short.
+- Use at most 3 topics, listed in priority order with the primary changed
+  surface first. Return [] when no topic applies.
+- If more than 3 topics seem central, keep the 3 that best satisfy the
+  deliverable test below, preferring specific topics over generic ones. A
+  fourth candidate is almost always a mechanism, producer, or motivation
+  label that fails the deliverable test.
 - Do not add topics supported only by changed files, tests added alongside a
   change, examples, incidental helper code, or weak downstream consequences.
+
+### Deliverable test (global tie-break)
+
+Include a topic only when the item changes that surface's behavior contract —
+what the surface promises or does, not what it touches. Apply this before
+every label, especially a marginal second or third. A surface is NOT labeled
+when its only role is:
+
+- **delivery mechanism**: a config key, toggle, default, or tool/function
+  parameter introduced only as the means of shipping another surface's change
+  does not earn `config`, `tool_calling`, or `api_surface`; label those only
+  when changed config/tool/API semantics are themselves the deliverable.
+- **producer, consumer, or symptom location**: surfaces that emit into a new
+  schema, paths that get instrumented, or the place a failure is observed do
+  not get labels; label the surface whose contract the item changes.
+- **motivation**: a security/reliability rationale does not justify
+  `security`/`reliability` unless the item itself changes a security control
+  or a failure-mode behavior.
+- **commenter discussion**: label from the item body/diff and the requested
+  deliverable; concerns raised only in comments do not add labels.
+
+**Specific beats generic.** When a specific topic applies (`codex`, `acpx`),
+add its generic sibling (`coding_agent_integrations`, `acp`) only when the
+item also changes a concern the specific topic does not cover. Never include
+a specific topic and its generic counterpart for the same single fact.
 
 ### Conformance and policy rows
 
@@ -39,14 +65,19 @@ adjusting model configurations, catalogs, and metadata. Layer test: which
 would the maintainer change to fix it — the API client, the local/self-hosted
 inference hookup or model operation, or the model catalog/config? Never
 substitute `config` or `docs` for this family when a provider/engine/model
-integration is the central subject.
+integration is the central subject. `inference_api` owns the wire contract
+with the provider; internal model *selection* — dispatch, fallback ordering,
+capability-based routing — is `agent_runtime` or `model_lifecycle`, not
+`inference_api`, unless provider request/response handling itself changes.
 
 ### High-traffic boundaries
 
-- `reliability`: timeout, crash, leak, stuck state, retry, data loss, cleanup,
-  recovery, overload, or operational failure mode as a deliverable — including
-  docs/tests whose subject is that behavior. Not a generic bug tag; CI-only
-  failures are `tests_ci`.
+- `reliability`: the item changes a recovery, retry, cleanup, lifecycle,
+  watchdog, or hardening mechanism itself — including docs/tests whose subject
+  is that behavior. Not a generic bug tag; CI-only failures are `tests_ci`. A
+  defect that merely *manifested* as message loss, a hang, a race, or a crash
+  inside another surface's logic is that surface only; impact tags such as
+  `impact:message-loss` describe severity, not ownership.
 - `api_surface`: external API, CLI, HTTP, SDK, or documented command contracts.
   If the item changes WHAT an external contract promises, label api_surface
   even when the implementation lives in the gateway or a serving endpoint.
@@ -112,7 +143,10 @@ integration is the central subject.
 - `hooks` vs `skills_plugins`: channel/event hooks are `hooks` (+ the chat
   surface); `skills_plugins` only when plugin SDK/loading/manifest or a skill/
   plugin surface (including the Policy plugin) is changed, validated, or given
-  doctor/check behavior.
+  doctor/check behavior. A caller suppressing or bypassing hook execution as
+  part of its own recovery or mechanism is the caller's surface, not `hooks`;
+  `hooks` requires changed hook registration, priority, lifecycle, execution,
+  or security.
 - `docs`: only when documentation itself is the subject — and a docs-only item
   still carries the product topic whose behavior is centrally documented.
 - `tool_calling`: tool-call protocol, function/tool schemas, result transcript

@@ -7,55 +7,82 @@ Classify for maintainer topic inventory and evaluation, not code search. Each
 topic names a surface a maintainer owns; a label is correct when that owner
 would need to act on or review the item.
 
+Do not adjust labels for dataset balance, low topic support, benchmark
+eligibility, or train/test suitability. Those are post-pass decisions. This
+guidance only decides which topic labels are true for the item.
+
 ## Cardinality law
 
-- Use 1-3 topics by default. Use 4-5 topics only when the item is genuinely
-  cross-cutting and each topic is central.
-- Include every topic whose MUST rule is satisfied. Do not omit a MUST topic to
-  keep the output short.
-- Never output more than 5 topics. If more than 5 MUST rules are satisfied,
-  keep the 5 strongest central owner boundaries.
+- Use 1-3 topics by default, extending to 4-5 topics only when the item is
+  genuinely cross-cutting and each topic is central. Use at most 5 topics.
+- Include all central owner surfaces that are directly changed by the item; do
+  not add incidental, downstream, or merely mentioned surfaces.
 - Use an empty label set when no allowed topic applies.
+
+## Label decision standard
+
+Include a topic when the item directly changes, fixes, documents, or asks for
+behavior owned by that surface. Examples and named technologies below clarify
+ownership boundaries; they are not keyword triggers.
+
+Do not include a topic for mentions, examples, file paths, helper names, tests,
+implementation mechanisms, downstream effects, or surfaces where the change is
+merely visible. When an item names a mechanism, protocol, runtime, hook, config,
+or UI/status view, first ask which owner surface actually changes behavior.
+
+## Common mechanism ownership tests
+
+When an item involves spawning or delegating work to a child/subagent, do not
+label `sessions` automatically. Classify by the behavior that changes:
+
+- spawn/message semantics: `acp`
+- internal subagent execution: `agent_runtime`
+- lanes, scheduling, or work dispatch: `queueing`
+- model-callable tool/function schema: `tool_calling`
+- external documented API, CLI, HTTP, or SDK contract: `api_surface`
+- persisted or user/operator-visible setting/default: `config`
+- stored session identity, lifecycle, state, transcript, cleanup, list, status,
+  or store behavior: `sessions`
+
+When an item adds or changes a parameter, decide what kind of parameter it is:
+
+- persisted/user/operator setting or default: `config`
+- external API/CLI/SDK contract field: `api_surface`
+- model-callable tool/function schema field: `tool_calling`
+- internal implementation argument with no owner-visible contract: route to the
+  surface whose behavior changes, not to `config`, `api_surface`, or
+  `tool_calling`.
 
 ## Incidental-evidence exclusion (global)
 
 Do not add topics supported only by changed files, tests added alongside a
 change, examples, incidental helper code, file paths, helper names, or weak
-downstream consequences. A MUST rule is satisfied only when its subject is
-central to the item, not merely mentioned. Label the surface whose behavior
-the item changes, not the surfaces where the change is merely visible.
+downstream consequences. A topic applies only when its subject is central to
+the item, not merely mentioned. Label the surface whose behavior the item
+changes, not the surfaces where the change is merely visible.
 
-## Conformance and policy rows (compositional co-label rules)
+## Conformance and policy items (compositional co-label rules)
 
 - If an item introduces or validates allow/deny rules, conformance checks, or
   doctor checks, include the checked domains, and include `config` when those
   rules/settings are operator-visible or persisted.
 - If policy/conformance work lives in, extends, documents, or adds checks for
-  the Policy plugin, `skills_plugins` MUST be included.
+  the Policy plugin, include `skills_plugins`.
 - If the checks include private-network, SSRF, credential, auth, or permission
-  posture, `security` MUST be included.
+  posture, include `security`.
 - If the checks include model providers, provider refs, provider catalogs, or
-  provider routing/setup, `inference_api` MUST be included.
-- If the checks include MCP servers or MCP tools, `mcp_tooling` MUST be
-  included.
+  provider routing/setup, include `inference_api`.
+- If the checks include MCP servers or MCP tools, include `mcp_tooling`.
 
 ## Coding-agent boundary
 
-Use `coding_agent_integrations` when the item changes how OpenClaw integrates
-with, launches, configures, authenticates, routes to, adapts, or preserves
-compatibility for an external coding-agent runtime or CLI such as Pi, Codex,
-Claude Code, Gemini CLI, or a similar coding agent.
+Use `coding_agent_integrations` when the item changes how OpenClaw integrates with, launches, configures, authenticates, routes to, adapts, or preserves compatibility for an external coding-agent runtime or CLI such as Pi, Codex, Claude Code, Gemini CLI, or a similar coding agent.
 
 First identify the actor whose behavior changes. If OpenClaw is merely
-starting internal work, relaying messages, managing a run, or updating session
-state, route to the internal owner such as `agent_runtime`, `acp`, `acpx`,
-`sessions`, `queueing`, `tool_calling`, `approvals`, `sandboxing`, or
-`telemetry_usage`. If the changed behavior is OpenClaw's contract with an
-external coding-agent runtime, include `coding_agent_integrations`.
+starting internal work, relaying messages, managing a run, or updating session state, route to the internal owner such as `agent_runtime`, `acp`, `sessions`, `queueing`, `gateway`, `approvals`, `sandboxing`, or `telemetry_usage`. If the changed behavior is OpenClaw's contract with an external coding-agent runtime, include `coding_agent_integrations`.
 
 ACP is an integration protocol. It may be the protocol used to reach an
-external coding agent, but ACP work is not `coding_agent_integrations` unless
-OpenClaw's behavior toward that external agent changes.
+external coding agent, but ACP work is not `coding_agent_integrations` unless OpenClaw's behavior toward that external agent changes.
 
 ## Inference family disambiguation
 
@@ -84,7 +111,7 @@ provider/engine/model integration is the central subject.
 
 ## `inference_api`
 
-- MUST include: the integration layer between OpenClaw and model
+- Include when: the integration layer between OpenClaw and model
   serving/providers — usage of Responses, Chat Completions, Anthropic
   Messages, or similar inference APIs and integrations (including TTS, vision,
   and embeddings APIs); streaming/SSE and usage chunks; base URL
@@ -99,7 +126,7 @@ provider/engine/model integration is the central subject.
 
 ## `self_hosted_inference`
 
-- MUST include: integration with inference engines such as vLLM, llama.cpp,
+- Include when: integration with inference engines such as vLLM, llama.cpp,
   Ollama, LM Studio, TGI, or LocalAI — on device or self-hosted elsewhere —
   including engine setup, lifecycle, compatibility, engine crashes/timeouts,
   self-hosted embeddings/speech/memory backends, GGUF or quantization behavior,
@@ -112,28 +139,20 @@ provider/engine/model integration is the central subject.
 
 ## `model_lifecycle`
 
-- MUST include: introduction, decommissioning, or adjustment of model
-  configurations — adding/removing/renaming model IDs, catalog or default
-  updates, deprecations, version-specific model support, or model metadata
-  (context windows, quantization variants) changes.
+- Include when: introduction, decommissioning, or adjusting model
+  configurations — adding/removing/renaming model IDs, model catalog, default
+  settings, version-specific model support, or model metadata   (context windows
+  , quantization variants) changes.
 - Do not include: merely because a model name appears, or inference
   API-integration changes (`inference_api`).
 
-## `acpx`
 
-- MUST include: ACPX runtime, worker, harness, configured binding, or
-  ACPX-specific compatibility is central.
-- Do not include: generic ACP issues without ACPX-specific surfaces.
-- Co-label test: add `acp` alongside `acpx` only when the item names ACP
-  protocol behavior such as binding, override, spawn/cancel semantics,
-  parent/child message relay, event streams, completion delivery, message
-  blocks, or client/server compatibility as behavior being implemented, fixed,
-  or preserved. Pure ACPX transport, worker, harness, proxy, command, auth, or
-  compatibility work does not imply `acp`.
 
 ## `acp`
 
-- MUST include: ACP protocol semantics — binding and override, spawn/cancel,
+Agent Client Protocol (ACP) is a feature of OpenClaw that allows Agent Integration.
+
+- Include when: ACP protocol semantics — binding and override, spawn/cancel,
   parent/child message relay and delivery (event streams, completion notify),
   message blocks, or ACP client/server compatibility.
 - Do not include: the session objects themselves — lifecycle, state,
@@ -145,9 +164,22 @@ provider/engine/model integration is the central subject.
   only when the item changes both the protocol behavior and the session
   object's lifecycle or state.
 
+
+## `acpx`
+
+ACPX is a sibling project to OpenClaw, and provides an Agent Client Protocol 
+(ACP) CLI adapter. Issues may be raised directly on this component. 
+
+- Include when: ACPX runtime, worker, harness, configured binding, or
+  ACPX-specific compatibility is central.
+- Do not include: generic ACP issues unless there is an ACPX-specific integration
+problem.
+- Co-label test: only add `acp` alongside `acpx` when the item clearly
+- relates to OpenClaw's ACP adapter integrating with the ACPX module.
+
 ## `coding_agent_integrations`
 
-- MUST include: OpenClaw's integration with an external coding-agent runtime or
+- Include when: OpenClaw's integration with an external coding-agent runtime or
   CLI such as Pi, Codex, Claude Code, Gemini CLI, or a similar coding agent:
   launching it, configuring it, authenticating it, adapting its protocol,
   routing work to it, handling compatibility, or preserving its runtime
@@ -161,29 +193,30 @@ provider/engine/model integration is the central subject.
 
 ## `mcp_tooling`
 
-- MUST include: MCP server allow/deny rules, MCP conformance checks, MCP
+- Include when: MCP server allow/deny rules, MCP conformance checks, MCP
   handshake/tool behavior, MCP config, MCP tool discovery/materialization
   (tools/list), or MCP tool routing.
 - Do not include: MCP appearing only in examples or incidental config.
 
 ## `codex`
 
-- MUST include: Codex runtime, Codex auth, Codex ACP, Codex plugin, or Codex
+- Include when: Codex runtime, Codex auth, Codex ACP, Codex plugin, or Codex
   harness behavior is central.
 - Do not include: generic coding-agent workflows without Codex specifics.
 
 ## `agent_runtime`
 
-- MUST include: OpenClaw's internal agent machinery — runtime startup, loop,
+- Include when: OpenClaw's internal agent machinery — runtime startup, loop,
   backends, model call orchestration, runtime adapter behavior, subagent
   execution and orchestration, or runtime ownership/execution architecture.
 - Do not include: external coding-agent integrations (`coding_agent_integrations`), ACP
   protocol/session/delivery work (`acp`/`acpx`), or any agent-adjacent
   provider/UI/config change.
+- Note -- this can be fulfilled by an internal "Pi" instance - so you need to distinguish whether the item refers to Pi as the internal runner as the  `agent_runtime` in which case DO NOT LABEL as `coding_agent_integrations`. 
 
 ## `sessions`
 
-- MUST include: the session objects themselves — session identity, lifecycle,
+- Include when: the session objects themselves — session identity, lifecycle,
   state, persistence, transcript, resume, reset, cleanup, or session stores —
   including parent/child sessions when their lifecycle or state changes.
 - Do not include: ACP parent/child message semantics, binding, relay, or
@@ -192,7 +225,7 @@ provider/engine/model integration is the central subject.
 
 ## `gateway`
 
-- MUST include: gateway routing, gateway state, gateway startup, gateway
+- Include when: gateway routing, gateway state, gateway startup, gateway
   protocol, gateway restart/health, or gateway-owned execution/lifecycle is
   central.
 - Do not include: ordinary provider proxy, HTTP compatibility, app-runtime
@@ -201,14 +234,14 @@ provider/engine/model integration is the central subject.
 
 ## `exec_tools`
 
-- MUST include: shell execution, command invocation, PATH, tool execution
+- Include when: shell execution, command invocation, PATH, tool execution
   policy, or execution output control is central.
 - Do not include: API/tool schema semantics (`tool_calling`), or ACPX/agent
   runtime internals that do not change command execution behavior.
 
 ## `approvals`
 
-- MUST include: approval prompts, permission decisions, or approval mode
+- Include when: approval prompts, permission decisions, or approval mode
   behavior is central.
 - Do not include: merely because a command or tool might require permission.
 - Co-label: bounding/expiring/persisting pending-approval state is approvals
@@ -216,14 +249,17 @@ provider/engine/model integration is the central subject.
 
 ## `sandboxing`
 
-- MUST include: sandbox policy, sandbox inheritance, sandbox escape, path
+- Include when: sandbox policy, sandbox inheritance, sandbox escape, path
   isolation, or sandbox runtime behavior is central.
 - Do not include: merely because command execution or security is mentioned.
 
 ## `hooks`
 
-- MUST include: hook registration, hook priority, hook execution, or hook
-  security is central.
+"Hooks" are code that runs automatically on Agent/LLM/Tool Call events such
+as pre-call, post-call or end of turn. 
+
+- Include when: hook registration, hook priority, hook execution, or hook
+  security is central to the issue.
 - Do not include: generic plugin behavior unless hook mechanics are the owner
   surface. Channel/event hooks for a chat surface are `hooks` +
   `chat_integrations`, not `skills_plugins`, unless plugin SDK/loading is
@@ -231,20 +267,20 @@ provider/engine/model integration is the central subject.
 
 ## `cron_automation`
 
-- MUST include: cron jobs, heartbeat runs, scheduled automation, or force-run
+- Include when: cron jobs, heartbeat runs, scheduled automation, or force-run
   behavior is central.
 - Do not include: merely because an agent/runtime heartbeat is mentioned.
 
 ## `chat_integrations`
 
-- MUST include: a named chat platform, channel adapter, message ingestion, or
+- Include when: a named chat platform, channel adapter, message ingestion, or
   chat delivery surface is central.
 - Do not include: generic message delivery/recovery without a named chat
   surface.
 
 ## `ui_tui`
 
-- MUST include: UI/TUI display, interaction, navigation, rendering, or
+- Include when: UI/TUI display, interaction, navigation, rendering, or
   user-facing control behavior is itself the failing or changed surface —
   including status views, footer, mobile UI, and settings screens.
 - Do not include: a defect merely observed or triggered through a dashboard,
@@ -254,20 +290,20 @@ provider/engine/model integration is the central subject.
 
 ## `browser_automation`
 
-- MUST include: browser/CDP/Chrome automation, browser session attach, or auth
+- Include when: browser/CDP/Chrome automation, browser session attach, or auth
   browser flow is central.
 - Do not include: generic UI or web API behavior.
 
 ## `memory`
 
-- MUST include: memory indexing, memory search, embeddings, active memory, or
+- Include when: memory indexing, memory search, embeddings, active memory, or
   memory provider state is central.
 - Do not include: context window, session state, transcript, or generic
   remembering.
 
 ## `security`
 
-- MUST include: concrete security issues, security improvements, or direct
+- Include when: concrete security issues, security improvements, or direct
   security features: SSRF, private-network access, credential/secret/token
   exposure or hardening, auth or permission boundary changes, access-control
   enforcement, sandbox escape/isolation hardening, vulnerability mitigation,
@@ -277,15 +313,18 @@ provider/engine/model integration is the central subject.
   profile configuration unless the item changes an access rule, exposure path,
   permission check, credential/secret/token handling, or other security
   control.
-- Boundary: `auth_identity` rows co-label `security` only when they change a
+- Boundary: `auth_identity` items co-label `security` only when they change a
   security control: access rule, exposure path, permission check, credential/
   secret/token handling, signature/HMAC/verification, or auth-boundary
   hardening. Privacy-flavored user preference or identity UX alone does not
   qualify.
+- Co-label: add `sandboxing` when the security change centrally alters sandbox
+  isolation, sandbox policy, filesystem/process boundaries, or escape
+  hardening.
 
 ## `config`
 
-- MUST include: configuration schemas, persisted config shape, config loading,
+- Include when: configuration schemas, persisted config shape, config loading,
   config validation, config repair, environment/config defaults, allow/deny
   configuration, policy settings, or adding/changing user- or operator-facing
   settings — new toggles, pickers, defaults, and persisted preferences qualify,
@@ -295,26 +334,25 @@ provider/engine/model integration is the central subject.
 
 ## `packaging_deployment`
 
-- MUST include: packaging, installer, Docker image, release artifact,
+- Include when: packaging, installer, Docker image, release artifact,
   dependency packaging, or deployment is central.
 - Do not include: ordinary runtime config.
 
 ## `docs`
 
-- MUST include: only when documentation itself is the subject.
+- Include when: documentation itself is the subject.
 - Co-label: a docs-only item still carries the product topic whose behavior is
   centrally documented (e.g., a failure-recovery runbook is `docs` +
   `reliability`); `docs` alone only when the writing itself is the subject.
 
 ## `tests_ci`
 
-- MUST include: only when tests, CI, or test infrastructure itself is the
-  subject.
+- Include when: tests, CI, or test infrastructure itself is the subject.
 - Do not include: a PR merely including tests alongside a change.
 
 ## `telemetry_usage`
 
-- MUST include: OpenClaw's own telemetry and usage surface is the subject —
+- Include when: OpenClaw's own telemetry and usage surface is the subject —
   token/usage/cost accounting, metrics, diagnostics, trace production and
   observability coverage, or status reporting of the OpenClaw product.
 - Do not include: measurement or benchmark vocabulary appearing near another
@@ -324,7 +362,7 @@ provider/engine/model integration is the central subject.
 
 ## `api_surface`
 
-- MUST include: external API, CLI, HTTP, SDK, or documented command contracts.
+- Include when: external API, CLI, HTTP, SDK, or documented command contracts.
 - Do not include: internal helpers, payload parsing, status text, UI events,
   ordinary commands, inference-integration behavior (`inference_api`), or gateway
   process ownership (`gateway`).
@@ -335,7 +373,7 @@ provider/engine/model integration is the central subject.
 
 ## `queueing`
 
-- MUST include: queues, lanes, scheduling, task ordering, or work dispatch are
+- Include when: queues, lanes, scheduling, task ordering, or work dispatch are
   central.
 - Do not include: any async/background task without queue mechanics.
 - Boundary: locks that gate dispatch/ordering/pending-running state count as
@@ -343,7 +381,7 @@ provider/engine/model integration is the central subject.
 
 ## `notifications`
 
-- MUST include: generic outbound notifications, completion delivery, message
+- Include when: generic outbound notifications, completion delivery, message
   delivery gates, announcements, or notify behavior is central.
 - Observable test: include `notifications` only when the item implements or
   changes an outbound delivery path, sent-message handling, a completion/
@@ -359,7 +397,7 @@ provider/engine/model integration is the central subject.
 
 ## `skills_plugins`
 
-- MUST include: the item changes, extends, validates, documents, or adds
+- Include when: the item changes, extends, validates, documents, or adds
   doctor/check behavior for a plugin or skill surface. The bundled Policy
   plugin is a plugin surface: if Policy plugin behavior is central, include
   skills_plugins even when model, MCP, security, or config topics are also
@@ -369,7 +407,7 @@ provider/engine/model integration is the central subject.
 
 ## `auth_identity`
 
-- MUST include: OpenClaw's own authentication and identity surface is the
+- Include when: OpenClaw's own authentication and identity surface is the
   subject — login, auth profiles, OAuth flows, tokens, account binding,
   credential propagation, or user/device identity within the product.
 - Do not include: authentication of external services touched incidentally by
@@ -384,7 +422,7 @@ provider/engine/model integration is the central subject.
 
 ## `reliability`
 
-- MUST include: timeout, crash, leak, stuck state, retry, data loss, lifecycle
+- Include when: timeout, crash, leak, stuck state, retry, data loss, lifecycle
   cleanup, recovery, overload, or operational failure mode.
 - Do not include: a generic bug tag, CI-only or test-environment failures
   (`tests_ci`), or a failure that merely motivates a change whose deliverable
@@ -392,7 +430,6 @@ provider/engine/model integration is the central subject.
 
 ## `tool_calling`
 
-- MUST include: tool-call protocol, tool result transcript handling,
+- Include when: tool-call protocol, tool result transcript handling,
   function/tool schema, or tool-call rendering is central.
-- Do not include: generic command output, TTS, browser screenshot/vision, or
-  config-like options.
+- Do not include: generic command output, TTS, browser screenshot/vision, or config-like options.

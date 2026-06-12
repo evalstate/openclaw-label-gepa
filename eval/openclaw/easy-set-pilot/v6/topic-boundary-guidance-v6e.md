@@ -17,6 +17,20 @@ would need to act on or review the item.
   keep the 5 strongest central owner boundaries.
 - Use an empty label set when no allowed topic applies.
 
+## Benchmark eligibility overlay
+
+All allowed topics remain legal labels. However, this easy-set pilot is trying
+to identify stable train/test rows, not force coverage of every rare topic.
+Treat these low-support or high-confusion topics as train-only or review-heavy
+unless the item is unambiguous and the topic is a central owner surface:
+`coding_agent_integrations`, `model_lifecycle`, `skills_plugins`,
+`sandboxing`, `queueing`, `tool_calling`, `auth_identity`, and `codex`.
+
+When one of those topics is merely plausible, adjacent, or supported by a
+keyword, prefer excluding it and record it in `excluded_label_rationale`. If
+one of those topics is truly central but boundary judgments remain plausible,
+downgrade the row to `medium` or `hard` rather than marking it easy.
+
 ## Incidental-evidence exclusion (global)
 
 Do not add topics supported only by changed files, tests added alongside a

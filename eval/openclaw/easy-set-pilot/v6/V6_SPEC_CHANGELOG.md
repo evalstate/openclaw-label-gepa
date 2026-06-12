@@ -166,6 +166,126 @@ notify) -> acp + notifications; 51654 (session env vars) -> sessions-led;
 protocol injection mechanism changes. Rows still unstable after v6d demote to
 medium per the ladder rule, not further spec edits.
 
+## v6g (2026-06-12) — deliverable test + 3-label cap
+
+Spec: `topic-boundary-guidance-v6g.md` + `allowed-topics-v6f.md` (unchanged) +
+`teacher-card-v6g.md` + `teacher-output-v6g.schema.json`. Label-only variant
+like v6f (no task/eligibility overlay). Enum unchanged (33). Two changes, from
+the v6f prompt-keyword-audit-40 rationale analysis:
+
+- **Deliverable test (global tie-break).** 12 of 13 v6f GPT/Opus modal
+  disagreements were strict superset relations where the disputed label was
+  `config`, `agent_runtime`, `acp`, or `sessions` — one teacher labeling a
+  surface that was merely the delivery mechanism (a toggle/parameter shipping
+  another surface's feature), a producer/symptom location (paths emitting into
+  a new trace schema, the daemon where a hang appears), the motivation
+  (security rationale without a security-control change), or commenter
+  discussion. The new section makes "behavior contract changes" the explicit
+  inclusion bar for every label and adds **specific beats generic** (`codex` /
+  `coding_agent_integrations`, `acpx`/`acp`) as a hard rule. The disputed
+  label appeared in `possible_confusions` in 13/13 disagreement rows, and
+  excluded-label rationales of the form "plausible but not central" already
+  described the right call — the test tells the teacher to trust that
+  exclusion.
+- **Cardinality cap 5 → 3, priority-ordered.** v6f acceptance by GPT modal
+  label count: 1 → 6/10, 2 → 8/9, 3 → 7/15, 4 → 1/4, 5 → 0/2; no accepted row
+  had >4 labels and zero exact modal matches had 5. Schema `maxItems` is now 3
+  and labels must be listed primary-surface-first (enables top-1/top-2 partial
+  agreement scoring later). The consensus script's `hit_label_cap` /
+  `too_many_labels` checks (hardcoded ==5/>5) become inert, not broken.
+
+Verify on the same 40-row audit set (`runs/easy-set-v6d/prompt-keyword-audit-40/input.jsonl`)
+against the b/d/e/f baselines; success = exact modal matches 27 → 31+ and
+deferrals 18 → ~10. If met, freeze the spec and route residual superset
+disputes to the deterministic intersection rule instead of further prompt
+variants.
+
+**Verification result (runs/easy-set-v6g/prompt-keyword-audit-40):** accepted
+25 (v6f: 22), deferred 15 (18), exact modal matches 30 (27), mean Jaccard
+0.900 (0.870), review flags 0 (3). 30 vs the 31 target, but every
+cross-teacher metric improved and a manual rationale audit of the five
+riskiest drops (40332, 48580, 48406, 82880, 44379) confirmed the compression
+is label-truth-improving, not agreement-by-forcing: 5 of 6 newly-accepted
+rows had no cap binding (the deliverable test did the work). Residual: 8
+single-label superset disputes (intersection rule), 2 cap-churn cross
+disputes (48406, 48580 — human adjudication; also deferred under v6f). v6g is
+FROZEN as the label standard.
+
+## v6g GEPA-side crystallization (2026-06-12)
+
+The student/GEPA stack moves to the same standard. New tracked assets, all
+pointed to by `env.sh`:
+
+- `task-boundary-overlay-v6g.md` — based on v6d (the v6e benchmark-eligibility
+  section is dropped for good; it only inflated review flags). Cardinality law
+  → at most 3 priority-ordered; adds the deliverable test and
+  specific-beats-generic; hooks bullet gains the #44379 rule (a caller
+  suppressing/bypassing hooks is the caller's surface).
+- `openclaw-vanilla-labeler-v6g.md` — taxonomy include moves v6b → v6f (picks
+  up the acp/sessions ownership split), overlay include moves to v6g, output
+  instruction states the 3-cap and priority order.
+- `seed-policy-vanilla-v6g.md` / `seed-policy-overlay-v6g.md` — seed candidate
+  restated around the deliverable test; cardinality section no longer says
+  "include every qualifying topic, cap 5".
+- `vanilla-asi-v6g-slim.md` — reflection constraints updated: cap 3
+  priority-ordered; reflection must not restate the (now fixed) deliverable
+  test; names the expected over-labeling failure modes (mechanism, producer/
+  symptom, motivation, generic-beside-specific) and steers GEPA toward
+  suppression rules.
+
+Deliberately NOT changed: `eval/openclaw/output.schema.json` (shared scoring
+plumbing; adding `maxItems: 3` would break re-scoring of pre-v6g runs). The
+student cap is enforced by prompt text plus capped gold labels under
+row-aware scoring, not by schema validation. The teacher schema
+(`teacher-output-v6g.schema.json`) IS capped at 3.
+
+## v6h (2026-06-12) — reliability-mechanism and inference-dispatch tie-breaks
+
+Spec: `topic-boundary-guidance-v6h.md` + `allowed-topics-v6f.md` (unchanged) +
+`task-boundary-overlay-v6h.md` + `teacher-card-v6h.md` +
+`teacher-output-v6h.schema.json` (content-identical to v6g schema). GEPA-side
+assets bumped in lockstep (`openclaw-vanilla-labeler-v6h.md`,
+`seed-policy-*-v6h.md`, `vanilla-asi-v6h-slim.md`); env.sh points here. Enum
+unchanged (33). This is the build spec for the full ~700-row intake.
+
+Provenance note first: v6g's `docs` section gained a `Do not include:` guard
+*after* the prompt-keyword-audit-40 run (needed so
+`load_topic_hints_from_guidance` materializes 33/33 dynamic-ASI topics — a
+section with no guard bullet is skipped). The intake-100-slim and reinforce-50
+runs used that amended text. Recorded here instead of silently; v6h formally
+owns the guard.
+
+Two tie-breaks, from the intake-100-slim disagreement rationales (top
+disputed labels: reliability 9, inference_api 7, security 6):
+
+- **`reliability` requires a changed mechanism.** Include only when the item
+  adds or changes a recovery/retry/cleanup/lifecycle/watchdog/hardening
+  mechanism itself. A defect that *manifested* as message loss, a hang, a
+  race, or a crash inside another surface's logic is that surface only;
+  `impact:*` severity tags do not confer ownership. (Opus was labeling
+  reliability off impact tags and "operational failure mode" framing; GPT
+  excluded it as symptom/motivation — 9 rows, all the same undecided
+  question.)
+- **`inference_api` owns the wire contract.** Internal model selection —
+  dispatch, fallback ordering, capability-based routing — is `agent_runtime`/
+  `model_lifecycle` unless provider request/response handling itself changes.
+
+`security` disputes (6 rows: centrality of credential/access changes) were
+judged adjudication material, not spec-fixable; no change.
+
+**Probe (runs/easy-set-v6h/tiebreak-probe, 21 rows, 1×GPT + 1×Opus):**
+the 15 reliability/inference_api dispute rows went 0/15 → 9/15 exact match
+(most of the rest is ordinary single-run flicker or cross disputes). Controls:
+accepted rows 88400, 84771, 51667 unchanged; 39248 upgraded to exact match
+(both teachers now drop motivation-reliability); 71646 needs re-adjudication —
+under the v6h reading Opus drops `mcp_tooling` (leak's location, not its
+changed surface), which is arguably the deliverable test applied correctly to
+a row v6g accepted with it.
+
+Open item: reinforce-50 ran under v6g; its accepted rows that contain
+`reliability` or `inference_api` should be cheaply re-probed under v6h before
+entering the bench ledger (same targeted-probe pattern).
+
 ## Divergence from the maintainer's production enum
 
 The maintainer's DS4 guidance uses the v4 enum (`model_serving`,
