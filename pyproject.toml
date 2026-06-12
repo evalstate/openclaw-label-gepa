@@ -14,6 +14,11 @@ openclaw-benchmark = "openclaw_gepa.openclaw_benchmark:main"
 [tool.uv]
 package = true
 
+[tool.uv.sources]
+# Local dev/0.7.18 checkout until fast-agent-mcp 0.7.18 is on PyPI; delete
+# this override on release (the >=0.7.18 pin above then resolves from PyPI).
+fast-agent-mcp = { path = "/home/ssmith/source/fast-agent-pr", editable = true }
+
 [tool.ruff]
 line-length = 120
 src = ["src", "scripts"]
