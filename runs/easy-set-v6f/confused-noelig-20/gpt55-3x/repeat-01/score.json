@@ -1,0 +1,376 @@
+{
+  "score": 0.0,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "row_symdiff_score": 0.23809523809523808
+    },
+    "score_details": {
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 3.2,
+      "valid_json": 1.0,
+      "false_positives": 64,
+      "false_negatives": 0,
+      "avg_predicted_topics": 3.2,
+      "avg_expected_topics": 0
+    },
+    "evaluated": 20,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-43564",
+        "title": "[Feature Request] ACP Session Skill Context Injection",
+        "expected": [],
+        "actual": [
+          "acp",
+          "coding_agent_integrations",
+          "security",
+          "skills_plugins"
+        ],
+        "false_positives": [
+          "acp",
+          "coding_agent_integrations",
+          "security",
+          "skills_plugins"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-51654",
+        "title": "Support session-level environment variables for ACP sessions",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx",
+          "config",
+          "security",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx",
+          "config",
+          "security",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-54471",
+        "title": "fix(acp): add system_event stream relay to parent session for ACP spawn",
+        "expected": [],
+        "actual": [
+          "acp"
+        ],
+        "false_positives": [
+          "acp"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-56442",
+        "title": "feat: Add opt-in ACP parent completion notify for sessions_spawn",
+        "expected": [],
+        "actual": [
+          "acp",
+          "notifications",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "acp",
+          "notifications",
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-68204",
+        "title": "Unified run trace schema across agent, ACP, subagent, and task flows",
+        "expected": [],
+        "actual": [
+          "telemetry_usage"
+        ],
+        "false_positives": [
+          "telemetry_usage"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-77694",
+        "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+        "expected": [],
+        "actual": [
+          "acpx"
+        ],
+        "false_positives": [
+          "acpx"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84740",
+        "title": "Feature Request: Option to hide/suppress certain sessions from the session list",
+        "expected": [],
+        "actual": [
+          "sessions",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "sessions",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84771",
+        "title": "Event loop saturation during startup: synchronous model-prewarm and session-locks block event loop for 28-64 seconds",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-10467",
+        "title": "[Feature Request]: Multi-lane concurrency support for sub-agents via sessions_spawn",
+        "expected": [],
+        "actual": [
+          "acp",
+          "agent_runtime",
+          "config",
+          "queueing",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "acp",
+          "agent_runtime",
+          "config",
+          "queueing",
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-39248",
+        "title": "Bug: sandbox.mode: \"non-main\" silently breaks sessions_spawn subagent initialization",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "reliability",
+          "sandboxing",
+          "sessions"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "reliability",
+          "sandboxing",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-40332",
+        "title": "[Feature]: Per-binding and per-agent permissionMode for ACP sessions",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx",
+          "approvals",
+          "config",
+          "security"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx",
+          "approvals",
+          "config",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-44379",
+        "title": "fix(pi-runner): harden context-overflow recovery with one suppress-hook retry",
+        "expected": [],
+        "actual": [
+          "coding_agent_integrations",
+          "hooks",
+          "reliability"
+        ],
+        "false_positives": [
+          "coding_agent_integrations",
+          "hooks",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48406",
+        "title": "Docs: add saturated session recovery guide",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "config",
+          "docs",
+          "reliability"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "config",
+          "docs",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48580",
+        "title": "Bug: acpx codex sessions \u521b\u5efa\u7684\u4f1a\u8bdd\u7acb\u5373\u9000\u51fa - stdin is not a terminal",
+        "expected": [],
+        "actual": [
+          "acpx",
+          "codex",
+          "coding_agent_integrations",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "acpx",
+          "codex",
+          "coding_agent_integrations",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48851",
+        "title": "feat(status): add API call count to session status and usage footer",
+        "expected": [],
+        "actual": [
+          "sessions",
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "sessions",
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-51667",
+        "title": "Feature: Native Audio Input for Omni-Modal Models (skip STT transcription)",
+        "expected": [],
+        "actual": [
+          "config",
+          "inference_api",
+          "sessions"
+        ],
+        "false_positives": [
+          "config",
+          "inference_api",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-58135",
+        "title": "[Feature]: expose promptMode parameter in sessions_spawn for deterministic blank sub-agents",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-60737",
+        "title": "[Feature]: Per-DM/per-chat default ACP binding for auto-spawning ACP sessions on new topics",
+        "expected": [],
+        "actual": [
+          "acp",
+          "chat_integrations",
+          "config",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "chat_integrations",
+          "config",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-82880",
+        "title": "security: harden ACPX proxy and Firecrawl SSRF protection",
+        "expected": [],
+        "actual": [
+          "acpx",
+          "config",
+          "exec_tools",
+          "security"
+        ],
+        "false_positives": [
+          "acpx",
+          "config",
+          "exec_tools",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-46740",
+        "title": "ACP: classify silent acpx exits as backend unavailable",
+        "expected": [],
+        "actual": [
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "acpx",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      }
+    ]
+  }
+}

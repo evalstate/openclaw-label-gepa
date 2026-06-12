@@ -1,0 +1,75 @@
+{
+  "model": "codexresponses.gpt-5.5?reasoning=high",
+  "input": "runs/easy-set-v6f/confused-noelig-20/gpt55-3x/selected-input.jsonl",
+  "output": "runs/easy-set-v6f/confused-noelig-20/gpt55-3x/repeat-03/results.jsonl",
+  "schema": "eval/openclaw/easy-set-pilot/v6/teacher-output-v6f.schema.json",
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/teacher-card-v6f.md",
+  "agent": "openclaw_easy_set_pilot_teacher",
+  "template": "eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+  "shell_runtime": false,
+  "output_mode": "structured",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "parallel": 4,
+  "work_dir": "runs/easy-set-v6f/confused-noelig-20/gpt55-3x/repeat-03/.results.jsonl.batch/20260612T132033Z-c0b014ff",
+  "started_at": "2026-06-12T13:20:33Z",
+  "completed_at": "2026-06-12T13:26:11Z",
+  "input_rows": 20,
+  "selected_rows": 20,
+  "processed_rows": 20,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 323956.82,
+  "timing_ms": {
+    "duration": {
+      "count": 20,
+      "min": 13308.05,
+      "mean": 54291.9845,
+      "median_approx": 53901.2275,
+      "max": 98036.01
+    },
+    "ttft": {
+      "count": 20,
+      "min": 5408.82,
+      "mean": 18540.5335,
+      "median_approx": 17658.68,
+      "max": 41642.93
+    },
+    "time_to_response": {
+      "count": 20,
+      "min": 10542.9,
+      "mean": 51275.4885,
+      "median_approx": 50815.21,
+      "max": 94947.17
+    }
+  },
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 5,
+      "output": "runs/easy-set-v6f/confused-noelig-20/gpt55-3x/repeat-03/.results.jsonl.batch/20260612T132033Z-c0b014ff/part-000.jsonl"
+    },
+    {
+      "index": 1,
+      "offset": 5,
+      "limit": 5,
+      "output": "runs/easy-set-v6f/confused-noelig-20/gpt55-3x/repeat-03/.results.jsonl.batch/20260612T132033Z-c0b014ff/part-001.jsonl"
+    },
+    {
+      "index": 2,
+      "offset": 10,
+      "limit": 5,
+      "output": "runs/easy-set-v6f/confused-noelig-20/gpt55-3x/repeat-03/.results.jsonl.batch/20260612T132033Z-c0b014ff/part-002.jsonl"
+    },
+    {
+      "index": 3,
+      "offset": 15,
+      "limit": 5,
+      "output": "runs/easy-set-v6f/confused-noelig-20/gpt55-3x/repeat-03/.results.jsonl.batch/20260612T132033Z-c0b014ff/part-003.jsonl"
+    }
+  ]
+}

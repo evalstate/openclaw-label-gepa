@@ -1,0 +1,25 @@
+{
+  "batch": "prompt-keyword-audit-40",
+  "rows": 40,
+  "accepted_consensus": 20,
+  "deferred": 20,
+  "gpt_exact_stable_rows": 32,
+  "opus_exact_stable_rows": 37,
+  "gpt_opus_exact_modal_matches": 23,
+  "exact_modal_matches_with_5_labels": 1,
+  "rows_with_any_5_label_teacher_modal": 3,
+  "mean_gpt_opus_modal_jaccard": 0.845,
+  "review_reason_counts": {
+    "gpt_opus_modal_disagreement": 17,
+    "opus_unstable": 3,
+    "gpt_unstable": 8,
+    "opus_flagged_human_review": 3,
+    "gpt_flagged_human_review": 2
+  },
+  "accepted_label_counts": {
+    "3": 4,
+    "1": 7,
+    "2": 8,
+    "5": 1
+  }
+}
