@@ -10,7 +10,7 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SCHEMA = ROOT / "eval/openclaw/easy-set-pilot/v6/teacher-output.schema.json"
+DEFAULT_SCHEMA = ROOT / "eval/openclaw/easy-set-pilot/v6/teacher-output-v6b.schema.json"
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -280,7 +280,7 @@ def main() -> int:
                     "labels": agreed_labels,
                     "source": "teacher_consensus",
                     "legacy_v5_labels": v5_by_id.get(rid, []),
-                    "decision_note": "GPT and Opus modal labels are exact-stable and matched under v6.",
+                    "decision_note": "GPT and Opus modal labels are exact-stable and matched under the current spec.",
                 }
             )
         else:

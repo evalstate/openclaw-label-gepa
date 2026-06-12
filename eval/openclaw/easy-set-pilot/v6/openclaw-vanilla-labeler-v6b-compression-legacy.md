@@ -21,13 +21,8 @@ Required output shape:
 
 Use only topic IDs from the allowed list below. Never invent a topic ID.
 
-{{file:eval/openclaw/easy-set-pilot/v6/allowed-topics-v6b.md}}
+{{file:eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md}}
 
-{{file:eval/openclaw/easy-set-pilot/v6/task-boundary-overlay-v6b.md}}
-
-## Routing policy (mutable overlay)
-
-The policy below is an overlay on top of the fixed taxonomy and boundary overlay
-above. Where it gives a more specific rule for this model, follow it.
+## Routing policy
 
 {{policy}}

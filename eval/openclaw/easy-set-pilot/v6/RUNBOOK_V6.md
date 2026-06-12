@@ -17,16 +17,16 @@ phase's inputs depend on their outputs.
 
 | File | Role |
 |---|---|
-| `topic-boundary-guidance-v6.md` | FROZEN label spec: maintainer MUST rules (production DS4 inventory guidance) + do-not-include guards + cardinality law + conformance co-label block |
-| `allowed-topics-v6.md` | v6 taxonomy: 38 topics (`model_serving`→`inference_api`, `model_releases`→`model_lifecycle`, `local_model_providers`/`open_weight_models` removed); see `V6_SPEC_CHANGELOG.md` for the crosswalk |
+| `topic-boundary-guidance-v6b.md` | Active v6b label spec: maintainer MUST rules + do-not-include guards + cardinality law + tightened boundary/co-label tests |
+| `allowed-topics-v6b.md` | Active v6b taxonomy: 33 topics (`local_models` folded into `self_hosted_inference`); see `V6_SPEC_CHANGELOG.md` for the crosswalk |
 | `V6_SPEC_CHANGELOG.md` | Lineage, provenance, enum crosswalk, version discipline — never injected into prompts |
-| `openclaw-vanilla-labeler-v6b.md` | Arm B labeler card: v6 taxonomy, no overlay (compression-arm control) |
-| `teacher-card-v6.md` | Anchor-free teacher card (no previous-label exposure; includes frozen v6 guidance) |
+| `openclaw-vanilla-labeler-v6b.md` | Active v6b labeler card: taxonomy + fixed overlay + mutable policy slot |
+| `teacher-card-v6b.md` | Anchor-free teacher card (no previous-label exposure; includes frozen v6b guidance) |
 | `teacher-template-v6-anchor-free.md` | Row template without the `current_expected_topics` block |
-| `task-boundary-overlay-v6.md` | Condensed (~4.5k) task-facing overlay — Arm A fixed context |
-| `openclaw-vanilla-labeler-v6a.md` | Arm A labeler card: taxonomy + fixed overlay + mutable policy slot |
-| `seed-policy-overlay-v6.md` | Structured overlay seed (Decision Procedure / Cardinality / Boundary Overlays / Suppression) |
-| `vanilla-asi-v6-slim.md` | Slim reflection ASI: overlay contract, no cue tables |
+| `task-boundary-overlay-v6b.md` | Condensed task-facing overlay for v6b |
+| `seed-policy-overlay-v6b.md` | Structured overlay seed (Decision Procedure / Cardinality / Boundary Overlays / Suppression) |
+| `seed-policy-vanilla-v6b.md` | Vanilla seed policy for v6b compression/baseline runs |
+| `vanilla-asi-v6b-slim.md` | Slim reflection ASI: overlay contract, no cue tables |
 | `v6-prereview-convergent-disagreements.md` | 8 disputed test rows for human decision before freezing |
 | `V6_INTAKE_LADDER.md` | Reproducible 30-row intake/calibration workflow for the new-label build |
 | `env.sh` | Source me: run-stable settings (paths, trackio project + repo-local `TRACKIO_DIR`, models, `FAST_AGENT_BIN`) + `v6_intake_snapshot` helper |
@@ -65,8 +65,8 @@ Script changes (already applied to `scripts/openclaw-vanilla-f1-gepa.py`):
    `decision` is `keep` (gold stands; guidance must teach it) or `flip`
    (co-label was anchoring/centrality artifact; provide `"labels": [...]`).
 
-2. Review and edit `topic-boundary-guidance-v6.md` and
-   `task-boundary-overlay-v6.md` until you'd defend every rule. These two files
+2. Review and edit `topic-boundary-guidance-v6b.md` and
+   `task-boundary-overlay-v6b.md` until you'd defend every rule. These two files
    are the spec — Phase 1 results are only meaningful against the frozen text.
    If a Phase 0 decision contradicts a v6 rule draft, fix the rule now.
 
@@ -104,16 +104,16 @@ v4 teacher workflow):
 python scripts/openclaw-easy-set-stability.py \
   --direct-batch \
   --input eval/openclaw/easy-set-pilot/v6/revalidation-input.jsonl \
-  --agent-card eval/openclaw/easy-set-pilot/v6/teacher-card-v6.md \
+  --agent-card eval/openclaw/easy-set-pilot/v6/teacher-card-v6b.md \
   --agent-name openclaw_easy_set_pilot_teacher \
   --template eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md \
-  --schema eval/openclaw/easy-set-pilot/v6/teacher-output.schema.json \
+  --schema eval/openclaw/easy-set-pilot/v6/teacher-output-v6b.schema.json \
   --model 'codexresponses.gpt-5.5?reasoning=high' \
   --runs 3 \
   --parallel 4 \
-  --run-root runs/easy-set-v6/revalidation \
-  --run-name v6-gpt55-anchor-free-3x \
-  --trackio-project easy-v6-databuild \
+  --run-root runs/easy-set-v6b/revalidation \
+  --run-name v6b-gpt55-anchor-free-3x \
+  --trackio-project easy-v6b-databuild \
   --trackio-every 10 \
   --overwrite
 ```
@@ -124,16 +124,16 @@ python scripts/openclaw-easy-set-stability.py \
 python scripts/openclaw-easy-set-stability.py \
   --direct-batch \
   --input eval/openclaw/easy-set-pilot/v6/revalidation-input.jsonl \
-  --agent-card eval/openclaw/easy-set-pilot/v6/teacher-card-v6.md \
+  --agent-card eval/openclaw/easy-set-pilot/v6/teacher-card-v6b.md \
   --agent-name openclaw_easy_set_pilot_teacher \
   --template eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md \
-  --schema eval/openclaw/easy-set-pilot/v6/teacher-output.schema.json \
+  --schema eval/openclaw/easy-set-pilot/v6/teacher-output-v6b.schema.json \
   --model 'opus' \
   --runs 2 \
   --parallel 4 \
-  --run-root runs/easy-set-v6/revalidation \
-  --run-name v6-opus-anchor-free-2x \
-  --trackio-project easy-v6-databuild \
+  --run-root runs/easy-set-v6b/revalidation \
+  --run-name v6b-opus-anchor-free-2x \
+  --trackio-project easy-v6b-databuild \
   --trackio-every 10 \
   --overwrite
 ```
@@ -168,7 +168,7 @@ outputs). Expected flow:
 
 ```bash
 python scripts/openclaw-v6-build.py \
-  --revalidation-root runs/easy-set-v6/revalidation \
+  --revalidation-root runs/easy-set-v6b/revalidation \
   --source eval/openclaw/easy-set-pilot/v6/revalidation-input.jsonl \
   --prereview-decisions eval/openclaw/easy-set-pilot/v6/v6-prereview-decisions.jsonl \
   --v5-gold eval/openclaw/easy-set-pilot/v6/v5-gold-reference.jsonl \
@@ -215,15 +215,15 @@ Drop qwen3.5-9b (not competitive in v5). gemma-e4 optional Arm A-only
 #   codexresponses.gpt-5.4-mini / gpt-5.4-mini ; sonnet / sonnet ; deepseek / deepseek4
 python scripts/openclaw-vanilla-f1-gepa.py \
   --input eval/openclaw/easy-set-pilot/v6/easy-final-v6-train.jsonl \
-  --agent-card eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6a.md \
-  --allowed-topics eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md \
-  --seed-policy eval/openclaw/easy-set-pilot/v6/seed-policy-overlay-v6.md \
-  --static-asi eval/openclaw/easy-set-pilot/v6/vanilla-asi-v6-slim.md \
-  --boundary-guidance eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6.md \
+  --agent-card eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6b.md \
+  --allowed-topics eval/openclaw/easy-set-pilot/v6/allowed-topics-v6b.md \
+  --seed-policy eval/openclaw/easy-set-pilot/v6/seed-policy-overlay-v6b.md \
+  --static-asi eval/openclaw/easy-set-pilot/v6/vanilla-asi-v6b-slim.md \
+  --boundary-guidance eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6b.md \
   --model 'MODEL_ALIAS' \
   --reflection-model 'codexresponses.gpt-5.5?reasoning=high' \
-  --run-root runs/easy-set-v6/gepa \
-  --run-name NAME-v6a-overlay-batch-mc25 \
+  --run-root runs/easy-set-v6b/gepa \
+  --run-name NAME-v6b-overlay-batch-mc25 \
   --gepa-mode batch \
   --max-metric-calls 25 \
   --score-mode row-aware \
@@ -247,13 +247,13 @@ maintainer boundary text that now contradicts the v6 spec.)
 python scripts/openclaw-vanilla-f1-gepa.py \
   --input eval/openclaw/easy-set-pilot/v6/easy-final-v6-train.jsonl \
   --agent-card eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6b.md \
-  --allowed-topics eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md \
-  --seed-policy eval/openclaw/easy-set-pilot/v6/seed-policy-vanilla.md \
-  --static-asi eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6.md \
-  --boundary-guidance eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6.md \
+  --allowed-topics eval/openclaw/easy-set-pilot/v6/allowed-topics-v6b.md \
+  --seed-policy eval/openclaw/easy-set-pilot/v6/seed-policy-vanilla-v6b.md \
+  --static-asi eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6b.md \
+  --boundary-guidance eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6b.md \
   --model 'codexresponses.gpt-5.4-mini' \
   --reflection-model 'codexresponses.gpt-5.5?reasoning=high' \
-  --run-root runs/easy-set-v6/gepa \
+  --run-root runs/easy-set-v6b/gepa \
   --run-name gpt-5.4-mini-v6b-compress-batch-mc25 \
   --gepa-mode batch \
   --max-metric-calls 25 \
@@ -275,11 +275,11 @@ for r in 01 02; do
 python scripts/openclaw-vanilla-f1-gepa.py \
   --evaluate-only \
   --input eval/openclaw/easy-set-pilot/v6/easy-final-v6-train.jsonl \
-  --agent-card eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6a.md \
-  --allowed-topics eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md \
-  --seed-policy runs/easy-set-v6/gepa/RUN_NAME/candidate-NNNN/policy.md \
+  --agent-card eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6b.md \
+  --allowed-topics eval/openclaw/easy-set-pilot/v6/allowed-topics-v6b.md \
+  --seed-policy runs/easy-set-v6b/gepa/RUN_NAME/candidate-NNNN/policy.md \
   --model 'MODEL_ALIAS' \
-  --run-root runs/easy-set-v6/selection \
+  --run-root runs/easy-set-v6b/selection \
   --run-name RUN_NAME-cNNNN-reval-r$r \
   --score-mode row-aware \
   --parallel 4 \
@@ -304,14 +304,14 @@ policy and the seed (vanilla) policy. Pattern (Arm A; swap `--seed-policy` and
 ```bash
 python scripts/openclaw-easy-set-stability.py \
   --input eval/openclaw/easy-set-pilot/v6/easy-final-v6-test.jsonl \
-  --agent-card eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6a.md \
-  --allowed-topics eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md \
-  --seed-policy <SELECTED_POLICY.md | v6/seed-policy-overlay-v6.md> \
+  --agent-card eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6b.md \
+  --allowed-topics eval/openclaw/easy-set-pilot/v6/allowed-topics-v6b.md \
+  --seed-policy <SELECTED_POLICY.md | v6/seed-policy-overlay-v6b.md> \
   --model 'MODEL_ALIAS' \
   --runs 3 \
   --parallel 4 \
-  --run-root runs/easy-set-v6/stability \
-  --wrapped-run-root runs/easy-set-v6/baselines \
+  --run-root runs/easy-set-v6b/stability \
+  --wrapped-run-root runs/easy-set-v6b/baselines \
   --score-mode row-aware \
   --keep-vanilla-runs \
   --run-name NAME-<gepa-best|vanilla>-v6a-test-3x

@@ -31,10 +31,6 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fp": "Tighten api_surface: require public API, CLI/API contract, HTTP contract, request/response shape, or compatibility contract. Exclude internal helpers, payload parsing, status text, UI events, ordinary commands, and local model compatibility.",
         "fn": "Add api_surface when a public API, CLI/API contract, HTTP request/response shape, schema, or compatibility contract is central.",
     },
-    "notifications": {
-        "fp": "Tighten notifications: do not use for named Discord/Telegram/Slack behavior or delivery recovery. Use chat_integrations for named chat surfaces and reliability for loss/fallback/recovery.",
-        "fn": "Add notifications for generic notification policy, routing, delivery gates, notifier behavior, announcements, or maintainer notification mechanics.",
-    },
     "coding_agent_integrations": {
         "fp": "Tighten coding_agent_integrations: require an external coding-agent backend/run such as Codex, Claude Code, Gemini CLI/coding agents, Pi, or coding-agent harness/tools/approvals. Do not use for internal OpenClaw subagent/session/queue/lock orchestration; prefer agent_runtime/sessions/queueing.",
         "fn": "Improve coding_agent_integrations recall: add when Codex, Claude Code, Gemini CLI/coding agents, Pi, external coding-agent harnesses, coding-agent approvals/sandboxing/tools, or provider behavior breaking an external coding-agent turn is central.",
@@ -42,10 +38,6 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
     "local_model_providers": {
         "fp": "Tighten local_model_providers: require local, self-hosted, or user-configured OpenAI-compatible provider setup/routing/auth/discovery/compatibility. Do not use for ordinary hosted cloud providers such as Vertex/Azure/Bedrock/Anthropic/DeepInfra/OpenRouter, local lifecycle knobs, model serving endpoint behavior, hosted catalogs, or generic local model mentions.",
         "fn": "Add local_model_providers when local/self-hosted/user-configured OpenAI-compatible provider setup, auth, discovery, routing, model resolution, or adapter compatibility is central.",
-    },
-    "local_models": {
-        "fp": "Tighten local_models: require concrete local/on-device inference, backend, model-family, or hardware behavior (LM Studio/Ollama/llama.cpp/GGUF/local GPU/ggml-metal). Do not use merely for OpenAI-compatible API/protocol issues.",
-        "fn": "Add local_models when local backend execution, local model UX, local hardware/VRAM/cold-start, llama.cpp/Ollama/LM Studio inference behavior, or local model crash/timeout is central.",
     },
     "config": {
         "fp": "Tighten config: do not add merely because an option, payload field, or example exists. Use only for config schema, persisted config, setup options, defaults, validation, or config read/write policy.",
@@ -76,8 +68,8 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fn": "Add tool_calling for structured tool result display, stdout rendering for tool results, pre-tool text preservation, or tool-call transcript/content semantics.",
     },
     "gateway": {
-        "fp": "Tighten gateway: require gateway service/process/boundary/startup/routing ownership or gateway-managed sidecars. Exclude ordinary provider proxy, HTTP compatibility, browser command, or app-runtime bugs unless the gateway is the owning boundary.",
-        "fn": "Add gateway when the gateway service, cgroup/process tree, startup, managed sidecars, routing boundary, or gateway-owned lifecycle is central.",
+        "fp": "Tighten gateway: require decisive gateway ownership: routing, state, startup/restart, protocol, service health, gateway-owned execution, or gateway-owned lifecycle. Exclude code that merely runs through the gateway, ordinary provider proxy, HTTP compatibility, browser command, or app-runtime bugs.",
+        "fn": "Add gateway when gateway routing, state, startup/restart, protocol, service health, gateway-owned execution, or gateway-owned lifecycle is central.",
     },
     "exec_tools": {
         "fp": "Tighten exec_tools: require shell/PTY command execution, subprocess lifecycle, command approval/allowlist, browser command launch, TTS/speech execution, or execution output handling. Exclude API/tool schema semantics.",
@@ -92,8 +84,8 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fn": "Add telemetry_usage for token/usage/cost counters, diagnostics, metrics, traces, usage chunks, quota/status reporting, or run logs.",
     },
     "notifications": {
-        "fp": "Tighten notifications: require notification policy/routing/delivery/maintainer alert mechanics. Exclude chat-specific behavior, reliability-only recovery, or generic message text.",
-        "fn": "Add notifications for generic notification delivery, routing, maintainer alerts, notifier policy, announcements, or delivery gates.",
+        "fp": "Tighten notifications: require an outbound delivery path, sent-message handling, completion/notification delivery gate, notify setting, or announcement behavior to be implemented or changed. Exclude chat-only behavior, reliability-only recovery, generic message text, and events/hooks about sends.",
+        "fn": "Add notifications when outbound delivery paths, sent-message handling, completion/notification delivery gates, notify settings, announcements, or generic notification delivery behavior are central.",
     },
     "browser_automation": {
         "fp": "Tighten browser_automation: require browser launch/control/CDP/Chrome/Playwright/screenshot/extension/proxy behavior, not generic UI or web API behavior.",
@@ -112,8 +104,8 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fn": "Add auth_identity for auth profiles, tokens, credentials, account identity, permission checks, login/session identity, or auth-bound routing.",
     },
     "self_hosted_inference": {
-        "fp": "Tighten self_hosted_inference: require self-operated inference services or locally operated inference backends, including embeddings, speech, or memory providers. Exclude ordinary hosted cloud providers, generic local provider config, or endpoint protocol behavior better covered by model_serving.",
-        "fn": "Add self_hosted_inference when self-hosted inference backends, private/local inference servers, self-hosted embeddings/speech/memory providers, proxy bypass for private inference, or operator-run inference services are central.",
+        "fp": "Tighten self_hosted_inference: require self-operated or local inference behavior: vLLM, llama.cpp, Ollama, LM Studio, TGI, LocalAI, GGUF/quantization, local hardware/VRAM, model-family quirks, local fallback/context/UX, embeddings, speech, or memory providers. Exclude ordinary hosted cloud providers, generic provider config, or endpoint protocol behavior better covered by inference_api.",
+        "fn": "Add self_hosted_inference when self-hosted/local inference backends, private/local inference servers, GGUF/quantization, local hardware/VRAM/cold-start, local model fallback/context/UX, self-hosted embeddings/speech/memory providers, proxy bypass for private inference, or operator-run inference services are central.",
     },
     "open_weight_models": {
         "fp": "Tighten open_weight_models: require open-weight model families, weights, quantization, context metadata for open-weight families, packaging/deployability, or hosted catalogs of open-weight models. Do not add merely because a provider serves a named model.",
@@ -124,8 +116,8 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fn": "Add model_releases when adding/removing/updating model IDs, provider catalogs, release notes, model-family availability, version-specific model support, or deprecation/rename behavior is central.",
     },
     "acp": {
-        "fp": "Tighten acp: require ACP protocol/runtime/session binding/delivery semantics. Do not add merely because an item mentions an agent session or internal runtime behavior.",
-        "fn": "Add acp when ACP protocol, ACP session tools, ACP binding, ACP parent/child delivery, ACP blocks, acp_send, sessions_spawn/cancel, or ACP client/server compatibility is central.",
+        "fp": "Tighten acp: require ACP protocol/runtime/session binding/delivery semantics. With acpx, add acp only when ACP binding, override, parent/child session, or delivery semantics are named as behavior being changed. Do not add merely because an item mentions an agent session or internal runtime behavior.",
+        "fn": "Add acp when ACP protocol, ACP session tools, ACP binding/override, ACP parent/child delivery, ACP blocks, acp_send, sessions_spawn/cancel, or ACP client/server compatibility is central.",
     },
     "acpx": {
         "fp": "Tighten acpx: require ACPX-specific runtime, proxy, backend, worker, transport, configured binding, command, auth, or compatibility behavior. Do not use for generic ACP issues.",
@@ -160,8 +152,8 @@ TOPIC_HINTS: dict[str, dict[str, str]] = {
         "fn": "Add memory when memory indexing/search, active-memory recall, embeddings, vector/LanceDB storage, memory provider config/state, archive/recovery, or memory hook behavior is central.",
     },
     "security": {
-        "fp": "Tighten security: require concrete security posture such as SSRF/private network access, secrets/credentials/token leakage, auth hardening, permission boundaries, sandbox escape, vulnerability prevention, supply-chain hardening, redaction, or unsafe access control. Do not add for generic privacy preferences or ordinary auth/profile configuration without security risk.",
-        "fn": "Add security when SSRF, private/internal network access, credential/secret/token exposure, HMAC/signature hardening, unsafe permissions, sandbox escape, vulnerability mitigation, redaction, supply-chain hardening, or access-control enforcement is central.",
+        "fp": "Tighten security: require a concrete security issue, improvement, or direct security feature such as SSRF/private-network access, credential/secret/token exposure or hardening, auth or permission boundary changes, access-control enforcement, sandbox escape/isolation hardening, vulnerability mitigation, supply-chain hardening, or signature/HMAC/verification behavior. Do not add for privacy-focused features, disappearing messages, retention/visibility preferences, generic privacy UX, or ordinary auth/profile configuration unless a security control changes.",
+        "fn": "Add security when SSRF, private/internal network access, credential/secret/token exposure or hardening, HMAC/signature/verification behavior, unsafe permissions, sandbox escape/isolation hardening, vulnerability mitigation, supply-chain hardening, or access-control enforcement is central.",
     },
     "queueing": {
         "fp": "Tighten queueing: require queues, lanes, locks, pending/running state, scheduling, ordering, dispatch, backpressure, or stuck work queues. Do not add for any async/background task unless queue mechanics are the owner boundary.",

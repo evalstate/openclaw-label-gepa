@@ -13,18 +13,21 @@ ROOT = Path(__file__).resolve().parents[1]
 V6_DIR = ROOT / "eval/openclaw/easy-set-pilot/v6"
 DEFAULT_SOURCE = V6_DIR / "revalidation-input.jsonl"
 DEFAULT_V5_GOLD = V6_DIR / "v5-gold-reference.jsonl"
-DEFAULT_OUT_ROOT = ROOT / "runs/easy-set-v6a/v6a-databuild/intake"
+DEFAULT_OUT_ROOT = ROOT / "runs/easy-set-v6b/v6b-databuild/intake"
 DEFAULT_STABILITY_RECORDS = (
     ROOT
     / "runs/easy-set-v5/label-audit/blind-stability-train-gpt55-opus/stability-records.jsonl"
 )
 SPEC_FILES = [
-    V6_DIR / "allowed-topics-v6a.md",
-    V6_DIR / "topic-boundary-guidance-v6a.md",
-    V6_DIR / "task-boundary-overlay-v6.md",
-    V6_DIR / "teacher-card-v6.md",
+    V6_DIR / "allowed-topics-v6b.md",
+    V6_DIR / "topic-boundary-guidance-v6b.md",
+    V6_DIR / "task-boundary-overlay-v6b.md",
+    V6_DIR / "teacher-card-v6b.md",
     V6_DIR / "teacher-template-v6-anchor-free.md",
-    V6_DIR / "teacher-output.schema.json",
+    V6_DIR / "teacher-output-v6b.schema.json",
+    V6_DIR / "seed-policy-overlay-v6b.md",
+    V6_DIR / "seed-policy-vanilla-v6b.md",
+    V6_DIR / "vanilla-asi-v6b-slim.md",
     V6_DIR / "V6_SPEC_CHANGELOG.md",
 ]
 

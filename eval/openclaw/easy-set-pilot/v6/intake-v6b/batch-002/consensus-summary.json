@@ -1,0 +1,25 @@
+{
+  "batch": "batch-002",
+  "rows": 30,
+  "accepted_consensus": 6,
+  "deferred": 24,
+  "gpt_exact_stable_rows": 19,
+  "opus_exact_stable_rows": 23,
+  "gpt_opus_exact_modal_matches": 8,
+  "exact_modal_matches_with_5_labels": 1,
+  "rows_with_any_5_label_teacher_modal": 6,
+  "mean_gpt_opus_modal_jaccard": 0.7538888888888889,
+  "review_reason_counts": {
+    "gpt_unstable": 11,
+    "gpt_opus_modal_disagreement": 22,
+    "opus_unstable": 7,
+    "gpt_flagged_human_review": 1,
+    "opus_flagged_human_review": 2
+  },
+  "accepted_label_counts": {
+    "2": 3,
+    "3": 1,
+    "4": 1,
+    "1": 1
+  }
+}

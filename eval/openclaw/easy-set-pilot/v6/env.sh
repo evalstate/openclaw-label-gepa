@@ -15,10 +15,10 @@ export V6_ROOT
 export V6_DIR="$V6_ROOT/eval/openclaw/easy-set-pilot/v6"
 
 # --- run roots ---------------------------------------------------------------
-export V6_RUNS="$V6_ROOT/runs/easy-set-v6a"
-export V6_RUNS_INTAKE="$V6_RUNS/v6-databuild/intake"   # raw batch workdirs (untracked)
-export V6_INTAKE="$V6_DIR/intake"                      # curated batch records (tracked)
-export V6_LEDGER="$V6_DIR/v6-build-ledger.jsonl"       # cumulative accepted rows (tracked)
+export V6_RUNS="$V6_ROOT/runs/easy-set-v6d"
+export V6_RUNS_INTAKE="$V6_RUNS/v6b-databuild/intake"  # raw batch workdirs (untracked)
+export V6_INTAKE="$V6_DIR/intake-v6b"                  # curated batch records (tracked)
+export V6_LEDGER="$V6_DIR/v6b-build-ledger.jsonl"      # cumulative accepted rows (tracked)
 
 # --- trackio -----------------------------------------------------------------
 # TRACKIO_DIR pins trackio's sqlite/dashboard storage inside the repo without
@@ -26,21 +26,21 @@ export V6_LEDGER="$V6_DIR/v6-build-ledger.jsonl"       # cumulative accepted row
 # the repo (hub downloads included), set HF_HOME instead and drop TRACKIO_DIR:
 #   export HF_HOME="$V6_ROOT/.hf-home"
 export TRACKIO_DIR="$V6_ROOT/.trackio"
-export V6_TRACKIO_PROJECT="openclaw-v6-intake"
+export V6_TRACKIO_PROJECT="openclaw-v6b-intake"
 export V6_TRACKIO_EVERY=5
 
 # --- frozen spec & prompt assets (tracked) ------------------------------------
-export V6_SPEC="$V6_DIR/topic-boundary-guidance-v6a.md"
-export V6_TAXONOMY="$V6_DIR/allowed-topics-v6a.md"
-export V6_OVERLAY="$V6_DIR/task-boundary-overlay-v6.md"
-export V6_TEACHER_CARD="$V6_DIR/teacher-card-v6.md"
+export V6_SPEC="$V6_DIR/topic-boundary-guidance-v6d.md"
+export V6_TAXONOMY="$V6_DIR/allowed-topics-v6d.md"
+export V6_OVERLAY="$V6_DIR/task-boundary-overlay-v6d.md"
+export V6_TEACHER_CARD="$V6_DIR/teacher-card-v6d.md"
 export V6_TEACHER_TEMPLATE="$V6_DIR/teacher-template-v6-anchor-free.md"
-export V6_TEACHER_SCHEMA="$V6_DIR/teacher-output.schema.json"
-export V6_LABELER_A="$V6_DIR/openclaw-vanilla-labeler-v6a.md"   # fair-context arm
-export V6_LABELER_B="$V6_DIR/openclaw-vanilla-labeler-v6b.md"   # compression arm
-export V6_SEED_OVERLAY="$V6_DIR/seed-policy-overlay-v6.md"
-export V6_SEED_VANILLA="$V6_DIR/seed-policy-vanilla.md"
-export V6_SLIM_ASI="$V6_DIR/vanilla-asi-v6-slim.md"
+export V6_TEACHER_SCHEMA="$V6_DIR/teacher-output-v6d.schema.json"
+export V6_LABELER_A="$V6_DIR/openclaw-vanilla-labeler-v6b.md"   # fair-context arm
+export V6_LABELER_B="$V6_DIR/openclaw-vanilla-labeler-v6b.md"   # compression arm not split for v6b
+export V6_SEED_OVERLAY="$V6_DIR/seed-policy-overlay-v6b.md"
+export V6_SEED_VANILLA="$V6_DIR/seed-policy-vanilla-v6b.md"
+export V6_SLIM_ASI="$V6_DIR/vanilla-asi-v6b-slim.md"
 
 # --- source rows -------------------------------------------------------------
 export V6_SOURCE_ROWS="$V6_DIR/revalidation-input.jsonl"   # 195 stripped rows

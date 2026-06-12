@@ -35,7 +35,7 @@ Each intake batch has a raw working dir (untracked) and a curated record dir
 (tracked):
 
 ```text
-$V6_RUNS_INTAKE/BATCH_NAME/    runs/easy-set-v6a/v6a-databuild/intake/ — raw
+$V6_RUNS_INTAKE/BATCH_NAME/    runs/easy-set-v6b/v6b-databuild/intake/ — raw
 $V6_INTAKE/BATCH_NAME/         eval/openclaw/easy-set-pilot/v6/intake/ — tracked
 ```
 
@@ -243,10 +243,10 @@ After each batch:
 1. Identify recurring confusion pairs and omitted/extra labels.
 2. Decide whether each issue is a row-specific adjudication or a spec problem.
 3. Patch only the relevant v6 spec files:
-   - `topic-boundary-guidance-v6.md`
-   - `task-boundary-overlay-v6.md`
-   - `teacher-card-v6.md` only when the teacher procedure itself is wrong
-   - `teacher-output.schema.json` only for validation constraints
+   - `topic-boundary-guidance-v6b.md`
+   - `task-boundary-overlay-v6b.md`
+   - `teacher-card-v6b.md` only when the teacher procedure itself is wrong
+   - `teacher-output-v6b.schema.json` only for validation constraints
 4. Record the change in `V6_SPEC_CHANGELOG.md`.
 5. Rerun the same batch against the new spec.
 
@@ -270,7 +270,7 @@ Each record should include:
   "status": "accepted_consensus",
   "labels": ["coding_agent_integrations", "sessions", "queueing", "config"],
   "source": "teacher_consensus",
-  "spec_manifest": "runs/easy-set-v6/v6-databuild/intake/batch-001/spec-manifest.json",
+  "spec_manifest": "runs/easy-set-v6b/v6b-databuild/intake/batch-001/spec-manifest.json",
   "legacy_v5_labels": ["coding_agents", "sessions", "queueing", "config"],
   "decision_note": "Stable under v6 teacher consensus."
 }

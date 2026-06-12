@@ -72,6 +72,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--row-ids", nargs="*", default=None)
     p.add_argument("--row-ids-file", type=Path, default=None)
     p.add_argument("--overwrite", action="store_true")
+    p.add_argument("--resume", action="store_true", help="Resume incomplete direct-batch repeat outputs instead of overwriting them.")
     p.add_argument(
         "--direct-batch",
         action="store_true",
@@ -271,10 +272,13 @@ def run_direct_batch_repeat(
         "--telemetry-output",
         str(telemetry),
         "--include-input",
-        "--overwrite",
         "--no-progress",
         "--no-final-summary",
     ]
+    if args.resume and output.exists():
+        cmd.append("--resume")
+    else:
+        cmd.append("--overwrite")
     if args.schema and not args.plain_labels:
         cmd.extend(["--json-schema", str(args.schema)])
     if args.trackio_project:

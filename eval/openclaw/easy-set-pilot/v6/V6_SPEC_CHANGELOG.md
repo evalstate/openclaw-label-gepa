@@ -70,8 +70,8 @@ these under the v6 enum; the builder compares via this crosswalk.
 ## v6a (2026-06-11) — review-packet feedback from intake batches 001-002
 
 Current label-generation spec: `topic-boundary-guidance-v6a.md` +
-`allowed-topics-v6a.md` (teacher card and env.sh point here). Enum unchanged
-from v6 (34). Changes from the batch 001-002 review packet:
+`allowed-topics-v6a.md`. Enum unchanged from v6 (34). Changes from the batch
+001-002 review packet:
 
 - `coding_agent_integrations` replaces the v6 topic id `coding_agents`; the
   rename is intended to make the external-integration boundary explicit.
@@ -101,9 +101,70 @@ from v6 (34). Changes from the batch 001-002 review packet:
   item changes, not where it is visible") for frontier-teacher reasoning;
   caveat count kept flat.
 
+## v6b (2026-06-12) — post-run boundary cleanup
+
+- `local_models` merged into `self_hosted_inference`; enum size is now 33.
+  Former `local_models` cases (GGUF/quantization, local hardware/VRAM,
+  model-family quirks, local model fallback/context/UX) now route to
+  `self_hosted_inference`.
+- `gateway` narrowed to decisive gateway ownership: routing, state, startup,
+  protocol, restart/health, gateway-owned execution, or gateway-owned
+  lifecycle. Merely identifying code that runs through the gateway no longer
+  satisfies the topic.
+- `notifications` co-label test made observable: include only when an outbound
+  delivery path, sent-message handling, completion/notification delivery gate,
+  notify setting, or announcement behavior is implemented or changed. Events or
+  hooks about sends route to `hooks` unless the delivery path/gate itself
+  changes. The same observable test is present in both the task overlay and the
+  teacher-injected topic-boundary guidance.
+- `acp` alongside `acpx` now requires named ACP binding, override,
+  parent/child session, or delivery semantics. Pure ACPX worker/transport/
+  harness/proxy/command/auth/compatibility work remains `acpx` only.
+- `security` tightened to concrete security issues, improvements, or direct
+  security features. Privacy-focused product features, disappearing messages,
+  retention/visibility preferences, generic privacy UX, and ordinary auth/
+  profile configuration do not qualify unless they change a security control.
+  The `auth_identity` co-label now uses an observable trigger: access rule,
+  exposure path, permission check, credential/secret/token handling,
+  signature/HMAC/verification, or auth-boundary hardening.
+- Active run settings (`env.sh` and intake manifests) now point to the v6b
+  files: `allowed-topics-v6b.md`, `topic-boundary-guidance-v6b.md`,
+  `task-boundary-overlay-v6b.md`, `teacher-card-v6b.md`, and
+  `teacher-output-v6b.schema.json`. v6b-named seed/ASI copies
+  (`seed-policy-overlay-v6b.md`, `seed-policy-vanilla-v6b.md`,
+  `vanilla-asi-v6b-slim.md`) are used for GEPA auditability, although the slim
+  ASI remains intentionally generic and does not duplicate taxonomy boundaries.
+  v6a files are retained for auditability.
+
 Files `topic-boundary-guidance-v6.md` / `allowed-topics-v6.md` remain as the
 pre-feedback spec used by intake batches 001-002 (their spec-manifests
 reference them); do not edit them further.
+
+## v6d (2026-06-12) — acp/sessions ownership split
+
+Current label-generation spec: `topic-boundary-guidance-v6d.md` +
+`allowed-topics-v6d.md` + `task-boundary-overlay-v6d.md` +
+`teacher-card-v6d.md` + `teacher-output-v6d.schema.json` (env.sh points here;
+runs root `runs/easy-set-v6d`). Enum unchanged (33). One change, from the
+batch-002 stability analysis:
+
+- `acp` and `sessions` both claimed "binding" and "parent/child behavior"
+  verbatim — the only spec-attributable pattern in batch-002's persistent
+  instability (4 rows gpt-unstable under v6, v6a, AND v6b, all ACP-session
+  rows: 43564, 51654, 54471, 56442). v6d splits ownership by layer: `acp` =
+  protocol semantics (binding/override, spawn/cancel, parent/child message
+  relay and delivery, event streams, completion notify, message blocks,
+  client/server compatibility); `sessions` = the session objects themselves
+  (identity, lifecycle, state, persistence, transcript, cleanup, stores);
+  co-label only when the item changes both layers. Bare "binding" removed
+  from `sessions`.
+
+Predicted resolutions for the four hard rows (verify on the v6d rerun):
+54471 (system_event relay) -> acp without sessions; 56442 (parent completion
+notify) -> acp + notifications; 51654 (session env vars) -> sessions-led;
+43564 (skill context injection) -> sessions + skills_plugins, acp only if the
+protocol injection mechanism changes. Rows still unstable after v6d demote to
+medium per the ladder rule, not further spec edits.
 
 ## Divergence from the maintainer's production enum
 

@@ -1,6 +1,6 @@
 ---
 type: agent
-name: openclaw_vanilla_labeler
+name: openclaw_vanilla_labeler_plain
 model: "$system.default"
 skills: []
 use_history: false
@@ -11,12 +11,20 @@ variables:
 # OpenClaw Vanilla Labeler
 
 Classify one OpenClaw GitHub issue or pull request using only the supplied GitHub context.
-Return only the final structured JSON required by the schema. No prose, markdown, analysis, or extra fields.
 
-Required output shape:
+Return only comma-separated topic IDs. No JSON, markdown, prose, explanation,
+confidence, or extra fields.
 
-```json
-{"topics_of_interest":[],"description":"One concise evidence-backed sentence.","caveats":[]}
+Example output:
+
+```text
+reliability,browser_automation,exec_tools
+```
+
+If no listed topic applies, return exactly:
+
+```text
+none
 ```
 
 Use only topic IDs from the allowed list below. Never invent a topic ID.

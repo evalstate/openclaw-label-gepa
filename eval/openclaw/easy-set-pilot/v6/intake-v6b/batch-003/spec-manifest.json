@@ -1,0 +1,59 @@
+{
+  "batch": "batch-003",
+  "source": "runs/easy-set-v6b/v6b-databuild/refdata/ds4-unlabeled-v6b-source.jsonl",
+  "v5_gold": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/v5-gold-reference.jsonl",
+  "row_count": 200,
+  "row_ids_sha256": "bc33a8228521e9109f27ef3866df749d6efdf8442b316442b882b17d3d380d1e",
+  "spec_files": [
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/allowed-topics-v6b.md",
+      "sha256": "1fd54e532711fa4174d097490a2dbea0bb5071fd1fc4f7bd3303243f3de536dc",
+      "bytes": 8248
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6b.md",
+      "sha256": "a5bc936e19d13a01191c93fd99dbe3771b6b1b63d599c58020de34ba3fc0e29d",
+      "bytes": 17914
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/task-boundary-overlay-v6b.md",
+      "sha256": "3b2192930879ed883acff5b3184ba60f7ae020f9995fc56e4a712936f8be2066",
+      "bytes": 7111
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/teacher-card-v6b.md",
+      "sha256": "6854771a0bcee71fd7669b2e15d546e6f98f3399786bc4b8a17a79b59727a30f",
+      "bytes": 3141
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+      "sha256": "2a4cd9f7ddcf5f1a5b9223509a940decd81dedefd8a9b97daea832c298a5a74b",
+      "bytes": 80
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/teacher-output-v6b.schema.json",
+      "sha256": "47627f2ea74f9222bb55079959a691efc3c045882de40dc5841e5fe34972195e",
+      "bytes": 4006
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/seed-policy-overlay-v6b.md",
+      "sha256": "e31bcbf64ecc069e4ae777319c5483c70fecaf13c77694b391350417b3029bdd",
+      "bytes": 896
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/seed-policy-vanilla-v6b.md",
+      "sha256": "3562c6d365e3b6020f47a32521647e267646d3954b78276f2ed1b5a6f623ace3",
+      "bytes": 747
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/vanilla-asi-v6b-slim.md",
+      "sha256": "f6ddc7a0ba617f7c8938c139a2be360190f36d455eec565fc19ec504ac40268c",
+      "bytes": 1496
+    },
+    {
+      "path": "/home/ssmith/temp/gepa-batch-openclaw/eval/openclaw/easy-set-pilot/v6/V6_SPEC_CHANGELOG.md",
+      "sha256": "64d93ef630a171fb1caaf43b47da23a2daa558a7c74936eeec241ea6cbfa133c",
+      "bytes": 8734
+    }
+  ]
+}
