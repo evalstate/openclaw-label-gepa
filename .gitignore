@@ -40,11 +40,15 @@ dist/
 
 # Experiment / run outputs
 runs/
+!runs/
+!runs/easy-set-v6b/
+!runs/easy-set-v6b/**
 trackio/
 .trackio/
 
 # Generated evaluation artifacts
 *.log
+!runs/easy-set-v6b/**/*.log
 *.out
 *.err
 eval/openclaw/label-rationales/generated-*/
@@ -63,6 +67,8 @@ reference/
 
 # Local data and logs (v6)
 refdata/
+!runs/easy-set-v6b/**/refdata/
+!runs/easy-set-v6b/**/refdata/**
 fast-agent-log.jsonl
 fastagent.jsonl
 .hf-home/
