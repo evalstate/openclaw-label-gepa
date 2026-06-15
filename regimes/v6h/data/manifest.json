@@ -1,0 +1,45 @@
+{
+  "final_folder": "regimes/v6h/data",
+  "main_ledger": "regimes/v6h/data/final-ledger.jsonl",
+  "source_files": {
+    "gpt-1": "regimes/v6h/data/source-gpt-1.jsonl",
+    "gpt-2": "regimes/v6h/data/source-gpt-2.jsonl",
+    "gpt-3": "regimes/v6h/data/source-gpt-3.jsonl",
+    "opus-1": "regimes/v6h/data/source-opus-1.jsonl",
+    "opus-2": "regimes/v6h/data/source-opus-2.jsonl"
+  },
+  "gepa_train": "regimes/v6h/data/final-gepa-train.jsonl",
+  "label_order": "regimes/v7a/prompts/allowed-topics-v6h.md",
+  "label_order_invariant": "All derived final labels, expected_topics, modal label fields, soft-disagreement labels, and source-view possible_confusions are normalized to the allowed-topics priority order.",
+  "rows": 330,
+  "quality_indicator_counts": {
+    "five_model_consensus_train": 223,
+    "five_model_soft_modal_train": 22,
+    "five_model_strict_benchmark": 85
+  },
+  "evidence_level_counts": {
+    "gpt3_opus2": 330
+  },
+  "labels_covered": 33,
+  "low_label_counts_lt4": {
+    "auth_identity": 3,
+    "coding_agent_integrations": 2
+  },
+  "source_record_counts": {
+    "gpt-1": 330,
+    "gpt-2": 330,
+    "gpt-3": 330,
+    "opus-1": 330,
+    "opus-2": 330
+  },
+  "rows_with_all_five_source_records": 330,
+  "rows_without_all_five_source_records": [],
+  "artifacts": {
+    "artifact_root": "datasets/openclaw-label-v7a/artifacts",
+    "artifact_manifest": "datasets/openclaw-label-v7a/artifacts/artifact-manifest.json",
+    "groups": [
+      "scripts",
+      "spec"
+    ]
+  }
+}

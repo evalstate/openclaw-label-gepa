@@ -1,0 +1,106 @@
+[project]
+name = "openclaw-label-gepa"
+version = "0.1.0"
+description = "OpenClaw topic-label benchmark and GEPA regime runner"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fast-agent-mcp[gepa]",
+    "gepa",
+    "huggingface-hub==1.18.0",
+    "pydantic==2.13.4",
+    "pyyaml==6.0.3",
+    "trackio>=0.27.0",
+]
+
+[project.scripts]
+openclaw-label-gepa = "openclaw_label_gepa.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest==9.0.3",
+    "ruff==0.15.12",
+    "ty==0.0.34",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/openclaw_label_gepa"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+extend-exclude = [
+    ".agents",
+    ".codex",
+    ".fast-agent",
+    "datasets/*/artifacts/scripts",
+    "regimes/*/data",
+    "regimes/*/artifacts",
+    "tools/data-build",
+    "tools/runners",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "TCH",
+    "B",
+    "BLE",
+    "C4",
+    "C90",
+    "PL",
+    "RET",
+    "RUF",
+    "S",
+    "SIM",
+    "UP",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 7
+
+[tool.ruff.lint.pylint]
+max-args = 9
+max-branches = 8
+max-returns = 4
+max-statements = 40
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "PLR2004",
+    "S101",
+]
+"scripts/**/*.py" = [
+    "T201",
+]
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ty.environment]
+python-version = "3.14"
+root = ["./src"]
+
+[tool.ty.src]
+include = ["src", "tests"]
+respect-ignore-files = true
+
+[tool.ty.rules]
+all = "error"
+
+[tool.ty.terminal]
+error-on-warning = true
+output-format = "full"
+
+[tool.uv.sources]
+fast-agent-mcp = { path = "../fast-agent-pr", editable = true }
+gepa = { path = "../gepa", editable = true }

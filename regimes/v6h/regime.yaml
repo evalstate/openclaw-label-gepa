@@ -1,0 +1,44 @@
+name: v6h
+description: Final v6h five-model OpenClaw topic-label regime.
+
+dataset:
+  local_bundle: data
+  hf_repo_id: null
+
+default_variant: plain
+label_order: prompts/allowed-topics-v6f.md
+base_prompt: prompts/openclaw-vanilla-labeler-plain-v6h.md
+task_template: prompts/task-template-v6h.md
+agent_cards:
+  plain: prompts/openclaw-vanilla-labeler-plain-v6h.md
+  structured: null
+schema: schemas/teacher-output-v6h.schema.json
+train_split: data/final-gepa-train.jsonl
+benchmark_split: null
+metric: micro_f1
+score_mode: row-aware
+
+trackio:
+  project: easy-v6h-gepa
+  group: v6h
+  step_metric: gepa/iteration
+  local_dir: .trackio/v6h
+
+run_defaults:
+  run_root: runs/v6h/gepa
+  run_name_template: "{model_slug}-{regime}-{score_mode}-{variant}-mc{max_metric_calls}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: compact
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 2600
+  parallel: 4
+
+models:
+  - codexresponses.gpt-5.4-mini
+  - gemma-e4
+
+notes:
+  - Label arrays are priority-normalized to allowed-topics-v6f.md.
+  - This regime starts with a train-only local split until the HF dataset is published.

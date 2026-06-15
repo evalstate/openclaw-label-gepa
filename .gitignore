@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments and build output
+.venv/
+dist/
+build/
+*.egg-info/
+
+# Local runtime state
+.fast-agent/*
+!.fast-agent/fast-agent.yaml
+!.fast-agent/agent-cards/
+!.fast-agent/agent-cards/*.md
+!.fast-agent/model-overlays/
+!.fast-agent/model-overlays/*.yaml
+.hf/
+.trackio/
+runs/
+out/
+
+# Secrets/local config
+.env
+.env.*
+!.env.example
+
+# Editor/OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
