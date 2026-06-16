@@ -489,7 +489,7 @@ wheels = [
 
 [[package]]
 name = "fast-agent-mcp"
-version = "0.7.20"
+version = "0.7.21"
 source = { editable = "../fast-agent-pr" }
 dependencies = [
     { name = "a2a-sdk" },
@@ -555,7 +555,7 @@ requires-dist = [
     { name = "fastmcp", specifier = "==3.4.2" },
     { name = "gepa", marker = "extra == 'gepa'", specifier = ">=0.1.1" },
     { name = "google-genai", specifier = "==2.8.0" },
-    { name = "huggingface-hub", specifier = "==1.18.0" },
+    { name = "huggingface-hub", specifier = "==1.19.0" },
     { name = "jsonschema", specifier = "==4.26.0" },
     { name = "keyring", specifier = "==25.7.0" },
     { name = "mcp", specifier = "==1.27.2" },
@@ -566,7 +566,7 @@ requires-dist = [
     { name = "nvidia-cudnn-cu12", marker = "platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'privacy-gpu'", specifier = ">=9" },
     { name = "onnxruntime", marker = "extra == 'privacy'", specifier = ">=1.25" },
     { name = "onnxruntime-gpu", marker = "extra == 'privacy-gpu'", specifier = ">=1.25" },
-    { name = "openai", extras = ["aiohttp"], specifier = "==2.41.0" },
+    { name = "openai", extras = ["aiohttp"], specifier = "==2.41.1" },
     { name = "opentelemetry-distro", specifier = "==0.63b1" },
     { name = "opentelemetry-exporter-otlp-proto-http", specifier = "==1.42.1" },
     { name = "opentelemetry-instrumentation-anthropic", marker = "python_full_version >= '3.10' and python_full_version < '4'", specifier = "==0.61.0" },
@@ -1002,7 +1002,7 @@ wheels = [
 
 [[package]]
 name = "huggingface-hub"
-version = "1.18.0"
+version = "1.19.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -1016,9 +1016,9 @@ dependencies = [
     { name = "typer" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fb/d8/748ea0a47f0fa15227fe682f7a80826b4b7c096e4818044b8f56d6cb66d6/huggingface_hub-1.18.0.tar.gz", hash = "sha256:f0c5ecd1ef8c6a60f86f61ee278f2c1570ba9e279c9f54de9094210723b3613b", size = 812699, upload-time = "2026-06-05T09:26:33.401Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/88/27/629cfe58c582f92ded066c4a07d1a057ff617118ab7973200f770bd853cb/huggingface_hub-1.19.0.tar.gz", hash = "sha256:fd771622182d40977272a923953ee3b1b13538f9f8a7f5d78398f10af0f1c0bd", size = 824721, upload-time = "2026-06-11T12:33:18.665Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0b/03/40a05316cb6616e5b7efd7773656441ab04b4b022c2199e79bb4622a92a3/huggingface_hub-1.18.0-py3-none-any.whl", hash = "sha256:729be4a976fb706dcc02d176bcda8a3f32bdf21a294e8f4b3dda6fbcbc9c1ab1", size = 684411, upload-time = "2026-06-05T09:26:31.48Z" },
+    { url = "https://files.pythonhosted.org/packages/b2/a5/558da89f66464d8d0229ff497e8b8666977de2d8cf48c28a2862ecf1250f/huggingface_hub-1.19.0-py3-none-any.whl", hash = "sha256:1dc72e1f6b4d6df6b30eb72e57d00514ef453d660f04af2b87f0e67267f31ee0", size = 693398, upload-time = "2026-06-11T12:33:16.695Z" },
 ]
 
 [[package]]
@@ -1413,7 +1413,7 @@ wheels = [
 
 [[package]]
 name = "openai"
-version = "2.41.0"
+version = "2.41.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -1425,9 +1425,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3c/a6/5815fe2e2aca74b36c650d1bd43b69827cee568073d0d2d9b6fc5aaac80c/openai-2.41.0.tar.gz", hash = "sha256:db5c362acd6604b84f076abbefa66826ea4b46ecba2954ed866e6a149a1352c0", size = 783525, upload-time = "2026-06-03T22:39:40.719Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/40/36/4c926a91554483977608951360c18c2e911592785eb87a6437813f6123f7/openai-2.41.1.tar.gz", hash = "sha256:23d617a0432457ad844973bee8f540be9da90894f7c5686852d2d365da058f57", size = 783584, upload-time = "2026-06-10T16:10:37.667Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/be/51/d82bb424e8aa372190c5233253a2ceb399a778747d18b42cff487411e663/openai-2.41.0-py3-none-any.whl", hash = "sha256:20cc7952e8501c7e5773dd2ef7be437bae9cb549044902e1041a83a54516e375", size = 1353378, upload-time = "2026-06-03T22:39:38.964Z" },
+    { url = "https://files.pythonhosted.org/packages/20/74/925d7b3892927e9804aaf58d374a45dc28e4420ff90e992272b77286343e/openai-2.41.1-py3-none-any.whl", hash = "sha256:a939565f350cb7443cb843b801b88c716ac8024b492fb94ca269d5f6b1bbefd6", size = 1353380, upload-time = "2026-06-10T16:10:35.756Z" },
 ]
 
 [package.optional-dependencies]
@@ -1472,7 +1472,7 @@ dev = [
 requires-dist = [
     { name = "fast-agent-mcp", extras = ["gepa"], editable = "../fast-agent-pr" },
     { name = "gepa", editable = "../gepa" },
-    { name = "huggingface-hub", specifier = "==1.18.0" },
+    { name = "huggingface-hub", specifier = "==1.19.0" },
     { name = "pydantic", specifier = "==2.13.4" },
     { name = "pyyaml", specifier = "==6.0.3" },
     { name = "trackio", specifier = ">=0.27.0" },

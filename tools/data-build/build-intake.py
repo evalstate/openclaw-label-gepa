@@ -10,24 +10,29 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parents[2]
-V6_DIR = ROOT / "datasets/openclaw-label-v7a/artifacts/spec"
-V6_DOCS = ROOT / "datasets/openclaw-label-v7a/artifacts/docs"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATASET_ROOT = (
+    PROJECT_ROOT
+    if (PROJECT_ROOT / "data").exists() and (PROJECT_ROOT / "artifacts").exists()
+    else PROJECT_ROOT / "datasets/openclaw-label-v7a"
+)
+ARTIFACT_ROOT = DATASET_ROOT / "artifacts"
+ROOT = PROJECT_ROOT
+SPEC_DIR = ARTIFACT_ROOT / "spec"
 DEFAULT_SOURCE = None
 DEFAULT_COMPARISON_REFERENCE = None
 DEFAULT_OUT_ROOT = ROOT / "runs/data-build/intake"
 DEFAULT_STABILITY_RECORDS = None
 SPEC_FILES = [
-    V6_DIR / "allowed-topics-v6f.md",
-    V6_DIR / "topic-boundary-guidance-v6h.md",
-    V6_DIR / "task-boundary-overlay-v6h.md",
-    V6_DIR / "teacher-card-v6h.md",
-    V6_DIR / "teacher-template-v6-anchor-free.md",
-    V6_DIR / "teacher-output-v6h.schema.json",
-    V6_DIR / "seed-policy-overlay-v6h.md",
-    V6_DIR / "seed-policy-vanilla-v6h.md",
-    V6_DIR / "vanilla-asi-v6h-slim.md",
-    V6_DOCS / "V6_SPEC_CHANGELOG.md",
+    SPEC_DIR / "allowed-topics-v7a.md",
+    SPEC_DIR / "topic-boundary-guidance-v7a.md",
+    SPEC_DIR / "task-boundary-overlay-v7a.md",
+    SPEC_DIR / "teacher-card-v7a.md",
+    SPEC_DIR / "teacher-template-v7a.md",
+    SPEC_DIR / "teacher-output-v7a.schema.json",
+    SPEC_DIR / "seed-policy-overlay-v7a.md",
+    SPEC_DIR / "seed-policy-vanilla-v7a.md",
+    SPEC_DIR / "vanilla-asi-v7a-slim.md",
 ]
 
 
@@ -86,7 +91,7 @@ def unique_in_order(ids: list[str]) -> list[str]:
 
 
 FOCUS_PROFILES: dict[str, list[tuple[str, int, list[str]]]] = {
-    "v6h-slim": [
+    "slim": [
         (
             "tie_break_reliability_inference",
             42,
@@ -238,7 +243,7 @@ def select_sample_ids(
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Create reproducible v6 intake batch directories.")
+    p = argparse.ArgumentParser(description="Create reproducible intake batch directories.")
     p.add_argument("--batch", required=True, help="Batch name, e.g. batch-001.")
     p.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     p.add_argument("--comparison-reference", type=Path, default=DEFAULT_COMPARISON_REFERENCE)
@@ -271,7 +276,7 @@ def main() -> None:
     args = parse_args()
     if args.source is None:
         raise SystemExit(
-            "--source is required. The raw v6 revalidation reservoir is not bundled in this clean repo."
+            "--source is required. The raw revalidation reservoir is not bundled in this clean repo."
         )
     if args.comparison_reference is None:
         raise SystemExit(

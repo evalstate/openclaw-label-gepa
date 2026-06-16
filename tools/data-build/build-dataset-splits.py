@@ -10,11 +10,18 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "datasets/openclaw-label-v7a/data/final/final-gepa-train.jsonl"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATASET_ROOT = (
+    PROJECT_ROOT
+    if (PROJECT_ROOT / "data").exists() and (PROJECT_ROOT / "artifacts").exists()
+    else PROJECT_ROOT / "datasets/openclaw-label-v7a"
+)
+ARTIFACT_ROOT = DATASET_ROOT / "artifacts"
+ROOT = PROJECT_ROOT
+SOURCE = DATASET_ROOT / "data/final/final-gepa-train.jsonl"
 DEFAULT_OUT = ROOT / "runs/data-build/splits"
-DEFAULT_CONTEXT_SOURCE = ROOT / "datasets/openclaw-label-v7a/data/final/final-ledger.jsonl"
-DEFAULT_TOPICS = ROOT / "regimes/v7a/prompts/allowed-topics-v6h.md"
+DEFAULT_CONTEXT_SOURCE = DATASET_ROOT / "data/final/final-ledger.jsonl"
+DEFAULT_TOPICS = ARTIFACT_ROOT / "spec/allowed-topics-v7a.md"
 
 CONFUSION_FAMILIES = [
     {"inference_api", "self_hosted_inference", "model_lifecycle", "agent_runtime"},

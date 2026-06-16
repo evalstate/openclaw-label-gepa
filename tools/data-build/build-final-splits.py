@@ -10,12 +10,19 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parents[2]
-V6 = ROOT / "runs/data-build/v6k"
-FINAL = ROOT / "datasets/openclaw-label-v7a/data/final"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATASET_ROOT = (
+    PROJECT_ROOT
+    if (PROJECT_ROOT / "data").exists() and (PROJECT_ROOT / "artifacts").exists()
+    else PROJECT_ROOT / "datasets/openclaw-label-v7a"
+)
+ARTIFACT_ROOT = DATASET_ROOT / "artifacts"
+ROOT = PROJECT_ROOT
+BUILD_ROOT = ROOT / "runs/data-build/final-splits"
+FINAL = DATASET_ROOT / "data/final"
 DEFAULT_LEDGER = FINAL / "final-ledger.jsonl"
 DEFAULT_GEPA = FINAL / "final-gepa-train.jsonl"
-DEFAULT_OUTPUT = V6 / "pilot-splits"
+DEFAULT_OUTPUT = BUILD_ROOT / "pilot-splits"
 
 
 def parse_cardinality_targets(value: str) -> dict[int, int]:
@@ -29,7 +36,7 @@ def parse_cardinality_targets(value: str) -> dict[int, int]:
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Build v6k final-data feedback/Pareto/bench splits.")
+    p = argparse.ArgumentParser(description="Build final-data feedback/Pareto/bench splits.")
     p.add_argument("--ledger", type=Path, default=DEFAULT_LEDGER)
     p.add_argument("--gepa-input", type=Path, default=DEFAULT_GEPA)
     p.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
@@ -46,7 +53,7 @@ def parse_args() -> argparse.Namespace:
         help="Comma-separated labels to reserve into feedback before bench/Pareto selection.",
     )
     p.add_argument("--feedback-reserve-per-topic", type=int, default=1)
-    p.add_argument("--prefix", default="v6k-final")
+    p.add_argument("--prefix", default="final")
     return p.parse_args()
 
 
@@ -310,7 +317,7 @@ def main() -> int:
         "bench": {row["id"] for row in bench},
     }
     manifest = {
-        "regime": "v6k",
+        "dataset": str(DATASET_ROOT),
         "source_final_ledger": str(args.ledger),
         "source_gepa_input": str(args.gepa_input),
         "seed": args.seed,

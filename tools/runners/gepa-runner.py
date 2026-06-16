@@ -14,8 +14,8 @@ import subprocess
 import sys
 import time
 from collections import Counter, defaultdict
+from collections.abc import Mapping, Sequence
 from pathlib import Path
-from collections.abc import Mapping
 from typing import Any
 
 from fast_agent.batch import BatchRunResult
@@ -36,15 +36,15 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ROOT = PROJECT_ROOT
 ENV_DIR = PROJECT_ROOT / ".fast-agent"
 DEFAULT_REGIME_ROOT = PROJECT_ROOT / "regimes" / "v7a"
-SCHEMA = DEFAULT_REGIME_ROOT / "schemas" / "teacher-output-v6h.schema.json"
+SCHEMA = DEFAULT_REGIME_ROOT / "schemas" / "teacher-output-v7a.schema.json"
 TASK_TEMPLATE = DEFAULT_REGIME_ROOT / "prompts" / "task-template-v7a.md"
 DEFAULT_REFLECTION_AGENT = "openclaw_gepa_reflector"
-RUN_ROOT = ROOT / "runs" / "openclaw-gepa-runner"
-CARD = DEFAULT_REGIME_ROOT / "prompts" / "openclaw-vanilla-labeler-v7a.md"
-PLAIN_CARD = DEFAULT_REGIME_ROOT / "prompts" / "openclaw-vanilla-labeler-plain-v7a.md"
+RUN_ROOT = ROOT / "runs" / "gepa-runner"
+CARD = DEFAULT_REGIME_ROOT / "prompts" / "vanilla-labeler-v7a.md"
+PLAIN_CARD = DEFAULT_REGIME_ROOT / "prompts" / "vanilla-labeler-plain-v7a.md"
 SEED_POLICY = DEFAULT_REGIME_ROOT / "prompts" / "seed-policy-vanilla-v7a.md"
 DEFAULT_INPUT = DEFAULT_REGIME_ROOT / "data" / "feedback300.jsonl"
-ALLOWED_TOPICS = DEFAULT_REGIME_ROOT / "prompts" / "allowed-topics-v6h.md"
+ALLOWED_TOPICS = DEFAULT_REGIME_ROOT / "prompts" / "allowed-topics-v7a.md"
 DEFAULT_POLICY_CHAR_BUDGET = 12_500
 ROW_WISE_FRONTIER_OBJECTIVE_KEYS_BY_SCORE_MODE = {
     "f1": ("gepa_score", "row_topic_f1"),
@@ -180,6 +180,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     p.add_argument("--agent-card", type=Path, default=CARD)
     p.add_argument("--allowed-topics", type=Path, default=ALLOWED_TOPICS)
+    p.add_argument(
+        "--output-schema",
+        type=Path,
+        default=SCHEMA,
+        help="JSON schema used for structured output validation and label enum checks.",
+    )
     p.add_argument("--plain-labels", action="store_true", help="Ask for comma-separated topic IDs instead of structured JSON.")
     p.add_argument(
         "--mutable-boundary-overlay",
@@ -188,6 +194,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help=(
             "Optional seed markdown for a second GEPA candidate variable named "
             "boundary_overlay. Use with an AgentCard containing {{boundary_overlay}}."
+        ),
+    )
+    p.add_argument(
+        "--mutable-topic-definitions",
+        type=Path,
+        default=None,
+        help=(
+            "Optional seed markdown for a GEPA candidate variable named topic_definitions. "
+            "Use with an AgentCard containing {{topic_definitions}}. The schema topic IDs "
+            "remain frozen and candidates that add/remove/rename definition bullets score zero."
         ),
     )
     p.add_argument("--run-name", default=None)
@@ -232,6 +248,25 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help=f"Policy length budget in characters before the length penalty starts (default {DEFAULT_POLICY_CHAR_BUDGET}).",
     )
     p.add_argument(
+        "--topic-definitions-char-budget",
+        type=int,
+        default=0,
+        help=(
+            "Mutable topic_definitions length budget in characters before the length penalty starts. "
+            "0 disables the penalty. Applies only with --mutable-topic-definitions."
+        ),
+    )
+    p.add_argument(
+        "--total-mutable-char-budget",
+        type=int,
+        default=0,
+        help=(
+            "Combined length budget for all mutable candidate components before a length penalty starts. "
+            "0 disables the combined penalty. Useful when policy, topic_definitions, and boundary_overlay "
+            "are all mutable and should share one prompt-size cap."
+        ),
+    )
+    p.add_argument(
         "--gepa-mode",
         choices=["batch", "row-wise"],
         default="batch",
@@ -242,12 +277,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     p.add_argument(
         "--feedback-profile",
-        choices=["full", "compact", "metrics-only"],
+        choices=["full", "compact", "surgical", "metrics-only"],
         default="full",
         help=(
             "Reflection side-info profile. full preserves current detailed row/topic feedback; "
-            "compact keeps bounded feedback while redacting row identifiers; metrics-only "
-            "keeps score/cardinality/hygiene diagnostics only."
+            "compact keeps bounded feedback while redacting row identifiers; surgical "
+            "keeps aggregate label errors plus minimal row deltas; metrics-only keeps "
+            "score/cardinality/hygiene diagnostics only."
         ),
     )
     p.add_argument(
@@ -300,7 +336,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--evaluate-only", action="store_true")
     p.add_argument("--no-trackio", action="store_true")
     p.add_argument("--project", default="openclaw-vanilla-f1")
-    p.add_argument("--trackio-group", default="openclaw-gepa-runner")
+    p.add_argument("--trackio-group", default="gepa-runner")
     p.add_argument("--trackio-space-id", default=os.environ.get("TRACKIO_SPACE_ID"))
     p.add_argument("--trackio-server-url", default=os.environ.get("TRACKIO_SERVER_URL"))
     p.add_argument(
@@ -378,6 +414,9 @@ def init_trackio(args: argparse.Namespace, run_name: str, run_dir: Path) -> bool
             "seed_policy": str(args.seed_policy),
             "static_asi": str(args.static_asi) if args.static_asi else None,
             "optimizer_cues": str(args.optimizer_cues) if args.optimizer_cues else None,
+            "mutable_topic_definitions": (
+                str(args.mutable_topic_definitions) if args.mutable_topic_definitions else None
+            ),
             "max_metric_calls": args.max_metric_calls,
             "score_mode": args.score_mode,
             "gepa_mode": args.gepa_mode,
@@ -388,6 +427,8 @@ def init_trackio(args: argparse.Namespace, run_name: str, run_dir: Path) -> bool
             "candidate_selection_strategy": args.candidate_selection_strategy,
             "acceptance_criterion": _rowwise_acceptance_criterion(args.acceptance_criterion),
             "policy_char_budget": args.policy_char_budget,
+            "topic_definitions_char_budget": args.topic_definitions_char_budget,
+            "total_mutable_char_budget": args.total_mutable_char_budget,
             "mutable_boundary_overlay": str(args.mutable_boundary_overlay) if args.mutable_boundary_overlay else None,
             "run_dir": str(run_dir),
             "run_root": str(args.run_root),
@@ -479,8 +520,14 @@ def policy_penalty_details(
 ) -> dict[str, Any]:
     hygiene = policy_hygiene(policy)
     policy_chars = hygiene["policy_chars"]
-    policy_length_over_budget = max(0, policy_chars - policy_char_budget)
-    policy_length_penalty = min(0.10, (policy_length_over_budget / 10_000) * 0.05)
+    policy_length_over_budget = (
+        max(0, policy_chars - policy_char_budget) if policy_char_budget else 0
+    )
+    policy_length_penalty = (
+        min(0.10, (policy_length_over_budget / 10_000) * 0.05)
+        if policy_char_budget
+        else 0.0
+    )
     hygiene_penalty = hygiene_penalty_weight * len(hygiene["findings"])
     return {
         "hygiene": hygiene,
@@ -492,6 +539,97 @@ def policy_penalty_details(
         "hygiene_penalty": hygiene_penalty,
         "policy_hygiene_compliance": 1.0 if hygiene["ok"] else max(0.0, 1.0 - hygiene_penalty / 0.10),
         "total_policy_penalty": policy_length_penalty + hygiene_penalty,
+    }
+
+
+def topic_definition_contract(text: str, allowed_topics: set[str]) -> dict[str, Any]:
+    ids = re.findall(r"(?m)^-\s+`([a-z][a-z0-9_]*)`\s*:", text)
+    counts = Counter(ids)
+    unique = set(ids)
+    missing = sorted(allowed_topics - unique)
+    extra = sorted(unique - allowed_topics)
+    duplicates = sorted(topic for topic, count in counts.items() if count > 1)
+    findings: list[str] = []
+    if missing:
+        findings.append(f"Missing topic definition bullets: {missing[:8]}")
+    if extra:
+        findings.append(f"Unknown topic definition bullets: {extra[:8]}")
+    if duplicates:
+        findings.append(f"Duplicate topic definition bullets: {duplicates[:8]}")
+    if re.search(r"\bopenclaw-openclaw-\d+|#\d{4,}\b", text):
+        findings.append("Mutable topic definitions appear to contain row IDs or issue-specific facts.")
+    if re.search(r"\b(easy-final|confusion-bucket|demoted rows|promotion rule|adjudicated source)\b", text.lower()):
+        findings.append("Mutable topic definitions appear to contain data-build or adjudication notes.")
+    return {
+        "ok": not findings,
+        "topic_count": len(ids),
+        "expected_topic_count": len(allowed_topics),
+        "missing_topics": missing,
+        "extra_topics": extra,
+        "duplicate_topics": duplicates,
+        "findings": findings,
+        "compliance": 1.0 if not findings else 0.0,
+    }
+
+
+def topic_definition_penalty_details(
+    text: str,
+    allowed_topics: set[str],
+    *,
+    char_budget: int = 0,
+) -> dict[str, Any]:
+    contract = topic_definition_contract(text, allowed_topics)
+    chars = len(text)
+    length_over_budget = max(0, chars - char_budget) if char_budget else 0
+    length_penalty = min(0.12, (length_over_budget / 5_000) * 0.08) if char_budget else 0.0
+    return {
+        "contract": contract,
+        "topic_definitions_chars": chars,
+        "topic_definitions_char_budget": char_budget,
+        "topic_definitions_length_over_budget": length_over_budget,
+        "topic_definitions_length_penalty": length_penalty,
+        "topic_definitions_length_compliance": 1.0 - (length_penalty / 0.12),
+        "topic_definition_compliance": contract["compliance"],
+        "total_topic_definitions_penalty": length_penalty,
+    }
+
+
+def total_mutable_penalty_details(
+    candidate: Mapping[str, str],
+    *,
+    char_budget: int = 0,
+) -> dict[str, Any]:
+    component_chars = {
+        name: len(str(candidate.get(name, "")))
+        for name in ("policy", "topic_definitions", "boundary_overlay")
+        if name in candidate
+    }
+    total_chars = sum(component_chars.values())
+    length_over_budget = max(0, total_chars - char_budget) if char_budget else 0
+    length_penalty = min(0.12, (length_over_budget / 10_000) * 0.06) if char_budget else 0.0
+    return {
+        "component_chars": component_chars,
+        "total_mutable_chars": total_chars,
+        "total_mutable_char_budget": char_budget,
+        "total_mutable_length_over_budget": length_over_budget,
+        "total_mutable_length_penalty": length_penalty,
+        "total_mutable_length_compliance": 1.0 - (length_penalty / 0.12),
+    }
+
+
+def candidate_policy_trackio_payload(penalties: Mapping[str, Any]) -> dict[str, int | float]:
+    policy_chars = int(penalties["policy_chars"])
+    total_policy_penalty = float(penalties["total_policy_penalty"])
+    return {
+        "candidate/policy_chars": policy_chars,
+        "candidate/policy_length": policy_chars,
+        "candidate/policy_char_budget": int(penalties["policy_char_budget"]),
+        "candidate/policy_length_over_budget": int(penalties["policy_length_over_budget"]),
+        "candidate/policy_length_penalty": float(penalties["policy_length_penalty"]),
+        "candidate/hygiene_penalty": float(penalties["hygiene_penalty"]),
+        "candidate/hygiene_findings_count": len(penalties["hygiene"]["findings"]),
+        "candidate/policy_penalty_score": total_policy_penalty,
+        "candidate/total_policy_penalty": total_policy_penalty,
     }
 
 
@@ -802,6 +940,12 @@ def feedback_profile_description(profile: str) -> str:
             "compact: bounded feedback is exposed to reflection while row identifiers "
             "and long examples are redacted."
         )
+    if profile == "surgical":
+        return (
+            "surgical: aggregate label/confusion diagnostics plus minimal row deltas are "
+            "exposed to reflection; topic definitions, row identifiers, long examples, "
+            "and row-specific prose are withheld to discourage minibatch memorization."
+        )
     if profile == "metrics-only":
         return (
             "metrics-only: reflection receives global score/cardinality/hygiene "
@@ -851,11 +995,14 @@ def apply_feedback_profile(report: dict[str, Any], profile: str, *, mutable_over
     for key in ("static_asi_path", "benchmark_static_asi_path"):
         if key in report:
             base[key] = report[key]
+    for key in ("topic_definition_contract", "topic_definition_penalties", "total_mutable_penalties"):
+        if key in report:
+            base[key] = report[key]
 
     if profile == "metrics-only":
         return base
 
-    if profile != "compact":
+    if profile not in ("compact", "surgical"):
         raise ValueError(f"Unknown feedback profile: {profile}")
 
     topic_priorities = list((cleaned.get("vanilla_f1_asi") or {}).get("topic_priorities") or [])[:6]
@@ -863,6 +1010,14 @@ def apply_feedback_profile(report: dict[str, Any], profile: str, *, mutable_over
     base["topic_error_patterns"] = list(cleaned.get("topic_error_patterns") or [])[:6]
     base["confusions"] = list(cleaned.get("confusions") or [])[:4]
     base["actionable_feedback"] = list(cleaned.get("actionable_feedback") or [])[:8]
+    if profile == "surgical":
+        base["vanilla_f1_asi"]["reflection_hint"] = (
+            "Make the smallest generalizable policy mutation that explains repeated "
+            "aggregate errors. Do not introduce a topic-by-topic guide."
+        )
+        base["topic_error_patterns"] = base["topic_error_patterns"][:4]
+        base["confusions"] = base["confusions"][:3]
+        base["actionable_feedback"] = base["actionable_feedback"][:3]
     return base
 
 
@@ -1038,6 +1193,7 @@ def score_output_against_input(
         if (rid := _row_identifier(row)) is not None
     }
     topic_stats: dict[str, Counter[str]] = defaultdict(Counter)
+    co_error: Counter[tuple[str, str]] = Counter()
     failures: list[dict[str, Any]] = []
     row_scores: list[dict[str, Any]] = []
     valid_rows = 0
@@ -1084,6 +1240,9 @@ def score_output_against_input(
             topic_stats[topic]["tp"] += int(topic in tp_topics)
             topic_stats[topic]["fp"] += int(topic in fp_topics)
             topic_stats[topic]["fn"] += int(topic in fn_topics)
+        for missed in fn_topics:
+            for extra in fp_topics:
+                co_error[(missed, extra)] += 1
         if fp_topics or fn_topics or scores["valid_json"] != 1.0:
             failures.append(
                 {
@@ -1131,6 +1290,19 @@ def score_output_against_input(
         key=lambda item: (item["false_positives"] + item["false_negatives"], item["topic"]),
         reverse=True,
     )
+    confusions = [
+        {
+            "missed_topic": missed_topic,
+            "extra_topic": extra_topic,
+            "count": count,
+            "diagnosis": "same-row false negative and false positive co-occurred",
+            "suggested_mutation": (
+                f"Clarify the boundary between `{missed_topic}` and `{extra_topic}` only "
+                "if this pair reflects a reusable ownership distinction."
+            ),
+        }
+        for (missed_topic, extra_topic), count in co_error.most_common(20)
+    ]
     failures.sort(key=lambda item: float(item["row_score"]))
     return {
         "scores": {
@@ -1177,6 +1349,7 @@ def score_output_against_input(
         "failures": failures[:20],
         "worst_failures": failures[:20],
         "topic_error_patterns": topic_error_patterns[:20],
+        "confusions": confusions,
         "invalid_topics": {},
         "row_scores": row_scores,
     }
@@ -1461,6 +1634,7 @@ def build_custom_candidate_proposer(args: argparse.Namespace, reflection_lm: Any
         )
     raise ValueError(f"Unknown candidate proposer: {args.candidate_proposer}")
 
+
 def apply_row_feedback_profile(
     side_info: dict[str, Any],
     profile: str,
@@ -1496,6 +1670,30 @@ def apply_row_feedback_profile(
     }
     if profile == "compact":
         return {key: value for key, value in base.items() if value not in (None, [], {})}
+    if profile == "surgical":
+        minimal = {
+            "scores": {
+                key: value
+                for key, value in dict(side_info.get("scores") or {}).items()
+                if key in ("gepa_score", "row_topic_f1", "row_exact", "row_jaccard")
+            },
+            "expected": side_info.get("expected"),
+            "actual": side_info.get("actual"),
+            "false_positives": side_info.get("false_positives"),
+            "false_negatives": side_info.get("false_negatives"),
+            "row_metrics": {
+                key: value
+                for key, value in dict(side_info.get("row_metrics") or {}).items()
+                if key in ("score_mode", "row_symdiff", "expected_topic_count", "actual_topic_count")
+            },
+            "prompt_hygiene": side_info.get("prompt_hygiene"),
+            "feedback_profile": profile,
+            "reflection_hint": (
+                "Use this row only as evidence for a reusable issue-understanding rule. "
+                "Do not add topic definitions, keyword lists, row examples, or a per-topic overlay."
+            ),
+        }
+        return {key: value for key, value in minimal.items() if value not in (None, [], {})}
     if profile == "full":
         out = dict(side_info)
         out["row_context"] = row_context
@@ -1518,12 +1716,16 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
         policy_char_budget: int,
         hygiene_penalty_weight: float,
         mutable_boundary_overlay: bool,
+        mutable_topic_definitions: bool,
+        total_mutable_char_budget: int,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
         self.policy_char_budget = policy_char_budget
         self.hygiene_penalty_weight = hygiene_penalty_weight
         self.mutable_boundary_overlay = mutable_boundary_overlay
+        self.mutable_topic_definitions = mutable_topic_definitions
+        self.total_mutable_char_budget = total_mutable_char_budget
         self._pending_candidate_trackio_payloads: list[dict[str, int | float]] = []
 
     def pop_pending_candidate_trackio_payload(self) -> dict[str, int | float] | None:
@@ -1565,12 +1767,7 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
         }
 
         candidate_diagnostics: dict[str, dict[str, int | float]] = {"policy": policy_stats}
-        trackio_payload: dict[str, int | float] = {
-            "candidate/policy_chars": policy_chars,
-            "candidate/policy_length_penalty": float(penalties["policy_length_penalty"]),
-            "candidate/hygiene_penalty": float(penalties["hygiene_penalty"]),
-            "candidate/hygiene_findings_count": len(penalties["hygiene"]["findings"]),
-        }
+        trackio_payload = candidate_policy_trackio_payload(penalties)
 
         if self.mutable_boundary_overlay:
             overlay = str(candidate.get("boundary_overlay", ""))
@@ -1579,6 +1776,41 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
             candidate_diagnostics["boundary_overlay"] = overlay_stats
             trackio_payload["candidate/boundary_overlay_chars"] = overlay_chars
             trackio_payload["candidate/total_mutable_chars"] = policy_chars + overlay_chars
+
+        if self.mutable_topic_definitions:
+            topic_definitions = str(candidate.get("topic_definitions", ""))
+            topic_definitions_chars = len(topic_definitions)
+            candidate_diagnostics["topic_definitions"] = {
+                "topic_definitions_chars": topic_definitions_chars
+            }
+            trackio_payload["candidate/topic_definitions_chars"] = topic_definitions_chars
+
+        if self.total_mutable_char_budget:
+            total_penalties = total_mutable_penalty_details(
+                candidate,
+                char_budget=self.total_mutable_char_budget,
+            )
+            candidate_diagnostics["total_mutable"] = {
+                key: value for key, value in total_penalties.items() if key != "component_chars"
+            }
+            candidate_diagnostics["total_mutable"]["component_chars"] = total_penalties[
+                "component_chars"
+            ]
+            trackio_payload["candidate/total_mutable_chars"] = int(
+                total_penalties["total_mutable_chars"]
+            )
+            trackio_payload["candidate/total_mutable_char_budget"] = int(
+                total_penalties["total_mutable_char_budget"]
+            )
+            trackio_payload["candidate/total_mutable_length_over_budget"] = int(
+                total_penalties["total_mutable_length_over_budget"]
+            )
+            trackio_payload["candidate/total_mutable_length_penalty"] = float(
+                total_penalties["total_mutable_length_penalty"]
+            )
+            trackio_payload["candidate/total_mutable_length_compliance"] = float(
+                total_penalties["total_mutable_length_compliance"]
+            )
 
         eval_dir = self.run_dir / "row-wise-evals" / f"eval-{self._evaluations:05d}"
         score_path = eval_dir / "row-wise-score.json"
@@ -1811,6 +2043,8 @@ def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgent
     candidate_variables = {"policy": "policy"}
     if args.mutable_boundary_overlay:
         candidate_variables["boundary_overlay"] = "boundary_overlay"
+    if args.mutable_topic_definitions:
+        candidate_variables["topic_definitions"] = "topic_definitions"
 
     def row_scorer(
         output_row: dict[str, Any],
@@ -1826,6 +2060,88 @@ def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgent
             hygiene_penalty_weight=args.hygiene_penalty,
             policy_char_budget=args.policy_char_budget,
         )
+        if args.mutable_topic_definitions:
+            definition_penalties = topic_definition_penalty_details(
+                str(candidate.get("topic_definitions", "")),
+                allowed,
+                char_budget=args.topic_definitions_char_budget,
+            )
+            contract = definition_penalties["contract"]
+            side_info["topic_definition_contract"] = contract
+            side_info["topic_definition_penalties"] = {
+                key: value
+                for key, value in definition_penalties.items()
+                if key != "contract"
+            }
+            side_info["scores"]["topic_definition_compliance"] = contract["compliance"]
+            side_info["scores"]["topic_definitions_length_compliance"] = definition_penalties[
+                "topic_definitions_length_compliance"
+            ]
+            side_info["row_metrics"].update(
+                {
+                    "topic_definitions_chars": definition_penalties["topic_definitions_chars"],
+                    "topic_definitions_char_budget": definition_penalties[
+                        "topic_definitions_char_budget"
+                    ],
+                    "topic_definitions_length_over_budget": definition_penalties[
+                        "topic_definitions_length_over_budget"
+                    ],
+                    "topic_definitions_length_penalty": definition_penalties[
+                        "topic_definitions_length_penalty"
+                    ],
+                }
+            )
+            if not contract["ok"]:
+                row_score = 0.0
+                side_info["scores"]["gepa_score"] = 0.0
+                side_info["reflection_hint"] = (
+                    "The mutable topic definitions violated the frozen schema/topic-ID contract. "
+                    "Restore exactly one definition bullet for every existing topic ID before "
+                    "optimizing wording nuance."
+                )
+            elif definition_penalties["topic_definitions_length_penalty"]:
+                row_score = max(
+                    0.0,
+                    row_score - definition_penalties["topic_definitions_length_penalty"],
+                )
+                side_info["scores"]["gepa_score"] = row_score
+                side_info["row_feedback"].append(
+                    "Mutable topic definitions length penalty: definitions are "
+                    f"{definition_penalties['topic_definitions_length_over_budget']} chars over the "
+                    f"{definition_penalties['topic_definitions_char_budget']} char budget; GEPA score "
+                    f"was reduced by {definition_penalties['topic_definitions_length_penalty']:.4f}."
+                )
+        if args.total_mutable_char_budget:
+            total_penalties = total_mutable_penalty_details(
+                candidate,
+                char_budget=args.total_mutable_char_budget,
+            )
+            side_info["total_mutable_penalties"] = total_penalties
+            side_info["scores"]["total_mutable_length_compliance"] = total_penalties[
+                "total_mutable_length_compliance"
+            ]
+            side_info["row_metrics"].update(
+                {
+                    "total_mutable_chars": total_penalties["total_mutable_chars"],
+                    "total_mutable_char_budget": total_penalties["total_mutable_char_budget"],
+                    "total_mutable_length_over_budget": total_penalties[
+                        "total_mutable_length_over_budget"
+                    ],
+                    "total_mutable_length_penalty": total_penalties[
+                        "total_mutable_length_penalty"
+                    ],
+                    "total_mutable_component_chars": total_penalties["component_chars"],
+                }
+            )
+            if total_penalties["total_mutable_length_penalty"]:
+                row_score = max(0.0, row_score - total_penalties["total_mutable_length_penalty"])
+                side_info["scores"]["gepa_score"] = row_score
+                side_info["row_feedback"].append(
+                    "Total mutable prompt length penalty: mutable components are "
+                    f"{total_penalties['total_mutable_length_over_budget']} chars over the "
+                    f"{total_penalties['total_mutable_char_budget']} char combined budget; GEPA score "
+                    f"was reduced by {total_penalties['total_mutable_length_penalty']:.4f}."
+                )
         objective_scores = {
             key: float(value)
             for key, value in (side_info.get("scores") or {}).items()
@@ -1871,6 +2187,8 @@ def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgent
         policy_char_budget=args.policy_char_budget,
         hygiene_penalty_weight=args.hygiene_penalty,
         mutable_boundary_overlay=bool(args.mutable_boundary_overlay),
+        mutable_topic_definitions=bool(args.mutable_topic_definitions),
+        total_mutable_char_budget=args.total_mutable_char_budget,
         env_dir=ENV_DIR,
         agent_card=resolve_agent_card(args),
         agent="openclaw_vanilla_labeler_plain" if plain_labels else "openclaw_vanilla_labeler",
@@ -1924,6 +2242,8 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
     candidate_variables = {"policy": "policy"}
     if args.mutable_boundary_overlay:
         candidate_variables["boundary_overlay"] = "boundary_overlay"
+    if args.mutable_topic_definitions:
+        candidate_variables["topic_definitions"] = "topic_definitions"
 
     fixed_asset_hashes = {
         name: {"path": str(path), "sha256": _sha256(path)}
@@ -1932,6 +2252,7 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
             "allowed_topics": args.allowed_topics,
             "seed_policy": args.seed_policy,
             "mutable_boundary_overlay_seed": args.mutable_boundary_overlay,
+            "mutable_topic_definitions_seed": args.mutable_topic_definitions,
             "static_asi": args.static_asi,
             "optimizer_cues": args.optimizer_cues,
             "boundary_guidance": args.boundary_guidance,
@@ -1950,6 +2271,13 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
         candidate_run: CandidateRun,
     ) -> tuple[float, dict[str, Any]]:
         policy = str(candidate.get("policy", ""))
+        topic_definition_penalty_report = None
+        if args.mutable_topic_definitions:
+            topic_definition_penalty_report = topic_definition_penalty_details(
+                str(candidate.get("topic_definitions", "")),
+                set(_schema_topic_contract()[0]),
+                char_budget=args.topic_definitions_char_budget,
+            )
         report = add_vanilla_asi(
             score_output_against_input(
                 input_path=input_path,
@@ -1973,6 +2301,90 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
             report["benchmark_static_asi_pack_omitted"] = True
         if args.static_asi:
             report["static_asi_path"] = str(args.static_asi)
+        if topic_definition_penalty_report is not None:
+            topic_definition_contract_report = topic_definition_penalty_report["contract"]
+            report["topic_definition_contract"] = topic_definition_contract_report
+            report["topic_definition_penalties"] = {
+                key: value
+                for key, value in topic_definition_penalty_report.items()
+                if key != "contract"
+            }
+            report["scores"]["topic_definition_compliance"] = topic_definition_contract_report["compliance"]
+            report["scores"]["topic_definitions_length_compliance"] = topic_definition_penalty_report[
+                "topic_definitions_length_compliance"
+            ]
+            details = report.setdefault("score_details", {})
+            details.update(
+                {
+                    "topic_definitions_chars": topic_definition_penalty_report[
+                        "topic_definitions_chars"
+                    ],
+                    "topic_definitions_char_budget": topic_definition_penalty_report[
+                        "topic_definitions_char_budget"
+                    ],
+                    "topic_definitions_length_over_budget": topic_definition_penalty_report[
+                        "topic_definitions_length_over_budget"
+                    ],
+                    "topic_definitions_length_penalty": topic_definition_penalty_report[
+                        "topic_definitions_length_penalty"
+                    ],
+                }
+            )
+            if not topic_definition_contract_report["ok"]:
+                report["scores"]["gepa_score"] = 0.0
+                details["gepa_score"] = 0.0
+                report.setdefault("actionable_feedback", []).insert(
+                    0,
+                    "Mutable topic definitions violated the frozen schema/topic-ID contract; "
+                    "restore exactly one definition bullet for every existing topic ID.",
+                )
+            elif topic_definition_penalty_report["topic_definitions_length_penalty"]:
+                penalty = topic_definition_penalty_report["topic_definitions_length_penalty"]
+                adjusted = max(0.0, float(report["scores"].get("gepa_score", 0.0)) - penalty)
+                report["scores"]["gepa_score"] = adjusted
+                details["gepa_score"] = adjusted
+                report.setdefault("actionable_feedback", []).insert(
+                    0,
+                    "Mutable topic definitions length penalty: definitions are "
+                    f"{topic_definition_penalty_report['topic_definitions_length_over_budget']} chars "
+                    f"over the {topic_definition_penalty_report['topic_definitions_char_budget']} char "
+                    f"budget; GEPA score was reduced by {penalty:.4f}.",
+                )
+        if args.total_mutable_char_budget:
+            total_penalty_report = total_mutable_penalty_details(
+                candidate,
+                char_budget=args.total_mutable_char_budget,
+            )
+            report["total_mutable_penalties"] = total_penalty_report
+            report["scores"]["total_mutable_length_compliance"] = total_penalty_report[
+                "total_mutable_length_compliance"
+            ]
+            details = report.setdefault("score_details", {})
+            details.update(
+                {
+                    "total_mutable_chars": total_penalty_report["total_mutable_chars"],
+                    "total_mutable_char_budget": total_penalty_report["total_mutable_char_budget"],
+                    "total_mutable_length_over_budget": total_penalty_report[
+                        "total_mutable_length_over_budget"
+                    ],
+                    "total_mutable_length_penalty": total_penalty_report[
+                        "total_mutable_length_penalty"
+                    ],
+                    "total_mutable_component_chars": total_penalty_report["component_chars"],
+                }
+            )
+            if total_penalty_report["total_mutable_length_penalty"]:
+                penalty = total_penalty_report["total_mutable_length_penalty"]
+                adjusted = max(0.0, float(report["scores"].get("gepa_score", 0.0)) - penalty)
+                report["scores"]["gepa_score"] = adjusted
+                details["gepa_score"] = adjusted
+                report.setdefault("actionable_feedback", []).insert(
+                    0,
+                    "Total mutable prompt length penalty: mutable components are "
+                    f"{total_penalty_report['total_mutable_length_over_budget']} chars over the "
+                    f"{total_penalty_report['total_mutable_char_budget']} char combined budget; "
+                    f"GEPA score was reduced by {penalty:.4f}.",
+                )
         (candidate_run.path / "raw-evaluator-report.json").write_text(
             json.dumps(report, indent=2) + "\n",
             encoding="utf-8",
@@ -1989,6 +2401,7 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
             "results_jsonl": result.output_path.name,
             "policy": "policy.md",
             "boundary_overlay": "boundary-overlay.md" if args.mutable_boundary_overlay else None,
+            "topic_definitions": "topic-definitions.md" if args.mutable_topic_definitions else None,
             "lineage": "lineage.json",
             "batch_summary": "batch-summary.json",
             "raw_evaluator_report": "raw-evaluator-report.json",
@@ -2004,12 +2417,19 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
         if args.mutable_boundary_overlay:
             (candidate_run.path / "boundary-overlay.md").write_text(boundary_overlay, encoding="utf-8")
             boundary_overlay_sha = hashlib.sha256(boundary_overlay.encode("utf-8")).hexdigest()
+        topic_definitions = str(candidate.get("topic_definitions", ""))
+        topic_definitions_sha = None
+        if args.mutable_topic_definitions:
+            (candidate_run.path / "topic-definitions.md").write_text(topic_definitions, encoding="utf-8")
+            topic_definitions_sha = hashlib.sha256(topic_definitions.encode("utf-8")).hexdigest()
         lineage = {
             "candidate_idx": idx,
             "policy_sha256": policy_sha,
             "policy_chars": len(policy),
             "boundary_overlay_sha256": boundary_overlay_sha,
             "boundary_overlay_chars": len(boundary_overlay) if args.mutable_boundary_overlay else None,
+            "topic_definitions_sha256": topic_definitions_sha,
+            "topic_definitions_chars": len(topic_definitions) if args.mutable_topic_definitions else None,
             **resolve_parent(idx),
             "fixed_assets": fixed_asset_hashes,
             "task_model": args.model,
@@ -2025,6 +2445,8 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
                 "policy_sha256",
                 "boundary_overlay_sha256",
                 "boundary_overlay_chars",
+                "topic_definitions_sha256",
+                "topic_definitions_chars",
                 "parent_candidate_idx",
                 "reflection_call",
             )
@@ -2062,7 +2484,10 @@ def objective_text(
     gepa_mode: str,
     score_mode: str,
     policy_char_budget: int,
+    topic_definitions_char_budget: int,
+    total_mutable_char_budget: int,
     mutable_overlay: bool,
+    mutable_topic_definitions: bool,
     feedback_profile: str,
 ) -> str:
     output_contract = (
@@ -2070,16 +2495,33 @@ def objective_text(
         if plain_labels
         else "JSON output contract"
     )
-    mutable_scope = (
-        "Improve only the mutable OpenClaw vanilla labeler routing policy and boundary_overlay components."
-        if mutable_overlay
-        else "Improve only the mutable OpenClaw vanilla labeler routing policy."
-    )
+    mutable_components = ["policy"]
+    if mutable_overlay:
+        mutable_components.append("boundary_overlay")
+    if mutable_topic_definitions:
+        mutable_components.append("topic_definitions")
+    mutable_scope = "Improve only these mutable OpenClaw vanilla labeler components: " + ", ".join(
+        mutable_components
+    ) + "."
     overlay_scope = (
         "\nThe boundary_overlay component is editable in this run. Keep it a general task-facing "
         "boundary overlay on top of the fixed taxonomy; do not change topic names, output format, "
         "schema constraints, or encode row-specific examples there.\n"
         if mutable_overlay
+        else ""
+    )
+    topic_definition_scope = (
+        "\nThe topic_definitions component is editable in this run. It may improve wording, "
+        "centrality, exclusions, and boundary nuance for existing topics only. It must keep "
+        "exactly one definition bullet for every schema topic ID and must not add, remove, "
+        "rename, reorder, or alias topic IDs. "
+        + (
+            f"Keep the full definitions file under {topic_definitions_char_budget:,} characters; "
+            "over-budget definitions receive a GEPA score penalty.\n"
+            if topic_definitions_char_budget
+            else "Do not expand it into a second policy document.\n"
+        )
+        if mutable_topic_definitions
         else ""
     )
     feedback_clause = (
@@ -2089,6 +2531,12 @@ def objective_text(
         if feedback_profile == "full"
         else "Use the shaped reflection side-info for this run; do not infer that omitted row examples or topic details are absent errors."
     )
+    if feedback_profile == "surgical":
+        feedback_clause = (
+            "Use aggregate error patterns and minimal row deltas to infer how the model is "
+            "misunderstanding the issue. Prefer durable issue-understanding and centrality "
+            "rules over label-name, filename, keyword, or sampled-row fitting."
+        )
     if gepa_mode == "row-wise":
         if score_mode == "f1":
             primary_objective = "maximize row-wise label membership F1 (`row_topic_f1`) on sampled rows"
@@ -2128,28 +2576,67 @@ def objective_text(
                 "0.50*topic_micro_f1 + 0.20*row_exact_accuracy + 0.30*avg_row_jaccard"
             )
         objective_guard = "Do not improve apparent recall by padding labels; exact topic membership matters."
+    mutation_discipline = ""
+    if feedback_profile == "surgical":
+        policy_target = (
+            f"- Target under {min(policy_char_budget, 4_500):,} characters even if the hard budget is higher.\n"
+            if policy_char_budget
+            else ""
+        )
+        mutation_discipline = f"""
+Aggressive mutation discipline for this run:
+
+- Treat the current component as mostly correct unless aggregate evidence says otherwise.
+- Make at most 3 substantive behavior changes in one proposal.
+- Prefer replacing, deleting, or tightening existing rules over adding new sections.
+{policy_target.rstrip()}
+- Do not create a topic-by-topic guide, boundary-overlay clone, taxonomy summary, keyword table,
+  or checklist organized around many topic IDs.
+- The model must understand the issue's deliverable and owner; do not optimize by matching
+  label names, filenames, PR labels, test names, or incidental keywords.
+"""
+    total_budget_clause = (
+        f"\nThe combined prompt material across all editable components has a "
+        f"{total_mutable_char_budget:,} character budget. Over-budget candidates receive a "
+        "GEPA score penalty. Choose the right balance across components; compress or trade off "
+        "wording rather than moving bloat between components.\n"
+        if total_mutable_char_budget
+        else ""
+    )
+    policy_budget_clause = (
+        "\n"
+        f"Keep the mutable policy under {policy_char_budget:,} characters; over-budget policies "
+        "receive a small GEPA score penalty, so compress rules instead of accumulating exhaustive "
+        "topic tables.\n"
+        if policy_char_budget
+        else ""
+    )
+
     return f"""{mutable_scope}
 
 The fixed AgentCard header, {output_contract}, schema enum, GitHub context renderer,
-and allowed-topic taxonomy are not editable.
+and topic ID/schema contract are not editable.
 {overlay_scope}
+{topic_definition_scope}
 
 Primary objective: {primary_objective}. {objective_guard}
 
 Feedback profile: {feedback_profile_description(feedback_profile)}
 {feedback_clause}
+{mutation_discipline}
 
-Keep the policy vanilla and compact. Prefer short reusable centrality/cardinality rules
-over a long topic-by-topic rulebook.
-
-Keep the mutable policy under {policy_char_budget:,} characters; over-budget policies receive a small
-GEPA score penalty, so compress rules instead of accumulating exhaustive topic tables.
+Keep the policy vanilla and compact. Prefer short reusable issue-understanding,
+centrality, and cardinality rules over a long topic-by-topic rulebook.
+{policy_budget_clause}
+{total_budget_clause}
 
 {"Preserve comma-separated topic-ID-only behavior; do not ask for JSON, prose, bullets, or explanations." if plain_labels else "Preserve concise JSON-only behavior."}
 
 Do not copy, rewrite, reorder, rename, delete, extend, or replace the fixed allowed-topic
-list, topic definitions, or cue/keyword list. Reference exact existing topic IDs only
-when a concise reusable boundary rule needs them.
+ID list, schema enum, or cue/keyword list. Reference exact existing topic IDs only
+when a concise reusable boundary rule needs them. If topic_definitions is mutable,
+you may revise definition wording while preserving the exact topic IDs. Keep topic-definition
+edits concise; use definitions for topic meaning, not sampled-row repair rules.
 
 Do not include row IDs, issue numbers, exact titles, URLs, or copied examples. Do not add
 memorized issue/title/keyword tables.
@@ -2165,6 +2652,8 @@ def background_text(
     static_asi: Path | None,
     optimizer_cues: Path | None,
     mutable_boundary_overlay: Path | None,
+    mutable_topic_definitions: Path | None,
+    topic_definitions_char_budget: int,
     feedback_profile: str,
 ) -> str:
     sections = [
@@ -2189,6 +2678,19 @@ model output contract."""
 `{mutable_boundary_overlay}`. Treat it as task-facing boundary guidance, not as a
 place to change the taxonomy, output contract, schema, or train-row facts. Use this
 only to test whether the fixed v6h task overlay is holding back generalization."""
+        )
+    if mutable_topic_definitions:
+        budget_text = (
+            f" The definitions file has a {topic_definitions_char_budget:,} character budget; "
+            "over-budget candidates receive a length penalty."
+            if topic_definitions_char_budget
+            else ""
+        )
+        sections.append(
+            f"""This run has a mutable GEPA component named `topic_definitions`, seeded from
+`{mutable_topic_definitions}`. The schema enum and topic IDs are frozen. The component
+may revise definition wording and boundary nuance only; candidates that add, remove,
+rename, duplicate, or omit topic definition bullets score zero.{budget_text}"""
         )
     if static_asi:
         sections.append(
@@ -2270,6 +2772,14 @@ ROW_WISE_FRONTIER_OBJECTIVE_KEYS = {row_wise_frontier_objective_keys(args.score_
             "frontier_objective_keys": list(row_wise_frontier_objective_keys(args.score_mode)),
             "all_values_are_higher_is_better": True,
             "policy_penalty_components": ["policy_length_penalty", "hygiene_penalty"],
+            "topic_definition_penalty_components": (
+                ["topic_definitions_length_penalty"] if args.mutable_topic_definitions else []
+            ),
+            "topic_definitions_char_budget": args.topic_definitions_char_budget,
+            "total_mutable_penalty_components": (
+                ["total_mutable_length_penalty"] if args.total_mutable_char_budget else []
+            ),
+            "total_mutable_char_budget": args.total_mutable_char_budget,
         },
         "frontier": {
             "frontier_type": args.frontier_type,
@@ -2369,6 +2879,7 @@ def resolve_file_args(args: argparse.Namespace) -> None:
         "agent_card",
         "allowed_topics",
         "mutable_boundary_overlay",
+        "mutable_topic_definitions",
         "boundary_guidance",
     ):
         setattr(args, name, _require_file_arg(f"--{name.replace('_', '-')}", getattr(args, name)))
@@ -2458,6 +2969,9 @@ def print_preflight_result(
         "agent_card": str(active_card),
         "allowed_topics": str(args.allowed_topics),
         "seed_policy": str(args.seed_policy),
+        "mutable_topic_definitions": (
+            str(args.mutable_topic_definitions) if args.mutable_topic_definitions else None
+        ),
         "boundary_guidance": str(args.boundary_guidance) if args.boundary_guidance else None,
         "boundary_guidance_topics": boundary_hint_count,
         "reflection_env_dir": str(args.reflection_env_dir),
@@ -2603,7 +3117,7 @@ def write_run_metadata(
     input_rows = sum(1 for line in (run_dir / "input.jsonl").read_text(encoding="utf-8").splitlines() if line.strip())
     copied = {
         "input": run_dir / "input.jsonl",
-        "agent_card": run_dir / "openclaw-vanilla-labeler.md",
+        "agent_card": run_dir / "vanilla-labeler.md",
         "seed_policy": run_dir / "seed-policy.md",
         "allowed_topics": run_dir / "allowed-topics.md",
         "objective": run_dir / "objective.md",
@@ -2613,6 +3127,9 @@ def write_run_metadata(
         "scoring_contract_sha256": run_dir / "scoring-contract.sha256",
         "mutable_boundary_overlay_seed": (
             run_dir / "mutable-boundary-overlay-seed.md" if args.mutable_boundary_overlay else None
+        ),
+        "mutable_topic_definitions_seed": (
+            run_dir / "mutable-topic-definitions-seed.md" if args.mutable_topic_definitions else None
         ),
         "static_asi": run_dir / "static-asi.md" if args.static_asi else None,
         "optimizer_cues": run_dir / "optimizer-cues.md" if args.optimizer_cues else None,
@@ -2637,6 +3154,7 @@ def write_run_metadata(
             "feedback_profile": args.feedback_profile,
             "candidate_proposer": args.candidate_proposer,
             "mutable_boundary_overlay": bool(args.mutable_boundary_overlay),
+            "mutable_topic_definitions": bool(args.mutable_topic_definitions),
             "frontier_type": args.frontier_type,
             "candidate_selection_strategy": args.candidate_selection_strategy,
             "acceptance_criterion": _rowwise_acceptance_criterion(args.acceptance_criterion),
@@ -2658,6 +3176,9 @@ def write_run_metadata(
             "max_metric_calls": args.max_metric_calls,
             "reflection_minibatch_size": args.reflection_minibatch_size,
             "parallel": args.parallel,
+            "policy_char_budget": args.policy_char_budget,
+            "topic_definitions_char_budget": args.topic_definitions_char_budget,
+            "total_mutable_char_budget": args.total_mutable_char_budget,
         },
         "inputs": {
             "input": _rel(effective_input),
@@ -2671,6 +3192,7 @@ def write_run_metadata(
             "test_rows": _jsonl_rows(args.test_input),
             "seed_policy": _rel(args.seed_policy),
             "mutable_boundary_overlay_seed": _rel(args.mutable_boundary_overlay),
+            "mutable_topic_definitions_seed": _rel(args.mutable_topic_definitions),
             "static_asi": _rel(args.static_asi),
             "optimizer_cues": _rel(args.optimizer_cues),
             "boundary_guidance": _rel(args.boundary_guidance),
@@ -2707,7 +3229,9 @@ def write_run_metadata(
 
 
 def main() -> int:
+    global SCHEMA
     args = parse_args()
+    SCHEMA = args.output_schema
     resolve_file_args(args)
     validate_allowed_topics_against_schema(args.allowed_topics)
     run_input_source = args.feedback_input if args.gepa_mode == "row-wise" and args.feedback_input else args.input
@@ -2739,11 +3263,13 @@ def main() -> int:
         shutil.copy2(args.pareto_input, run_dir / "pareto-input.jsonl")
     if args.test_input:
         shutil.copy2(args.test_input, run_dir / "test-input.jsonl")
-    shutil.copy2(active_card, run_dir / "openclaw-vanilla-labeler.md")
+    shutil.copy2(active_card, run_dir / "vanilla-labeler.md")
     shutil.copy2(args.seed_policy, run_dir / "seed-policy.md")
     shutil.copy2(args.allowed_topics, run_dir / "allowed-topics.md")
     if args.mutable_boundary_overlay:
         shutil.copy2(args.mutable_boundary_overlay, run_dir / "mutable-boundary-overlay-seed.md")
+    if args.mutable_topic_definitions:
+        shutil.copy2(args.mutable_topic_definitions, run_dir / "mutable-topic-definitions-seed.md")
     if args.static_asi:
         shutil.copy2(args.static_asi, run_dir / "static-asi.md")
     if args.optimizer_cues:
@@ -2759,14 +3285,19 @@ def main() -> int:
         gepa_mode=args.gepa_mode,
         score_mode=args.score_mode,
         policy_char_budget=args.policy_char_budget,
+        topic_definitions_char_budget=args.topic_definitions_char_budget,
+        total_mutable_char_budget=args.total_mutable_char_budget,
         mutable_overlay=bool(args.mutable_boundary_overlay),
         feedback_profile=args.feedback_profile,
+        mutable_topic_definitions=bool(args.mutable_topic_definitions),
     )
     background = background_text(
         allowed_topics=args.allowed_topics,
         static_asi=args.static_asi,
         optimizer_cues=args.optimizer_cues,
         mutable_boundary_overlay=args.mutable_boundary_overlay,
+        mutable_topic_definitions=args.mutable_topic_definitions,
+        topic_definitions_char_budget=args.topic_definitions_char_budget,
         feedback_profile=args.feedback_profile,
     )
     (run_dir / "objective.md").write_text(objective, encoding="utf-8")
@@ -2785,6 +3316,8 @@ def main() -> int:
     seed = {"policy": args.seed_policy.read_text(encoding="utf-8")}
     if args.mutable_boundary_overlay:
         seed["boundary_overlay"] = args.mutable_boundary_overlay.read_text(encoding="utf-8")
+    if args.mutable_topic_definitions:
+        seed["topic_definitions"] = args.mutable_topic_definitions.read_text(encoding="utf-8")
     evaluator = build_evaluator(run_dir, run_dir / "input.jsonl", args)
     try:
         if args.evaluate_only:
@@ -2889,6 +3422,8 @@ def main() -> int:
                 (run_dir / "best-policy.md").write_text(best["policy"], encoding="utf-8")
             if isinstance(best, dict) and "boundary_overlay" in best:
                 (run_dir / "best-boundary-overlay.md").write_text(best["boundary_overlay"], encoding="utf-8")
+            if isinstance(best, dict) and "topic_definitions" in best:
+                (run_dir / "best-topic-definitions.md").write_text(best["topic_definitions"], encoding="utf-8")
             (run_dir / "row-wise-result.json").write_text(
                 json.dumps(
                     {
@@ -2941,6 +3476,8 @@ def main() -> int:
             (run_dir / "best-policy.md").write_text(best["policy"], encoding="utf-8")
         if isinstance(best, dict) and "boundary_overlay" in best:
             (run_dir / "best-boundary-overlay.md").write_text(best["boundary_overlay"], encoding="utf-8")
+        if isinstance(best, dict) and "topic_definitions" in best:
+            (run_dir / "best-topic-definitions.md").write_text(best["topic_definitions"], encoding="utf-8")
         print(f"Best vanilla F1 policy written under {run_dir}")
         return 0
     finally:

@@ -9,8 +9,15 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_SCHEMA = ROOT / "regimes/v6h/schemas/teacher-output-v6h.schema.json"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATASET_ROOT = (
+    PROJECT_ROOT
+    if (PROJECT_ROOT / "data").exists() and (PROJECT_ROOT / "artifacts").exists()
+    else PROJECT_ROOT / "datasets/openclaw-label-v7a"
+)
+ARTIFACT_ROOT = DATASET_ROOT / "artifacts"
+ROOT = PROJECT_ROOT
+DEFAULT_SCHEMA = ARTIFACT_ROOT / "spec/teacher-output-v7a.schema.json"
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -23,7 +30,7 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Build v6 intake consensus/adjudication artifacts.")
+    p = argparse.ArgumentParser(description="Build intake consensus/adjudication artifacts.")
     p.add_argument("--batch-dir", type=Path, required=True)
     p.add_argument("--gpt-run", default="gpt55-3x")
     p.add_argument("--opus-run", default="opus-2x")
@@ -186,7 +193,7 @@ def review_reasons(gpt: dict[str, Any], opus: dict[str, Any], exact_match: bool)
 
 def make_review_packet(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str:
     lines = [
-        "# V6 batch consensus review",
+        "# Batch consensus review",
         "",
         f"- Batch: `{summary['batch']}`",
         f"- Rows: {summary['rows']}",

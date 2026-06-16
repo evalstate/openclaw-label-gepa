@@ -9,18 +9,25 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parents[2]
-SOURCE_DATA = ROOT / "datasets/openclaw-label-v7a/data"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATASET_ROOT = (
+    PROJECT_ROOT
+    if (PROJECT_ROOT / "data").exists() and (PROJECT_ROOT / "artifacts").exists()
+    else PROJECT_ROOT / "datasets/openclaw-label-v7a"
+)
+ARTIFACT_ROOT = DATASET_ROOT / "artifacts"
+ROOT = PROJECT_ROOT
+SOURCE_DATA = DATASET_ROOT / "data"
 SPLITS = SOURCE_DATA / "splits"
 DEFAULT_SOURCE = SOURCE_DATA / "final/final-gepa-train.jsonl"
 DEFAULT_PARETO = SPLITS / "pareto60.jsonl"
 DEFAULT_BENCH = SPLITS / "bench78.jsonl"
-DEFAULT_OUTPUT = ROOT / "runs/data-build/splits/v6n-final-feedback300.jsonl"
+DEFAULT_OUTPUT = ROOT / "runs/data-build/splits/feedback300.jsonl"
 
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Build a 300-row GEPA feedback split.")
-    p.add_argument("--regime", default="v6n")
+    p.add_argument("--regime", default="dataset")
     p.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     p.add_argument("--pareto", type=Path, default=DEFAULT_PARETO)
     p.add_argument("--bench", type=Path, default=DEFAULT_BENCH)

@@ -8,10 +8,17 @@ from pathlib import Path
 from typing import Any
 
 
-ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATASET_ROOT = (
+    PROJECT_ROOT
+    if (PROJECT_ROOT / "data").exists() and (PROJECT_ROOT / "artifacts").exists()
+    else PROJECT_ROOT / "datasets/openclaw-label-v7a"
+)
+ARTIFACT_ROOT = DATASET_ROOT / "artifacts"
+ROOT = PROJECT_ROOT
 DEFAULT_INTAKE = ROOT / "runs/data-build/intake"
 DEFAULT_OUTDIR = ROOT / "runs/data-build/train-ledger"
-DEFAULT_SCHEMA = ROOT / "regimes/v6h/schemas/teacher-output-v6h.schema.json"
+DEFAULT_SCHEMA = ARTIFACT_ROOT / "spec/teacher-output-v7a.schema.json"
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -24,10 +31,10 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build a v6 train-quality ledger from intake consensus rows.")
+    parser = argparse.ArgumentParser(description="Build a train-quality ledger from intake consensus rows.")
     parser.add_argument("--intake-root", type=Path, default=DEFAULT_INTAKE)
     parser.add_argument("--outdir", type=Path, default=DEFAULT_OUTDIR)
-    parser.add_argument("--prefix", default="v6h")
+    parser.add_argument("--prefix", default="train")
     parser.add_argument("--max-labels", type=int, default=3)
     parser.add_argument("--batch-glob", default="batch-*", help="Batch directory glob under --intake-root.")
     parser.add_argument("--schema", type=Path, default=DEFAULT_SCHEMA)
@@ -139,9 +146,9 @@ def ledger_row(row: dict[str, Any], batch: str, *, intake_root: Path, max_labels
 
 def markdown_summary(summary: dict[str, Any], extra_rows: list[dict[str, Any]]) -> str:
     lines = [
-        "# V6 Train-Quality Ledger",
+        "# Train-Quality Ledger",
         "",
-        "This artifact is for sharing and early investigation. It does not change the adjudicated v6 set.",
+        "This artifact is for sharing and early investigation. It does not change the adjudicated dataset.",
         "",
         "## Gates",
         "",

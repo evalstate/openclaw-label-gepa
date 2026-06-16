@@ -81,7 +81,7 @@ def _base_command(regime: Regime) -> list[str]:
         "uv",
         "run",
         "python",
-        "tools/runners/openclaw-gepa-runner.py",
+        "tools/runners/gepa-runner.py",
         "--input",
         str(regime.train_path),
         "--feedback-input",
@@ -104,12 +104,17 @@ def _extend_gepa_args(
     args: _GepaCommandArgs,
 ) -> None:
     defaults = args.defaults
+    reflection_env_dir = regime.path_value("reflection_env_dir") or (
+        regime.root.parents[1] / ".fast-agent"
+    )
     command.extend(
         [
             "--agent-card",
             str(regime.agent_card_path(args.variant)),
             "--allowed-topics",
             str(regime.label_order_path),
+            "--output-schema",
+            str(regime.schema_path),
             "--model",
             args.task_model,
             "--reflection-model",
@@ -117,13 +122,15 @@ def _extend_gepa_args(
             "--reflection-agent",
             str(regime.raw.get("reflection_agent", "openclaw_gepa_reflector")),
             "--reflection-env-dir",
-            str(regime.root.parents[1] / ".fast-agent"),
+            str(reflection_env_dir),
             "--gepa-mode",
             str(_value(defaults, "gepa_mode", "row-wise")),
             "--score-mode",
             str(regime.raw.get("score_mode", regime.metric)),
             "--feedback-profile",
             str(_value(defaults, "feedback_profile", "compact")),
+            "--candidate-proposer",
+            str(_value(defaults, "candidate_proposer", "default")),
             "--frontier-type",
             str(_value(defaults, "frontier_type", "hybrid")),
             "--candidate-selection-strategy",
@@ -155,6 +162,8 @@ def _extend_regime_artifacts(command: list[str], regime: Regime, variant: str) -
         ("seed_policy", "--seed-policy"),
         ("boundary_guidance", "--boundary-guidance"),
         ("static_asi", "--static-asi"),
+        ("mutable_boundary_overlay", "--mutable-boundary-overlay"),
+        ("mutable_topic_definitions", "--mutable-topic-definitions"),
     ):
         path = _path_arg(regime.path_value(regime_key))
         if path is not None:
@@ -162,6 +171,8 @@ def _extend_regime_artifacts(command: list[str], regime: Regime, variant: str) -
     for default_key, arg_name in (
         ("hygiene_penalty", "--hygiene-penalty"),
         ("policy_char_budget", "--policy-char-budget"),
+        ("topic_definitions_char_budget", "--topic-definitions-char-budget"),
+        ("total_mutable_char_budget", "--total-mutable-char-budget"),
     ):
         if default_key in defaults:
             command.extend([arg_name, str(defaults[default_key])])
@@ -191,8 +202,10 @@ def _run_name(
         score_mode=str(regime.raw.get("score_mode", regime.metric)).replace("_", "-"),
         variant=variant,
         feedback_profile=str(_value(defaults, "feedback_profile", "compact")),
+        candidate_proposer=str(_value(defaults, "candidate_proposer", "default")),
         reflection_minibatch_size=reflection_minibatch_size,
         max_metric_calls=max_metric_calls,
+        total_mutable_char_budget=int(_value(defaults, "total_mutable_char_budget", 0)),
         run_index=run_index,
     )
 
@@ -223,17 +236,30 @@ def _resolve_candidate_policy(regime: Regime, candidate: str) -> Path:
     raise ValueError(msg)
 
 
-def _resolve_candidate_overlay(candidate: str) -> Path | None:
+def _resolve_candidate_overlay(regime: Regime, candidate: str) -> Path | None:
     if candidate == "base":
-        return None
+        return regime.path_value("mutable_boundary_overlay")
     path = Path(candidate)
     if path.is_file():
-        return None
+        return regime.path_value("mutable_boundary_overlay")
     for name in ("best-boundary-overlay.md", "boundary-overlay.md"):
         overlay_path = path / name
         if overlay_path.exists():
             return overlay_path
-    return None
+    return regime.path_value("mutable_boundary_overlay")
+
+
+def _resolve_candidate_topic_definitions(regime: Regime, candidate: str) -> Path | None:
+    if candidate == "base":
+        return regime.path_value("mutable_topic_definitions")
+    path = Path(candidate)
+    if path.is_file():
+        return regime.path_value("mutable_topic_definitions")
+    for name in ("best-topic-definitions.md", "topic-definitions.md"):
+        definitions_path = path / name
+        if definitions_path.exists():
+            return definitions_path
+    return regime.path_value("mutable_topic_definitions")
 
 
 def _benchmark_run_name(
@@ -262,11 +288,14 @@ def _benchmark_base_command(
     trackio_group: str,
 ) -> list[str]:
     defaults = regime.mapping("run_defaults")
+    reflection_env_dir = regime.path_value("reflection_env_dir") or (
+        regime.root.parents[1] / ".fast-agent"
+    )
     return [
         "uv",
         "run",
         "python",
-        "tools/runners/openclaw-gepa-runner.py",
+        "tools/runners/gepa-runner.py",
         "--evaluate-only",
         "--input",
         str(benchmark_path),
@@ -274,8 +303,14 @@ def _benchmark_base_command(
         str(regime.agent_card_path(variant)),
         "--allowed-topics",
         str(regime.label_order_path),
+        "--output-schema",
+        str(regime.schema_path),
         "--model",
         task_model,
+        "--reflection-agent",
+        str(regime.raw.get("reflection_agent", "openclaw_gepa_reflector")),
+        "--reflection-env-dir",
+        str(reflection_env_dir),
         "--score-mode",
         str(regime.raw.get("score_mode", regime.metric)),
         "--parallel",
@@ -303,6 +338,8 @@ def _extend_benchmark_regime_args(command: list[str], regime: Regime) -> None:
     for default_key, arg_name in (
         ("hygiene_penalty", "--hygiene-penalty"),
         ("policy_char_budget", "--policy-char-budget"),
+        ("topic_definitions_char_budget", "--topic-definitions-char-budget"),
+        ("total_mutable_char_budget", "--total-mutable-char-budget"),
     ):
         if default_key in defaults:
             command.extend([arg_name, str(defaults[default_key])])
@@ -313,11 +350,14 @@ def _extend_benchmark_candidate_args(
     *,
     policy_path: Path,
     overlay_path: Path | None,
+    topic_definitions_path: Path | None,
     variant: str,
 ) -> None:
     command.extend(["--seed-policy", str(policy_path)])
     if overlay_path is not None:
         command.extend(["--mutable-boundary-overlay", str(overlay_path)])
+    if topic_definitions_path is not None:
+        command.extend(["--mutable-topic-definitions", str(topic_definitions_path)])
     if variant == "plain":
         command.append("--plain-labels")
 
@@ -344,7 +384,8 @@ def build_benchmark_plan(
     trackio_dir = project_root / str(_value(trackio, "local_dir", f".trackio/{regime.name}"))
     run_name = _benchmark_run_name(regime, task_model, variant, candidate, run_index)
     policy_path = _resolve_candidate_policy(regime, candidate)
-    overlay_path = _resolve_candidate_overlay(candidate)
+    overlay_path = _resolve_candidate_overlay(regime, candidate)
+    topic_definitions_path = _resolve_candidate_topic_definitions(regime, candidate)
     command = _benchmark_base_command(
         regime,
         benchmark_path=benchmark_path,
@@ -360,6 +401,7 @@ def build_benchmark_plan(
         command,
         policy_path=policy_path,
         overlay_path=overlay_path,
+        topic_definitions_path=topic_definitions_path,
         variant=variant,
     )
     return BenchmarkPlan(

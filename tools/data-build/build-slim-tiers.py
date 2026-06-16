@@ -18,7 +18,7 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Route v6h slim 1x/1x consensus rows into data-build tiers.")
+    p = argparse.ArgumentParser(description="Route slim 1x/1x consensus rows into data-build tiers.")
     p.add_argument("--consensus", type=Path, required=True)
     p.add_argument("--outdir", type=Path, default=None)
     p.add_argument("--bench-min-confidence", type=float, default=0.70)

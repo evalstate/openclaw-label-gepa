@@ -1,0 +1,83 @@
+name: v7h-clean-generator-mutate-all
+description: Clean v7g successor with local copies of generator-seed policy, topic definitions, boundary rules, schema, and final data splits.
+
+dataset:
+  local_bundle: data
+  hf_repo_id: null
+
+default_variant: structured
+label_order: prompts/allowed-topics-v7h.md
+base_prompt: prompts/vanilla-labeler-v7h.md
+task_template: prompts/task-template-v7h.md
+agent_cards:
+  structured: prompts/vanilla-labeler-v7h.md
+  plain: prompts/vanilla-labeler-plain-v7h.md
+schema: schemas/output-v7h.schema.json
+reflection_agent: openclaw_gepa_reflector
+reflection_env_dir: ../v7d-final/.fast-agent
+seed_policy: prompts/seed-policy-v7h.md
+mutable_topic_definitions: prompts/allowed-topics-v7h.md
+mutable_boundary_overlay: prompts/task-boundary-overlay-v7h.md
+boundary_guidance: prompts/topic-boundary-guidance-v7h.md
+static_asi: prompts/vanilla-asi-v7h.md
+train_split: data/feedback300.jsonl
+feedback_split: data/feedback300.jsonl
+pareto_split: data/pareto60.jsonl
+benchmark_split: data/bench78.jsonl
+split_manifest: data/split-manifest.json
+metric: row_soft_exact
+score_mode: row-soft-exact
+
+score_formula:
+  gepa_score: "max(0.0, 0.60 * row_jaccard + 0.20 * row_topic_f1 + 0.20 * row_exact - hygiene_penalty - total_mutable_length_penalty); candidates with invalid topic-definition contracts score zero"
+  frontier_objectives:
+    - gepa_score
+    - row_jaccard
+    - row_topic_f1
+    - row_exact
+
+trackio:
+  project: easy-v7h-clean-generator-mutate-all-gepa
+  group: v7h-clean-generator-mutate-all
+  step_metric: gepa/iteration
+  local_dir: runs/v7h-clean-generator-mutate-all/trackio
+
+run_defaults:
+  run_root: runs/v7h-clean-generator-mutate-all/gepa
+  run_name_template: "{model_slug}-v7h-{variant}-{feedback_profile}-tot{total_mutable_char_budget}-mb{reflection_minibatch_size}-mc{max_metric_calls}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: compact
+  candidate_proposer: default
+  reflection_minibatch_size: 30
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 2400
+  hygiene_penalty: 0.06
+  policy_char_budget: 0
+  topic_definitions_char_budget: 0
+  total_mutable_char_budget: 20000
+  parallel: 8
+
+models:
+  default_task: codexresponses.gpt-5.4-mini
+  default_reflection: codexresponses.gpt-5.5?reasoning=high
+  supported:
+    - deepseek4flash
+    - gemma-e4
+    - codexresponses.gpt-5.4-mini
+    - responses.gpt-5.5?reasoning=high
+
+artifacts:
+  regime_doc: docs/V7H_CLEAN_GENERATOR_MUTATE_ALL.md
+  output_schema: schemas/output-v7h.schema.json
+  generator_prompt_seed: prompts/seed-policy-v7h.md
+
+notes:
+  - Pristine v7g successor for final handover and ablation runs.
+  - Uses local copies of the v7g/v7d/v7b prompt assets and final data splits.
+  - The task-facing headings are neutral: Topic List and Definitions, Boundary Rules, Routing Policy.
+  - GEPA may mutate policy, topic_definitions, and boundary_overlay.
+  - Topic IDs are frozen; invalid topic-definition contracts score zero.
+  - Uses one combined prompt budget of 20000 chars; there are no separate per-component length caps.
+  - GEPA should choose the balance across policy, topic definitions, and boundary rules.

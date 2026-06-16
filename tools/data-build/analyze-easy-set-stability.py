@@ -16,16 +16,23 @@ from pathlib import Path
 from statistics import mean, pstdev
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[2]
-STABILITY_ROOT = ROOT / "runs" / "openclaw-easy-set-stability"
-WRAPPED_RUN_ROOT = ROOT / "runs" / "openclaw-gepa-runner"
-DEFAULT_INPUT = ROOT / "regimes/v7a/data/bench78.jsonl"
-DEFAULT_CARD = ROOT / "regimes/v7a/prompts/openclaw-vanilla-labeler-v7a.md"
-DEFAULT_PLAIN_CARD = ROOT / "regimes/v7a/prompts/openclaw-vanilla-labeler-plain-v7a.md"
-DEFAULT_TOPICS = ROOT / "regimes/v7a/prompts/allowed-topics-v6h.md"
-DEFAULT_POLICY = ROOT / "regimes/v7a/prompts/seed-policy-vanilla-v7a.md"
-DEFAULT_TEMPLATE = ROOT / "regimes/v7a/prompts/task-template-v7a.md"
-DEFAULT_SCHEMA = ROOT / "regimes/v7a/schemas/teacher-output-v6h.schema.json"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATASET_ROOT = (
+    PROJECT_ROOT
+    if (PROJECT_ROOT / "data").exists() and (PROJECT_ROOT / "artifacts").exists()
+    else PROJECT_ROOT / "datasets/openclaw-label-v7a"
+)
+ARTIFACT_ROOT = DATASET_ROOT / "artifacts"
+ROOT = PROJECT_ROOT
+STABILITY_ROOT = ROOT / "runs" / "easy-set-stability"
+WRAPPED_RUN_ROOT = ROOT / "runs" / "gepa-runner"
+DEFAULT_INPUT = DATASET_ROOT / "data/splits/bench78.jsonl"
+DEFAULT_CARD = ARTIFACT_ROOT / "spec/teacher-card-v7a.md"
+DEFAULT_PLAIN_CARD = ARTIFACT_ROOT / "spec/teacher-card-v7a.md"
+DEFAULT_TOPICS = ARTIFACT_ROOT / "spec/allowed-topics-v7a.md"
+DEFAULT_POLICY = ARTIFACT_ROOT / "spec/seed-policy-vanilla-v7a.md"
+DEFAULT_TEMPLATE = ARTIFACT_ROOT / "spec/teacher-template-v7a.md"
+DEFAULT_SCHEMA = ARTIFACT_ROOT / "spec/teacher-output-v7a.schema.json"
 
 
 def parse_args() -> argparse.Namespace:
@@ -52,7 +59,7 @@ def parse_args() -> argparse.Namespace:
         "--wrapped-run-root",
         type=Path,
         default=WRAPPED_RUN_ROOT,
-        help="Directory for wrapped openclaw-gepa-runner.py evaluate-only repeats.",
+        help="Directory for wrapped gepa-runner.py evaluate-only repeats.",
     )
     p.add_argument("--plain-labels", action="store_true")
     p.add_argument("--score-mode", choices=["f1", "row-aware"], default="row-aware")
@@ -76,7 +83,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--direct-batch",
         action="store_true",
-        help="Run fast-agent batch directly instead of wrapping openclaw-gepa-runner.py. Use for teacher/generator cards.",
+        help="Run fast-agent batch directly instead of wrapping gepa-runner.py. Use for teacher/generator cards.",
     )
     p.add_argument("--keep-wrapped-runs", action="store_true", help="Do not copy/delete wrapped runner dirs; reports still reference them.")
     p.add_argument("--keep-vanilla-runs", action="store_true", help=argparse.SUPPRESS)
@@ -182,7 +189,7 @@ def run_repeat(args: argparse.Namespace, stability_dir: Path, selected_input: Pa
 
     cmd = [
         sys.executable,
-        str(ROOT / "tools/runners/openclaw-gepa-runner.py"),
+        str(PROJECT_ROOT / "tools/runners/gepa-runner.py"),
         "--evaluate-only",
         "--input",
         str(selected_input),
@@ -220,7 +227,7 @@ def run_repeat(args: argparse.Namespace, stability_dir: Path, selected_input: Pa
         src = candidate / name
         if src.exists():
             shutil.copy2(src, repeat_dir / name)
-    for name in ["evaluate-only.json", "input.jsonl", "seed-policy.md", "allowed-topics.md", "openclaw-vanilla-labeler.md"]:
+    for name in ["evaluate-only.json", "input.jsonl", "seed-policy.md", "allowed-topics.md", "vanilla-labeler.md"]:
         src = wrapped_dir / name
         if src.exists():
             shutil.copy2(src, repeat_dir / name)

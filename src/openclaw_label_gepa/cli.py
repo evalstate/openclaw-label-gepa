@@ -411,7 +411,7 @@ def _validate_prompt_placeholders(regime: Any) -> list[str]:
 def _validate_reflection_agent(regime: Any) -> list[str]:
     project_root = project_root_for_regime(regime)
     agent_name = str(regime.raw.get("reflection_agent", "openclaw_gepa_reflector"))
-    env_dir = project_root / ".fast-agent"
+    env_dir = regime.path_value("reflection_env_dir") or (project_root / ".fast-agent")
     card = env_dir / "agent-cards" / f"{agent_name}.md"
     problems = []
     if not (env_dir / "fast-agent.yaml").exists():
