@@ -29,6 +29,15 @@ phase's inputs depend on their outputs.
 | `vanilla-asi-v6b-slim.md` | Slim reflection ASI: overlay contract, no cue tables |
 | `v6-prereview-convergent-disagreements.md` | 8 disputed test rows for human decision before freezing |
 | `V6_INTAKE_LADDER.md` | Reproducible 30-row intake/calibration workflow for the new-label build |
+| `V6I_REGIME.md` | v6i GEPA ablation plan: feedback tightness and mutable task-overlay experiments on the frozen v6h split |
+| `V6K_REGIME.md` | v6k final-data row-wise GEPA regime from the earlier mixed final pool |
+| `V6L_REGIME.md` | Current gold-only row-wise GEPA regime: 330-row final pool, feedback192 divisible by minibatch 12, Pareto60, bench78, and launch commands |
+| `V6M_REGIME.md` | v6m row-wise GEPA regime: v6l data with macro-F1, label over/under-application, and confusion-matrix reflection diagnostics |
+| `V6N_REGIME.md` | v6n strict row-wise GEPA regime: Jaccard/exact scoring, no padded minibatches, label/co-error reflection diagnostics, and dashboard alignment on `gepa/iteration` |
+| `V6O_REGIME.md` | v6o clean strict row-wise GEPA regime: v6o-named 300-row feedback artifacts, Jaccard/exact scoring, no padded minibatches |
+| `V6P_REGIME.md` | v6p softened exactness ablation: v6o data with `row-soft-exact` scoring and cleaner Trackio objective/diagnostic metric namespaces |
+| `V6Q_REGIME.md` | v6q GPT-5.4 minimal-seed ablation: v6p data/scoring/ASI with a deliberately sparse starting policy |
+| `V6R_REGIME.md` | v6r GPT-5.4 surgical-reflection ablation: compact reflection background, minimal row deltas, lower policy budget, and anti-keyword/anti-rulebook mutation discipline |
 | `env.sh` | Source me: run-stable settings (paths, trackio project + repo-local `TRACKIO_DIR`, models, `FAST_AGENT_BIN`) + `v6_intake_snapshot` helper |
 | `intake/BATCH/` | Tracked curated batch records (row-ids, spec-manifest, consensus, adjudication, accepted/deferred); raw repeats stay under `runs/` |
 | `v6-build-ledger.jsonl` | Tracked cumulative ledger of accepted rows — the source for final v6 train/test |
@@ -36,14 +45,30 @@ phase's inputs depend on their outputs.
 Script changes (already applied to `scripts/openclaw-vanilla-f1-gepa.py`):
 
 - `--hygiene-penalty W` (per-finding gepa_score penalty; batch-mode candidate
-  scoring) and `--policy-char-budget N`. Defaults (0.0 / 12000) preserve v5
-  behavior exactly. `policy_hygiene()` now also flags copied
+  scoring) and `--policy-char-budget N`. The current runner default is 12,500
+  chars; pass `--policy-char-budget 12000` to reproduce the old v5 budget
+  exactly, or pass a lower explicit budget for compact-overlay ablations.
+  `policy_hygiene()` now also flags copied
   false-positive/false-negative guard text and per-topic guide sections.
 - `--boundary-guidance PATH`: replaces the in-code `TOPIC_HINTS` (the source of
   the dynamic-ASI guard injections) with hints parsed from the frozen v6 spec —
   single source of truth. Validates parsed topics against the schema enum,
   copies the file into the run dir, records it (path + sha256) in run.json.
   REQUIRED for all v6 GEPA runs; without it, reflection receives v4-era guard
+  text.
+- `--feedback-profile surgical` and `--reflection-background compact`: v6r
+  anti-overfit controls. Surgical feedback exposes aggregate label/confusion
+  diagnostics plus minimal row deltas; compact reflection background gives the
+  tutor topic IDs rather than the full taxonomy definition block. Use these for
+  GPT-5.4-mini-class runs where long GEPA policies have failed to transfer.
+- The live classifier schema `eval/openclaw/output.schema.json` now matches the
+  v6h teacher label contract: 33-topic enum, no `local_models`, and
+  `topics_of_interest.maxItems == 3`. The GEPA runner preflights both
+  `--allowed-topics` and input gold labels against that schema before any model
+  calls. Use
+  `pilot-splits/v6h-gepa-generous296-cap3-train.jsonl` for the current
+  generous train reservoir; the four excluded over-cap rows are in
+  `pilot-splits/v6h-gepa-generous296-overcap-review.jsonl`.
   text against v6 labels.
 - Candidate lineage: every candidate dir now gets `lineage.json` (policy
   sha256, parent candidate index resolved via the producing reflection call,

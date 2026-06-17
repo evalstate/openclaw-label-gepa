@@ -233,11 +233,12 @@ pointed to by `env.sh`:
   symptom, motivation, generic-beside-specific) and steers GEPA toward
   suppression rules.
 
-Deliberately NOT changed: `eval/openclaw/output.schema.json` (shared scoring
-plumbing; adding `maxItems: 3` would break re-scoring of pre-v6g runs). The
-student cap is enforced by prompt text plus capped gold labels under
-row-aware scoring, not by schema validation. The teacher schema
-(`teacher-output-v6g.schema.json`) IS capped at 3.
+Initially NOT changed at v6g: `eval/openclaw/output.schema.json` was shared
+scoring plumbing, and adding `maxItems: 3` would break re-scoring of pre-v6g
+runs on the same branch. This exception was superseded for the proper v6h GEPA
+regime: the live classifier schema now follows the v6h label contract exactly
+(33-topic enum, no `local_models`, `maxItems: 3`) so the task model cannot
+optimize against a looser output space than the teacher/gold labels.
 
 ## v6h (2026-06-12) — reliability-mechanism and inference-dispatch tie-breaks
 

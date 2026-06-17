@@ -10,7 +10,7 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SCHEMA = ROOT / "eval/openclaw/easy-set-pilot/v6/teacher-output-v6b.schema.json"
+DEFAULT_SCHEMA = ROOT / "eval/openclaw/easy-set-pilot/v6/teacher-output-v6h.schema.json"
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -27,15 +27,30 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--batch-dir", type=Path, required=True)
     p.add_argument("--gpt-run", default="gpt55-3x")
     p.add_argument("--opus-run", default="opus-2x")
+    p.add_argument("--gpt-expected-runs", type=int, default=3)
+    p.add_argument("--opus-expected-runs", type=int, default=2)
     p.add_argument("--schema", type=Path, default=DEFAULT_SCHEMA)
     p.add_argument("--outdir", type=Path, default=None)
     p.add_argument("--overwrite", action="store_true")
     return p.parse_args()
 
 
-def allowed_topics(schema_path: Path) -> set[str]:
+def topic_order(schema_path: Path) -> list[str]:
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
-    return set(schema["properties"]["labels"]["items"]["enum"])
+    return list(schema["properties"]["labels"]["items"]["enum"])
+
+
+def priority_labels(labels: Any, order: list[str]) -> list[str]:
+    if not isinstance(labels, list):
+        return []
+    rank = {label: index for index, label in enumerate(order)}
+    return sorted((x for x in labels if isinstance(x, str)), key=lambda x: rank.get(x, len(rank)))
+
+
+def max_labels(schema_path: Path) -> int | None:
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    value = schema["properties"]["labels"].get("maxItems")
+    return value if isinstance(value, int) else None
 
 
 def result_obj(row: dict[str, Any]) -> dict[str, Any]:
@@ -43,10 +58,8 @@ def result_obj(row: dict[str, Any]) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
 
-def label_key(labels: Any) -> tuple[str, ...]:
-    if not isinstance(labels, list):
-        return ()
-    return tuple(sorted(x for x in labels if isinstance(x, str)))
+def label_key(labels: Any, order: list[str]) -> tuple[str, ...]:
+    return tuple(priority_labels(labels, order))
 
 
 def ambiguity_level(result: dict[str, Any]) -> str | None:
@@ -56,14 +69,14 @@ def ambiguity_level(result: dict[str, Any]) -> str | None:
     return None
 
 
-def possible_confusions(result: dict[str, Any]) -> list[str]:
+def possible_confusions(result: dict[str, Any], order: list[str]) -> list[str]:
     ambiguity = result.get("ambiguity")
     if not isinstance(ambiguity, dict) or not isinstance(ambiguity.get("possible_confusions"), list):
         return []
-    return [x for x in ambiguity["possible_confusions"] if isinstance(x, str)]
+    return priority_labels(ambiguity["possible_confusions"], order)
 
 
-def read_repeats(run_dir: Path) -> dict[str, list[dict[str, Any]]]:
+def read_repeats(run_dir: Path, order: list[str]) -> dict[str, list[dict[str, Any]]]:
     by_id: dict[str, list[dict[str, Any]]] = {}
     repeat_paths = sorted(run_dir.glob("repeat-*/results.jsonl"))
     if not repeat_paths:
@@ -80,11 +93,11 @@ def read_repeats(run_dir: Path) -> dict[str, list[dict[str, Any]]]:
                 {
                     "repeat": repeat_name,
                     "ok": raw.get("ok") is True,
-                    "labels": list(label_key(result.get("labels"))),
+                    "labels": list(label_key(result.get("labels"), order)),
                     "bucket": result.get("bucket"),
                     "confidence": result.get("confidence"),
                     "ambiguity_level": ambiguity_level(result),
-                    "possible_confusions": possible_confusions(result),
+                    "possible_confusions": possible_confusions(result, order),
                     "needs_human_review": result.get("needs_human_review"),
                     "invalid_labels": [],
                 }
@@ -97,11 +110,12 @@ def summarize_teacher(
     *,
     expected_runs: int,
     allowed: set[str],
+    label_cap: int | None,
 ) -> dict[str, Any]:
     counts = Counter(tuple(row["labels"]) for row in rows)
     modal_key, modal_count = counts.most_common(1)[0] if counts else ((), 0)
     invalid = sorted({label for row in rows for label in row["labels"] if label not in allowed})
-    too_many = any(len(row["labels"]) > 5 for row in rows)
+    too_many = any(label_cap is not None and len(row["labels"]) > label_cap for row in rows)
     human_review = any(row.get("needs_human_review") is True for row in rows)
     failed = sum(1 for row in rows if not row.get("ok"))
     return {
@@ -113,7 +127,7 @@ def summarize_teacher(
         "exact_stable": len(rows) == expected_runs and modal_count == expected_runs,
         "label_set_counts": {"|".join(key): value for key, value in counts.items()},
         "avg_label_count": sum(len(row["labels"]) for row in rows) / len(rows) if rows else 0.0,
-        "hit_label_cap": any(len(row["labels"]) == 5 for row in rows),
+        "hit_label_cap": any(label_cap is not None and len(row["labels"]) == label_cap for row in rows),
         "too_many_labels": too_many,
         "invalid_labels": invalid,
         "needs_human_review": human_review,
@@ -179,8 +193,9 @@ def make_review_packet(summary: dict[str, Any], rows: list[dict[str, Any]]) -> s
         f"- Accepted consensus: {summary['accepted_consensus']}",
         f"- Deferred/review: {summary['deferred']}",
         f"- GPT/Opus exact modal matches: {summary['gpt_opus_exact_modal_matches']}",
-        f"- Exact modal matches with 5 labels: {summary['exact_modal_matches_with_5_labels']}",
-        f"- Rows where either teacher hit the 5-label cap: {summary['rows_with_any_5_label_teacher_modal']}",
+        f"- Label cap: {summary['label_cap']}",
+        f"- Exact modal matches at label cap: {summary['exact_modal_matches_at_label_cap']}",
+        f"- Rows where either teacher hit the label cap: {summary['rows_with_any_teacher_modal_at_label_cap']}",
         f"- Mean GPT/Opus modal Jaccard: {summary['mean_gpt_opus_modal_jaccard']:.3f}",
         "",
         "## Review rows",
@@ -228,11 +243,13 @@ def main() -> int:
         if path.exists() and not args.overwrite:
             raise SystemExit(f"{path} exists; pass --overwrite")
 
-    allowed = allowed_topics(args.schema)
+    order = topic_order(args.schema)
+    allowed = set(order)
+    label_cap = max_labels(args.schema)
     input_rows = load_jsonl(batch_dir / "input.jsonl")
     v5_by_id = load_v5(batch_dir)
-    gpt_by_id = read_repeats(batch_dir / args.gpt_run)
-    opus_by_id = read_repeats(batch_dir / args.opus_run)
+    gpt_by_id = read_repeats(batch_dir / args.gpt_run, order)
+    opus_by_id = read_repeats(batch_dir / args.opus_run, order)
 
     consensus_rows: list[dict[str, Any]] = []
     accepted: list[dict[str, Any]] = []
@@ -241,8 +258,18 @@ def main() -> int:
 
     for source in input_rows:
         rid = source["id"]
-        gpt = summarize_teacher(gpt_by_id.get(rid, []), expected_runs=3, allowed=allowed)
-        opus = summarize_teacher(opus_by_id.get(rid, []), expected_runs=2, allowed=allowed)
+        gpt = summarize_teacher(
+            gpt_by_id.get(rid, []),
+            expected_runs=args.gpt_expected_runs,
+            allowed=allowed,
+            label_cap=label_cap,
+        )
+        opus = summarize_teacher(
+            opus_by_id.get(rid, []),
+            expected_runs=args.opus_expected_runs,
+            allowed=allowed,
+            label_cap=label_cap,
+        )
         exact_match = gpt["modal_labels"] == opus["modal_labels"]
         agreed_labels = gpt["modal_labels"] if exact_match else []
         reasons = review_reasons(gpt, opus, exact_match)
@@ -251,7 +278,8 @@ def main() -> int:
             and gpt["exact_stable"]
             and opus["exact_stable"]
             and exact_match
-            and 1 <= len(agreed_labels) <= 5
+            and 1 <= len(agreed_labels)
+            and (label_cap is None or len(agreed_labels) <= label_cap)
         )
         status = "accepted_consensus" if accept else "deferred"
         row = {
@@ -267,7 +295,10 @@ def main() -> int:
             "gpt_opus_exact_modal_match": exact_match,
             "gpt_opus_modal_jaccard": jaccard(gpt["modal_labels"], opus["modal_labels"]),
             "agreed_label_count": len(agreed_labels),
-            "any_teacher_modal_label_count_5": len(gpt["modal_labels"]) == 5 or len(opus["modal_labels"]) == 5,
+            "any_teacher_modal_at_label_cap": (
+                label_cap is not None
+                and (len(gpt["modal_labels"]) == label_cap or len(opus["modal_labels"]) == label_cap)
+            ),
             "review_reasons": reasons,
             "legacy_v5_labels": v5_by_id.get(rid, []),
         }
@@ -305,12 +336,18 @@ def main() -> int:
         "rows": len(consensus_rows),
         "accepted_consensus": len(accepted),
         "deferred": len(deferred),
+        "schema": str(args.schema),
+        "label_cap": label_cap,
+        "gpt_expected_runs": args.gpt_expected_runs,
+        "opus_expected_runs": args.opus_expected_runs,
         "gpt_exact_stable_rows": sum(1 for row in consensus_rows if row["gpt"]["exact_stable"]),
         "opus_exact_stable_rows": sum(1 for row in consensus_rows if row["opus"]["exact_stable"]),
         "gpt_opus_exact_modal_matches": len(exact_matches),
-        "exact_modal_matches_with_5_labels": sum(1 for row in exact_matches if row["agreed_label_count"] == 5),
-        "rows_with_any_5_label_teacher_modal": sum(
-            1 for row in consensus_rows if row["any_teacher_modal_label_count_5"]
+        "exact_modal_matches_at_label_cap": sum(
+            1 for row in exact_matches if label_cap is not None and row["agreed_label_count"] == label_cap
+        ),
+        "rows_with_any_teacher_modal_at_label_cap": sum(
+            1 for row in consensus_rows if row["any_teacher_modal_at_label_cap"]
         ),
         "mean_gpt_opus_modal_jaccard": sum(row["gpt_opus_modal_jaccard"] for row in consensus_rows)
         / len(consensus_rows)

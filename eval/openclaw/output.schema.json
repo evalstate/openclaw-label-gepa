@@ -11,11 +11,10 @@
   "properties": {
     "topics_of_interest": {
       "type": "array",
-      "description": "Central allowed OpenClaw maintainer routing topics. Use the smallest set needed.",
+      "description": "Central allowed OpenClaw maintainer routing topics. Use at most 3, in priority order, with the primary changed surface first.",
       "items": {
         "type": "string",
         "enum": [
-          "local_models",
           "inference_api",
           "self_hosted_inference",
           "acpx",
@@ -50,7 +49,9 @@
           "reliability",
           "tool_calling"
         ]
-      }
+      },
+      "minItems": 0,
+      "maxItems": 3
     },
     "description": {
       "type": "string",

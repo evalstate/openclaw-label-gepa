@@ -283,7 +283,7 @@ def run_direct_batch_repeat(
         cmd.extend(["--json-schema", str(args.schema)])
     if args.trackio_project:
         cmd.extend(["--project", args.trackio_project, "--run-name", repeat_name])
-        cmd.extend(["--group", args.trackio_group or args.run_name])
+        cmd.extend(["--trackio-group", args.trackio_group or args.run_name])
         if args.trackio_space_id:
             cmd.extend(["--trackio-space-id", args.trackio_space_id])
         if args.trackio_server_url:
@@ -306,6 +306,7 @@ def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path, s
     expected = {row["id"]: expected_topics(row) for row in load_jsonl(input_path)}
     rows = load_jsonl(result_path)
     tp = fp = fn = exact = 0
+    topic_stats: dict[str, Counter[str]] = defaultdict(Counter)
     row_jaccards: list[float] = []
     row_symdiffs: list[int] = []
     predicted_counts: list[int] = []
@@ -324,6 +325,12 @@ def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path, s
         tp += len(sp & se)
         fp += len(sp - se)
         fn += len(se - sp)
+        for topic in sp & se:
+            topic_stats[topic]["tp"] += 1
+        for topic in sp - se:
+            topic_stats[topic]["fp"] += 1
+        for topic in se - sp:
+            topic_stats[topic]["fn"] += 1
         exact += int(sp == se)
         row_jaccards.append(jaccard(pred, exp))
         row_symdiffs.append(symdiff(pred, exp))
@@ -344,6 +351,22 @@ def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path, s
     precision = tp / (tp + fp) if tp + fp else 1.0
     recall = tp / (tp + fn) if tp + fn else 1.0
     f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+    per_topic_metrics = []
+    for counts in topic_stats.values():
+        ttp, tfp, tfn = counts["tp"], counts["fp"], counts["fn"]
+        if ttp + tfp + tfn == 0:
+            continue
+        topic_precision = ttp / (ttp + tfp) if ttp + tfp else 0.0
+        topic_recall = ttp / (ttp + tfn) if ttp + tfn else 0.0
+        topic_f1 = (
+            2 * topic_precision * topic_recall / (topic_precision + topic_recall)
+            if topic_precision + topic_recall
+            else 0.0
+        )
+        per_topic_metrics.append((topic_precision, topic_recall, topic_f1))
+    macro_precision = mean([x[0] for x in per_topic_metrics]) if per_topic_metrics else 0.0
+    macro_recall = mean([x[1] for x in per_topic_metrics]) if per_topic_metrics else 0.0
+    macro_f1 = mean([x[2] for x in per_topic_metrics]) if per_topic_metrics else 0.0
     avg_sym = mean(row_symdiffs) if row_symdiffs else 0.0
     row_exact = exact / max(len(expected), 1)
     avg_jaccard = mean(row_jaccards) if row_jaccards else 0.0
@@ -357,6 +380,7 @@ def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path, s
             "scores": {
                 "gepa_score": gepa_score,
                 "topic_micro_f1": f1,
+                "topic_macro_f1": macro_f1,
                 "row_exact_accuracy": row_exact,
                 "avg_row_jaccard": avg_jaccard,
                 "row_symdiff_score": 1.0 / (1.0 + avg_sym),
@@ -364,6 +388,9 @@ def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path, s
             "score_details": {
                 "topic_micro_precision": precision,
                 "topic_micro_recall": recall,
+                "topic_macro_precision": macro_precision,
+                "topic_macro_recall": macro_recall,
+                "topic_macro_f1": macro_f1,
                 "exact_match": row_exact,
                 "row_exact_accuracy": row_exact,
                 "avg_row_jaccard": avg_jaccard,
@@ -371,6 +398,7 @@ def score_direct_repeat(input_path: Path, result_path: Path, score_path: Path, s
                 "valid_json": valid / max(len(expected), 1),
                 "false_positives": fp,
                 "false_negatives": fn,
+                "topic_macro_active_labels": len(per_topic_metrics),
                 "avg_predicted_topics": mean(predicted_counts) if predicted_counts else 0.0,
                 "avg_expected_topics": mean(expected_counts) if expected_counts else 0.0,
             },
@@ -416,6 +444,9 @@ def build_report(stability_dir: Path, selected_rows: list[dict[str, Any]], repea
                         "topic_micro_f1",
                         "topic_micro_precision",
                         "topic_micro_recall",
+                        "topic_macro_f1",
+                        "topic_macro_precision",
+                        "topic_macro_recall",
                         "row_exact_accuracy",
                         "exact_match",
                         "avg_row_jaccard",

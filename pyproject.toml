@@ -16,10 +16,10 @@ openclaw-benchmark = "openclaw_gepa.openclaw_benchmark:main"
 package = true
 
 [tool.uv.sources]
-# fast-agent-mcp 0.7.18 was tagged but not published to PyPI.
-# Keep the GEPA adapter + Trackio integration on the matching source refs.
-fast-agent-mcp = { git = "https://github.com/evalstate/fast-agent.git", tag = "v0.7.18" }
-gepa = { git = "https://github.com/evalstate/gepa.git", branch = "feat/trackio" }
+# Use the local fast-agent checkout so GEPA additions are editable.
+fast-agent-mcp = { path = "/home/ssmith/source/fast-agent-pr", editable = true }
+# Use the local GEPA checkout that has callback + Trackio support.
+gepa = { path = "/home/ssmith/source/gepa", editable = true }
 
 [tool.ruff]
 line-length = 120

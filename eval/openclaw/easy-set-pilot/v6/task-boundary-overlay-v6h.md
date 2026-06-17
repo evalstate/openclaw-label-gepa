@@ -119,6 +119,10 @@ capability-based routing — is `agent_runtime` or `model_lifecycle`, not
   message/tool/approval/sandbox/trace behavior -> the concrete internal owner
   (`agent_runtime`, `acp`, `acpx`, `sessions`, `queueing`, `tool_calling`,
   `approvals`, `sandboxing`, or `telemetry_usage`).
+  If Pi is acting as OpenClaw's internal runner/backend/orchestration path,
+  route that behavior to `agent_runtime`, not `coding_agent_integrations`; use
+  `coding_agent_integrations` for Pi only when OpenClaw's contract with an
+  external Pi runtime or CLI changes.
 - `acpx`/`acp`: ACPX worker/transport/binding internals → `acpx`; add `acp`
   only when ACP protocol behavior is changed: binding/override, spawn/cancel
   semantics, parent/child message relay, event streams, completion delivery,

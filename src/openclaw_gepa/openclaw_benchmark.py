@@ -675,6 +675,35 @@ def score(output_path: Path) -> dict[str, Any]:
     row_exact_accuracy = exact / n
     avg_row_jaccard = row_jaccard_total / n
     avg_row_symdiff = row_symdiff_total / n
+    per_topic_metrics = []
+    for c in topic_stats.values():
+        ttp, tfp, tfn = c["tp"], c["fp"], c["fn"]
+        if ttp + tfp + tfn == 0:
+            continue
+        topic_precision = 0.0 if ttp + tfp == 0 else ttp / (ttp + tfp)
+        topic_recall = 0.0 if ttp + tfn == 0 else ttp / (ttp + tfn)
+        per_topic_metrics.append(
+            {
+                "precision": topic_precision,
+                "recall": topic_recall,
+                "f1": f1(ttp, tfp, tfn),
+            }
+        )
+    macro_precision = (
+        sum(x["precision"] for x in per_topic_metrics) / len(per_topic_metrics)
+        if per_topic_metrics
+        else 0.0
+    )
+    macro_recall = (
+        sum(x["recall"] for x in per_topic_metrics) / len(per_topic_metrics)
+        if per_topic_metrics
+        else 0.0
+    )
+    macro_f1 = (
+        sum(x["f1"] for x in per_topic_metrics) / len(per_topic_metrics)
+        if per_topic_metrics
+        else 0.0
+    )
 
     patterns = []
     for topic, c in topic_stats.items():
@@ -748,6 +777,9 @@ def score(output_path: Path) -> dict[str, Any]:
             "topic_micro_f1": micro_f1,
             "topic_micro_precision": precision,
             "topic_micro_recall": recall,
+            "topic_macro_f1": macro_f1,
+            "topic_macro_precision": macro_precision,
+            "topic_macro_recall": macro_recall,
             "exact_match": row_exact_accuracy,
             "row_exact_accuracy": row_exact_accuracy,
             "avg_row_jaccard": avg_row_jaccard,
@@ -762,6 +794,7 @@ def score(output_path: Path) -> dict[str, Any]:
             "avg_row_symdiff": avg_row_symdiff,
             "avg_expected_topics": avg_expected,
             "avg_predicted_topics": avg_actual,
+            "topic_macro_active_labels": len(per_topic_metrics),
             "asi_score": asi_score,
         },
         "evaluated": len(rows),

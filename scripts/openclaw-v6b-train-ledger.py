@@ -9,8 +9,9 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INTAKE = ROOT / "runs/easy-set-v6b/v6b-databuild/intake"
+DEFAULT_INTAKE = ROOT / "runs/easy-set-v6h/v6b-databuild/intake"
 DEFAULT_OUTDIR = ROOT / "eval/openclaw/easy-set-pilot/v6"
+DEFAULT_SCHEMA = ROOT / "eval/openclaw/easy-set-pilot/v6/teacher-output-v6h.schema.json"
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -23,15 +24,30 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build a v6b train-quality ledger from intake consensus rows.")
+    parser = argparse.ArgumentParser(description="Build a v6 train-quality ledger from intake consensus rows.")
     parser.add_argument("--intake-root", type=Path, default=DEFAULT_INTAKE)
     parser.add_argument("--outdir", type=Path, default=DEFAULT_OUTDIR)
-    parser.add_argument("--prefix", default="v6b")
+    parser.add_argument("--prefix", default="v6h")
+    parser.add_argument("--max-labels", type=int, default=3)
+    parser.add_argument("--batch-glob", default="batch-*", help="Batch directory glob under --intake-root.")
+    parser.add_argument("--schema", type=Path, default=DEFAULT_SCHEMA)
     return parser.parse_args()
 
 
-def label_tuple(labels: Any) -> tuple[str, ...]:
-    return tuple(labels) if isinstance(labels, list) and all(isinstance(x, str) for x in labels) else ()
+def topic_order(schema_path: Path) -> list[str]:
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    return list(schema["properties"]["labels"]["items"]["enum"])
+
+
+def priority_labels(labels: Any, order: list[str]) -> list[str]:
+    if not isinstance(labels, list):
+        return []
+    rank = {label: index for index, label in enumerate(order)}
+    return sorted((x for x in labels if isinstance(x, str)), key=lambda x: rank.get(x, len(rank)))
+
+
+def label_tuple(labels: Any, order: list[str]) -> tuple[str, ...]:
+    return tuple(priority_labels(labels, order))
 
 
 def basic_teacher_ok(summary: dict[str, Any]) -> bool:
@@ -40,7 +56,6 @@ def basic_teacher_ok(summary: dict[str, Any]) -> bool:
         and summary.get("failed_runs", 0) == 0
         and not summary.get("invalid_labels")
         and not summary.get("too_many_labels")
-        and not summary.get("hit_label_cap")
         and not summary.get("needs_human_review")
     )
 
@@ -62,32 +77,32 @@ def strict_teacher_ok(summary: dict[str, Any]) -> bool:
     return True
 
 
-def train_quality(row: dict[str, Any]) -> bool:
+def train_quality(row: dict[str, Any], *, max_labels: int, order: list[str]) -> bool:
     gpt = row["gpt"]
     opus = row["opus"]
     return bool(
         basic_teacher_ok(gpt)
         and basic_teacher_ok(opus)
         and gpt.get("exact_stable")
-        and label_tuple(gpt.get("modal_labels")) == label_tuple(opus.get("modal_labels"))
-        and 1 <= len(gpt.get("modal_labels", [])) <= 5
+        and label_tuple(gpt.get("modal_labels"), order) == label_tuple(opus.get("modal_labels"), order)
+        and 1 <= len(gpt.get("modal_labels", [])) <= max_labels
     )
 
 
-def strict_benchmark_quality(row: dict[str, Any]) -> bool:
+def strict_benchmark_quality(row: dict[str, Any], *, max_labels: int, order: list[str]) -> bool:
     gpt = row["gpt"]
     opus = row["opus"]
     return bool(
-        train_quality(row)
+        train_quality(row, max_labels=max_labels, order=order)
         and opus.get("exact_stable")
         and strict_teacher_ok(gpt)
         and strict_teacher_ok(opus)
     )
 
 
-def ledger_row(row: dict[str, Any], batch: str) -> dict[str, Any]:
+def ledger_row(row: dict[str, Any], batch: str, *, intake_root: Path, max_labels: int, order: list[str]) -> dict[str, Any]:
     accepted = row.get("status") == "accepted_consensus"
-    labels = row["gpt"]["modal_labels"]
+    labels = priority_labels(row["gpt"]["modal_labels"], order)
     source = "teacher_consensus" if accepted else "teacher_modal_soft_train_only"
     decision_note = (
         "GPT and Opus modal labels are exact-stable and matched under the current spec."
@@ -105,17 +120,17 @@ def ledger_row(row: dict[str, Any], batch: str) -> dict[str, Any]:
         "source": source,
         "github_url": row.get("github_url"),
         "title": row.get("title"),
-        "spec_manifest": str(DEFAULT_INTAKE / batch / "spec-manifest.json"),
+        "spec_manifest": str(intake_root / batch / "spec-manifest.json"),
         "legacy_v5_labels": row.get("legacy_v5_labels", []),
         "quality": {
             "train_quality": True,
-            "strict_benchmark_quality": strict_benchmark_quality(row),
+            "strict_benchmark_quality": strict_benchmark_quality(row, max_labels=max_labels, order=order),
             "gpt_exact_stable": row["gpt"].get("exact_stable"),
             "opus_exact_stable": row["opus"].get("exact_stable"),
             "gpt_modal_count": row["gpt"].get("modal_count"),
             "opus_modal_count": row["opus"].get("modal_count"),
-            "gpt_opus_modal_match": label_tuple(row["gpt"].get("modal_labels"))
-            == label_tuple(row["opus"].get("modal_labels")),
+            "gpt_opus_modal_match": label_tuple(row["gpt"].get("modal_labels"), order)
+            == label_tuple(row["opus"].get("modal_labels"), order),
             "review_reasons": row.get("review_reasons", []),
         },
         "decision_note": decision_note,
@@ -124,13 +139,13 @@ def ledger_row(row: dict[str, Any], batch: str) -> dict[str, Any]:
 
 def markdown_summary(summary: dict[str, Any], extra_rows: list[dict[str, Any]]) -> str:
     lines = [
-        "# V6b Train-Quality Ledger",
+        "# V6 Train-Quality Ledger",
         "",
-        "This artifact is for sharing and early investigation. It does not change the adjudicated v6b set.",
+        "This artifact is for sharing and early investigation. It does not change the adjudicated v6 set.",
         "",
         "## Gates",
         "",
-        "- Benchmark/adjudicated rows require GPT 3/3 exact stability, Opus 2/2 exact stability, matching modal label sets, and no teacher validity flags.",
+        f"- Benchmark/adjudicated rows require GPT exact stability, Opus exact stability, matching modal label sets, no teacher validity flags, and <= {summary['max_labels']} labels.",
         "- Strict benchmark-quality rows additionally require every teacher run to have confidence >= 0.90 and low ambiguity.",
         "- Train-only rows require GPT 3/3 exact stability and an Opus modal set matching GPT. Opus may wobble across its two repeats.",
         "- Deferred rows with GPT/Opus modal disagreement, invalid labels, over-cardinality, failed runs, or human-review flags are excluded.",
@@ -167,22 +182,29 @@ def markdown_summary(summary: dict[str, Any], extra_rows: list[dict[str, Any]]) 
 
 def main() -> int:
     args = parse_args()
-    consensus_paths = sorted(args.intake_root.glob("batch-*/consensus.jsonl"))
+    consensus_paths = sorted(args.intake_root.glob(f"{args.batch_glob}/consensus.jsonl"))
     if not consensus_paths:
         raise SystemExit(f"no consensus files found under {args.intake_root}")
+    order = topic_order(args.schema)
 
     all_rows: list[tuple[str, dict[str, Any]]] = []
     for path in consensus_paths:
         batch = path.parent.name
         all_rows.extend((batch, row) for row in load_jsonl(path))
 
-    train_rows = [ledger_row(row, batch) for batch, row in all_rows if train_quality(row)]
+    train_rows = [
+        ledger_row(row, batch, intake_root=args.intake_root, max_labels=args.max_labels, order=order)
+        for batch, row in all_rows
+        if train_quality(row, max_labels=args.max_labels, order=order)
+    ]
     extra_rows = [row for row in train_rows if row["status"] == "train_only_modal_soft"]
     accepted_rows = [row for _, row in all_rows if row.get("status") == "accepted_consensus"]
-    strict_rows = [row for _, row in all_rows if strict_benchmark_quality(row)]
+    strict_rows = [row for _, row in all_rows if strict_benchmark_quality(row, max_labels=args.max_labels, order=order)]
 
     summary = {
         "attempted_rows": len(all_rows),
+        "intake_root": str(args.intake_root),
+        "max_labels": args.max_labels,
         "accepted_consensus_rows": len(accepted_rows),
         "strict_benchmark_quality_rows": len(strict_rows),
         "train_quality_rows": len(train_rows),
