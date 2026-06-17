@@ -14,12 +14,7 @@ build/
 *.egg-info/
 
 # Local runtime state
-.fast-agent/*
-!.fast-agent/fast-agent.yaml
-!.fast-agent/agent-cards/
-!.fast-agent/agent-cards/*.md
-!.fast-agent/model-overlays/
-!.fast-agent/model-overlays/*.yaml
+.fast-agent/
 .hf/
 .trackio/
 runs/

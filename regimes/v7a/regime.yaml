@@ -6,16 +6,16 @@ dataset:
   hf_repo_id: null
 
 default_variant: plain
-label_order: prompts/allowed-topics-v6h.md
-base_prompt: prompts/openclaw-vanilla-labeler-plain-v7a.md
+label_order: prompts/allowed-topics-v7a.md
+base_prompt: prompts/vanilla-labeler-plain-v7a.md
 task_template: prompts/task-template-v7a.md
 agent_cards:
-  structured: prompts/openclaw-vanilla-labeler-v7a.md
-  plain: prompts/openclaw-vanilla-labeler-plain-v7a.md
-schema: schemas/teacher-output-v6h.schema.json
+  structured: prompts/vanilla-labeler-v7a.md
+  plain: prompts/vanilla-labeler-plain-v7a.md
+schema: schemas/teacher-output-v7a.schema.json
 reflection_agent: openclaw_gepa_reflector
 seed_policy: prompts/seed-policy-vanilla-v7a.md
-boundary_guidance: prompts/topic-boundary-guidance-v6h.md
+boundary_guidance: prompts/topic-boundary-guidance-v7a.md
 static_asi: prompts/vanilla-asi-v7a-slim.md
 train_split: data/feedback300.jsonl
 feedback_split: data/feedback300.jsonl

@@ -1,0 +1,79 @@
+name: v7d-final
+description: Final compact soft-exact row-wise GEPA regime for handover/default ablations.
+
+dataset:
+  local_bundle: data
+  hf_repo_id: null
+
+default_variant: structured
+label_order: prompts/allowed-topics-v7d.md
+base_prompt: prompts/vanilla-labeler-plain-v7d-final.md
+task_template: prompts/task-template-v7d.md
+agent_cards:
+  structured: prompts/vanilla-labeler-v7d-final.md
+  plain: prompts/vanilla-labeler-plain-v7d-final.md
+schema: schemas/output-v7d.schema.json
+reflection_agent: openclaw_gepa_reflector
+reflection_env_dir: .fast-agent
+seed_policy: prompts/seed-policy-vanilla-v7d-final.md
+boundary_guidance: prompts/topic-boundary-guidance-v7d.md
+static_asi: prompts/vanilla-asi-v7d-final-compact.md
+train_split: data/feedback300.jsonl
+feedback_split: data/feedback300.jsonl
+pareto_split: data/pareto60.jsonl
+benchmark_split: data/bench78.jsonl
+split_manifest: data/split-manifest.json
+metric: row_soft_exact
+score_mode: row-soft-exact
+
+score_formula:
+  gepa_score: "max(0.0, 0.60 * row_jaccard + 0.20 * row_topic_f1 + 0.20 * row_exact - policy_length_penalty - hygiene_penalty)"
+  frontier_objectives:
+    - gepa_score
+    - row_jaccard
+    - row_topic_f1
+    - row_exact
+
+trackio:
+  project: easy-v7d-final-gepa
+  group: v7d-final
+  step_metric: gepa/iteration
+  local_dir: runs/v7d-final/trackio
+
+run_defaults:
+  run_root: runs/v7d-final/gepa
+  run_name_template: "{model_slug}-{regime}-soft-exact-{variant}-{feedback_profile}-mb{reflection_minibatch_size}-mc{max_metric_calls}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: compact
+  candidate_proposer: default
+  reflection_minibatch_size: 20
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 1400
+  hygiene_penalty: 0.06
+  policy_char_budget: 5000
+  parallel: 4
+
+models:
+  default_task: responses.gpt-5.5?reasoning=high
+  default_reflection: codexresponses.gpt-5.5?reasoning=high
+  supported:
+    - responses.gpt-5.5?reasoning=high
+    - codexresponses.gpt-5.4-mini
+    - gemma-e4
+    - deepseek
+
+artifacts:
+  regime_doc: docs/V7D_FINAL_REGIME.md
+  output_schema: schemas/output-v7d.schema.json
+  feedback_sha256: 3d5b6a09222b4321ca9036f2d75720edf09435893c068d909352b17849cd0a5e
+  pareto_sha256: dcd0d5a06ddcd27f6ea62a52021d5ffdb59a2fad85cdf9e9c846156f5c4b398f
+  bench_sha256: d84af041233e89104d8eba3ad3a6dbb43a47b0fdcbde632a13cbe94c92152f32
+
+notes:
+  - End-game default: compact feedback, default GEPA proposer, 5,000-character mutable policy budget.
+  - Data is intentionally identical to v7a/v6p so final comparisons stay anchored to the strongest known split.
+  - The fixed taxonomy and boundary overlay remain static; mutable overlay experiments are separate ablations.
+  - Default output variant is structured; plain labels remain available as an ablation.
+  - Trackio dashboards should use gepa/iteration or gepa/total_metric_calls as the x-axis.

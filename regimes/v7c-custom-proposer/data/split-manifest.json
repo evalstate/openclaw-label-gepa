@@ -75,9 +75,9 @@
     "feedback": "remaining source rows excluding benchmark and new Pareto, capped to 300 rows"
   },
   "outputs": {
-    "feedback": "regimes/v7b-generator-prompt-seed/data/feedback300.jsonl",
-    "pareto": "regimes/v7b-generator-prompt-seed/data/pareto60.jsonl",
-    "bench": "regimes/v7b-generator-prompt-seed/data/bench78.jsonl"
+    "feedback": "regimes/v7c-custom-proposer/data/feedback300.jsonl",
+    "pareto": "regimes/v7c-custom-proposer/data/pareto60.jsonl",
+    "bench": "regimes/v7c-custom-proposer/data/bench78.jsonl"
   },
   "hashes": {
     "feedback": "d833344c25bb51a433a28cf18383c96b739417b912fcc89e21b0b0118a37bd13",

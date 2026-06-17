@@ -6,6 +6,8 @@ skills: []
 use_history: false
 variables:
   policy: ""
+  topic_definitions: ""
+  boundary_overlay: ""
 ---
 
 # OpenClaw Issue Labeler
@@ -17,13 +19,14 @@ Do not include prose, markdown, explanations, or extra fields.
 Use only topic IDs from the allowed list below. Never invent a topic ID.
 List topics in priority order, the primary changed surface first, and use at most 3 topics.
 
-{{file:regimes/v7a/prompts/allowed-topics-v6h.md}}
+## Topic List and Definitions
 
-{{file:regimes/v7a/prompts/task-boundary-overlay-v6h.md}}
+{{topic_definitions}}
 
-## Routing policy (mutable overlay)
+## Boundary Rules
 
-The policy below is an overlay on top of the fixed taxonomy and boundary overlay
-above. Where it gives a more specific rule for this model, follow it.
+{{boundary_overlay}}
+
+## Routing Policy
 
 {{policy}}

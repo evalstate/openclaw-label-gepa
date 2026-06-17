@@ -1,0 +1,76 @@
+name: v7e-mutable-definitions
+description: Mutable topic-definition GEPA ablation using the v7d final data and compact feedback.
+
+dataset:
+  local_bundle: ../v7d-final/data
+  hf_repo_id: null
+
+default_variant: plain
+label_order: ../v7d-final/prompts/allowed-topics-v7d.md
+base_prompt: prompts/vanilla-labeler-plain-v7e.md
+task_template: ../v7d-final/prompts/task-template-v7d.md
+agent_cards:
+  structured: prompts/vanilla-labeler-v7e.md
+  plain: prompts/vanilla-labeler-plain-v7e.md
+schema: ../v7d-final/schemas/output-v7d.schema.json
+reflection_agent: openclaw_gepa_reflector
+reflection_env_dir: ../v7d-final/.fast-agent
+seed_policy: ../v7d-final/prompts/seed-policy-vanilla-v7d-final.md
+mutable_topic_definitions: ../v7d-final/prompts/allowed-topics-v7d.md
+boundary_guidance: ../v7d-final/prompts/topic-boundary-guidance-v7d.md
+static_asi: ../v7d-final/prompts/vanilla-asi-v7d-final-compact.md
+train_split: ../v7d-final/data/feedback300.jsonl
+feedback_split: ../v7d-final/data/feedback300.jsonl
+pareto_split: ../v7d-final/data/pareto60.jsonl
+benchmark_split: ../v7d-final/data/bench78.jsonl
+split_manifest: ../v7d-final/data/split-manifest.json
+metric: row_soft_exact
+score_mode: row-soft-exact
+
+score_formula:
+  gepa_score: "max(0.0, 0.60 * row_jaccard + 0.20 * row_topic_f1 + 0.20 * row_exact - policy_length_penalty - hygiene_penalty); candidates with invalid mutable topic-definition contracts score zero"
+  frontier_objectives:
+    - gepa_score
+    - row_jaccard
+    - row_topic_f1
+    - row_exact
+
+trackio:
+  project: easy-v7e-mutable-definitions-gepa
+  group: v7e-mutable-definitions
+  step_metric: gepa/iteration
+  local_dir: runs/v7e-mutable-definitions/trackio
+
+run_defaults:
+  run_root: runs/v7e-mutable-definitions/gepa
+  run_name_template: "{model_slug}-{regime}-soft-exact-{variant}-{feedback_profile}-defs-mb{reflection_minibatch_size}-mc{max_metric_calls}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: compact
+  candidate_proposer: default
+  reflection_minibatch_size: 30
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 2400
+  hygiene_penalty: 0.06
+  policy_char_budget: 5000
+  parallel: 4
+
+models:
+  default_task: gemma-e4
+  default_reflection: codexresponses.gpt-5.5?reasoning=high
+  supported:
+    - gemma-e4
+    - codexresponses.gpt-5.4-mini
+    - responses.gpt-5.5?reasoning=high
+    - deepseek
+
+artifacts:
+  regime_doc: docs/V7E_MUTABLE_DEFINITIONS.md
+  output_schema: ../v7d-final/schemas/output-v7d.schema.json
+
+notes:
+  - Ablation of mutable taxonomy wording, not mutable topic IDs.
+  - The task-facing topic definitions are seeded from v7d allowed-topics and exposed as GEPA component topic_definitions.
+  - The schema enum and label order remain frozen; candidates that add, remove, duplicate, rename, or omit topic definition bullets score zero.
+  - Data, scoring, static ASI, and boundary guidance are inherited from v7d-final.

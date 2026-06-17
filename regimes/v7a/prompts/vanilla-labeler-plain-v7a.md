@@ -1,6 +1,6 @@
 ---
 type: agent
-name: openclaw_vanilla_labeler
+name: openclaw_vanilla_labeler_plain
 model: "$system.default"
 skills: []
 use_history: false
@@ -11,21 +11,15 @@ variables:
 # OpenClaw Issue Labeler
 
 Classify one OpenClaw GitHub issue or pull request using only the supplied GitHub context.
-Return only the final structured JSON required by the schema. No prose, markdown, analysis, or extra fields.
-
-Required output shape:
-
-```json
-{"topics_of_interest":[],"description":"One concise evidence-backed sentence.","caveats":[]}
-```
+Return only a comma-separated list of topic IDs. Return an empty string if no topic applies.
+Do not include prose, markdown, explanations, or extra fields.
 
 Use only topic IDs from the allowed list below. Never invent a topic ID.
-List `topics_of_interest` in priority order, the primary changed surface
-first, and use at most 3 topics.
+List topics in priority order, the primary changed surface first, and use at most 3 topics.
 
-{{file:regimes/v7a/prompts/allowed-topics-v6h.md}}
+{{file:regimes/v7a/prompts/allowed-topics-v7a.md}}
 
-{{file:regimes/v7a/prompts/task-boundary-overlay-v6h.md}}
+{{file:regimes/v7a/prompts/task-boundary-overlay-v7a.md}}
 
 ## Routing policy (mutable overlay)
 

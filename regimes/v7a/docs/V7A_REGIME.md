@@ -17,8 +17,8 @@ and macro-F1 on Pareto and held-out benchmark rows.
 ## Artifacts
 
 - static ASI: `regimes/v7a/prompts/vanilla-asi-v7a-slim.md`
-- plain-label AgentCard: `regimes/v7a/prompts/openclaw-vanilla-labeler-plain-v7a.md`
-- structured AgentCard: `regimes/v7a/prompts/openclaw-vanilla-labeler-v7a.md`
+- plain-label AgentCard: `regimes/v7a/prompts/vanilla-labeler-plain-v7a.md`
+- structured AgentCard: `regimes/v7a/prompts/vanilla-labeler-v7a.md`
 - seed prompt: `regimes/v7a/prompts/seed-policy-vanilla-v7a.md`
 - feedback split: `regimes/v7a/data/feedback300.jsonl`
 - Pareto split: `regimes/v7a/data/pareto60.jsonl`

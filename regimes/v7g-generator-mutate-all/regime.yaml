@@ -1,0 +1,83 @@
+name: v7g-generator-mutate-all
+description: Mutate policy, topic definitions, and boundary overlay from the generator-prompt seed with one combined mutable prompt budget.
+
+dataset:
+  local_bundle: ../v7d-final/data
+  hf_repo_id: null
+
+default_variant: plain
+label_order: ../v7d-final/prompts/allowed-topics-v7d.md
+base_prompt: prompts/vanilla-labeler-plain-v7g.md
+task_template: ../v7d-final/prompts/task-template-v7d.md
+agent_cards:
+  structured: prompts/vanilla-labeler-v7g.md
+  plain: prompts/vanilla-labeler-plain-v7g.md
+schema: ../v7d-final/schemas/output-v7d.schema.json
+reflection_agent: openclaw_gepa_reflector
+reflection_env_dir: ../v7d-final/.fast-agent
+seed_policy: ../v7b-generator-prompt-seed/prompts/seed-policy-vanilla-v7b-generator-prompt-seed.md
+mutable_topic_definitions: ../v7d-final/prompts/allowed-topics-v7d.md
+mutable_boundary_overlay: ../v7d-final/prompts/task-boundary-overlay-v7d.md
+boundary_guidance: ../v7d-final/prompts/topic-boundary-guidance-v7d.md
+static_asi: prompts/vanilla-asi-v7g-generator-mutate-all.md
+train_split: ../v7d-final/data/feedback300.jsonl
+feedback_split: ../v7d-final/data/feedback300.jsonl
+pareto_split: ../v7d-final/data/pareto60.jsonl
+benchmark_split: ../v7d-final/data/bench78.jsonl
+split_manifest: ../v7d-final/data/split-manifest.json
+metric: row_soft_exact
+score_mode: row-soft-exact
+
+score_formula:
+  gepa_score: "max(0.0, 0.60 * row_jaccard + 0.20 * row_topic_f1 + 0.20 * row_exact - hygiene_penalty - total_mutable_length_penalty); candidates with invalid mutable topic-definition contracts score zero"
+  frontier_objectives:
+    - gepa_score
+    - row_jaccard
+    - row_topic_f1
+    - row_exact
+
+trackio:
+  project: easy-v7g-generator-mutate-all-gepa
+  group: v7g-generator-mutate-all
+  step_metric: gepa/iteration
+  local_dir: runs/v7g-generator-mutate-all/trackio
+
+run_defaults:
+  run_root: runs/v7g-generator-mutate-all/gepa
+  run_name_template: "{model_slug}-{regime}-soft-exact-{variant}-{feedback_profile}-allmut-tot{total_mutable_char_budget}-mb{reflection_minibatch_size}-mc{max_metric_calls}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: compact
+  candidate_proposer: default
+  reflection_minibatch_size: 30
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 2400
+  hygiene_penalty: 0.06
+  policy_char_budget: 4500
+  topic_definitions_char_budget: 0
+  total_mutable_char_budget: 20000
+  parallel: 8
+
+models:
+  default_task: deepseek4flash
+  default_reflection: codexresponses.gpt-5.5?reasoning=high
+  supported:
+    - deepseek4flash
+    - gemma-e4
+    - codexresponses.gpt-5.4-mini
+    - responses.gpt-5.5?reasoning=high
+
+artifacts:
+  regime_doc: docs/V7G_GENERATOR_MUTATE_ALL.md
+  output_schema: ../v7d-final/schemas/output-v7d.schema.json
+  generator_prompt_seed: ../v7b-generator-prompt-seed/prompts/seed-policy-vanilla-v7b-generator-prompt-seed.md
+
+notes:
+  - Starts from the original generator/adjudication seed policy that outperformed the v7f GEPA candidate on deepseek4flash bench.
+  - The fixed AgentCard shell owns only the output contract and placement of mutable components.
+  - GEPA may mutate policy, topic_definitions, and boundary_overlay.
+  - Topic IDs are frozen; invalid topic-definition contracts score zero.
+  - The mutable policy keeps a 4500 character cap; topic definitions do not have a separate cap.
+  - The experiment also uses one combined mutable prompt budget of 20000 characters.
+  - The seed mutable material is approximately 20400 characters, so the original seed may begin slightly over the combined budget by design.
