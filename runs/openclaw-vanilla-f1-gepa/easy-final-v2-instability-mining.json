@@ -1,0 +1,3905 @@
+{
+  "stability_summary": {
+    "completed_runs": 8,
+    "run_names": [
+      "easy-final-v2-test-gpt-5.4-mini-best-stability-rerun-01",
+      "easy-final-v2-test-gpt-5.4-mini-best-stability-rerun-02",
+      "easy-final-v2-test-gpt-5.4-mini-best-stability-rerun-03",
+      "easy-final-v2-test-sonnet-best-stability-rerun-01",
+      "easy-final-v2-test-sonnet-best-stability-rerun-02",
+      "easy-final-v2-test-sonnet-best-stability-rerun-03",
+      "easy-final-v2-test-deepseek4-best-stability-rerun-01",
+      "easy-final-v2-test-deepseek4-best-stability-rerun-02"
+    ]
+  },
+  "least_stable_test_rows": [
+    {
+      "id": "openclaw-openclaw-83863",
+      "title": "ACP/Codex child tasks can be marked succeeded with progress-only output and no final deliverable",
+      "expected": [
+        "acp",
+        "agent_runtime",
+        "codex",
+        "coding_agents",
+        "reliability"
+      ],
+      "n": 8,
+      "unique_sets": 8,
+      "most_common": [
+        [
+          [
+            "acp",
+            "codex",
+            "notifications",
+            "reliability",
+            "sessions"
+          ],
+          1
+        ],
+        [
+          [
+            "acp",
+            "agent_runtime",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          1
+        ],
+        [
+          [
+            "acp",
+            "agent_runtime",
+            "codex",
+            "notifications",
+            "reliability"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.0,
+      "avg_jaccard_vs_expected": 0.49032738095238093,
+      "avg_symdiff_vs_expected": 3.5,
+      "pairwise_pred_jaccard": 0.530484693877551,
+      "volatile_topics": [
+        [
+          "sessions",
+          6
+        ],
+        [
+          "notifications",
+          5
+        ],
+        [
+          "codex",
+          4
+        ],
+        [
+          "coding_agents",
+          4
+        ],
+        [
+          "agent_runtime",
+          2
+        ],
+        [
+          "queueing",
+          2
+        ],
+        [
+          "ui_tui",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "sessions",
+          6
+        ],
+        [
+          "notifications",
+          5
+        ],
+        [
+          "queueing",
+          2
+        ],
+        [
+          "ui_tui",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "agent_runtime",
+          6
+        ],
+        [
+          "coding_agents",
+          4
+        ],
+        [
+          "codex",
+          4
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "acp",
+            "coding_agents",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acp",
+            "codex",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "acp",
+            "codex",
+            "notifications",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acp",
+            "agent_runtime",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acp",
+            "agent_runtime",
+            "codex",
+            "notifications",
+            "reliability"
+          ]
+        ],
+        "sonnet": [
+          [
+            "acp",
+            "coding_agents",
+            "notifications",
+            "queueing",
+            "reliability"
+          ],
+          [
+            "acp",
+            "coding_agents",
+            "notifications",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acp",
+            "coding_agents",
+            "notifications",
+            "reliability",
+            "sessions"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-70002",
+      "title": "ci: skip docs sync & translate-trigger workflows in forks",
+      "expected": [
+        "tests_ci"
+      ],
+      "n": 8,
+      "unique_sets": 3,
+      "most_common": [
+        [
+          [
+            "tests_ci"
+          ],
+          4
+        ],
+        [
+          [
+            "reliability",
+            "tests_ci"
+          ],
+          3
+        ],
+        [
+          [
+            "docs"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.5,
+      "avg_jaccard_vs_expected": 0.6875,
+      "avg_symdiff_vs_expected": 0.625,
+      "pairwise_pred_jaccard": 0.5357142857142857,
+      "volatile_topics": [
+        [
+          "tests_ci",
+          7
+        ],
+        [
+          "reliability",
+          3
+        ],
+        [
+          "docs",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "reliability",
+          3
+        ],
+        [
+          "docs",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "tests_ci",
+          1
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "tests_ci"
+          ],
+          [
+            "docs"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "reliability",
+            "tests_ci"
+          ],
+          [
+            "reliability",
+            "tests_ci"
+          ],
+          [
+            "reliability",
+            "tests_ci"
+          ]
+        ],
+        "sonnet": [
+          [
+            "tests_ci"
+          ],
+          [
+            "tests_ci"
+          ],
+          [
+            "tests_ci"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-84697",
+      "title": "Custom OpenAI-compatible provider with baseUrl without /v1 fails with cryptic 'incomplete terminal response' error",
+      "expected": [
+        "config",
+        "local_model_providers",
+        "model_serving"
+      ],
+      "n": 8,
+      "unique_sets": 5,
+      "most_common": [
+        [
+          [
+            "config",
+            "local_model_providers",
+            "model_serving"
+          ],
+          2
+        ],
+        [
+          [
+            "config",
+            "local_model_providers"
+          ],
+          2
+        ],
+        [
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          2
+        ]
+      ],
+      "exact_rate": 0.25,
+      "avg_jaccard_vs_expected": 0.6770833333333334,
+      "avg_symdiff_vs_expected": 1.125,
+      "pairwise_pred_jaccard": 0.5446428571428571,
+      "volatile_topics": [
+        [
+          "config",
+          5
+        ],
+        [
+          "model_serving",
+          5
+        ],
+        [
+          "reliability",
+          3
+        ]
+      ],
+      "fp": [
+        [
+          "reliability",
+          3
+        ]
+      ],
+      "fn": [
+        [
+          "model_serving",
+          3
+        ],
+        [
+          "config",
+          3
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "local_model_providers"
+          ],
+          [
+            "config",
+            "local_model_providers"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "config",
+            "local_model_providers",
+            "model_serving"
+          ],
+          [
+            "config",
+            "local_model_providers"
+          ],
+          [
+            "config",
+            "local_model_providers",
+            "model_serving"
+          ]
+        ],
+        "sonnet": [
+          [
+            "config",
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-70518",
+      "title": "fix(config): add heartbeat skill allowlist",
+      "expected": [
+        "config",
+        "cron_automation",
+        "skills_plugins"
+      ],
+      "n": 8,
+      "unique_sets": 6,
+      "most_common": [
+        [
+          [
+            "config",
+            "cron_automation",
+            "skills_plugins"
+          ],
+          3
+        ],
+        [
+          [
+            "config",
+            "gateway",
+            "skills_plugins"
+          ],
+          1
+        ],
+        [
+          [
+            "config",
+            "skills_plugins"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.375,
+      "avg_jaccard_vs_expected": 0.7270833333333333,
+      "avg_symdiff_vs_expected": 1.125,
+      "pairwise_pred_jaccard": 0.569047619047619,
+      "volatile_topics": [
+        [
+          "cron_automation",
+          6
+        ],
+        [
+          "skills_plugins",
+          6
+        ],
+        [
+          "docs",
+          3
+        ],
+        [
+          "agent_runtime",
+          1
+        ],
+        [
+          "gateway",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "docs",
+          3
+        ],
+        [
+          "gateway",
+          1
+        ],
+        [
+          "agent_runtime",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "cron_automation",
+          2
+        ],
+        [
+          "skills_plugins",
+          2
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "config",
+            "cron_automation",
+            "docs"
+          ],
+          [
+            "agent_runtime",
+            "config",
+            "cron_automation",
+            "docs"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "config",
+            "gateway",
+            "skills_plugins"
+          ],
+          [
+            "config",
+            "cron_automation",
+            "skills_plugins"
+          ],
+          [
+            "config",
+            "skills_plugins"
+          ]
+        ],
+        "sonnet": [
+          [
+            "config",
+            "cron_automation",
+            "skills_plugins"
+          ],
+          [
+            "config",
+            "cron_automation",
+            "skills_plugins"
+          ],
+          [
+            "config",
+            "cron_automation",
+            "docs",
+            "skills_plugins"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-87277",
+      "title": "[Feature] Add MiMo-V2.5 to Xiaomi catalog + automatic multimodal routing when DeepSeek V4-Pro is primary model",
+      "expected": [
+        "config",
+        "model_releases",
+        "model_serving"
+      ],
+      "n": 8,
+      "unique_sets": 5,
+      "most_common": [
+        [
+          [
+            "config",
+            "model_serving"
+          ],
+          3
+        ],
+        [
+          [
+            "config",
+            "model_serving",
+            "open_weight_models"
+          ],
+          2
+        ],
+        [
+          [
+            "config",
+            "model_serving",
+            "reliability"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.0,
+      "avg_jaccard_vs_expected": 0.5625,
+      "avg_symdiff_vs_expected": 1.625,
+      "pairwise_pred_jaccard": 0.5839285714285715,
+      "volatile_topics": [
+        [
+          "model_serving",
+          7
+        ],
+        [
+          "open_weight_models",
+          3
+        ],
+        [
+          "agent_runtime",
+          1
+        ],
+        [
+          "model_releases",
+          1
+        ],
+        [
+          "reliability",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "open_weight_models",
+          3
+        ],
+        [
+          "reliability",
+          1
+        ],
+        [
+          "agent_runtime",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "model_releases",
+          7
+        ],
+        [
+          "model_serving",
+          1
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "agent_runtime",
+            "config"
+          ],
+          [
+            "config",
+            "model_serving"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "config",
+            "model_serving"
+          ],
+          [
+            "config",
+            "model_serving",
+            "reliability"
+          ],
+          [
+            "config",
+            "model_serving"
+          ]
+        ],
+        "sonnet": [
+          [
+            "config",
+            "model_releases",
+            "model_serving",
+            "open_weight_models"
+          ],
+          [
+            "config",
+            "model_serving",
+            "open_weight_models"
+          ],
+          [
+            "config",
+            "model_serving",
+            "open_weight_models"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-85660",
+      "title": "GitHub Copilot plugin: agents.defaults.imageModel for unknown Copilot model ID falls back to OpenAI provider with confusing 401",
+      "expected": [
+        "config",
+        "model_serving",
+        "security",
+        "skills_plugins"
+      ],
+      "n": 8,
+      "unique_sets": 5,
+      "most_common": [
+        [
+          [
+            "config",
+            "security",
+            "skills_plugins"
+          ],
+          3
+        ],
+        [
+          [
+            "config",
+            "model_serving",
+            "security"
+          ],
+          2
+        ],
+        [
+          [
+            "auth_identity",
+            "config",
+            "security"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.125,
+      "avg_jaccard_vs_expected": 0.7375,
+      "avg_symdiff_vs_expected": 1.125,
+      "pairwise_pred_jaccard": 0.6107142857142858,
+      "volatile_topics": [
+        [
+          "security",
+          7
+        ],
+        [
+          "skills_plugins",
+          5
+        ],
+        [
+          "model_serving",
+          4
+        ],
+        [
+          "auth_identity",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "auth_identity",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "model_serving",
+          4
+        ],
+        [
+          "skills_plugins",
+          3
+        ],
+        [
+          "security",
+          1
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "config",
+            "model_serving",
+            "security"
+          ],
+          [
+            "config",
+            "model_serving",
+            "security",
+            "skills_plugins"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "auth_identity",
+            "config",
+            "security"
+          ],
+          [
+            "config",
+            "model_serving",
+            "security"
+          ],
+          [
+            "config",
+            "model_serving",
+            "skills_plugins"
+          ]
+        ],
+        "sonnet": [
+          [
+            "config",
+            "security",
+            "skills_plugins"
+          ],
+          [
+            "config",
+            "security",
+            "skills_plugins"
+          ],
+          [
+            "config",
+            "security",
+            "skills_plugins"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-74204",
+      "title": "memory.qmd.update.embedTimeoutMs default (120 s) is too low for local GGUF; error message doesn't surface the fix",
+      "expected": [
+        "config",
+        "local_models",
+        "memory",
+        "reliability"
+      ],
+      "n": 8,
+      "unique_sets": 5,
+      "most_common": [
+        [
+          [
+            "config",
+            "memory",
+            "reliability"
+          ],
+          3
+        ],
+        [
+          [
+            "config",
+            "local_models",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          2
+        ],
+        [
+          [
+            "config",
+            "local_models",
+            "memory"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.0,
+      "avg_jaccard_vs_expected": 0.7375,
+      "avg_symdiff_vs_expected": 1.25,
+      "pairwise_pred_jaccard": 0.6212585034013606,
+      "volatile_topics": [
+        [
+          "reliability",
+          6
+        ],
+        [
+          "local_models",
+          5
+        ],
+        [
+          "self_hosted_inference",
+          3
+        ],
+        [
+          "docs",
+          1
+        ],
+        [
+          "open_weight_models",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "self_hosted_inference",
+          3
+        ],
+        [
+          "docs",
+          1
+        ],
+        [
+          "open_weight_models",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "local_models",
+          3
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "config",
+            "docs",
+            "local_models",
+            "memory",
+            "reliability"
+          ],
+          [
+            "config",
+            "local_models",
+            "memory",
+            "open_weight_models",
+            "self_hosted_inference"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "config",
+            "memory",
+            "reliability"
+          ],
+          [
+            "config",
+            "memory",
+            "reliability"
+          ],
+          [
+            "config",
+            "memory",
+            "reliability"
+          ]
+        ],
+        "sonnet": [
+          [
+            "config",
+            "local_models",
+            "memory"
+          ],
+          [
+            "config",
+            "local_models",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          [
+            "config",
+            "local_models",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-72085",
+      "title": "docs(commands): document bashForegroundMs clamp bounds (0\u201330 000 ms)",
+      "expected": [
+        "config",
+        "docs"
+      ],
+      "n": 8,
+      "unique_sets": 4,
+      "most_common": [
+        [
+          [
+            "config",
+            "docs"
+          ],
+          3
+        ],
+        [
+          [
+            "config",
+            "docs",
+            "gateway"
+          ],
+          2
+        ],
+        [
+          [
+            "config",
+            "docs",
+            "exec_tools"
+          ],
+          2
+        ]
+      ],
+      "exact_rate": 0.375,
+      "avg_jaccard_vs_expected": 0.7708333333333333,
+      "avg_symdiff_vs_expected": 0.625,
+      "pairwise_pred_jaccard": 0.6369047619047619,
+      "volatile_topics": [
+        [
+          "config",
+          7
+        ],
+        [
+          "exec_tools",
+          2
+        ],
+        [
+          "gateway",
+          2
+        ]
+      ],
+      "fp": [
+        [
+          "gateway",
+          2
+        ],
+        [
+          "exec_tools",
+          2
+        ]
+      ],
+      "fn": [
+        [
+          "config",
+          1
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "docs"
+          ],
+          [
+            "config",
+            "docs",
+            "exec_tools"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "config",
+            "docs",
+            "gateway"
+          ],
+          [
+            "config",
+            "docs",
+            "gateway"
+          ],
+          [
+            "config",
+            "docs"
+          ]
+        ],
+        "sonnet": [
+          [
+            "config",
+            "docs"
+          ],
+          [
+            "config",
+            "docs"
+          ],
+          [
+            "config",
+            "docs",
+            "exec_tools"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-84753",
+      "title": "[Feature]: Show display name instead of user ID in session list",
+      "expected": [
+        "chat_integrations",
+        "sessions",
+        "ui_tui"
+      ],
+      "n": 8,
+      "unique_sets": 4,
+      "most_common": [
+        [
+          [
+            "acp",
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          3
+        ],
+        [
+          [
+            "chat_integrations",
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          3
+        ],
+        [
+          [
+            "acp",
+            "chat_integrations",
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.0,
+      "avg_jaccard_vs_expected": 0.56875,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_pred_jaccard": 0.6511904761904762,
+      "volatile_topics": [
+        [
+          "config",
+          7
+        ],
+        [
+          "sessions",
+          7
+        ],
+        [
+          "chat_integrations",
+          5
+        ],
+        [
+          "acp",
+          4
+        ],
+        [
+          "api_surface",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "config",
+          7
+        ],
+        [
+          "acp",
+          4
+        ],
+        [
+          "api_surface",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "chat_integrations",
+          3
+        ],
+        [
+          "sessions",
+          1
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "acp",
+            "chat_integrations",
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "api_surface",
+            "chat_integrations",
+            "ui_tui"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "acp",
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "acp",
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "acp",
+            "config",
+            "sessions",
+            "ui_tui"
+          ]
+        ],
+        "sonnet": [
+          [
+            "chat_integrations",
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "chat_integrations",
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "chat_integrations",
+            "config",
+            "sessions",
+            "ui_tui"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-75784",
+      "title": "Phantom user messages appear in webchat after heartbeat wakes / gateway restart / session repair",
+      "expected": [
+        "chat_integrations",
+        "gateway",
+        "reliability",
+        "sessions"
+      ],
+      "n": 8,
+      "unique_sets": 5,
+      "most_common": [
+        [
+          [
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          3
+        ],
+        [
+          [
+            "agent_runtime",
+            "gateway",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          2
+        ],
+        [
+          [
+            "gateway",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.375,
+      "avg_jaccard_vs_expected": 0.75,
+      "avg_symdiff_vs_expected": 1.375,
+      "pairwise_pred_jaccard": 0.6630952380952381,
+      "volatile_topics": [
+        [
+          "gateway",
+          7
+        ],
+        [
+          "chat_integrations",
+          5
+        ],
+        [
+          "agent_runtime",
+          4
+        ],
+        [
+          "ui_tui",
+          3
+        ]
+      ],
+      "fp": [
+        [
+          "agent_runtime",
+          4
+        ],
+        [
+          "ui_tui",
+          3
+        ]
+      ],
+      "fn": [
+        [
+          "chat_integrations",
+          3
+        ],
+        [
+          "gateway",
+          1
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "agent_runtime",
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "agent_runtime",
+            "chat_integrations",
+            "reliability",
+            "sessions"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ]
+        ],
+        "sonnet": [
+          [
+            "agent_runtime",
+            "gateway",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "gateway",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "agent_runtime",
+            "gateway",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-67539",
+      "title": "[Feature]: Add provider-specific TTS prompt hints",
+      "expected": [
+        "api_surface",
+        "self_hosted_inference"
+      ],
+      "n": 8,
+      "unique_sets": 4,
+      "most_common": [
+        [
+          [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          5
+        ],
+        [
+          [
+            "api_surface",
+            "self_hosted_inference",
+            "skills_plugins"
+          ],
+          1
+        ],
+        [
+          [
+            "self_hosted_inference"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.625,
+      "avg_jaccard_vs_expected": 0.8125,
+      "avg_symdiff_vs_expected": 0.5,
+      "pairwise_pred_jaccard": 0.6785714285714286,
+      "volatile_topics": [
+        [
+          "api_surface",
+          6
+        ],
+        [
+          "skills_plugins",
+          2
+        ]
+      ],
+      "fp": [
+        [
+          "skills_plugins",
+          2
+        ]
+      ],
+      "fn": [
+        [
+          "api_surface",
+          2
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "self_hosted_inference"
+          ],
+          [
+            "self_hosted_inference",
+            "skills_plugins"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          [
+            "api_surface",
+            "self_hosted_inference"
+          ]
+        ],
+        "sonnet": [
+          [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          [
+            "api_surface",
+            "self_hosted_inference",
+            "skills_plugins"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-75043",
+      "title": "Add provider-aware automatic TTS emotion mapping",
+      "expected": [
+        "api_surface",
+        "config",
+        "self_hosted_inference"
+      ],
+      "n": 8,
+      "unique_sets": 4,
+      "most_common": [
+        [
+          [
+            "config",
+            "self_hosted_inference"
+          ],
+          2
+        ],
+        [
+          [
+            "config",
+            "docs",
+            "self_hosted_inference"
+          ],
+          2
+        ],
+        [
+          [
+            "api_surface",
+            "config",
+            "self_hosted_inference"
+          ],
+          2
+        ]
+      ],
+      "exact_rate": 0.25,
+      "avg_jaccard_vs_expected": 0.7291666666666666,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_pred_jaccard": 0.6904761904761905,
+      "volatile_topics": [
+        [
+          "api_surface",
+          4
+        ],
+        [
+          "docs",
+          4
+        ]
+      ],
+      "fp": [
+        [
+          "docs",
+          4
+        ]
+      ],
+      "fn": [
+        [
+          "api_surface",
+          4
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "config",
+            "docs",
+            "self_hosted_inference"
+          ],
+          [
+            "api_surface",
+            "config",
+            "self_hosted_inference"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "config",
+            "self_hosted_inference"
+          ],
+          [
+            "config",
+            "docs",
+            "self_hosted_inference"
+          ],
+          [
+            "config",
+            "self_hosted_inference"
+          ]
+        ],
+        "sonnet": [
+          [
+            "api_surface",
+            "config",
+            "self_hosted_inference"
+          ],
+          [
+            "api_surface",
+            "config",
+            "docs",
+            "self_hosted_inference"
+          ],
+          [
+            "api_surface",
+            "config",
+            "docs",
+            "self_hosted_inference"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-78977",
+      "title": "fix(providers): skip store:false for proxy-like Responses API endpoints (#78897)",
+      "expected": [
+        "local_model_providers",
+        "model_serving",
+        "reliability"
+      ],
+      "n": 8,
+      "unique_sets": 3,
+      "most_common": [
+        [
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          5
+        ],
+        [
+          [
+            "local_model_providers",
+            "model_serving"
+          ],
+          2
+        ],
+        [
+          [
+            "api_surface",
+            "model_serving"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.625,
+      "avg_jaccard_vs_expected": 0.8229166666666666,
+      "avg_symdiff_vs_expected": 0.625,
+      "pairwise_pred_jaccard": 0.6994047619047619,
+      "volatile_topics": [
+        [
+          "local_model_providers",
+          7
+        ],
+        [
+          "reliability",
+          5
+        ],
+        [
+          "api_surface",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "api_surface",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "reliability",
+          3
+        ],
+        [
+          "local_model_providers",
+          1
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "local_model_providers",
+            "model_serving"
+          ],
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "local_model_providers",
+            "model_serving"
+          ],
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          [
+            "api_surface",
+            "model_serving"
+          ]
+        ],
+        "sonnet": [
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-56613",
+      "title": "[Feature]: Talk/Voice tab \u2014 agent/session switching + per-agent TTS voice",
+      "expected": [
+        "config",
+        "sessions",
+        "ui_tui"
+      ],
+      "n": 8,
+      "unique_sets": 2,
+      "most_common": [
+        [
+          [
+            "config",
+            "self_hosted_inference",
+            "sessions",
+            "ui_tui"
+          ],
+          4
+        ],
+        [
+          [
+            "sessions",
+            "ui_tui"
+          ],
+          4
+        ]
+      ],
+      "exact_rate": 0.0,
+      "avg_jaccard_vs_expected": 0.7083333333333333,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_pred_jaccard": 0.7142857142857143,
+      "volatile_topics": [
+        [
+          "config",
+          4
+        ],
+        [
+          "self_hosted_inference",
+          4
+        ]
+      ],
+      "fp": [
+        [
+          "self_hosted_inference",
+          4
+        ]
+      ],
+      "fn": [
+        [
+          "config",
+          4
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "sessions",
+            "ui_tui"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "config",
+            "self_hosted_inference",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "sessions",
+            "ui_tui"
+          ]
+        ],
+        "sonnet": [
+          [
+            "config",
+            "self_hosted_inference",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "config",
+            "self_hosted_inference",
+            "sessions",
+            "ui_tui"
+          ],
+          [
+            "config",
+            "self_hosted_inference",
+            "sessions",
+            "ui_tui"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-71157",
+      "title": "[Feature]: Support WhatsApp disappearing-message expiration for outbound replies",
+      "expected": [
+        "chat_integrations",
+        "config",
+        "security"
+      ],
+      "n": 8,
+      "unique_sets": 3,
+      "most_common": [
+        [
+          [
+            "chat_integrations",
+            "config"
+          ],
+          4
+        ],
+        [
+          [
+            "chat_integrations",
+            "config",
+            "security"
+          ],
+          2
+        ],
+        [
+          [
+            "chat_integrations",
+            "config",
+            "notifications",
+            "security"
+          ],
+          2
+        ]
+      ],
+      "exact_rate": 0.25,
+      "avg_jaccard_vs_expected": 0.7708333333333333,
+      "avg_symdiff_vs_expected": 0.75,
+      "pairwise_pred_jaccard": 0.7261904761904762,
+      "volatile_topics": [
+        [
+          "security",
+          4
+        ],
+        [
+          "notifications",
+          2
+        ]
+      ],
+      "fp": [
+        [
+          "notifications",
+          2
+        ]
+      ],
+      "fn": [
+        [
+          "security",
+          4
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "chat_integrations",
+            "config",
+            "security"
+          ],
+          [
+            "chat_integrations",
+            "config"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "chat_integrations",
+            "config"
+          ],
+          [
+            "chat_integrations",
+            "config"
+          ],
+          [
+            "chat_integrations",
+            "config"
+          ]
+        ],
+        "sonnet": [
+          [
+            "chat_integrations",
+            "config",
+            "security"
+          ],
+          [
+            "chat_integrations",
+            "config",
+            "notifications",
+            "security"
+          ],
+          [
+            "chat_integrations",
+            "config",
+            "notifications",
+            "security"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-71784",
+      "title": "Bug: memory search live embedding fails ~20\u201340% with `fetch failed | other side closed` (provider-agnostic; upstream healthy)",
+      "expected": [
+        "memory",
+        "reliability"
+      ],
+      "n": 8,
+      "unique_sets": 3,
+      "most_common": [
+        [
+          [
+            "memory",
+            "reliability"
+          ],
+          4
+        ],
+        [
+          [
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          2
+        ],
+        [
+          [
+            "memory",
+            "reliability",
+            "security"
+          ],
+          2
+        ]
+      ],
+      "exact_rate": 0.5,
+      "avg_jaccard_vs_expected": 0.8333333333333333,
+      "avg_symdiff_vs_expected": 0.5,
+      "pairwise_pred_jaccard": 0.738095238095238,
+      "volatile_topics": [
+        [
+          "security",
+          2
+        ],
+        [
+          "self_hosted_inference",
+          2
+        ]
+      ],
+      "fp": [
+        [
+          "self_hosted_inference",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "fn": [],
+      "by_model": {
+        "deepseek4": [
+          [
+            "memory",
+            "reliability",
+            "security"
+          ],
+          [
+            "memory",
+            "reliability",
+            "security"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "memory",
+            "reliability"
+          ],
+          [
+            "memory",
+            "reliability"
+          ],
+          [
+            "memory",
+            "reliability"
+          ]
+        ],
+        "sonnet": [
+          [
+            "memory",
+            "reliability"
+          ],
+          [
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          [
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-84297",
+      "title": "[Bug]: Per-agent identity overlay dropped on cron --announce and heartbeat target-channel Slack pushes (announce path; reply path was fixed in #38235)",
+      "expected": [
+        "auth_identity",
+        "chat_integrations",
+        "cron_automation",
+        "notifications"
+      ],
+      "n": 8,
+      "unique_sets": 3,
+      "most_common": [
+        [
+          [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          5
+        ],
+        [
+          [
+            "chat_integrations",
+            "config",
+            "cron_automation"
+          ],
+          2
+        ],
+        [
+          [
+            "chat_integrations",
+            "cron_automation"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.0,
+      "avg_jaccard_vs_expected": 0.63125,
+      "avg_symdiff_vs_expected": 1.625,
+      "pairwise_pred_jaccard": 0.7380952380952381,
+      "volatile_topics": [
+        [
+          "notifications",
+          5
+        ],
+        [
+          "config",
+          2
+        ]
+      ],
+      "fp": [
+        [
+          "config",
+          2
+        ]
+      ],
+      "fn": [
+        [
+          "auth_identity",
+          8
+        ],
+        [
+          "notifications",
+          3
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "chat_integrations",
+            "config",
+            "cron_automation"
+          ],
+          [
+            "chat_integrations",
+            "cron_automation"
+          ],
+          [
+            "chat_integrations",
+            "config",
+            "cron_automation"
+          ]
+        ],
+        "sonnet": [
+          [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-48580",
+      "title": "Bug: acpx codex sessions \u521b\u5efa\u7684\u4f1a\u8bdd\u7acb\u5373\u9000\u51fa - stdin is not a terminal",
+      "expected": [
+        "acpx",
+        "codex",
+        "reliability",
+        "sessions"
+      ],
+      "n": 8,
+      "unique_sets": 4,
+      "most_common": [
+        [
+          [
+            "acpx",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          3
+        ],
+        [
+          [
+            "acpx",
+            "coding_agents",
+            "reliability",
+            "sessions"
+          ],
+          3
+        ],
+        [
+          [
+            "acpx",
+            "codex",
+            "exec_tools",
+            "reliability",
+            "sessions"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.375,
+      "avg_jaccard_vs_expected": 0.8,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_pred_jaccard": 0.7416666666666667,
+      "volatile_topics": [
+        [
+          "codex",
+          5
+        ],
+        [
+          "coding_agents",
+          4
+        ],
+        [
+          "exec_tools",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "coding_agents",
+          4
+        ],
+        [
+          "exec_tools",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "codex",
+          3
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "acpx",
+            "coding_agents",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acpx",
+            "coding_agents",
+            "reliability",
+            "sessions"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "acpx",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acpx",
+            "codex",
+            "exec_tools",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acpx",
+            "codex",
+            "reliability",
+            "sessions"
+          ]
+        ],
+        "sonnet": [
+          [
+            "acpx",
+            "coding_agents",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acpx",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          [
+            "acpx",
+            "codex",
+            "coding_agents",
+            "reliability",
+            "sessions"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-46552",
+      "title": "docs(queue): clarify steer behavior with partial streaming and tool boundaries",
+      "expected": [
+        "docs",
+        "queueing",
+        "tool_calling"
+      ],
+      "n": 8,
+      "unique_sets": 4,
+      "most_common": [
+        [
+          [
+            "docs",
+            "queueing"
+          ],
+          5
+        ],
+        [
+          [
+            "chat_integrations",
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          1
+        ],
+        [
+          [
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.125,
+      "avg_jaccard_vs_expected": 0.6979166666666666,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_pred_jaccard": 0.743452380952381,
+      "volatile_topics": [
+        [
+          "tool_calling",
+          2
+        ],
+        [
+          "chat_integrations",
+          1
+        ],
+        [
+          "notifications",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "chat_integrations",
+          1
+        ],
+        [
+          "notifications",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "tool_calling",
+          6
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "docs",
+            "notifications",
+            "queueing"
+          ],
+          [
+            "docs",
+            "queueing"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "chat_integrations",
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          [
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          [
+            "docs",
+            "queueing"
+          ]
+        ],
+        "sonnet": [
+          [
+            "docs",
+            "queueing"
+          ],
+          [
+            "docs",
+            "queueing"
+          ],
+          [
+            "docs",
+            "queueing"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "openclaw-openclaw-62428",
+      "title": "test(exec): land exec v2 contract follow-through",
+      "expected": [
+        "approvals",
+        "exec_tools",
+        "security",
+        "tests_ci"
+      ],
+      "n": 8,
+      "unique_sets": 5,
+      "most_common": [
+        [
+          [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          3
+        ],
+        [
+          [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          2
+        ],
+        [
+          [
+            "approvals",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          1
+        ]
+      ],
+      "exact_rate": 0.125,
+      "avg_jaccard_vs_expected": 0.76875,
+      "avg_symdiff_vs_expected": 1.125,
+      "pairwise_pred_jaccard": 0.7446428571428572,
+      "volatile_topics": [
+        [
+          "config",
+          5
+        ],
+        [
+          "tests_ci",
+          5
+        ],
+        [
+          "docs",
+          1
+        ]
+      ],
+      "fp": [
+        [
+          "config",
+          5
+        ],
+        [
+          "docs",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "tests_ci",
+          3
+        ]
+      ],
+      "by_model": {
+        "deepseek4": [
+          [
+            "approvals",
+            "docs",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          [
+            "approvals",
+            "exec_tools",
+            "security"
+          ]
+        ],
+        "gpt-5.4-mini": [
+          [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ]
+        ],
+        "sonnet": [
+          [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          [
+            "approvals",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ]
+        ]
+      }
+    }
+  ],
+  "least_stable_gepa_train_rows": [
+    {
+      "id": "openclaw-openclaw-43495",
+      "title": "feat(tts): add <notts> tag support for visual-only content",
+      "expected": [
+        "api_surface",
+        "self_hosted_inference"
+      ],
+      "n": 54,
+      "unique_sets": 29,
+      "exact_rate": 0.05555555555555555,
+      "avg_jaccard_vs_expected": 0.3458994708994709,
+      "avg_symdiff_vs_expected": 2.7777777777777777,
+      "pairwise_pred_jaccard": 0.3401650527436691,
+      "most_common": [
+        [
+          [
+            "api_surface",
+            "config",
+            "docs",
+            "gateway",
+            "security",
+            "self_hosted_inference"
+          ],
+          6
+        ],
+        [
+          [
+            "api_surface",
+            "config"
+          ],
+          5
+        ],
+        [
+          [
+            "api_surface",
+            "config",
+            "gateway",
+            "security",
+            "self_hosted_inference"
+          ],
+          4
+        ]
+      ],
+      "fp": [
+        [
+          "config",
+          33
+        ],
+        [
+          "gateway",
+          29
+        ],
+        [
+          "docs",
+          20
+        ],
+        [
+          "security",
+          18
+        ],
+        [
+          "sessions",
+          5
+        ]
+      ],
+      "fn": [
+        [
+          "api_surface",
+          24
+        ],
+        [
+          "self_hosted_inference",
+          14
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84706",
+      "title": "[Bug]: subagent spawn validation rejects every non-off thinking level on all canonical openai/* models \u2014 error cites canonical alias even when openai-codex/* is requested",
+      "expected": [
+        "api_surface",
+        "codex",
+        "coding_agents",
+        "config",
+        "sessions"
+      ],
+      "n": 54,
+      "unique_sets": 39,
+      "exact_rate": 0.018518518518518517,
+      "avg_jaccard_vs_expected": 0.4384700176366843,
+      "avg_symdiff_vs_expected": 3.5555555555555554,
+      "pairwise_pred_jaccard": 0.40022461814914645,
+      "most_common": [
+        [
+          [
+            "acp",
+            "api_surface",
+            "config",
+            "sessions"
+          ],
+          3
+        ],
+        [
+          [
+            "api_surface",
+            "codex",
+            "sessions"
+          ],
+          3
+        ],
+        [
+          [
+            "acp",
+            "api_surface",
+            "codex",
+            "config",
+            "sessions"
+          ],
+          3
+        ]
+      ],
+      "fp": [
+        [
+          "acp",
+          29
+        ],
+        [
+          "agent_runtime",
+          15
+        ],
+        [
+          "model_serving",
+          10
+        ],
+        [
+          "reliability",
+          6
+        ],
+        [
+          "local_model_providers",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "coding_agents",
+          48
+        ],
+        [
+          "codex",
+          29
+        ],
+        [
+          "api_surface",
+          27
+        ],
+        [
+          "config",
+          23
+        ],
+        [
+          "sessions",
+          4
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-76724",
+      "title": "[Bug]: MCP tools not discovered by Agent despite successful handshake (200 OK)",
+      "expected": [
+        "mcp_tooling",
+        "ui_tui"
+      ],
+      "n": 54,
+      "unique_sets": 13,
+      "exact_rate": 0.3333333333333333,
+      "avg_jaccard_vs_expected": 0.654320987654321,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_pred_jaccard": 0.5360354064756581,
+      "most_common": [
+        [
+          [
+            "mcp_tooling",
+            "ui_tui"
+          ],
+          18
+        ],
+        [
+          [
+            "mcp_tooling"
+          ],
+          12
+        ],
+        [
+          [
+            "gateway",
+            "mcp_tooling"
+          ],
+          5
+        ]
+      ],
+      "fp": [
+        [
+          "config",
+          11
+        ],
+        [
+          "gateway",
+          10
+        ],
+        [
+          "reliability",
+          7
+        ],
+        [
+          "api_surface",
+          2
+        ],
+        [
+          "agent_runtime",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "ui_tui",
+          23
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-10467",
+      "title": "[Feature Request]: Multi-lane concurrency support for sub-agents via sessions_spawn",
+      "expected": [
+        "acp",
+        "agent_runtime",
+        "config",
+        "queueing",
+        "sessions"
+      ],
+      "n": 54,
+      "unique_sets": 24,
+      "exact_rate": 0.0,
+      "avg_jaccard_vs_expected": 0.5926807760141093,
+      "avg_symdiff_vs_expected": 2.4074074074074074,
+      "pairwise_pred_jaccard": 0.5808342484443113,
+      "most_common": [
+        [
+          [
+            "api_surface",
+            "config",
+            "queueing",
+            "sessions"
+          ],
+          8
+        ],
+        [
+          [
+            "acp",
+            "api_surface",
+            "config",
+            "queueing",
+            "sessions"
+          ],
+          6
+        ],
+        [
+          [
+            "agent_runtime",
+            "api_surface",
+            "config",
+            "queueing"
+          ],
+          3
+        ]
+      ],
+      "fp": [
+        [
+          "api_surface",
+          35
+        ],
+        [
+          "reliability",
+          11
+        ]
+      ],
+      "fn": [
+        [
+          "agent_runtime",
+          36
+        ],
+        [
+          "acp",
+          28
+        ],
+        [
+          "sessions",
+          14
+        ],
+        [
+          "config",
+          6
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84038",
+      "title": "[Bug]: doctor --fix silently migrates intentional openai-codex/ config to openai/, breaking PI+OAuth runtime and causing 3-4x token inflation",
+      "expected": [
+        "agent_runtime",
+        "auth_identity",
+        "codex",
+        "config"
+      ],
+      "n": 54,
+      "unique_sets": 18,
+      "exact_rate": 0.16666666666666666,
+      "avg_jaccard_vs_expected": 0.6962962962962963,
+      "avg_symdiff_vs_expected": 1.3703703703703705,
+      "pairwise_pred_jaccard": 0.5915210808292569,
+      "most_common": [
+        [
+          [
+            "auth_identity",
+            "codex",
+            "config"
+          ],
+          15
+        ],
+        [
+          [
+            "agent_runtime",
+            "auth_identity",
+            "codex",
+            "config"
+          ],
+          9
+        ],
+        [
+          [
+            "codex",
+            "config",
+            "reliability"
+          ],
+          4
+        ]
+      ],
+      "fp": [
+        [
+          "reliability",
+          11
+        ],
+        [
+          "coding_agents",
+          8
+        ]
+      ],
+      "fn": [
+        [
+          "agent_runtime",
+          30
+        ],
+        [
+          "auth_identity",
+          15
+        ],
+        [
+          "codex",
+          10
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-51667",
+      "title": "Feature: Native Audio Input for Omni-Modal Models (skip STT transcription)",
+      "expected": [
+        "chat_integrations",
+        "config",
+        "model_serving",
+        "sessions"
+      ],
+      "n": 54,
+      "unique_sets": 15,
+      "exact_rate": 0.09259259259259259,
+      "avg_jaccard_vs_expected": 0.712962962962963,
+      "avg_symdiff_vs_expected": 1.2962962962962963,
+      "pairwise_pred_jaccard": 0.6028651292802236,
+      "most_common": [
+        [
+          [
+            "config",
+            "model_serving",
+            "sessions"
+          ],
+          10
+        ],
+        [
+          [
+            "chat_integrations",
+            "config",
+            "model_serving",
+            "self_hosted_inference",
+            "sessions"
+          ],
+          10
+        ],
+        [
+          [
+            "chat_integrations",
+            "config",
+            "model_serving"
+          ],
+          8
+        ]
+      ],
+      "fp": [
+        [
+          "self_hosted_inference",
+          17
+        ],
+        [
+          "security",
+          4
+        ],
+        [
+          "reliability",
+          1
+        ],
+        [
+          "api_surface",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "chat_integrations",
+          20
+        ],
+        [
+          "sessions",
+          20
+        ],
+        [
+          "model_serving",
+          6
+        ],
+        [
+          "config",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84761",
+      "title": "feat(secrets): scan backup files for plaintext provider apiKey values",
+      "expected": [
+        "auth_identity",
+        "config",
+        "security"
+      ],
+      "n": 54,
+      "unique_sets": 6,
+      "exact_rate": 0.2037037037037037,
+      "avg_jaccard_vs_expected": 0.6265432098765432,
+      "avg_symdiff_vs_expected": 1.1481481481481481,
+      "pairwise_pred_jaccard": 0.6033659445609131,
+      "most_common": [
+        [
+          [
+            "security"
+          ],
+          18
+        ],
+        [
+          [
+            "config",
+            "security"
+          ],
+          15
+        ],
+        [
+          [
+            "auth_identity",
+            "config",
+            "security"
+          ],
+          11
+        ]
+      ],
+      "fp": [
+        [
+          "tests_ci",
+          5
+        ]
+      ],
+      "fn": [
+        [
+          "auth_identity",
+          34
+        ],
+        [
+          "config",
+          23
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-77345",
+      "title": "google-vertex SSRF guard blocks fake-IP DNS (model.baseUrl not set for built-in providers)",
+      "expected": [
+        "model_serving",
+        "security"
+      ],
+      "n": 54,
+      "unique_sets": 10,
+      "exact_rate": 0.2777777777777778,
+      "avg_jaccard_vs_expected": 0.6743827160493827,
+      "avg_symdiff_vs_expected": 1.0185185185185186,
+      "pairwise_pred_jaccard": 0.6037619380386676,
+      "most_common": [
+        [
+          [
+            "model_serving",
+            "security"
+          ],
+          15
+        ],
+        [
+          [
+            "config",
+            "model_serving",
+            "security"
+          ],
+          14
+        ],
+        [
+          [
+            "model_serving",
+            "reliability",
+            "security"
+          ],
+          9
+        ]
+      ],
+      "fp": [
+        [
+          "config",
+          25
+        ],
+        [
+          "reliability",
+          14
+        ],
+        [
+          "local_model_providers",
+          2
+        ],
+        [
+          "self_hosted_inference",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "model_serving",
+          13
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71537",
+      "title": "Recover archived (.reset) session transcripts in memory hook + session-logs skill",
+      "expected": [
+        "memory",
+        "sessions",
+        "skills_plugins"
+      ],
+      "n": 54,
+      "unique_sets": 15,
+      "exact_rate": 0.14814814814814814,
+      "avg_jaccard_vs_expected": 0.6459876543209877,
+      "avg_symdiff_vs_expected": 1.7222222222222223,
+      "pairwise_pred_jaccard": 0.6108698545805464,
+      "most_common": [
+        [
+          [
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          11
+        ],
+        [
+          [
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          8
+        ],
+        [
+          [
+            "docs",
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins",
+            "tests_ci"
+          ],
+          7
+        ]
+      ],
+      "fp": [
+        [
+          "hooks",
+          32
+        ],
+        [
+          "docs",
+          24
+        ],
+        [
+          "reliability",
+          12
+        ],
+        [
+          "tests_ci",
+          8
+        ]
+      ],
+      "fn": [
+        [
+          "skills_plugins",
+          15
+        ],
+        [
+          "sessions",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-55888",
+      "title": "[Feature]: \ud83d\ude80 [Performance Insight] Unlocking 26.7k Context Window on M4 Pro: Fixing the 8k Compaction Lag (64GB RAM Only)",
+      "expected": [
+        "config",
+        "local_models",
+        "memory"
+      ],
+      "n": 54,
+      "unique_sets": 11,
+      "exact_rate": 0.35185185185185186,
+      "avg_jaccard_vs_expected": 0.7194444444444444,
+      "avg_symdiff_vs_expected": 1.037037037037037,
+      "pairwise_pred_jaccard": 0.6130095504309341,
+      "most_common": [
+        [
+          [
+            "config",
+            "local_models",
+            "memory"
+          ],
+          19
+        ],
+        [
+          [
+            "config",
+            "local_models"
+          ],
+          12
+        ],
+        [
+          [
+            "agent_runtime",
+            "config",
+            "local_models"
+          ],
+          5
+        ]
+      ],
+      "fp": [
+        [
+          "sessions",
+          10
+        ],
+        [
+          "agent_runtime",
+          6
+        ],
+        [
+          "open_weight_models",
+          5
+        ]
+      ],
+      "fn": [
+        [
+          "memory",
+          27
+        ],
+        [
+          "local_models",
+          8
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-58135",
+      "title": "[Feature]: expose promptMode parameter in sessions_spawn for deterministic blank sub-agents",
+      "expected": [
+        "acp",
+        "agent_runtime",
+        "api_surface",
+        "sessions"
+      ],
+      "n": 54,
+      "unique_sets": 13,
+      "exact_rate": 0.2222222222222222,
+      "avg_jaccard_vs_expected": 0.7194444444444444,
+      "avg_symdiff_vs_expected": 1.1666666666666667,
+      "pairwise_pred_jaccard": 0.6135103657116235,
+      "most_common": [
+        [
+          [
+            "acp",
+            "agent_runtime",
+            "api_surface",
+            "sessions"
+          ],
+          12
+        ],
+        [
+          [
+            "api_surface",
+            "sessions"
+          ],
+          10
+        ],
+        [
+          [
+            "acp",
+            "api_surface",
+            "sessions"
+          ],
+          10
+        ]
+      ],
+      "fp": [
+        [
+          "config",
+          6
+        ]
+      ],
+      "fn": [
+        [
+          "acp",
+          24
+        ],
+        [
+          "agent_runtime",
+          22
+        ],
+        [
+          "api_surface",
+          9
+        ],
+        [
+          "sessions",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68725",
+      "title": "feat(amazon-bedrock-mantle): add known context windows for open-weight Mantle models",
+      "expected": [
+        "config",
+        "open_weight_models"
+      ],
+      "n": 54,
+      "unique_sets": 9,
+      "exact_rate": 0.5740740740740741,
+      "avg_jaccard_vs_expected": 0.7438271604938271,
+      "avg_symdiff_vs_expected": 0.7592592592592593,
+      "pairwise_pred_jaccard": 0.6224668064290706,
+      "most_common": [
+        [
+          [
+            "config",
+            "open_weight_models"
+          ],
+          31
+        ],
+        [
+          [
+            "model_serving",
+            "open_weight_models"
+          ],
+          11
+        ],
+        [
+          [
+            "open_weight_models"
+          ],
+          4
+        ]
+      ],
+      "fp": [
+        [
+          "model_serving",
+          16
+        ],
+        [
+          "local_model_providers",
+          4
+        ],
+        [
+          "reliability",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "config",
+          18
+        ],
+        [
+          "open_weight_models",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84715",
+      "title": "[Bug]: @openclaw/codex peer link failure reproduced on 2026.5.19 after update",
+      "expected": [
+        "codex",
+        "packaging_deployment",
+        "reliability",
+        "skills_plugins"
+      ],
+      "n": 54,
+      "unique_sets": 13,
+      "exact_rate": 0.2222222222222222,
+      "avg_jaccard_vs_expected": 0.7351851851851852,
+      "avg_symdiff_vs_expected": 1.1851851851851851,
+      "pairwise_pred_jaccard": 0.623445143256464,
+      "most_common": [
+        [
+          [
+            "codex",
+            "packaging_deployment",
+            "reliability"
+          ],
+          14
+        ],
+        [
+          [
+            "codex",
+            "packaging_deployment",
+            "reliability",
+            "skills_plugins"
+          ],
+          12
+        ],
+        [
+          [
+            "codex",
+            "packaging_deployment",
+            "skills_plugins"
+          ],
+          5
+        ]
+      ],
+      "fp": [
+        [
+          "coding_agents",
+          17
+        ]
+      ],
+      "fn": [
+        [
+          "skills_plugins",
+          22
+        ],
+        [
+          "reliability",
+          14
+        ],
+        [
+          "codex",
+          6
+        ],
+        [
+          "packaging_deployment",
+          5
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-73910",
+      "title": "BUG: OpenClaw-managed Codex ACP uses isolated CODEX_HOME without auth bridge and sends unsupported timeout config",
+      "expected": [
+        "acp",
+        "acpx",
+        "auth_identity",
+        "codex",
+        "config"
+      ],
+      "n": 54,
+      "unique_sets": 23,
+      "exact_rate": 0.09259259259259259,
+      "avg_jaccard_vs_expected": 0.6498236331569665,
+      "avg_symdiff_vs_expected": 2.314814814814815,
+      "pairwise_pred_jaccard": 0.6308361895888102,
+      "most_common": [
+        [
+          [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "coding_agents",
+            "config",
+            "security"
+          ],
+          7
+        ],
+        [
+          [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "codex",
+            "coding_agents",
+            "security"
+          ],
+          6
+        ],
+        [
+          [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "coding_agents",
+            "security"
+          ],
+          5
+        ]
+      ],
+      "fp": [
+        [
+          "security",
+          37
+        ],
+        [
+          "coding_agents",
+          30
+        ],
+        [
+          "api_surface",
+          3
+        ],
+        [
+          "reliability",
+          1
+        ],
+        [
+          "sessions",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "config",
+          24
+        ],
+        [
+          "codex",
+          15
+        ],
+        [
+          "acp",
+          10
+        ],
+        [
+          "auth_identity",
+          3
+        ],
+        [
+          "acpx",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71803",
+      "title": "CLI watchdog kills sessions that are correctly idle while waiting on a Monitor task",
+      "expected": [
+        "agent_runtime",
+        "exec_tools",
+        "reliability",
+        "sessions"
+      ],
+      "n": 54,
+      "unique_sets": 14,
+      "exact_rate": 0.2777777777777778,
+      "avg_jaccard_vs_expected": 0.7148148148148148,
+      "avg_symdiff_vs_expected": 1.3703703703703705,
+      "pairwise_pred_jaccard": 0.6333216864663406,
+      "most_common": [
+        [
+          [
+            "agent_runtime",
+            "exec_tools",
+            "reliability",
+            "sessions"
+          ],
+          15
+        ],
+        [
+          [
+            "agent_runtime",
+            "coding_agents",
+            "reliability",
+            "sessions"
+          ],
+          8
+        ],
+        [
+          [
+            "agent_runtime",
+            "coding_agents",
+            "exec_tools",
+            "reliability",
+            "sessions"
+          ],
+          6
+        ]
+      ],
+      "fp": [
+        [
+          "coding_agents",
+          29
+        ],
+        [
+          "codex",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "exec_tools",
+          19
+        ],
+        [
+          "sessions",
+          14
+        ],
+        [
+          "agent_runtime",
+          11
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72001",
+      "title": "fix(hooks): write allowedSessionKeyPrefixes from gmail wizard",
+      "expected": [
+        "config",
+        "gateway",
+        "hooks"
+      ],
+      "n": 54,
+      "unique_sets": 13,
+      "exact_rate": 0.25925925925925924,
+      "avg_jaccard_vs_expected": 0.7481481481481481,
+      "avg_symdiff_vs_expected": 0.9814814814814815,
+      "pairwise_pred_jaccard": 0.6382366643372933,
+      "most_common": [
+        [
+          [
+            "config",
+            "gateway",
+            "hooks"
+          ],
+          14
+        ],
+        [
+          [
+            "config",
+            "gateway",
+            "hooks",
+            "reliability"
+          ],
+          10
+        ],
+        [
+          [
+            "config",
+            "gateway",
+            "hooks",
+            "security"
+          ],
+          6
+        ]
+      ],
+      "fp": [
+        [
+          "reliability",
+          19
+        ],
+        [
+          "security",
+          12
+        ],
+        [
+          "sessions",
+          3
+        ],
+        [
+          "tests_ci",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "gateway",
+          11
+        ],
+        [
+          "hooks",
+          5
+        ],
+        [
+          "config",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-60381",
+      "title": "browser tool: add force parameter for click and expose evaluate action",
+      "expected": [
+        "api_surface",
+        "browser_automation",
+        "security"
+      ],
+      "n": 54,
+      "unique_sets": 10,
+      "exact_rate": 0.3148148148148148,
+      "avg_jaccard_vs_expected": 0.7012345679012345,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_pred_jaccard": 0.6434894013510366,
+      "most_common": [
+        [
+          [
+            "api_surface",
+            "browser_automation"
+          ],
+          20
+        ],
+        [
+          [
+            "api_surface",
+            "browser_automation",
+            "security"
+          ],
+          17
+        ],
+        [
+          [
+            "browser_automation"
+          ],
+          6
+        ]
+      ],
+      "fp": [
+        [
+          "exec_tools",
+          5
+        ],
+        [
+          "tool_calling",
+          4
+        ],
+        [
+          "reliability",
+          1
+        ]
+      ],
+      "fn": [
+        [
+          "security",
+          34
+        ],
+        [
+          "api_surface",
+          10
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-45200",
+      "title": "fix(subagents): notify user on announce give-up instead of silently dropping result",
+      "expected": [
+        "agent_runtime",
+        "notifications",
+        "reliability"
+      ],
+      "n": 54,
+      "unique_sets": 12,
+      "exact_rate": 0.2037037037037037,
+      "avg_jaccard_vs_expected": 0.7209876543209877,
+      "avg_symdiff_vs_expected": 1.1296296296296295,
+      "pairwise_pred_jaccard": 0.6472163987887258,
+      "most_common": [
+        [
+          [
+            "agent_runtime",
+            "notifications",
+            "reliability",
+            "sessions"
+          ],
+          13
+        ],
+        [
+          [
+            "agent_runtime",
+            "notifications",
+            "reliability"
+          ],
+          11
+        ],
+        [
+          [
+            "notifications",
+            "reliability"
+          ],
+          8
+        ]
+      ],
+      "fp": [
+        [
+          "sessions",
+          26
+        ],
+        [
+          "gateway",
+          12
+        ],
+        [
+          "chat_integrations",
+          4
+        ]
+      ],
+      "fn": [
+        [
+          "agent_runtime",
+          16
+        ],
+        [
+          "reliability",
+          3
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-43765",
+      "title": "Improve runtime recovery for heartbeat, Feishu, and exec sessions",
+      "expected": [
+        "chat_integrations",
+        "cron_automation",
+        "exec_tools",
+        "gateway",
+        "reliability"
+      ],
+      "n": 54,
+      "unique_sets": 24,
+      "exact_rate": 0.1111111111111111,
+      "avg_jaccard_vs_expected": 0.7324000587889476,
+      "avg_symdiff_vs_expected": 1.8333333333333333,
+      "pairwise_pred_jaccard": 0.6475799978420523,
+      "most_common": [
+        [
+          [
+            "chat_integrations",
+            "exec_tools",
+            "gateway",
+            "reliability"
+          ],
+          7
+        ],
+        [
+          [
+            "chat_integrations",
+            "cron_automation",
+            "exec_tools",
+            "reliability"
+          ],
+          6
+        ],
+        [
+          [
+            "chat_integrations",
+            "cron_automation",
+            "exec_tools",
+            "gateway",
+            "reliability"
+          ],
+          6
+        ]
+      ],
+      "fp": [
+        [
+          "acpx",
+          24
+        ],
+        [
+          "sessions",
+          21
+        ],
+        [
+          "acp",
+          8
+        ],
+        [
+          "notifications",
+          7
+        ],
+        [
+          "agent_runtime",
+          7
+        ]
+      ],
+      "fn": [
+        [
+          "cron_automation",
+          16
+        ],
+        [
+          "gateway",
+          12
+        ]
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-63229",
+      "title": "Bug: Gateway falsely marks healthy local vLLM endpoints as timed out/overloaded, causing 1\u201323 min fallback cascades",
+      "expected": [
+        "gateway",
+        "local_models",
+        "model_serving",
+        "reliability"
+      ],
+      "n": 54,
+      "unique_sets": 15,
+      "exact_rate": 0.2962962962962963,
+      "avg_jaccard_vs_expected": 0.7225308641975309,
+      "avg_symdiff_vs_expected": 1.3148148148148149,
+      "pairwise_pred_jaccard": 0.6544857076303617,
+      "most_common": [
+        [
+          [
+            "gateway",
+            "local_models",
+            "model_serving",
+            "reliability"
+          ],
+          16
+        ],
+        [
+          [
+            "gateway",
+            "model_serving",
+            "reliability"
+          ],
+          10
+        ],
+        [
+          [
+            "gateway",
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          7
+        ]
+      ],
+      "fp": [
+        [
+          "local_model_providers",
+          14
+        ],
+        [
+          "sessions",
+          7
+        ],
+        [
+          "self_hosted_inference",
+          3
+        ]
+      ],
+      "fn": [
+        [
+          "local_models",
+          34
+        ],
+        [
+          "model_serving",
+          12
+        ],
+        [
+          "reliability",
+          1
+        ]
+      ]
+    }
+  ]
+}

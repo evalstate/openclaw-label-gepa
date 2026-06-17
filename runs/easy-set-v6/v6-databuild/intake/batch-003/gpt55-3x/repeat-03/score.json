@@ -1,0 +1,390 @@
+{
+  "score": 0.0,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "row_symdiff_score": 0.2173913043478261
+    },
+    "score_details": {
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 3.6,
+      "valid_json": 1.0,
+      "false_positives": 108,
+      "false_negatives": 0,
+      "avg_predicted_topics": 3.6,
+      "avg_expected_topics": 0
+    },
+    "evaluated": 30,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-62428",
+        "title": "test(exec): land exec v2 contract follow-through",
+        "expected": [],
+        "actual": [
+          "approvals",
+          "config",
+          "exec_tools",
+          "security"
+        ],
+        "false_positives": [
+          "approvals",
+          "config",
+          "exec_tools",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-62552",
+        "title": "fix(acp): stabilize bridge session keys",
+        "expected": [],
+        "actual": [
+          "acp",
+          "queueing",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "queueing",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-62769",
+        "title": "[Feature]: Support ACP configured bindings for Telegram DMs (not just groups/topics)",
+        "expected": [],
+        "actual": [
+          "acp",
+          "chat_integrations",
+          "config"
+        ],
+        "false_positives": [
+          "acp",
+          "chat_integrations",
+          "config"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-63007",
+        "title": "Pass outbound session identity into message_sending and surface guarded gateway send denial",
+        "expected": [],
+        "actual": [
+          "gateway",
+          "hooks",
+          "notifications",
+          "sessions",
+          "skills_plugins"
+        ],
+        "false_positives": [
+          "gateway",
+          "hooks",
+          "notifications",
+          "sessions",
+          "skills_plugins"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-63229",
+        "title": "Bug: Gateway falsely marks healthy local vLLM endpoints as timed out/overloaded, causing 1\u201323 min fallback cascades",
+        "expected": [],
+        "actual": [
+          "gateway",
+          "inference_api",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "gateway",
+          "inference_api",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-64199",
+        "title": "[Bug]: ACP configured binding uses parent channel ID for session key \u2014 all threads under same channel share one persistent Claude Code process",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx",
+          "chat_integrations",
+          "security",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx",
+          "chat_integrations",
+          "security",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-64317",
+        "title": "[Bug]: Headed Chromium viewport screenshots time out on Omarchy/Hyprland/Wayland after successful page load",
+        "expected": [],
+        "actual": [
+          "browser_automation",
+          "reliability"
+        ],
+        "false_positives": [
+          "browser_automation",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-65187",
+        "title": "test: add regression tests for <final> tag stripping in UI message extraction",
+        "expected": [],
+        "actual": [
+          "tests_ci",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "tests_ci",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-65364",
+        "title": "feat(plugins): add registerProviderRuntimeAuthOverride API",
+        "expected": [],
+        "actual": [
+          "api_surface",
+          "auth_identity",
+          "inference_api",
+          "security",
+          "skills_plugins"
+        ],
+        "false_positives": [
+          "api_surface",
+          "auth_identity",
+          "inference_api",
+          "security",
+          "skills_plugins"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-66125",
+        "title": "[Bug]: openai-completions fallback candidate is selected, but fallback does not complete successfully through an OpenAI-compatible proxy",
+        "expected": [],
+        "actual": [
+          "inference_api"
+        ],
+        "false_positives": [
+          "inference_api"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-67244",
+        "title": "Explicit ACP agent runs: embedded backend visibility failure and stale final JSON state after sessions_yield",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx",
+          "api_surface",
+          "coding_agents",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx",
+          "api_surface",
+          "coding_agents",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-67539",
+        "title": "[Feature]: Add provider-specific TTS prompt hints",
+        "expected": [],
+        "actual": [
+          "inference_api"
+        ],
+        "false_positives": [
+          "inference_api"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-68725",
+        "title": "feat(amazon-bedrock-mantle): add known context windows for open-weight Mantle models",
+        "expected": [],
+        "actual": [
+          "inference_api",
+          "model_lifecycle"
+        ],
+        "false_positives": [
+          "inference_api",
+          "model_lifecycle"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-68843",
+        "title": "fix(acp): treat missing cwd as stale bound session",
+        "expected": [],
+        "actual": [
+          "acp",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-69256",
+        "title": "fix(cron): prevent premature session cleanup when subagents are running",
+        "expected": [],
+        "actual": [
+          "coding_agents",
+          "cron_automation",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "coding_agents",
+          "cron_automation",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-69260",
+        "title": "Harden Gemini ACP integration against ambient API-key fallback and add generic auth-contract hooks for ACP agents",
+        "expected": [],
+        "actual": [
+          "acp",
+          "auth_identity",
+          "coding_agents",
+          "config",
+          "security"
+        ],
+        "false_positives": [
+          "acp",
+          "auth_identity",
+          "coding_agents",
+          "config",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-69328",
+        "title": "fix(acp): avoid false zero-diff failures and append session messages",
+        "expected": [],
+        "actual": [
+          "acp",
+          "coding_agents",
+          "sessions",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "acp",
+          "coding_agents",
+          "sessions",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-69669",
+        "title": "ACP: keep thread-bound follow-ups parent-orchestrated by default, not raw pass-through",
+        "expected": [],
+        "actual": [
+          "acp",
+          "coding_agents",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "coding_agents",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71216",
+        "title": "Config schema: add `sandbox`, `routing.rules`, `instances`, and `gateway.nodes.denyPaths`",
+        "expected": [],
+        "actual": [
+          "config",
+          "gateway",
+          "inference_api",
+          "sandboxing",
+          "security"
+        ],
+        "false_positives": [
+          "config",
+          "gateway",
+          "inference_api",
+          "sandboxing",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71537",
+        "title": "Recover archived (.reset) session transcripts in memory hook + session-logs skill",
+        "expected": [],
+        "actual": [
+          "docs",
+          "hooks",
+          "memory",
+          "sessions",
+          "skills_plugins"
+        ],
+        "false_positives": [
+          "docs",
+          "hooks",
+          "memory",
+          "sessions",
+          "skills_plugins"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      }
+    ]
+  }
+}

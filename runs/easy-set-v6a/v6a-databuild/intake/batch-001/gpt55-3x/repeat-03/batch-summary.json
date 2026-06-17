@@ -1,0 +1,75 @@
+{
+  "model": "codexresponses.gpt-5.5?reasoning=high",
+  "input": "runs/easy-set-v6a/v6a-databuild/intake/batch-001/gpt55-3x/selected-input.jsonl",
+  "sql": null,
+  "output": "runs/easy-set-v6a/v6a-databuild/intake/batch-001/gpt55-3x/repeat-03/results.jsonl",
+  "schema": "eval/openclaw/easy-set-pilot/v6/teacher-output.schema.json",
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/teacher-card-v6.md",
+  "agent": "openclaw_easy_set_pilot_teacher",
+  "variables": [],
+  "template": "eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+  "shell_runtime": false,
+  "output_mode": "structured",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "started_at": "2026-06-11T22:12:43Z",
+  "completed_at": "2026-06-11T22:26:58Z",
+  "input_rows": 30,
+  "selected_rows": 30,
+  "processed_rows": 30,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 797852.04,
+  "timing_ms": {
+    "duration": {
+      "count": 30,
+      "min": 8593.3,
+      "mean": 26541.659333333333,
+      "median": 17382.875,
+      "max": 102565.54
+    },
+    "ttft": {
+      "count": 30,
+      "min": 4946.26,
+      "mean": 13390.633333333333,
+      "median": 10210.155,
+      "max": 34842.87
+    },
+    "time_to_response": {
+      "count": 30,
+      "min": 7638.33,
+      "mean": 23950.686666666665,
+      "median": 15439.119999999999,
+      "max": 98278.4
+    }
+  },
+  "usage": {
+    "input_tokens": 239867,
+    "output_tokens": 42685,
+    "total_tokens": 282552,
+    "billing_tokens": 282552,
+    "reasoning_tokens": 36054,
+    "tool_use_tokens": 0,
+    "tool_calls": 0,
+    "rows_with_usage": 30,
+    "usage_coverage_percent": 100.0
+  },
+  "cache": {
+    "read_tokens": 0,
+    "write_tokens": 0,
+    "hit_tokens": 204288,
+    "served_tokens": 204288,
+    "activity_tokens": 204288,
+    "effective_input_tokens": 35579,
+    "hit_rate_percent": 85.16719682157195,
+    "write_rate_percent": 0.0,
+    "activity_rate_percent": 85.16719682157195,
+    "rows_with_cache_activity": 30,
+    "row_cache_activity_percent": 100.0,
+    "non_cached_input_tokens": 35579,
+    "served_to_effective_input_ratio": 5.741813991399421
+  }
+}

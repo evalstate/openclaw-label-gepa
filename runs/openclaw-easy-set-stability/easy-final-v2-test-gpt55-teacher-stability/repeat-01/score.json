@@ -1,0 +1,27 @@
+{
+  "score": 0.9999999999999999,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.9999999999999999,
+      "topic_micro_f1": 1.0,
+      "row_exact_accuracy": 1.0,
+      "avg_row_jaccard": 1.0,
+      "row_symdiff_score": 1.0
+    },
+    "score_details": {
+      "topic_micro_precision": 1.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 1.0,
+      "row_exact_accuracy": 1.0,
+      "avg_row_jaccard": 1.0,
+      "avg_row_symdiff": 0,
+      "valid_json": 1.0,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "avg_predicted_topics": 3.3,
+      "avg_expected_topics": 3.3
+    },
+    "evaluated": 40,
+    "failures": []
+  }
+}

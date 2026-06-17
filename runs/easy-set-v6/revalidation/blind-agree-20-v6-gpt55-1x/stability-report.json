@@ -1,0 +1,1158 @@
+{
+  "stability_dir": "runs/easy-set-v6/revalidation/blind-agree-20-v6-gpt55-1x",
+  "selected_rows": 20,
+  "completed_repeats": 1,
+  "repeat_metrics": [
+    {
+      "repeat": 1,
+      "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+      "gepa_score": 0.6604224137931034,
+      "topic_micro_f1": 0.8103448275862069,
+      "topic_micro_precision": 0.8392857142857143,
+      "topic_micro_recall": 0.7833333333333333,
+      "row_exact_accuracy": 0.25,
+      "exact_match": 0.25,
+      "avg_row_jaccard": 0.6841666666666667,
+      "avg_row_symdiff": 1.1,
+      "row_symdiff_score": 0.47619047619047616,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 2.8,
+      "avg_expected_topics": 3.0
+    }
+  ],
+  "metric_summary": {
+    "avg_expected_topics": {
+      "mean": 3.0,
+      "pstdev": 0.0,
+      "values": [
+        3.0
+      ]
+    },
+    "avg_predicted_topics": {
+      "mean": 2.8,
+      "pstdev": 0.0,
+      "values": [
+        2.8
+      ]
+    },
+    "avg_row_jaccard": {
+      "mean": 0.6841666666666667,
+      "pstdev": 0.0,
+      "values": [
+        0.6841666666666667
+      ]
+    },
+    "avg_row_symdiff": {
+      "mean": 1.1,
+      "pstdev": 0.0,
+      "values": [
+        1.1
+      ]
+    },
+    "exact_match": {
+      "mean": 0.25,
+      "pstdev": 0.0,
+      "values": [
+        0.25
+      ]
+    },
+    "gepa_score": {
+      "mean": 0.6604224137931034,
+      "pstdev": 0.0,
+      "values": [
+        0.6604224137931034
+      ]
+    },
+    "row_exact_accuracy": {
+      "mean": 0.25,
+      "pstdev": 0.0,
+      "values": [
+        0.25
+      ]
+    },
+    "row_symdiff_score": {
+      "mean": 0.47619047619047616,
+      "pstdev": 0.0,
+      "values": [
+        0.47619047619047616
+      ]
+    },
+    "topic_micro_f1": {
+      "mean": 0.8103448275862069,
+      "pstdev": 0.0,
+      "values": [
+        0.8103448275862069
+      ]
+    },
+    "topic_micro_precision": {
+      "mean": 0.8392857142857143,
+      "pstdev": 0.0,
+      "values": [
+        0.8392857142857143
+      ]
+    },
+    "topic_micro_recall": {
+      "mean": 0.7833333333333333,
+      "pstdev": 0.0,
+      "values": [
+        0.7833333333333333
+      ]
+    },
+    "valid_json": {
+      "mean": 1.0,
+      "pstdev": 0.0,
+      "values": [
+        1.0
+      ]
+    }
+  },
+  "prediction_stability": {
+    "pairwise_prediction_exact_rate": 1.0,
+    "pairwise_prediction_jaccard": 1.0,
+    "pairwise_prediction_symdiff": 0.0
+  },
+  "bucket_counts": {
+    "stable_wrong": 15,
+    "stable_correct": 5
+  },
+  "rows": [
+    {
+      "id": "openclaw-openclaw-47083",
+      "title": "fix: respect totalTokensFresh flag to avoid showing stale token counts",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "sessions",
+        "telemetry_usage",
+        "ui_tui"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.6666666666666666,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "telemetry_usage",
+            "ui_tui"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [
+        [
+          "sessions",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "telemetry_usage",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [],
+          "false_negatives": [
+            "sessions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-51849",
+      "title": "Docs: add freeCodeCamp OpenClaw full tutorial to showcase",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "agent_demos",
+        "docs"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.5,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "docs"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [
+        [
+          "agent_demos",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "docs"
+          ],
+          "exact": false,
+          "false_positives": [],
+          "false_negatives": [
+            "agent_demos"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-53997",
+      "title": "acpx: add terminal-truth artifacts and strict terminal states",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "acp",
+        "acpx",
+        "reliability"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.4,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acpx",
+            "agent_runtime",
+            "exec_tools",
+            "reliability"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "agent_runtime",
+          1
+        ],
+        [
+          "exec_tools",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [
+        [
+          "acp",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "acpx",
+            "agent_runtime",
+            "exec_tools",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "agent_runtime",
+            "exec_tools"
+          ],
+          "false_negatives": [
+            "acp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68916",
+      "title": "[Bug]: ACP oneshot sessions leave orphaned processes \u2014 session reset does not clean up child ACP session keys",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "acp",
+        "reliability",
+        "sessions"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.75,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "gateway",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "acp",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71157",
+      "title": "[Feature]: Support WhatsApp disappearing-message expiration for outbound replies",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "chat_integrations",
+        "config",
+        "security"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.5,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "config",
+            "notifications"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "notifications",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [
+        [
+          "security",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "config",
+            "notifications"
+          ],
+          "exact": false,
+          "false_positives": [
+            "notifications"
+          ],
+          "false_negatives": [
+            "security"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71487",
+      "title": "Web UI: add a clear TTS toggle and default voice picker in Settings",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "config",
+        "self_hosted_inference",
+        "ui_tui"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.6666666666666666,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "ui_tui"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [
+        [
+          "self_hosted_inference",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "config",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [],
+          "false_negatives": [
+            "self_hosted_inference"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71976",
+      "title": "Memory Dreaming: Light sleep sort prioritizes recency over recallCount, hiding real recall data",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "memory",
+        "reliability"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.5,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "memory"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [
+        [
+          "reliability",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "memory"
+          ],
+          "exact": false,
+          "false_positives": [],
+          "false_negatives": [
+            "reliability"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72138",
+      "title": "fix(feishu): emit sent hooks for normal replies",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "chat_integrations",
+        "hooks",
+        "notifications"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.75,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "hooks",
+            "notifications",
+            "skills_plugins"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "skills_plugins",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "hooks",
+            "notifications",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-77694",
+      "title": "[Bug]: acpx flow run ACP node outputs return empty strings instead of agent replies",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "acp",
+        "acpx",
+        "agent_runtime",
+        "reliability"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.4,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "coding_agents"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "coding_agents",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [
+        [
+          "agent_runtime",
+          1
+        ],
+        [
+          "reliability",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "acp",
+            "acpx",
+            "coding_agents"
+          ],
+          "exact": false,
+          "false_positives": [
+            "coding_agents"
+          ],
+          "false_negatives": [
+            "agent_runtime",
+            "reliability"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-78528",
+      "title": "Security: skill SecretRef API keys still leak into exec child environments",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "auth_identity",
+        "exec_tools",
+        "security",
+        "skills_plugins"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.75,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "exec_tools",
+            "security",
+            "skills_plugins"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [
+        [
+          "auth_identity",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "exec_tools",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [],
+          "false_negatives": [
+            "auth_identity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-82642",
+      "title": "Fix iMessage slash command acknowledgements",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "chat_integrations",
+        "notifications",
+        "reliability"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.6666666666666666,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "notifications"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [
+        [
+          "reliability",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "notifications"
+          ],
+          "exact": false,
+          "false_positives": [],
+          "false_negatives": [
+            "reliability"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84761",
+      "title": "feat(secrets): scan backup files for plaintext provider apiKey values",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "auth_identity",
+        "config",
+        "security"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.3333333333333333,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "security"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [
+        [
+          "auth_identity",
+          1
+        ],
+        [
+          "config",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [],
+          "false_negatives": [
+            "auth_identity",
+            "config"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84771",
+      "title": "Event loop saturation during startup: synchronous model-prewarm and session-locks block event loop for 28-64 seconds",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "gateway",
+        "model_serving",
+        "reliability",
+        "sessions"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.8,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "gateway",
+            "model_serving",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "queueing",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "gateway",
+            "model_serving",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "queueing"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84997",
+      "title": "[AI-assisted] Add NEAR AI Cloud provider",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "auth_identity",
+        "model_serving"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.5,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "api_surface",
+            "auth_identity",
+            "model_releases",
+            "model_serving"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "api_surface",
+          1
+        ],
+        [
+          "model_releases",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "api_surface",
+            "auth_identity",
+            "model_releases",
+            "model_serving"
+          ],
+          "exact": false,
+          "false_positives": [
+            "api_surface",
+            "model_releases"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-88400",
+      "title": "fix(config): accept overlays for bundled provider aliases",
+      "bucket": "stable_wrong",
+      "expected_topics": [
+        "config",
+        "model_serving"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.5,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [
+        [
+          "model_serving",
+          1
+        ]
+      ],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "config"
+          ],
+          "exact": false,
+          "false_positives": [],
+          "false_negatives": [
+            "model_serving"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-65640",
+      "title": "fix(acp): persistent session recovery for --bind here sessions",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "acpx",
+        "reliability",
+        "sessions"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "reliability",
+            "sessions"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "acp",
+            "acpx",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68204",
+      "title": "Unified run trace schema across agent, ACP, subagent, and task flows",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "agent_runtime",
+        "sessions",
+        "telemetry_usage"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions",
+            "telemetry_usage"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions",
+            "telemetry_usage"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-76724",
+      "title": "[Bug]: MCP tools not discovered by Agent despite successful handshake (200 OK)",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "mcp_tooling",
+        "ui_tui"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "mcp_tooling",
+            "ui_tui"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "mcp_tooling",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84732",
+      "title": "Slack channel sends fail: `reconcileUnknownSend` required but no channel adapter implements it",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "chat_integrations",
+        "notifications",
+        "reliability"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "notifications",
+            "reliability"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "notifications",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-87277",
+      "title": "[Feature] Add MiMo-V2.5 to Xiaomi catalog + automatic multimodal routing when DeepSeek V4-Pro is primary model",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "model_releases",
+        "model_serving",
+        "reliability"
+      ],
+      "runs": 1,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1.0,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0.0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "model_releases",
+            "model_serving",
+            "reliability"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "blind-agree-20-v6-gpt55-1x-repeat-01",
+          "topics": [
+            "model_releases",
+            "model_serving",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "batch": "prompt-keyword-audit-40",
+  "rows": 40,
+  "accepted_consensus": 25,
+  "deferred": 15,
+  "gpt_exact_stable_rows": 31,
+  "opus_exact_stable_rows": 34,
+  "gpt_opus_exact_modal_matches": 30,
+  "exact_modal_matches_with_5_labels": 0,
+  "rows_with_any_5_label_teacher_modal": 0,
+  "mean_gpt_opus_modal_jaccard": 0.9,
+  "review_reason_counts": {
+    "gpt_unstable": 9,
+    "gpt_opus_modal_disagreement": 10,
+    "opus_unstable": 6
+  },
+  "accepted_label_counts": {
+    "3": 8,
+    "1": 8,
+    "2": 9
+  }
+}

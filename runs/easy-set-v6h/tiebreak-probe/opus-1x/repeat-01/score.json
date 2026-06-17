@@ -1,0 +1,336 @@
+{
+  "score": 0.0,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "row_symdiff_score": 0.3134328358208955
+    },
+    "score_details": {
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 2.1904761904761907,
+      "valid_json": 1.0,
+      "false_positives": 46,
+      "false_negatives": 0,
+      "avg_predicted_topics": 2.1904761904761907,
+      "avg_expected_topics": 0
+    },
+    "evaluated": 21,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-39248",
+        "title": "Bug: sandbox.mode: \"non-main\" silently breaks sessions_spawn subagent initialization",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "sandboxing"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "sandboxing"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43765",
+        "title": "Improve runtime recovery for heartbeat, Feishu, and exec sessions",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "exec_tools",
+          "reliability"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "exec_tools",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-45508",
+        "title": "[Feature]: Self-hosted STT/TTS provider support in webchat (Route webchat TTS through the gateway instead of browser Speech API)",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "config",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "config",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-46740",
+        "title": "ACP: classify silent acpx exits as backend unavailable",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-51667",
+        "title": "Feature: Native Audio Input for Omni-Modal Models (skip STT transcription)",
+        "expected": [],
+        "actual": [
+          "config",
+          "inference_api"
+        ],
+        "false_positives": [
+          "config",
+          "inference_api"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-56532",
+        "title": "memory-lancedb: add configurable timeout/retry for embedding calls",
+        "expected": [],
+        "actual": [
+          "config",
+          "memory",
+          "reliability"
+        ],
+        "false_positives": [
+          "config",
+          "memory",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-56613",
+        "title": "[Feature]: Talk/Voice tab \u2014 agent/session switching + per-agent TTS voice",
+        "expected": [],
+        "actual": [
+          "config",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "config",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-63229",
+        "title": "Bug: Gateway falsely marks healthy local vLLM endpoints as timed out/overloaded, causing 1\u201323 min fallback cascades",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "reliability"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-64317",
+        "title": "[Bug]: Headed Chromium viewport screenshots time out on Omarchy/Hyprland/Wayland after successful page load",
+        "expected": [],
+        "actual": [
+          "browser_automation"
+        ],
+        "false_positives": [
+          "browser_automation"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-65242",
+        "title": "fix: CompletionDeliveryGate to prevent duplicate ACP completion delivery",
+        "expected": [],
+        "actual": [
+          "acp",
+          "notifications"
+        ],
+        "false_positives": [
+          "acp",
+          "notifications"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71646",
+        "title": "mcp/channel-bridge: pendingClaudePermissions / pendingApprovals leak \u2014 no TTL, no close-clear, no cap",
+        "expected": [],
+        "actual": [
+          "approvals",
+          "reliability"
+        ],
+        "false_positives": [
+          "approvals",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71930",
+        "title": "Mattermost plugin drops post_edited events \u2014 @mentions added via edit do not trigger agent wake",
+        "expected": [],
+        "actual": [
+          "chat_integrations"
+        ],
+        "false_positives": [
+          "chat_integrations"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-75784",
+        "title": "Phantom user messages appear in webchat after heartbeat wakes / gateway restart / session repair",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "sessions"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-80479",
+        "title": "feat(memory/embeddings): add openai-compatible provider for self-hosted servers (llama.cpp, Ollama, vLLM, TGI, LocalAI)",
+        "expected": [],
+        "actual": [
+          "memory",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "memory",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84316",
+        "title": "[Bug]: Telegram group TTS for sub-agent reports success in /tts status but voice never delivered (2026.5.12)",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "notifications"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "notifications"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84583",
+        "title": "cron announce delivery triggers EmbeddedAttemptSessionTakeoverError when user is actively chatting",
+        "expected": [],
+        "actual": [
+          "cron_automation",
+          "notifications",
+          "sessions"
+        ],
+        "false_positives": [
+          "cron_automation",
+          "notifications",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84706",
+        "title": "[Bug]: subagent spawn validation rejects every non-off thinking level on all canonical openai/* models \u2014 error cites canonical alias even when openai-codex/* is requested",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "model_lifecycle"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "model_lifecycle"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84752",
+        "title": "fix: self-heal lane wedges + restore openai-codex OAuth on embedded path",
+        "expected": [],
+        "actual": [
+          "auth_identity",
+          "queueing",
+          "reliability"
+        ],
+        "false_positives": [
+          "auth_identity",
+          "queueing",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84771",
+        "title": "Event loop saturation during startup: synchronous model-prewarm and session-locks block event loop for 28-64 seconds",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-87277",
+        "title": "[Feature] Add MiMo-V2.5 to Xiaomi catalog + automatic multimodal routing when DeepSeek V4-Pro is primary model",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "model_lifecycle"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "model_lifecycle"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      }
+    ]
+  }
+}

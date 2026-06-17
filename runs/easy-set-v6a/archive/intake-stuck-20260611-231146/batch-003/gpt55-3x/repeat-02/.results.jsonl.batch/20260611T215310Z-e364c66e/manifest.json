@@ -1,0 +1,37 @@
+{
+  "input": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/selected-input.jsonl",
+  "output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/results.jsonl",
+  "parallel": 3,
+  "input_rows": 30,
+  "selected_rows": 30,
+  "created_at": "2026-06-11T21:53:10Z",
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 10,
+      "output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/part-000.jsonl",
+      "error_output": null,
+      "telemetry_output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/telemetry.part-000.jsonl",
+      "summary_output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/summary.part-000.json"
+    },
+    {
+      "index": 1,
+      "offset": 10,
+      "limit": 10,
+      "output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/part-001.jsonl",
+      "error_output": null,
+      "telemetry_output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/telemetry.part-001.jsonl",
+      "summary_output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/summary.part-001.json"
+    },
+    {
+      "index": 2,
+      "offset": 20,
+      "limit": 10,
+      "output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/part-002.jsonl",
+      "error_output": null,
+      "telemetry_output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/telemetry.part-002.jsonl",
+      "summary_output": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T215310Z-e364c66e/summary.part-002.json"
+    }
+  ]
+}

@@ -1,0 +1,3700 @@
+{
+  "stability_dir": "runs/easy-set-v6g/reinforce-50/opus-2x",
+  "selected_rows": 50,
+  "completed_repeats": 2,
+  "repeat_metrics": [
+    {
+      "repeat": 1,
+      "run_name": "opus-2x-repeat-01",
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "row_exact_accuracy": 0.0,
+      "exact_match": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 2.54,
+      "row_symdiff_score": 0.2824858757062147,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 2.54,
+      "avg_expected_topics": 0.0
+    },
+    {
+      "repeat": 2,
+      "run_name": "opus-2x-repeat-02",
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "row_exact_accuracy": 0.0,
+      "exact_match": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 2.48,
+      "row_symdiff_score": 0.28735632183908044,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 2.48,
+      "avg_expected_topics": 0.0
+    }
+  ],
+  "metric_summary": {
+    "avg_expected_topics": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_predicted_topics": {
+      "mean": 2.51,
+      "pstdev": 0.030000000000000027,
+      "values": [
+        2.54,
+        2.48
+      ]
+    },
+    "avg_row_jaccard": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0
+      ]
+    },
+    "avg_row_symdiff": {
+      "mean": 2.51,
+      "pstdev": 0.030000000000000027,
+      "values": [
+        2.54,
+        2.48
+      ]
+    },
+    "exact_match": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0
+      ]
+    },
+    "gepa_score": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0
+      ]
+    },
+    "row_exact_accuracy": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0
+      ]
+    },
+    "row_symdiff_score": {
+      "mean": 0.2849210987726476,
+      "pstdev": 0.0024352230664328733,
+      "values": [
+        0.2824858757062147,
+        0.28735632183908044
+      ]
+    },
+    "topic_micro_f1": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0
+      ]
+    },
+    "topic_micro_precision": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0
+      ]
+    },
+    "topic_micro_recall": {
+      "mean": 1.0,
+      "pstdev": 0.0,
+      "values": [
+        1.0,
+        1.0
+      ]
+    },
+    "valid_json": {
+      "mean": 1.0,
+      "pstdev": 0.0,
+      "values": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "prediction_stability": {
+    "pairwise_prediction_exact_rate": 0.9,
+    "pairwise_prediction_jaccard": 0.9666666666666667,
+    "pairwise_prediction_symdiff": 0.1
+  },
+  "bucket_counts": {
+    "unstable_boundary": 5,
+    "stable_wrong": 45
+  },
+  "rows": [
+    {
+      "id": "openclaw-openclaw-47285",
+      "title": "feat(memory-lancedb): native Azure OpenAI support",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2.5,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 1,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "inference_api",
+            "memory",
+            "skills_plugins"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "inference_api",
+            "memory"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "inference_api",
+          2
+        ],
+        [
+          "memory",
+          2
+        ],
+        [
+          "skills_plugins",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "skills_plugins",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "inference_api",
+            "memory",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "memory",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "inference_api",
+            "memory"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "memory"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84038",
+      "title": "[Bug]: doctor --fix silently migrates intentional openai-codex/ config to openai/, breaking PI+OAuth runtime and causing 3-4x token inflation",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2.5,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 1,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "codex",
+            "config",
+            "model_lifecycle"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "codex",
+            "config"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "codex",
+          2
+        ],
+        [
+          "config",
+          2
+        ],
+        [
+          "model_lifecycle",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "model_lifecycle",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "codex",
+            "config",
+            "model_lifecycle"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "config",
+            "model_lifecycle"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "codex",
+            "config"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "config"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84570",
+      "title": "Remove skill prelude exec allowlist",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2.5,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 1,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "skills_plugins"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "approvals",
+            "exec_tools"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "approvals",
+          2
+        ],
+        [
+          "exec_tools",
+          2
+        ],
+        [
+          "skills_plugins",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "skills_plugins",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "exec_tools",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "approvals",
+            "exec_tools"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "exec_tools"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84648",
+      "title": "Add SafeOps preflight hook for exec tool",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2.5,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 1,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "exec_tools",
+            "hooks",
+            "security"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "exec_tools",
+            "security"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "exec_tools",
+          2
+        ],
+        [
+          "security",
+          2
+        ],
+        [
+          "hooks",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "hooks",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "exec_tools",
+            "hooks",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "exec_tools",
+            "hooks",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84681",
+      "title": "fix(codex): stabilize heartbeat dynamic tool schema",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2.5,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 1,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "codex",
+            "tool_calling"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "codex",
+            "sessions",
+            "tool_calling"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "codex",
+          2
+        ],
+        [
+          "tool_calling",
+          2
+        ],
+        [
+          "sessions",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "sessions",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "codex",
+            "tool_calling"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "tool_calling"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "codex",
+            "sessions",
+            "tool_calling"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "sessions",
+            "tool_calling"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-39714",
+      "title": "Sandbox: fix Dockerized browser bridge and tab creation",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "browser_automation",
+            "config",
+            "sandboxing"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "browser_automation",
+          2
+        ],
+        [
+          "config",
+          2
+        ],
+        [
+          "sandboxing",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "browser_automation",
+            "config",
+            "sandboxing"
+          ],
+          "exact": false,
+          "false_positives": [
+            "browser_automation",
+            "config",
+            "sandboxing"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "browser_automation",
+            "config",
+            "sandboxing"
+          ],
+          "exact": false,
+          "false_positives": [
+            "browser_automation",
+            "config",
+            "sandboxing"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-42606",
+      "title": "Browser: harden noVNC bootstrap headers",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "browser_automation",
+            "security"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "browser_automation",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "browser_automation",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "browser_automation",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "browser_automation",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "browser_automation",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-43246",
+      "title": "fix(message): deny same-provider cross-context sends by default [AI-assisted]",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "notifications",
+            "security"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "config",
+          2
+        ],
+        [
+          "notifications",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "config",
+            "notifications",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "notifications",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "config",
+            "notifications",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "notifications",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-44202",
+      "title": "[Bug]: local memory embeddings on Apple Silicon can crash gateway in ggml-metal / node-llama-cpp; need official Metal/GPU guidance",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "memory",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ],
+        [
+          "self_hosted_inference",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-47187",
+      "title": "fix(ui): reset transient chat overlays and style context notice",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "ui_tui"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "ui_tui",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "ui_tui"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "ui_tui"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-47446",
+      "title": "fix(gateway/discord): respect env proxy vars and prevent ECONNRESET",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "chat_integrations",
+          2
+        ],
+        [
+          "gateway",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-48260",
+      "title": "feat(ui): add active time summary to usage overview",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "telemetry_usage",
+            "ui_tui"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "telemetry_usage",
+          2
+        ],
+        [
+          "ui_tui",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "telemetry_usage",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "telemetry_usage",
+            "ui_tui"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "telemetry_usage",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "telemetry_usage",
+            "ui_tui"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-49310",
+      "title": "fix: keep tui busy during follow-up waits",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "ui_tui"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "ui_tui",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "ui_tui"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "ui_tui"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-57597",
+      "title": "fix(acp): persist spawn labels in target session store",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "sessions"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          2
+        ],
+        [
+          "sessions",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "acp",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "acp",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-58411",
+      "title": "sessions_spawn lacks --bind here equivalent \u2014 agent cannot bind ACP session to existing Discord thread",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "chat_integrations",
+            "tool_calling"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          2
+        ],
+        [
+          "chat_integrations",
+          2
+        ],
+        [
+          "tool_calling",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "acp",
+            "chat_integrations",
+            "tool_calling"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "chat_integrations",
+            "tool_calling"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "acp",
+            "chat_integrations",
+            "tool_calling"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "chat_integrations",
+            "tool_calling"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-59878",
+      "title": "Session lane stuck in 'running' after run dies \u2014 sessions.abort + gateway restart fail to clear stale state",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "queueing",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ],
+        [
+          "sessions",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-62769",
+      "title": "[Feature]: Support ACP configured bindings for Telegram DMs (not just groups/topics)",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "chat_integrations"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          2
+        ],
+        [
+          "chat_integrations",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "acp",
+            "chat_integrations"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "chat_integrations"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "acp",
+            "chat_integrations"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "chat_integrations"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-63007",
+      "title": "Pass outbound session identity into message_sending and surface guarded gateway send denial",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "gateway",
+            "hooks",
+            "notifications"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "gateway",
+          2
+        ],
+        [
+          "hooks",
+          2
+        ],
+        [
+          "notifications",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "gateway",
+            "hooks",
+            "notifications"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "hooks",
+            "notifications"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "gateway",
+            "hooks",
+            "notifications"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "hooks",
+            "notifications"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-64718",
+      "title": "fix(security): default exec to deny for non-owner auto-reply senders",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "approvals",
+          2
+        ],
+        [
+          "exec_tools",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-65187",
+      "title": "test: add regression tests for <final> tag stripping in UI message extraction",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "tests_ci"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "tests_ci",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "tests_ci"
+          ],
+          "exact": false,
+          "false_positives": [
+            "tests_ci"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "tests_ci"
+          ],
+          "exact": false,
+          "false_positives": [
+            "tests_ci"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-65364",
+      "title": "feat(plugins): add registerProviderRuntimeAuthOverride API",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "inference_api",
+          2
+        ],
+        [
+          "security",
+          2
+        ],
+        [
+          "skills_plugins",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-66327",
+      "title": "feat(msteams): implement sendPayload for interactive approval cards",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "chat_integrations",
+            "notifications"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "approvals",
+          2
+        ],
+        [
+          "chat_integrations",
+          2
+        ],
+        [
+          "notifications",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "approvals",
+            "chat_integrations",
+            "notifications"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "chat_integrations",
+            "notifications"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "approvals",
+            "chat_integrations",
+            "notifications"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "chat_integrations",
+            "notifications"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68187",
+      "title": "SSE-backed MCP sessions can stay stale after server restart and fail with 'Session not found'",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "mcp_tooling",
+            "reliability"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "mcp_tooling",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "mcp_tooling",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "mcp_tooling",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "mcp_tooling",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "mcp_tooling",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-69256",
+      "title": "fix(cron): prevent premature session cleanup when subagents are running",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "cron_automation",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ],
+        [
+          "sessions",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71594",
+      "title": "docs(gateway): clarify IPv4-only BYOH bind path",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "docs",
+            "gateway"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "docs",
+          2
+        ],
+        [
+          "gateway",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "docs",
+            "gateway"
+          ],
+          "exact": false,
+          "false_positives": [
+            "docs",
+            "gateway"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "docs",
+            "gateway"
+          ],
+          "exact": false,
+          "false_positives": [
+            "docs",
+            "gateway"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72001",
+      "title": "fix(hooks): write allowedSessionKeyPrefixes from gmail wizard",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "hooks"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "config",
+          2
+        ],
+        [
+          "hooks",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "config",
+            "hooks"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "hooks"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "config",
+            "hooks"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "hooks"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72016",
+      "title": "[Feature]: doctor api/extendability",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "skills_plugins"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "skills_plugins",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72262",
+      "title": "docs: add WhatsApp 408 disconnect troubleshooting runbook",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "docs",
+            "reliability"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "chat_integrations",
+          2
+        ],
+        [
+          "docs",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "docs",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "docs",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "docs",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "docs",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-74204",
+      "title": "memory.qmd.update.embedTimeoutMs default (120 s) is too low for local GGUF; error message doesn't surface the fix",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "memory",
+            "self_hosted_inference"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "config",
+          2
+        ],
+        [
+          "memory",
+          2
+        ],
+        [
+          "self_hosted_inference",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "config",
+            "memory",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "memory",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "config",
+            "memory",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "memory",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-74305",
+      "title": "[Bug]: ACPX Codex worker fails when model/thinking overrides are configured",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acpx",
+            "codex"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acpx",
+          2
+        ],
+        [
+          "codex",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "acpx",
+            "codex"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acpx",
+            "codex"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "acpx",
+            "codex"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acpx",
+            "codex"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-74484",
+      "title": "Gateway pairing scope deadlock: CLI cannot approve/reject auto-reissued over-scoped repair requests",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "auth_identity",
+            "gateway",
+            "security"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "auth_identity",
+          2
+        ],
+        [
+          "gateway",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "auth_identity",
+            "gateway",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "auth_identity",
+            "gateway",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "auth_identity",
+            "gateway",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "auth_identity",
+            "gateway",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-75043",
+      "title": "Add provider-aware automatic TTS emotion mapping",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "inference_api"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "config",
+          2
+        ],
+        [
+          "inference_api",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "config",
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "inference_api"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "config",
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "inference_api"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-77345",
+      "title": "google-vertex SSRF guard blocks fake-IP DNS (model.baseUrl not set for built-in providers)",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "inference_api",
+            "security"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "inference_api",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "inference_api",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "inference_api",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-80255",
+      "title": "fix #79026: active-memory recall subagent can deadlock on the main lane inside before_prompt_build",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "memory",
+            "queueing",
+            "reliability"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "memory",
+          2
+        ],
+        [
+          "queueing",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "memory",
+            "queueing",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "memory",
+            "queueing",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "memory",
+            "queueing",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "memory",
+            "queueing",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-81200",
+      "title": "fix(acpx): strip provider API keys from child harness env",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acpx",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acpx",
+          2
+        ],
+        [
+          "coding_agent_integrations",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "acpx",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acpx",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "acpx",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acpx",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-82145",
+      "title": "cron: allow retries for local model preflight",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "cron_automation",
+            "self_hosted_inference"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "config",
+          2
+        ],
+        [
+          "cron_automation",
+          2
+        ],
+        [
+          "self_hosted_inference",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "config",
+            "cron_automation",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "cron_automation",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "config",
+            "cron_automation",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "cron_automation",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-82596",
+      "title": "Feature/exec denylist",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "approvals",
+          2
+        ],
+        [
+          "exec_tools",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84297",
+      "title": "[Bug]: Per-agent identity overlay dropped on cron --announce and heartbeat target-channel Slack pushes (announce path; reply path was fixed in #38235)",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "chat_integrations",
+          2
+        ],
+        [
+          "cron_automation",
+          2
+        ],
+        [
+          "notifications",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84413",
+      "title": "[Bug]: 2026.5.18 Codex Chrome DevTools MCP sidecars accumulate under gateway and drive cgroup memory growth",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "codex",
+            "mcp_tooling",
+            "reliability"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "codex",
+          2
+        ],
+        [
+          "mcp_tooling",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "codex",
+            "mcp_tooling",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "mcp_tooling",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "codex",
+            "mcp_tooling",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "mcp_tooling",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84419",
+      "title": "fix(session): prefer real tool result over synthetic error in transcript repair",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "sessions",
+            "tool_calling"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "sessions",
+          2
+        ],
+        [
+          "tool_calling",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "sessions",
+            "tool_calling"
+          ],
+          "exact": false,
+          "false_positives": [
+            "sessions",
+            "tool_calling"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "sessions",
+            "tool_calling"
+          ],
+          "exact": false,
+          "false_positives": [
+            "sessions",
+            "tool_calling"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84567",
+      "title": "[Bug]: Codex bundled harness initialize still hangs in 2026.5.18 isolated cron \u2014 surfaces via #64744 timeout-wrapping as 'isolated agent setup timed out before runner start'",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "codex",
+            "cron_automation",
+            "reliability"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "codex",
+          2
+        ],
+        [
+          "cron_automation",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "codex",
+            "cron_automation",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "cron_automation",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "codex",
+            "cron_automation",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "cron_automation",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84645",
+      "title": "Materialize node-host inline interpreter eval before exec approval",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "approvals",
+          2
+        ],
+        [
+          "exec_tools",
+          2
+        ],
+        [
+          "security",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84660",
+      "title": "[Bug] Voice STT: empty moonshine transcripts passed as raw JSON to LLM, clogging serialized processing queue",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "queueing",
+            "self_hosted_inference"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "chat_integrations",
+          2
+        ],
+        [
+          "queueing",
+          2
+        ],
+        [
+          "self_hosted_inference",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "queueing",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "queueing",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "queueing",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "queueing",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84668",
+      "title": "docs(agent-runtimes): clarify model name vs runtime routing for Codex (#84637)",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "codex",
+            "docs"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "codex",
+          2
+        ],
+        [
+          "docs",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "codex",
+            "docs"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "docs"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "codex",
+            "docs"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "docs"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84709",
+      "title": "fix(cron): fail closed when required tools are unavailable",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "codex",
+            "cron_automation",
+            "exec_tools"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "codex",
+          2
+        ],
+        [
+          "cron_automation",
+          2
+        ],
+        [
+          "exec_tools",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "codex",
+            "cron_automation",
+            "exec_tools"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "cron_automation",
+            "exec_tools"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "codex",
+            "cron_automation",
+            "exec_tools"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "cron_automation",
+            "exec_tools"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84729",
+      "title": "[codex] Fix macOS app copyright year",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "tests_ci",
+            "ui_tui"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "tests_ci",
+          2
+        ],
+        [
+          "ui_tui",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "tests_ci",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "tests_ci",
+            "ui_tui"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "tests_ci",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "tests_ci",
+            "ui_tui"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84802",
+      "title": "fix(memory-core): allow bounded dreaming session cleanup",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "memory",
+            "reliability",
+            "sessions"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "memory",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ],
+        [
+          "sessions",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "memory",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "memory",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "memory",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "memory",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84997",
+      "title": "[AI-assisted] Add NEAR AI Cloud provider",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "inference_api",
+          2
+        ],
+        [
+          "model_lifecycle",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-85999",
+      "title": "[Bug]: 2026.5.22 gateway pre-warm (warmCurrentProviderAuthState) blocks event loop ~60s on startup, breaks channel handshakes",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "gateway",
+          2
+        ],
+        [
+          "inference_api",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-90146",
+      "title": "google-vertex: Missing gemini-3.1-flash-lite in provider catalog causes silent failure instead of error",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 2,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "agent_runtime",
+            "model_lifecycle",
+            "reliability"
+          ],
+          "count": 2
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "agent_runtime",
+          2
+        ],
+        [
+          "model_lifecycle",
+          2
+        ],
+        [
+          "reliability",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "opus-2x-repeat-01",
+          "topics": [
+            "agent_runtime",
+            "model_lifecycle",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "agent_runtime",
+            "model_lifecycle",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "opus-2x-repeat-02",
+          "topics": [
+            "agent_runtime",
+            "model_lifecycle",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "agent_runtime",
+            "model_lifecycle",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    }
+  ]
+}

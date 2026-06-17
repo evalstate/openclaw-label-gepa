@@ -1,0 +1,3019 @@
+{
+  "stability_dir": "/home/shaun/temp/openclaw-gepa/runs/openclaw-easy-set-stability/easy-final-v2-test-gpt55-teacher-stability",
+  "selected_rows": 40,
+  "completed_repeats": 3,
+  "repeat_metrics": [
+    {
+      "repeat": 1,
+      "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+      "gepa_score": 0.9999999999999999,
+      "topic_micro_f1": 1.0,
+      "topic_micro_precision": 1.0,
+      "topic_micro_recall": 1.0,
+      "row_exact_accuracy": 1.0,
+      "exact_match": 1.0,
+      "avg_row_jaccard": 1.0,
+      "avg_row_symdiff": 0.0,
+      "row_symdiff_score": 1.0,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 3.3,
+      "avg_expected_topics": 3.3
+    },
+    {
+      "repeat": 2,
+      "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+      "gepa_score": 0.9999999999999999,
+      "topic_micro_f1": 1.0,
+      "topic_micro_precision": 1.0,
+      "topic_micro_recall": 1.0,
+      "row_exact_accuracy": 1.0,
+      "exact_match": 1.0,
+      "avg_row_jaccard": 1.0,
+      "avg_row_symdiff": 0.0,
+      "row_symdiff_score": 1.0,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 3.3,
+      "avg_expected_topics": 3.3
+    },
+    {
+      "repeat": 3,
+      "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+      "gepa_score": 0.9918584905660378,
+      "topic_micro_f1": 0.9962264150943396,
+      "topic_micro_precision": 0.9924812030075187,
+      "topic_micro_recall": 1.0,
+      "row_exact_accuracy": 0.975,
+      "exact_match": 0.975,
+      "avg_row_jaccard": 0.995,
+      "avg_row_symdiff": 0.025,
+      "row_symdiff_score": 0.9756097560975611,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 3.325,
+      "avg_expected_topics": 3.3
+    }
+  ],
+  "metric_summary": {
+    "avg_expected_topics": {
+      "mean": 3.3,
+      "pstdev": 0.0,
+      "values": [
+        3.3,
+        3.3,
+        3.3
+      ]
+    },
+    "avg_predicted_topics": {
+      "mean": 3.308333333333333,
+      "pstdev": 0.01178511301977596,
+      "values": [
+        3.3,
+        3.3,
+        3.325
+      ]
+    },
+    "avg_row_jaccard": {
+      "mean": 0.9983333333333333,
+      "pstdev": 0.0023570226039551605,
+      "values": [
+        1.0,
+        1.0,
+        0.995
+      ]
+    },
+    "avg_row_symdiff": {
+      "mean": 0.008333333333333333,
+      "pstdev": 0.011785113019775792,
+      "values": [
+        0.0,
+        0.0,
+        0.025
+      ]
+    },
+    "exact_match": {
+      "mean": 0.9916666666666667,
+      "pstdev": 0.011785113019775802,
+      "values": [
+        1.0,
+        1.0,
+        0.975
+      ]
+    },
+    "gepa_score": {
+      "mean": 0.9972861635220125,
+      "pstdev": 0.0038379443532325576,
+      "values": [
+        0.9999999999999999,
+        0.9999999999999999,
+        0.9918584905660378
+      ]
+    },
+    "row_exact_accuracy": {
+      "mean": 0.9916666666666667,
+      "pstdev": 0.011785113019775802,
+      "values": [
+        1.0,
+        1.0,
+        0.975
+      ]
+    },
+    "row_symdiff_score": {
+      "mean": 0.9918699186991871,
+      "pstdev": 0.011497671238805608,
+      "values": [
+        1.0,
+        1.0,
+        0.9756097560975611
+      ]
+    },
+    "topic_micro_f1": {
+      "mean": 0.9987421383647799,
+      "pstdev": 0.0017788849841171002,
+      "values": [
+        1.0,
+        1.0,
+        0.9962264150943396
+      ]
+    },
+    "topic_micro_precision": {
+      "mean": 0.9974937343358395,
+      "pstdev": 0.003544394893165678,
+      "values": [
+        1.0,
+        1.0,
+        0.9924812030075187
+      ]
+    },
+    "topic_micro_recall": {
+      "mean": 1.0,
+      "pstdev": 0.0,
+      "values": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "valid_json": {
+      "mean": 1.0,
+      "pstdev": 0.0,
+      "values": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "prediction_stability": {
+    "pairwise_prediction_exact_rate": 0.9833333333333333,
+    "pairwise_prediction_jaccard": 0.9966666666666667,
+    "pairwise_prediction_symdiff": 0.016666666666666666
+  },
+  "bucket_counts": {
+    "unstable_near": 1,
+    "stable_correct": 39
+  },
+  "rows": [
+    {
+      "id": "openclaw-openclaw-75784",
+      "title": "Phantom user messages appear in webchat after heartbeat wakes / gateway restart / session repair",
+      "bucket": "unstable_near",
+      "expected_topics": [
+        "chat_integrations",
+        "gateway",
+        "reliability",
+        "sessions"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0.6666666666666666,
+      "avg_jaccard_vs_expected": 0.9333333333333333,
+      "avg_symdiff_vs_expected": 0.3333333333333333,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.8666666666666667,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "agent_runtime",
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "agent_runtime",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "agent_runtime",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "agent_runtime",
+            "chat_integrations",
+            "gateway",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "agent_runtime"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-87277",
+      "title": "[Feature] Add MiMo-V2.5 to Xiaomi catalog + automatic multimodal routing when DeepSeek V4-Pro is primary model",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "config",
+        "model_releases",
+        "model_serving"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "model_releases",
+            "model_serving"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "config",
+            "model_releases",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "config",
+            "model_releases",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "config",
+            "model_releases",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84094",
+      "title": "feat(gateway): forward frequency_penalty, presence_penalty, and seed via OpenAI-compatible HTTP gateway",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "api_surface",
+        "gateway",
+        "model_serving"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "api_surface",
+            "gateway",
+            "model_serving"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "api_surface",
+            "gateway",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "api_surface",
+            "gateway",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "api_surface",
+            "gateway",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-48580",
+      "title": "Bug: acpx codex sessions \u521b\u5efa\u7684\u4f1a\u8bdd\u7acb\u5373\u9000\u51fa - stdin is not a terminal",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acpx",
+        "codex",
+        "reliability",
+        "sessions"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acpx",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "acpx",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "acpx",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "acpx",
+            "codex",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-59878",
+      "title": "Session lane stuck in 'running' after run dies \u2014 sessions.abort + gateway restart fail to clear stale state",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "gateway",
+        "queueing",
+        "reliability",
+        "sessions"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "gateway",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "gateway",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "gateway",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "gateway",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-56613",
+      "title": "[Feature]: Talk/Voice tab \u2014 agent/session switching + per-agent TTS voice",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "config",
+        "sessions",
+        "ui_tui"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "config",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68187",
+      "title": "SSE-backed MCP sessions can stay stale after server restart and fail with 'Session not found'",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "gateway",
+        "mcp_tooling",
+        "reliability",
+        "sessions"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "gateway",
+            "mcp_tooling",
+            "reliability",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "gateway",
+            "mcp_tooling",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "gateway",
+            "mcp_tooling",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "gateway",
+            "mcp_tooling",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-39714",
+      "title": "Sandbox: fix Dockerized browser bridge and tab creation",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "browser_automation",
+        "reliability",
+        "sandboxing"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "browser_automation",
+            "reliability",
+            "sandboxing"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "browser_automation",
+            "reliability",
+            "sandboxing"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "browser_automation",
+            "reliability",
+            "sandboxing"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "browser_automation",
+            "reliability",
+            "sandboxing"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-78977",
+      "title": "fix(providers): skip store:false for proxy-like Responses API endpoints (#78897)",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "local_model_providers",
+        "model_serving",
+        "reliability"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "local_model_providers",
+            "model_serving",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-47446",
+      "title": "fix(gateway/discord): respect env proxy vars and prevent ECONNRESET",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "chat_integrations",
+        "config",
+        "gateway",
+        "reliability"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "config",
+            "gateway",
+            "reliability"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "config",
+            "gateway",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "config",
+            "gateway",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "chat_integrations",
+            "config",
+            "gateway",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-74204",
+      "title": "memory.qmd.update.embedTimeoutMs default (120 s) is too low for local GGUF; error message doesn't surface the fix",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "config",
+        "local_models",
+        "memory",
+        "reliability"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84385",
+      "title": "[codex] Fix macOS app copyright year",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "ui_tui"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "ui_tui"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-75043",
+      "title": "Add provider-aware automatic TTS emotion mapping",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "api_surface",
+        "config",
+        "self_hosted_inference"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "api_surface",
+            "config",
+            "self_hosted_inference"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "api_surface",
+            "config",
+            "self_hosted_inference"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "api_surface",
+            "config",
+            "self_hosted_inference"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "api_surface",
+            "config",
+            "self_hosted_inference"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-67539",
+      "title": "[Feature]: Add provider-specific TTS prompt hints",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "api_surface",
+        "self_hosted_inference"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "api_surface",
+            "self_hosted_inference"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-70002",
+      "title": "ci: skip docs sync & translate-trigger workflows in forks",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "tests_ci"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "tests_ci"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "tests_ci"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "tests_ci"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "tests_ci"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-85999",
+      "title": "[Bug]: 2026.5.22 gateway pre-warm (warmCurrentProviderAuthState) blocks event loop ~60s on startup, breaks channel handshakes",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "auth_identity",
+        "chat_integrations",
+        "gateway",
+        "reliability"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "auth_identity",
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "auth_identity",
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "auth_identity",
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "auth_identity",
+            "chat_integrations",
+            "gateway",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72085",
+      "title": "docs(commands): document bashForegroundMs clamp bounds (0\u201330 000 ms)",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "config",
+        "docs"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "docs"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "config",
+            "docs"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "config",
+            "docs"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "config",
+            "docs"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68204",
+      "title": "Unified run trace schema across agent, ACP, subagent, and task flows",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "agent_runtime",
+        "sessions",
+        "telemetry_usage"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions",
+            "telemetry_usage"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions",
+            "telemetry_usage"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions",
+            "telemetry_usage"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions",
+            "telemetry_usage"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-46552",
+      "title": "docs(queue): clarify steer behavior with partial streaming and tool boundaries",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "docs",
+        "queueing",
+        "tool_calling"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "docs",
+            "queueing",
+            "tool_calling"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84697",
+      "title": "Custom OpenAI-compatible provider with baseUrl without /v1 fails with cryptic 'incomplete terminal response' error",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "config",
+        "local_model_providers",
+        "model_serving"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "local_model_providers",
+            "model_serving"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "config",
+            "local_model_providers",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "config",
+            "local_model_providers",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "config",
+            "local_model_providers",
+            "model_serving"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-69328",
+      "title": "fix(acp): avoid false zero-diff failures and append session messages",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "reliability",
+        "sessions",
+        "ui_tui"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68843",
+      "title": "fix(acp): treat missing cwd as stale bound session",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "reliability",
+        "sessions"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71157",
+      "title": "[Feature]: Support WhatsApp disappearing-message expiration for outbound replies",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "chat_integrations",
+        "config",
+        "security"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "config",
+            "security"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "config",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "config",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "chat_integrations",
+            "config",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-45393",
+      "title": "fix(errors): friendly message and last-message repair for tool_use/tool_result mismatch (#45385)",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "reliability",
+        "security",
+        "sessions",
+        "tool_calling"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "reliability",
+            "security",
+            "sessions",
+            "tool_calling"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "reliability",
+            "security",
+            "sessions",
+            "tool_calling"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "reliability",
+            "security",
+            "sessions",
+            "tool_calling"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "reliability",
+            "security",
+            "sessions",
+            "tool_calling"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-70518",
+      "title": "fix(config): add heartbeat skill allowlist",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "config",
+        "cron_automation",
+        "skills_plugins"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "cron_automation",
+            "skills_plugins"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "config",
+            "cron_automation",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "config",
+            "cron_automation",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "config",
+            "cron_automation",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71784",
+      "title": "Bug: memory search live embedding fails ~20\u201340% with `fetch failed | other side closed` (provider-agnostic; upstream healthy)",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "memory",
+        "reliability"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "memory",
+            "reliability"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "memory",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "memory",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "memory",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-79897",
+      "title": "OpenAI-compatible streaming with llama.cpp saves zero usage (stream closed before final usage chunk)",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "local_models",
+        "model_serving",
+        "telemetry_usage"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "local_models",
+            "model_serving",
+            "telemetry_usage"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "local_models",
+            "model_serving",
+            "telemetry_usage"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "local_models",
+            "model_serving",
+            "telemetry_usage"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "local_models",
+            "model_serving",
+            "telemetry_usage"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-83863",
+      "title": "ACP/Codex child tasks can be marked succeeded with progress-only output and no final deliverable",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "agent_runtime",
+        "codex",
+        "coding_agents",
+        "reliability"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "codex",
+            "coding_agents",
+            "reliability"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "codex",
+            "coding_agents",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "codex",
+            "coding_agents",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "codex",
+            "coding_agents",
+            "reliability"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72016",
+      "title": "[Feature]: doctor api/extendability",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "api_surface",
+        "config",
+        "skills_plugins"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "api_surface",
+            "config",
+            "skills_plugins"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "api_surface",
+            "config",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "api_surface",
+            "config",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "api_surface",
+            "config",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-85660",
+      "title": "GitHub Copilot plugin: agents.defaults.imageModel for unknown Copilot model ID falls back to OpenAI provider with confusing 401",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "config",
+        "model_serving",
+        "security",
+        "skills_plugins"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "model_serving",
+            "security",
+            "skills_plugins"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "config",
+            "model_serving",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "config",
+            "model_serving",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "config",
+            "model_serving",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-58411",
+      "title": "sessions_spawn lacks --bind here equivalent \u2014 agent cannot bind ACP session to existing Discord thread",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "api_surface",
+        "chat_integrations",
+        "sessions"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "api_surface",
+            "chat_integrations",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "acp",
+            "api_surface",
+            "chat_integrations",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "acp",
+            "api_surface",
+            "chat_integrations",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "acp",
+            "api_surface",
+            "chat_integrations",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-56442",
+      "title": "feat: Add opt-in ACP parent completion notify for sessions_spawn",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "api_surface",
+        "notifications",
+        "sessions"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "api_surface",
+            "notifications",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "acp",
+            "api_surface",
+            "notifications",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "acp",
+            "api_surface",
+            "notifications",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "acp",
+            "api_surface",
+            "notifications",
+            "sessions"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-62428",
+      "title": "test(exec): land exec v2 contract follow-through",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "approvals",
+        "exec_tools",
+        "security",
+        "tests_ci"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security",
+            "tests_ci"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84297",
+      "title": "[Bug]: Per-agent identity overlay dropped on cron --announce and heartbeat target-channel Slack pushes (announce path; reply path was fixed in #38235)",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "auth_identity",
+        "chat_integrations",
+        "cron_automation",
+        "notifications"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "auth_identity",
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "auth_identity",
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "auth_identity",
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "auth_identity",
+            "chat_integrations",
+            "cron_automation",
+            "notifications"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-81200",
+      "title": "fix(acpx): strip provider API keys from child harness env",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "acp",
+        "acpx",
+        "auth_identity",
+        "security"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "security"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-82596",
+      "title": "Feature/exec denylist",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "approvals",
+        "exec_tools",
+        "security"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-81488",
+      "title": "Harden node exec approval precheck env [AI]",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "approvals",
+        "exec_tools",
+        "security"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "security"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-78528",
+      "title": "Security: skill SecretRef API keys still leak into exec child environments",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "auth_identity",
+        "exec_tools",
+        "security",
+        "skills_plugins"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "auth_identity",
+            "exec_tools",
+            "security",
+            "skills_plugins"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "auth_identity",
+            "exec_tools",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "auth_identity",
+            "exec_tools",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "auth_identity",
+            "exec_tools",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84570",
+      "title": "Remove skill prelude exec allowlist",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "approvals",
+        "exec_tools",
+        "skills_plugins"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "skills_plugins"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "approvals",
+            "exec_tools",
+            "skills_plugins"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-84753",
+      "title": "[Feature]: Show display name instead of user ID in session list",
+      "bucket": "stable_correct",
+      "expected_topics": [
+        "chat_integrations",
+        "sessions",
+        "ui_tui"
+      ],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 1,
+      "avg_jaccard_vs_expected": 1.0,
+      "avg_symdiff_vs_expected": 0,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "sessions",
+            "ui_tui"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "easy-final-v2-test-gpt55-teacher-stability-repeat-03",
+          "topics": [
+            "chat_integrations",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": true,
+          "false_positives": [],
+          "false_negatives": []
+        }
+      ]
+    }
+  ]
+}

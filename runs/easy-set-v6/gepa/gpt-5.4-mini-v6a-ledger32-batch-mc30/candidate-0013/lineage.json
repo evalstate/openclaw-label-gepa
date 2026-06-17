@@ -1,0 +1,36 @@
+{
+  "candidate_idx": 13,
+  "policy_sha256": "a1a3e738258e41d31c6b7cb7c5b4b88e5bd181a80dc33c592a5fd2b8e908cc58",
+  "policy_chars": 5988,
+  "parent_candidate_idx": 5,
+  "reflection_call": "call-0012",
+  "fixed_assets": {
+    "agent_card": {
+      "path": "eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6a.md",
+      "sha256": "1c6fe3f172b07018e1497293ecbd1588272dfc219a4f9847517b1ec1602feb5b"
+    },
+    "allowed_topics": {
+      "path": "eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md",
+      "sha256": "141a8351eacba3e343d6599fcd90a5a81b173c69d51a37cf53b5aeada9ce8ecd"
+    },
+    "seed_policy": {
+      "path": "eval/openclaw/easy-set-pilot/v6/seed-policy-overlay-v6.md",
+      "sha256": "e31bcbf64ecc069e4ae777319c5483c70fecaf13c77694b391350417b3029bdd"
+    },
+    "static_asi": {
+      "path": "eval/openclaw/easy-set-pilot/v6/vanilla-asi-v6-slim.md",
+      "sha256": "f6ddc7a0ba617f7c8938c139a2be360190f36d455eec565fc19ec504ac40268c"
+    },
+    "boundary_guidance": {
+      "path": "eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6.md",
+      "sha256": "92ea066401fc1a1f12c4c201815974aa572b6888199b8d2f05b489c4f238f38f"
+    },
+    "input": {
+      "path": "runs/easy-set-v6/gepa/gpt-5.4-mini-v6a-ledger32-batch-mc30/input.jsonl",
+      "sha256": "5e9f44e227a495867b1594a19b282564e326560980148222fd6f7d3c40d597ad"
+    }
+  },
+  "task_model": "codexresponses.gpt-5.4-mini",
+  "reflection_model": "codexresponses.gpt-5.5?reasoning=high",
+  "score_mode": "row-aware"
+}

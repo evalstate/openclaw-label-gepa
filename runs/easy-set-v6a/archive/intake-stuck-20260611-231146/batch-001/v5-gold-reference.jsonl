@@ -1,0 +1,30 @@
+{"id": "openclaw-openclaw-41892", "v5_expected_topics": ["cron_automation", "ui_tui"], "v5_split": "train"}
+{"id": "openclaw-openclaw-42408", "v5_expected_topics": ["config", "docs", "memory"], "v5_split": "train"}
+{"id": "openclaw-openclaw-43416", "v5_expected_topics": ["ui_tui"], "v5_split": "train"}
+{"id": "openclaw-openclaw-47083", "v5_expected_topics": ["sessions", "telemetry_usage", "ui_tui"], "v5_split": "train"}
+{"id": "openclaw-openclaw-48877", "v5_expected_topics": ["chat_integrations", "config"], "v5_split": "train"}
+{"id": "openclaw-openclaw-51849", "v5_expected_topics": ["docs", "agent_demos"], "v5_split": "train"}
+{"id": "openclaw-openclaw-53997", "v5_expected_topics": ["acpx", "acp", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-65640", "v5_expected_topics": ["acp", "acpx", "sessions", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-68204", "v5_expected_topics": ["acp", "agent_runtime", "sessions", "telemetry_usage"], "v5_split": "train"}
+{"id": "openclaw-openclaw-68916", "v5_expected_topics": ["acp", "sessions", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-71157", "v5_expected_topics": ["chat_integrations", "config", "security"], "v5_split": "train"}
+{"id": "openclaw-openclaw-71487", "v5_expected_topics": ["ui_tui", "self_hosted_inference", "config"], "v5_split": "train"}
+{"id": "openclaw-openclaw-71646", "v5_expected_topics": ["mcp_tooling", "approvals", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-71976", "v5_expected_topics": ["memory", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-72138", "v5_expected_topics": ["chat_integrations", "hooks", "notifications"], "v5_split": "train"}
+{"id": "openclaw-openclaw-76724", "v5_expected_topics": ["mcp_tooling", "ui_tui"], "v5_split": "train"}
+{"id": "openclaw-openclaw-77694", "v5_expected_topics": ["acpx", "acp", "agent_runtime", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-78528", "v5_expected_topics": ["security", "exec_tools", "skills_plugins", "auth_identity"], "v5_split": "train"}
+{"id": "openclaw-openclaw-81488", "v5_expected_topics": ["approvals", "exec_tools", "security"], "v5_split": "train"}
+{"id": "openclaw-openclaw-82145", "v5_expected_topics": ["cron_automation", "local_model_providers", "config", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-82642", "v5_expected_topics": ["chat_integrations", "notifications", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-84385", "v5_expected_topics": ["ui_tui"], "v5_split": "train"}
+{"id": "openclaw-openclaw-84648", "v5_expected_topics": ["exec_tools", "hooks", "security"], "v5_split": "train"}
+{"id": "openclaw-openclaw-84732", "v5_expected_topics": ["chat_integrations", "notifications", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-84740", "v5_expected_topics": ["sessions", "ui_tui"], "v5_split": "train"}
+{"id": "openclaw-openclaw-84761", "v5_expected_topics": ["security", "auth_identity", "config"], "v5_split": "train"}
+{"id": "openclaw-openclaw-84771", "v5_expected_topics": ["gateway", "model_serving", "reliability", "sessions"], "v5_split": "train"}
+{"id": "openclaw-openclaw-84997", "v5_expected_topics": ["model_serving", "auth_identity"], "v5_split": "train"}
+{"id": "openclaw-openclaw-87277", "v5_expected_topics": ["model_releases", "model_serving", "reliability"], "v5_split": "train"}
+{"id": "openclaw-openclaw-88400", "v5_expected_topics": ["config", "model_serving"], "v5_split": "train"}

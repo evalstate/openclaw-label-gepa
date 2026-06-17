@@ -1,0 +1,75 @@
+{
+  "model": "opus",
+  "input": "runs/easy-set-v6g/prompt-keyword-audit-40/opus-2x/selected-input.jsonl",
+  "output": "runs/easy-set-v6g/prompt-keyword-audit-40/opus-2x/repeat-01/results.jsonl",
+  "schema": "eval/openclaw/easy-set-pilot/v6/teacher-output-v6g.schema.json",
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/teacher-card-v6g.md",
+  "agent": "openclaw_easy_set_pilot_teacher",
+  "template": "eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+  "shell_runtime": false,
+  "output_mode": "structured",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "parallel": 4,
+  "work_dir": "runs/easy-set-v6g/prompt-keyword-audit-40/opus-2x/repeat-01/.results.jsonl.batch/20260612T154919Z-0ddc7914",
+  "started_at": "2026-06-12T15:49:19Z",
+  "completed_at": "2026-06-12T15:52:50Z",
+  "input_rows": 40,
+  "selected_rows": 40,
+  "processed_rows": 40,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 197079.56,
+  "timing_ms": {
+    "duration": {
+      "count": 40,
+      "min": 3530.58,
+      "mean": 16106.9175,
+      "median_approx": 14844.61,
+      "max": 38827.3
+    },
+    "ttft": {
+      "count": 40,
+      "min": 1398.56,
+      "mean": 11125.12125,
+      "median_approx": 9599.153750000001,
+      "max": 31879.02
+    },
+    "time_to_response": {
+      "count": 40,
+      "min": 1398.56,
+      "mean": 11125.12125,
+      "median_approx": 9599.153750000001,
+      "max": 31879.02
+    }
+  },
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 10,
+      "output": "runs/easy-set-v6g/prompt-keyword-audit-40/opus-2x/repeat-01/.results.jsonl.batch/20260612T154919Z-0ddc7914/part-000.jsonl"
+    },
+    {
+      "index": 1,
+      "offset": 10,
+      "limit": 10,
+      "output": "runs/easy-set-v6g/prompt-keyword-audit-40/opus-2x/repeat-01/.results.jsonl.batch/20260612T154919Z-0ddc7914/part-001.jsonl"
+    },
+    {
+      "index": 2,
+      "offset": 20,
+      "limit": 10,
+      "output": "runs/easy-set-v6g/prompt-keyword-audit-40/opus-2x/repeat-01/.results.jsonl.batch/20260612T154919Z-0ddc7914/part-002.jsonl"
+    },
+    {
+      "index": 3,
+      "offset": 30,
+      "limit": 10,
+      "output": "runs/easy-set-v6g/prompt-keyword-audit-40/opus-2x/repeat-01/.results.jsonl.batch/20260612T154919Z-0ddc7914/part-003.jsonl"
+    }
+  ]
+}

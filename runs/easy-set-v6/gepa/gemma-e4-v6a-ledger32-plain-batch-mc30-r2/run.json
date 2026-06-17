@@ -1,0 +1,130 @@
+{
+  "created_at": "2026-06-11T21:15:41Z",
+  "run_name": "gemma-e4-v6a-ledger32-plain-batch-mc30-r2",
+  "run_dir": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2",
+  "script": "scripts/openclaw-vanilla-f1-gepa.py",
+  "command": [
+    "scripts/openclaw-vanilla-f1-gepa.py",
+    "--input",
+    "eval/openclaw/easy-set-pilot/v6/easy-ledger-32-gepa.jsonl",
+    "--agent-card",
+    "eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6a.md",
+    "--allowed-topics",
+    "eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md",
+    "--seed-policy",
+    "eval/openclaw/easy-set-pilot/v6/seed-policy-overlay-v6.md",
+    "--static-asi",
+    "eval/openclaw/easy-set-pilot/v6/vanilla-asi-v6-slim.md",
+    "--boundary-guidance",
+    "eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6.md",
+    "--model",
+    "gemma-e4",
+    "--reflection-model",
+    "codexresponses.gpt-5.5?reasoning=high",
+    "--run-root",
+    "runs/easy-set-v6/gepa",
+    "--run-name",
+    "gemma-e4-v6a-ledger32-plain-batch-mc30-r2",
+    "--gepa-mode",
+    "batch",
+    "--max-metric-calls",
+    "30",
+    "--score-mode",
+    "row-aware",
+    "--hygiene-penalty",
+    "0.03",
+    "--policy-char-budget",
+    "4000",
+    "--parallel",
+    "4",
+    "--plain-labels",
+    "--project",
+    "easy-v6-gepa"
+  ],
+  "mode": {
+    "gepa_mode": "batch",
+    "score_mode": "row-aware",
+    "plain_labels": true,
+    "output_contract": "comma-separated topic IDs",
+    "score": "0.50*topic_micro_f1+0.20*row_exact_accuracy+0.30*avg_row_jaccard"
+  },
+  "models": {
+    "task_model": "gemma-e4",
+    "reflection_model": "codexresponses.gpt-5.5?reasoning=high"
+  },
+  "budget": {
+    "max_metric_calls": 30,
+    "reflection_minibatch_size": null,
+    "parallel": 4
+  },
+  "inputs": {
+    "input": "eval/openclaw/easy-set-pilot/v6/easy-ledger-32-gepa.jsonl",
+    "input_rows": 32,
+    "seed_policy": "eval/openclaw/easy-set-pilot/v6/seed-policy-overlay-v6.md",
+    "static_asi": "eval/openclaw/easy-set-pilot/v6/vanilla-asi-v6-slim.md",
+    "optimizer_cues": null,
+    "boundary_guidance": "eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6.md",
+    "agent_card_requested": "eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-v6a.md",
+    "agent_card_resolved": "eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-plain-v6a.md",
+    "allowed_topics": "eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md"
+  },
+  "artifacts": {
+    "input": {
+      "path": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/input.jsonl",
+      "sha256": "5e9f44e227a495867b1594a19b282564e326560980148222fd6f7d3c40d597ad"
+    },
+    "agent_card": {
+      "path": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/openclaw-vanilla-labeler.md",
+      "sha256": "1d2e2085df935bfa57855382b4e9ca58b1970dec07b1a7fa2693f9bdc8818a8d"
+    },
+    "seed_policy": {
+      "path": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/seed-policy.md",
+      "sha256": "e31bcbf64ecc069e4ae777319c5483c70fecaf13c77694b391350417b3029bdd"
+    },
+    "allowed_topics": {
+      "path": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/allowed-topics.md",
+      "sha256": "141a8351eacba3e343d6599fcd90a5a81b173c69d51a37cf53b5aeada9ce8ecd"
+    },
+    "objective": {
+      "path": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/objective.md",
+      "sha256": "8043f8f4021ab225d63a3118872ac88e670d125c83fead75da951a89abc30946"
+    },
+    "background": {
+      "path": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/background.md",
+      "sha256": "db91443cd259a79cec1232342ede8d5af211eb4c3fb762400ae216eedf36f5db"
+    },
+    "static_asi": {
+      "path": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/static-asi.md",
+      "sha256": "f6ddc7a0ba617f7c8938c139a2be360190f36d455eec565fc19ec504ac40268c"
+    },
+    "boundary_guidance": {
+      "path": "runs/easy-set-v6/gepa/gemma-e4-v6a-ledger32-plain-batch-mc30-r2/boundary-guidance.md",
+      "sha256": "92ea066401fc1a1f12c4c201815974aa572b6888199b8d2f05b489c4f238f38f"
+    }
+  },
+  "prompt_sizes": {
+    "objective_chars": 1505,
+    "background_chars": 9245
+  },
+  "tracking": {
+    "trackio_enabled": true,
+    "project": "easy-v6-gepa",
+    "trackio_space_id": null,
+    "trackio_server_url": null
+  },
+  "environment": {
+    "python": "3.14.2 (main, Jan 13 2026, 17:35:44) [Clang 21.1.4 ]",
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "packages": {
+      "gepa": "0.1.1",
+      "fast-agent-mcp": "0.7.17",
+      "trackio": "0.26.0"
+    }
+  },
+  "git": {
+    "commit": "f5bf32bfc50f661f8afffa01d789b093a3497673",
+    "branch": "main",
+    "dirty": true,
+    "status_short": "M eval/openclaw/easy-set-pilot/v6/allowed-topics-v6.md\n M eval/openclaw/easy-set-pilot/v6/task-boundary-overlay-v6.md\n M eval/openclaw/easy-set-pilot/v6/teacher-card-v6.md\n M eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6.md\n?? eval/openclaw/easy-set-pilot/v6/allowed-topics-v6a.md\n?? eval/openclaw/easy-set-pilot/v6/easy-ledger-32-gepa.jsonl\n?? eval/openclaw/easy-set-pilot/v6/openclaw-vanilla-labeler-plain-v6a.md\n?? eval/openclaw/easy-set-pilot/v6/topic-boundary-guidance-v6a.md"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "score": 0.9918584905660378,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.9918584905660378,
+      "topic_micro_f1": 0.9962264150943396,
+      "row_exact_accuracy": 0.975,
+      "avg_row_jaccard": 0.995,
+      "row_symdiff_score": 0.9756097560975611
+    },
+    "score_details": {
+      "topic_micro_precision": 0.9924812030075187,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.975,
+      "row_exact_accuracy": 0.975,
+      "avg_row_jaccard": 0.995,
+      "avg_row_symdiff": 0.025,
+      "valid_json": 1.0,
+      "false_positives": 1,
+      "false_negatives": 0,
+      "avg_predicted_topics": 3.325,
+      "avg_expected_topics": 3.3
+    },
+    "evaluated": 40,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-75784",
+        "title": "Phantom user messages appear in webchat after heartbeat wakes / gateway restart / session repair",
+        "expected": [
+          "chat_integrations",
+          "gateway",
+          "reliability",
+          "sessions"
+        ],
+        "actual": [
+          "agent_runtime",
+          "chat_integrations",
+          "gateway",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "agent_runtime"
+        ],
+        "false_negatives": [],
+        "row_score": 0.8
+      }
+    ]
+  }
+}

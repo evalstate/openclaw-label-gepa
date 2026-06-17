@@ -1,0 +1,352 @@
+{
+  "score": 0.0,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "row_symdiff_score": 0.2936857562408223
+    },
+    "score_details": {
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 2.405,
+      "valid_json": 1.0,
+      "false_positives": 481,
+      "false_negatives": 0,
+      "avg_predicted_topics": 2.405,
+      "avg_expected_topics": 0
+    },
+    "evaluated": 200,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-77053",
+        "title": "feat(lmstudio): opt-in idle TTL via native load API",
+        "expected": [],
+        "actual": [
+          "config",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "config",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-81249",
+        "title": "[Feature/Bug]: Local Ollama embeddings fail when proxy is enabled (SSRF defenses ignore NO_PROXY)",
+        "expected": [],
+        "actual": [
+          "config",
+          "security",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "config",
+          "security",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-80479",
+        "title": "feat(memory/embeddings): add openai-compatible provider for self-hosted servers (llama.cpp, Ollama, vLLM, TGI, LocalAI)",
+        "expected": [],
+        "actual": [
+          "memory",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "memory",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-63229",
+        "title": "Bug: Gateway falsely marks healthy local vLLM endpoints as timed out/overloaded, causing 1\u201323 min fallback cascades",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "gateway",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "gateway",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-83333",
+        "title": "[Bug]: Memory provider cutover to Ollama leaves production index in mixed OpenAI/Ollama vector state after live sync/reload",
+        "expected": [],
+        "actual": [
+          "memory",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "memory",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-79897",
+        "title": "OpenAI-compatible streaming with llama.cpp saves zero usage (stream closed before final usage chunk)",
+        "expected": [],
+        "actual": [
+          "inference_api",
+          "self_hosted_inference",
+          "telemetry_usage"
+        ],
+        "false_positives": [
+          "inference_api",
+          "self_hosted_inference",
+          "telemetry_usage"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-70790",
+        "title": "fix(agents): strip empty tools/tool_choice from embedded runner payloads",
+        "expected": [],
+        "actual": [
+          "inference_api",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "inference_api",
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-82880",
+        "title": "security: harden ACPX proxy and Firecrawl SSRF protection",
+        "expected": [],
+        "actual": [
+          "acpx",
+          "security"
+        ],
+        "false_positives": [
+          "acpx",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-46740",
+        "title": "ACP: classify silent acpx exits as backend unavailable",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-74339",
+        "title": "fix(acpx): prevent duplicate -c config overrides for Codex ACP command",
+        "expected": [],
+        "actual": [
+          "acpx",
+          "codex"
+        ],
+        "false_positives": [
+          "acpx",
+          "codex"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-78936",
+        "title": "fix #78919: [Bug] ACP sessions_spawn doesn't route images to Codex's native vision like acpx codex exec does",
+        "expected": [],
+        "actual": [
+          "acp",
+          "codex"
+        ],
+        "false_positives": [
+          "acp",
+          "codex"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43348",
+        "title": "feat(acp): add acp_send tool and sessions_cancel tool",
+        "expected": [],
+        "actual": [
+          "acp",
+          "gateway",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "gateway",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84443",
+        "title": "[Feature]: Add ACP support for Antigravity CLI (agy)",
+        "expected": [],
+        "actual": [
+          "acp",
+          "coding_agent_integrations"
+        ],
+        "false_positives": [
+          "acp",
+          "coding_agent_integrations"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84381",
+        "title": "fix(agent): abort accepted gateway runs on signal",
+        "expected": [],
+        "actual": [
+          "gateway",
+          "reliability",
+          "security"
+        ],
+        "false_positives": [
+          "gateway",
+          "reliability",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48433",
+        "title": "feat(exec): per-host allowlists via tools.exec.allowedHosts",
+        "expected": [],
+        "actual": [
+          "config",
+          "exec_tools",
+          "security"
+        ],
+        "false_positives": [
+          "config",
+          "exec_tools",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84570",
+        "title": "Remove skill prelude exec allowlist",
+        "expected": [],
+        "actual": [
+          "approvals",
+          "exec_tools",
+          "skills_plugins"
+        ],
+        "false_positives": [
+          "approvals",
+          "exec_tools",
+          "skills_plugins"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-84247",
+        "title": "Feat/browser screenshot vision",
+        "expected": [],
+        "actual": [
+          "browser_automation",
+          "config",
+          "inference_api",
+          "security"
+        ],
+        "false_positives": [
+          "browser_automation",
+          "config",
+          "inference_api",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-71856",
+        "title": "feat(tui): fetch startup conversation summary dynamically from Gateway API",
+        "expected": [],
+        "actual": [
+          "sessions",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "sessions",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-83552",
+        "title": "fix(harness): route CLI runtime aliases (claude-cli, google-gemini-cli) through PI harness",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "coding_agent_integrations",
+          "reliability"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "coding_agent_integrations",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-68587",
+        "title": "[Bug]: MCP server: tools/list sent as notification instead of request/response (breaks Hermes Agent)",
+        "expected": [],
+        "actual": [
+          "mcp_tooling"
+        ],
+        "false_positives": [
+          "mcp_tooling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      }
+    ]
+  }
+}

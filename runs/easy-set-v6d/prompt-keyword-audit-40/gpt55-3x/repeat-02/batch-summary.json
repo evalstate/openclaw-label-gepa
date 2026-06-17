@@ -1,0 +1,75 @@
+{
+  "model": "codexresponses.gpt-5.5?reasoning=high",
+  "input": "runs/easy-set-v6d/prompt-keyword-audit-40/gpt55-3x/selected-input.jsonl",
+  "output": "runs/easy-set-v6d/prompt-keyword-audit-40/gpt55-3x/repeat-02/results.jsonl",
+  "schema": "eval/openclaw/easy-set-pilot/v6/teacher-output-v6d.schema.json",
+  "schema_model": null,
+  "instruction": null,
+  "agent_card": "eval/openclaw/easy-set-pilot/v6/teacher-card-v6d.md",
+  "agent": "openclaw_easy_set_pilot_teacher",
+  "template": "eval/openclaw/easy-set-pilot/v6/teacher-template-v6-anchor-free.md",
+  "shell_runtime": false,
+  "output_mode": "structured",
+  "export_traces": null,
+  "hf_dataset": null,
+  "hf_dataset_path": null,
+  "parallel": 4,
+  "work_dir": "runs/easy-set-v6d/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T093502Z-6bb880cc",
+  "started_at": "2026-06-12T09:35:02Z",
+  "completed_at": "2026-06-12T09:47:51Z",
+  "input_rows": 40,
+  "selected_rows": 40,
+  "processed_rows": 40,
+  "skipped_rows": 0,
+  "failed_rows": 0,
+  "duration_ms": 735433.08,
+  "timing_ms": {
+    "duration": {
+      "count": 40,
+      "min": 6787.61,
+      "mean": 44750.50325,
+      "median_approx": 41340.520000000004,
+      "max": 118482.03
+    },
+    "ttft": {
+      "count": 40,
+      "min": 5029.7,
+      "mean": 17010.15125,
+      "median_approx": 16006.33375,
+      "max": 42430.92
+    },
+    "time_to_response": {
+      "count": 40,
+      "min": 6276.31,
+      "mean": 42265.662500000006,
+      "median_approx": 38163.597499999996,
+      "max": 113585.47
+    }
+  },
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 10,
+      "output": "runs/easy-set-v6d/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T093502Z-6bb880cc/part-000.jsonl"
+    },
+    {
+      "index": 1,
+      "offset": 10,
+      "limit": 10,
+      "output": "runs/easy-set-v6d/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T093502Z-6bb880cc/part-001.jsonl"
+    },
+    {
+      "index": 2,
+      "offset": 20,
+      "limit": 10,
+      "output": "runs/easy-set-v6d/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T093502Z-6bb880cc/part-002.jsonl"
+    },
+    {
+      "index": 3,
+      "offset": 30,
+      "limit": 10,
+      "output": "runs/easy-set-v6d/prompt-keyword-audit-40/gpt55-3x/repeat-02/.results.jsonl.batch/20260612T093502Z-6bb880cc/part-003.jsonl"
+    }
+  ]
+}

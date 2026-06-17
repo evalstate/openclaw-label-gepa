@@ -1,0 +1,344 @@
+{
+  "score": 0.0,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "row_symdiff_score": 0.29069767441860467
+    },
+    "score_details": {
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 2.44,
+      "valid_json": 1.0,
+      "false_positives": 244,
+      "false_negatives": 0,
+      "avg_predicted_topics": 2.44,
+      "avg_expected_topics": 0
+    },
+    "evaluated": 100,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-39714",
+        "title": "Sandbox: fix Dockerized browser bridge and tab creation",
+        "expected": [],
+        "actual": [
+          "browser_automation",
+          "config",
+          "sandboxing"
+        ],
+        "false_positives": [
+          "browser_automation",
+          "config",
+          "sandboxing"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-42425",
+        "title": "fix(hooks): load workspace hooks for non-default agents",
+        "expected": [],
+        "actual": [
+          "hooks"
+        ],
+        "false_positives": [
+          "hooks"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-42606",
+        "title": "Browser: harden noVNC bootstrap headers",
+        "expected": [],
+        "actual": [
+          "browser_automation",
+          "security"
+        ],
+        "false_positives": [
+          "browser_automation",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43246",
+        "title": "fix(message): deny same-provider cross-context sends by default [AI-assisted]",
+        "expected": [],
+        "actual": [
+          "config",
+          "notifications",
+          "security"
+        ],
+        "false_positives": [
+          "config",
+          "notifications",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43495",
+        "title": "feat(tts): add <notts> tag support for visual-only content",
+        "expected": [],
+        "actual": [
+          "gateway",
+          "inference_api",
+          "security"
+        ],
+        "false_positives": [
+          "gateway",
+          "inference_api",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43765",
+        "title": "Improve runtime recovery for heartbeat, Feishu, and exec sessions",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "cron_automation",
+          "exec_tools"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "cron_automation",
+          "exec_tools"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-44202",
+        "title": "[Bug]: local memory embeddings on Apple Silicon can crash gateway in ggml-metal / node-llama-cpp; need official Metal/GPU guidance",
+        "expected": [],
+        "actual": [
+          "memory",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "memory",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-45508",
+        "title": "[Feature]: Self-hosted STT/TTS provider support in webchat (Route webchat TTS through the gateway instead of browser Speech API)",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "config",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "config",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-47187",
+        "title": "fix(ui): reset transient chat overlays and style context notice",
+        "expected": [],
+        "actual": [
+          "ui_tui"
+        ],
+        "false_positives": [
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-47285",
+        "title": "feat(memory-lancedb): native Azure OpenAI support",
+        "expected": [],
+        "actual": [
+          "inference_api",
+          "memory"
+        ],
+        "false_positives": [
+          "inference_api",
+          "memory"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-47446",
+        "title": "fix(gateway/discord): respect env proxy vars and prevent ECONNRESET",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "gateway",
+          "reliability"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "gateway",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48260",
+        "title": "feat(ui): add active time summary to usage overview",
+        "expected": [],
+        "actual": [
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-49310",
+        "title": "fix: keep tui busy during follow-up waits",
+        "expected": [],
+        "actual": [
+          "ui_tui"
+        ],
+        "false_positives": [
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-53319",
+        "title": "[Bug]: ACP concurrent session spawns \u2014 first agent fails to launch CC process",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx",
+          "reliability"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-55790",
+        "title": "sessions_spawn(runtime=\"subagent\") ignores inherited/per-agent subagent thinking defaults and initializes children at low",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "config"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "config"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-55888",
+        "title": "[Feature]: \ud83d\ude80 [Performance Insight] Unlocking 26.7k Context Window on M4 Pro: Fixing the 8k Compaction Lag (64GB RAM Only)",
+        "expected": [],
+        "actual": [
+          "config",
+          "self_hosted_inference",
+          "sessions"
+        ],
+        "false_positives": [
+          "config",
+          "self_hosted_inference",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-56532",
+        "title": "memory-lancedb: add configurable timeout/retry for embedding calls",
+        "expected": [],
+        "actual": [
+          "config",
+          "memory",
+          "reliability"
+        ],
+        "false_positives": [
+          "config",
+          "memory",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-56613",
+        "title": "[Feature]: Talk/Voice tab \u2014 agent/session switching + per-agent TTS voice",
+        "expected": [],
+        "actual": [
+          "config",
+          "inference_api",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "config",
+          "inference_api",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-56866",
+        "title": "feat(whatsapp): ACP session binding with media threading and prompt fixes",
+        "expected": [],
+        "actual": [
+          "acp",
+          "chat_integrations",
+          "hooks"
+        ],
+        "false_positives": [
+          "acp",
+          "chat_integrations",
+          "hooks"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-57597",
+        "title": "fix(acp): persist spawn labels in target session store",
+        "expected": [],
+        "actual": [
+          "sessions"
+        ],
+        "false_positives": [
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      }
+    ]
+  }
+}

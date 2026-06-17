@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenClawEasySetPilotTeacherOutput",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "labels",
+    "bucket",
+    "confidence",
+    "per_label_rationale",
+    "excluded_label_rationale",
+    "ambiguity",
+    "needs_human_review"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "local_models",
+          "inference_api",
+          "self_hosted_inference",
+          "acpx",
+          "acp",
+          "coding_agents",
+          "mcp_tooling",
+          "model_lifecycle",
+          "codex",
+          "agent_runtime",
+          "sessions",
+          "gateway",
+          "exec_tools",
+          "approvals",
+          "sandboxing",
+          "hooks",
+          "cron_automation",
+          "chat_integrations",
+          "ui_tui",
+          "browser_automation",
+          "memory",
+          "security",
+          "config",
+          "packaging_deployment",
+          "docs",
+          "tests_ci",
+          "telemetry_usage",
+          "api_surface",
+          "queueing",
+          "notifications",
+          "skills_plugins",
+          "auth_identity",
+          "reliability",
+          "tool_calling"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 5
+    },
+    "bucket": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "per_label_rationale": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "rationale"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "excluded_label_rationale": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "rationale"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ambiguity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "possible_confusions",
+        "why_not_hard"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "possible_confusions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "local_models",
+              "inference_api",
+              "self_hosted_inference",
+              "acpx",
+              "acp",
+              "coding_agents",
+              "mcp_tooling",
+              "model_lifecycle",
+              "codex",
+              "agent_runtime",
+              "sessions",
+              "gateway",
+              "exec_tools",
+              "approvals",
+              "sandboxing",
+              "hooks",
+              "cron_automation",
+              "chat_integrations",
+              "ui_tui",
+              "browser_automation",
+              "memory",
+              "security",
+              "config",
+              "packaging_deployment",
+              "docs",
+              "tests_ci",
+              "telemetry_usage",
+              "api_surface",
+              "queueing",
+              "notifications",
+              "skills_plugins",
+              "auth_identity",
+              "reliability",
+              "tool_calling"
+            ]
+          }
+        },
+        "why_not_hard": {
+          "type": "string"
+        }
+      }
+    },
+    "needs_human_review": {
+      "type": "boolean"
+    }
+  }
+}

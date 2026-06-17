@@ -1,0 +1,7 @@
+{
+  "name": "confused-noelig-20",
+  "source": "runs/easy-set-v6d/prompt-keyword-audit-40",
+  "rows": 20,
+  "selection": "20 rows marked group=confused in selection-v6b-baseline.jsonl",
+  "prompt": "v6f = current sharpened v6d boundary guidance without v6e benchmark-eligibility overlay"
+}

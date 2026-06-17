@@ -1,0 +1,37 @@
+{
+  "input": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/selected-input.jsonl",
+  "output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/results.jsonl",
+  "parallel": 3,
+  "input_rows": 30,
+  "selected_rows": 30,
+  "created_at": "2026-06-11T23:59:50Z",
+  "shards": [
+    {
+      "index": 0,
+      "offset": 0,
+      "limit": 10,
+      "output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/part-000.jsonl",
+      "error_output": null,
+      "telemetry_output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/telemetry.part-000.jsonl",
+      "summary_output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/summary.part-000.json"
+    },
+    {
+      "index": 1,
+      "offset": 10,
+      "limit": 10,
+      "output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/part-001.jsonl",
+      "error_output": null,
+      "telemetry_output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/telemetry.part-001.jsonl",
+      "summary_output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/summary.part-001.json"
+    },
+    {
+      "index": 2,
+      "offset": 20,
+      "limit": 10,
+      "output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/part-002.jsonl",
+      "error_output": null,
+      "telemetry_output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/telemetry.part-002.jsonl",
+      "summary_output": "/home/ssmith/temp/gepa-batch-openclaw/runs/easy-set-v6b/v6b-databuild/intake/batch-001/gpt55-3x/repeat-02/.results.jsonl.batch/20260611T235950Z-b308ceb8/summary.part-002.json"
+    }
+  ]
+}

@@ -1,0 +1,3361 @@
+{
+  "stability_dir": "runs/easy-set-v6a/v6a-databuild/intake/batch-003/gpt55-3x",
+  "selected_rows": 30,
+  "completed_repeats": 3,
+  "repeat_metrics": [
+    {
+      "repeat": 1,
+      "run_name": "gpt55-3x-repeat-01",
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "row_exact_accuracy": 0.0,
+      "exact_match": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 3.4,
+      "row_symdiff_score": 0.22727272727272727,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 3.4,
+      "avg_expected_topics": 0.0
+    },
+    {
+      "repeat": 2,
+      "run_name": "gpt55-3x-repeat-02",
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "row_exact_accuracy": 0.0,
+      "exact_match": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 3.5,
+      "row_symdiff_score": 0.2222222222222222,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 3.5,
+      "avg_expected_topics": 0.0
+    },
+    {
+      "repeat": 3,
+      "run_name": "gpt55-3x-repeat-03",
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "row_exact_accuracy": 0.0,
+      "exact_match": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 3.466666666666667,
+      "row_symdiff_score": 0.22388059701492538,
+      "valid_json": 1.0,
+      "avg_predicted_topics": 3.466666666666667,
+      "avg_expected_topics": 0.0
+    }
+  ],
+  "metric_summary": {
+    "avg_expected_topics": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "avg_predicted_topics": {
+      "mean": 3.4555555555555557,
+      "pstdev": 0.04157397096415495,
+      "values": [
+        3.4,
+        3.5,
+        3.466666666666667
+      ]
+    },
+    "avg_row_jaccard": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "avg_row_symdiff": {
+      "mean": 3.4555555555555557,
+      "pstdev": 0.04157397096415495,
+      "values": [
+        3.4,
+        3.5,
+        3.466666666666667
+      ]
+    },
+    "exact_match": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gepa_score": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "row_exact_accuracy": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "row_symdiff_score": {
+      "mean": 0.22445851550329163,
+      "pstdev": 0.0021019661669796855,
+      "values": [
+        0.22727272727272727,
+        0.2222222222222222,
+        0.22388059701492538
+      ]
+    },
+    "topic_micro_f1": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "topic_micro_precision": {
+      "mean": 0.0,
+      "pstdev": 0.0,
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "topic_micro_recall": {
+      "mean": 1.0,
+      "pstdev": 0.0,
+      "values": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "valid_json": {
+      "mean": 1.0,
+      "pstdev": 0.0,
+      "values": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "prediction_stability": {
+    "pairwise_prediction_exact_rate": 0.6,
+    "pairwise_prediction_jaccard": 0.8709259259259259,
+    "pairwise_prediction_symdiff": 0.5111111111111111
+  },
+  "bucket_counts": {
+    "unstable_boundary": 7,
+    "review": 9,
+    "stable_wrong": 14
+  },
+  "rows": [
+    {
+      "id": "openclaw-openclaw-62769",
+      "title": "[Feature]: Support ACP configured bindings for Telegram DMs (not just groups/topics)",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 3,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2.6666666666666665,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.611111111111111,
+      "pairwise_prediction_symdiff": 1.3333333333333333,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "chat_integrations",
+            "sessions"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "acp",
+            "chat_integrations",
+            "config"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "acp",
+            "chat_integrations"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "chat_integrations",
+          3
+        ],
+        [
+          "sessions",
+          1
+        ],
+        [
+          "config",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "config",
+          1
+        ],
+        [
+          "sessions",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "chat_integrations",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "chat_integrations",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "chat_integrations",
+            "config"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "chat_integrations",
+            "config"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "chat_integrations"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "chat_integrations"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72016",
+      "title": "[Feature]: doctor api/extendability",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 3,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2.6666666666666665,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.611111111111111,
+      "pairwise_prediction_symdiff": 1.3333333333333333,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "api_surface",
+            "skills_plugins",
+            "telemetry_usage"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "api_surface",
+            "config",
+            "skills_plugins"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "api_surface",
+            "skills_plugins"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "api_surface",
+          3
+        ],
+        [
+          "skills_plugins",
+          3
+        ],
+        [
+          "telemetry_usage",
+          1
+        ],
+        [
+          "config",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "config",
+          1
+        ],
+        [
+          "telemetry_usage",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "api_surface",
+            "skills_plugins",
+            "telemetry_usage"
+          ],
+          "exact": false,
+          "false_positives": [
+            "api_surface",
+            "skills_plugins",
+            "telemetry_usage"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "api_surface",
+            "config",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "api_surface",
+            "config",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "api_surface",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "api_surface",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-77748",
+      "title": "fix: Codex startup plugins + WhatsApp history & Docker Codex OAuth",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 3,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 5,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 2,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "chat_integrations",
+            "codex",
+            "packaging_deployment",
+            "security",
+            "skills_plugins"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "chat_integrations",
+            "codex",
+            "gateway",
+            "packaging_deployment",
+            "skills_plugins"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "chat_integrations",
+            "codex",
+            "coding_agent_integrations",
+            "packaging_deployment",
+            "skills_plugins"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "chat_integrations",
+          3
+        ],
+        [
+          "codex",
+          3
+        ],
+        [
+          "packaging_deployment",
+          3
+        ],
+        [
+          "skills_plugins",
+          3
+        ],
+        [
+          "security",
+          1
+        ],
+        [
+          "gateway",
+          1
+        ],
+        [
+          "coding_agent_integrations",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "coding_agent_integrations",
+          1
+        ],
+        [
+          "gateway",
+          1
+        ],
+        [
+          "security",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "chat_integrations",
+            "codex",
+            "packaging_deployment",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "codex",
+            "packaging_deployment",
+            "security",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "chat_integrations",
+            "codex",
+            "gateway",
+            "packaging_deployment",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "codex",
+            "gateway",
+            "packaging_deployment",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "chat_integrations",
+            "codex",
+            "coding_agent_integrations",
+            "packaging_deployment",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "chat_integrations",
+            "codex",
+            "coding_agent_integrations",
+            "packaging_deployment",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-65187",
+      "title": "test: add regression tests for <final> tag stripping in UI message extraction",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 1.3333333333333333,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "tests_ci"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "tests_ci",
+            "ui_tui"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "tests_ci",
+          3
+        ],
+        [
+          "ui_tui",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "ui_tui",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "tests_ci"
+          ],
+          "exact": false,
+          "false_positives": [
+            "tests_ci"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "tests_ci"
+          ],
+          "exact": false,
+          "false_positives": [
+            "tests_ci"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "tests_ci",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "tests_ci",
+            "ui_tui"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-66125",
+      "title": "[Bug]: openai-completions fallback candidate is selected, but fallback does not complete successfully through an OpenAI-compatible proxy",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 1.3333333333333333,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "inference_api"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "inference_api",
+            "telemetry_usage"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "inference_api",
+          3
+        ],
+        [
+          "telemetry_usage",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "telemetry_usage",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "inference_api",
+            "telemetry_usage"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "telemetry_usage"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-77827",
+      "title": "fix: LM Studio thinking blocks invisible with Responses API",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 1.3333333333333333,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.6666666666666666,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "inference_api"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "inference_api",
+            "self_hosted_inference"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "inference_api",
+          3
+        ],
+        [
+          "self_hosted_inference",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "self_hosted_inference",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "inference_api",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-62552",
+      "title": "fix(acp): stabilize bridge session keys",
+      "bucket": "unstable_boundary",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 3,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 4,
+      "pairwise_prediction_exact_rate": 0,
+      "pairwise_prediction_jaccard": 0.7166666666666667,
+      "pairwise_prediction_symdiff": 1.3333333333333333,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "queueing",
+            "sessions"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "acp",
+            "gateway",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "count": 1
+        },
+        {
+          "topics": [
+            "acp",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "queueing",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ],
+        [
+          "reliability",
+          2
+        ],
+        [
+          "gateway",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "reliability",
+          2
+        ],
+        [
+          "gateway",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "queueing",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "queueing",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "gateway",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "gateway",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "queueing",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-63007",
+      "title": "Pass outbound session identity into message_sending and surface guarded gateway send denial",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 5,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.7777777777777778,
+      "pairwise_prediction_symdiff": 1.3333333333333333,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "gateway",
+            "hooks",
+            "notifications",
+            "security",
+            "sessions"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "gateway",
+            "hooks",
+            "notifications",
+            "sessions",
+            "skills_plugins"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "gateway",
+          3
+        ],
+        [
+          "hooks",
+          3
+        ],
+        [
+          "notifications",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ],
+        [
+          "security",
+          2
+        ],
+        [
+          "skills_plugins",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "security",
+          2
+        ],
+        [
+          "skills_plugins",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "gateway",
+            "hooks",
+            "notifications",
+            "security",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "hooks",
+            "notifications",
+            "security",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "gateway",
+            "hooks",
+            "notifications",
+            "security",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "hooks",
+            "notifications",
+            "security",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "gateway",
+            "hooks",
+            "notifications",
+            "sessions",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "hooks",
+            "notifications",
+            "sessions",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-69260",
+      "title": "Harden Gemini ACP integration against ambient API-key fallback and add generic auth-contract hooks for ACP agents",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 5,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.7777777777777778,
+      "pairwise_prediction_symdiff": 1.3333333333333333,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "coding_agent_integrations",
+            "config",
+            "security"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "acpx",
+          3
+        ],
+        [
+          "coding_agent_integrations",
+          3
+        ],
+        [
+          "security",
+          3
+        ],
+        [
+          "config",
+          2
+        ],
+        [
+          "auth_identity",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "config",
+          2
+        ],
+        [
+          "auth_identity",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "acpx",
+            "coding_agent_integrations",
+            "config",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "coding_agent_integrations",
+            "config",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "acpx",
+            "coding_agent_integrations",
+            "config",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "coding_agent_integrations",
+            "config",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "auth_identity",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-63229",
+      "title": "Bug: Gateway falsely marks healthy local vLLM endpoints as timed out/overloaded, causing 1\u201323 min fallback cascades",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3.3333333333333335,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.8333333333333334,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "gateway",
+            "inference_api",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "gateway",
+          3
+        ],
+        [
+          "inference_api",
+          3
+        ],
+        [
+          "reliability",
+          3
+        ],
+        [
+          "self_hosted_inference",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "self_hosted_inference",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "gateway",
+            "inference_api",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "inference_api",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "inference_api",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-69256",
+      "title": "fix(cron): prevent premature session cleanup when subagents are running",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3.6666666666666665,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.8333333333333334,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "agent_runtime",
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "cron_automation",
+          3
+        ],
+        [
+          "reliability",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ],
+        [
+          "agent_runtime",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "agent_runtime",
+          2
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "agent_runtime",
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "agent_runtime",
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "agent_runtime",
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "agent_runtime",
+            "cron_automation",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-69328",
+      "title": "fix(acp): avoid false zero-diff failures and append session messages",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3.3333333333333335,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.8333333333333334,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "sessions",
+            "ui_tui"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "acp",
+            "queueing",
+            "sessions",
+            "ui_tui"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ],
+        [
+          "ui_tui",
+          3
+        ],
+        [
+          "queueing",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "queueing",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "sessions",
+            "ui_tui"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "sessions",
+            "ui_tui"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "queueing",
+            "sessions",
+            "ui_tui"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "queueing",
+            "sessions",
+            "ui_tui"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-67244",
+      "title": "Explicit ACP agent runs: embedded backend visibility failure and stale final JSON state after sessions_yield",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 4.333333333333333,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.8666666666666667,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "api_surface",
+            "sessions"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "agent_runtime",
+            "api_surface",
+            "sessions"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "acpx",
+          3
+        ],
+        [
+          "api_surface",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ],
+        [
+          "agent_runtime",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "agent_runtime",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "acpx",
+            "agent_runtime",
+            "api_surface",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "agent_runtime",
+            "api_surface",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "acpx",
+            "api_surface",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "api_surface",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "acpx",
+            "api_surface",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "api_surface",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72015",
+      "title": "Reliability: active-memory blocks replies and QMD boot initialization can overload multi-agent gateways",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 4.666666666666667,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.8666666666666667,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "gateway",
+            "memory",
+            "reliability",
+            "skills_plugins"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "gateway",
+            "memory",
+            "reliability",
+            "skills_plugins"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "gateway",
+          3
+        ],
+        [
+          "memory",
+          3
+        ],
+        [
+          "reliability",
+          3
+        ],
+        [
+          "skills_plugins",
+          3
+        ],
+        [
+          "config",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "config",
+          2
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "gateway",
+            "memory",
+            "reliability",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "memory",
+            "reliability",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "config",
+            "gateway",
+            "memory",
+            "reliability",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "gateway",
+            "memory",
+            "reliability",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "config",
+            "gateway",
+            "memory",
+            "reliability",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "gateway",
+            "memory",
+            "reliability",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-74204",
+      "title": "memory.qmd.update.embedTimeoutMs default (120 s) is too low for local GGUF; error message doesn't surface the fix",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 4.666666666666667,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.8666666666666667,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability",
+            "telemetry_usage"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "config",
+          3
+        ],
+        [
+          "local_models",
+          3
+        ],
+        [
+          "memory",
+          3
+        ],
+        [
+          "reliability",
+          3
+        ],
+        [
+          "telemetry_usage",
+          2
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "telemetry_usage",
+          2
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability",
+            "telemetry_usage"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability",
+            "telemetry_usage"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability",
+            "telemetry_usage"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability",
+            "telemetry_usage"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "local_models",
+            "memory",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-75657",
+      "title": "fix: local GGUF embedding model warmup blocks Node.js event loop for minutes on startup (ARM64/Pi)",
+      "bucket": "review",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 2,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 4.333333333333333,
+      "pairwise_prediction_exact_rate": 0.3333333333333333,
+      "pairwise_prediction_jaccard": 0.8666666666666667,
+      "pairwise_prediction_symdiff": 0.6666666666666666,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "gateway",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "count": 2
+        },
+        {
+          "topics": [
+            "gateway",
+            "local_models",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "count": 1
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "gateway",
+          3
+        ],
+        [
+          "memory",
+          3
+        ],
+        [
+          "reliability",
+          3
+        ],
+        [
+          "self_hosted_inference",
+          3
+        ],
+        [
+          "local_models",
+          1
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [
+        [
+          "local_models",
+          1
+        ]
+      ],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "gateway",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "gateway",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "gateway",
+            "local_models",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "exact": false,
+          "false_positives": [
+            "gateway",
+            "local_models",
+            "memory",
+            "reliability",
+            "self_hosted_inference"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-62428",
+      "title": "test(exec): land exec v2 contract follow-through",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 4,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "approvals",
+          3
+        ],
+        [
+          "config",
+          3
+        ],
+        [
+          "exec_tools",
+          3
+        ],
+        [
+          "security",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "approvals",
+            "config",
+            "exec_tools",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-64199",
+      "title": "[Bug]: ACP configured binding uses parent channel ID for session key \u2014 all threads under same channel share one persistent Claude Code process",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 5,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "chat_integrations",
+            "security",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "acpx",
+          3
+        ],
+        [
+          "chat_integrations",
+          3
+        ],
+        [
+          "security",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "acpx",
+            "chat_integrations",
+            "security",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "chat_integrations",
+            "security",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "acpx",
+            "chat_integrations",
+            "security",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "chat_integrations",
+            "security",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "acpx",
+            "chat_integrations",
+            "security",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "chat_integrations",
+            "security",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-64317",
+      "title": "[Bug]: Headed Chromium viewport screenshots time out on Omarchy/Hyprland/Wayland after successful page load",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "browser_automation",
+            "reliability"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "browser_automation",
+          3
+        ],
+        [
+          "reliability",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "browser_automation",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "browser_automation",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "browser_automation",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "browser_automation",
+            "reliability"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "browser_automation",
+            "reliability"
+          ],
+          "exact": false,
+          "false_positives": [
+            "browser_automation",
+            "reliability"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-65364",
+      "title": "feat(plugins): add registerProviderRuntimeAuthOverride API",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 4,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "api_surface",
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "api_surface",
+          3
+        ],
+        [
+          "inference_api",
+          3
+        ],
+        [
+          "security",
+          3
+        ],
+        [
+          "skills_plugins",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "api_surface",
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "api_surface",
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "api_surface",
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "api_surface",
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "api_surface",
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "api_surface",
+            "inference_api",
+            "security",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-67539",
+      "title": "[Feature]: Add provider-specific TTS prompt hints",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 1,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "inference_api"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "inference_api",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "inference_api"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68725",
+      "title": "feat(amazon-bedrock-mantle): add known context windows for open-weight Mantle models",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "inference_api",
+          3
+        ],
+        [
+          "model_lifecycle",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "exact": false,
+          "false_positives": [
+            "inference_api",
+            "model_lifecycle"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-68843",
+      "title": "fix(acp): treat missing cwd as stale bound session",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "reliability",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "reliability",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-69669",
+      "title": "ACP: keep thread-bound follow-ups parent-orchestrated by default, not raw pass-through",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "agent_runtime",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "agent_runtime",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "agent_runtime",
+            "sessions"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "agent_runtime",
+            "sessions"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "agent_runtime",
+            "sessions"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71216",
+      "title": "Config schema: add `sandbox`, `routing.rules`, `instances`, and `gateway.nodes.denyPaths`",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 5,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "gateway",
+            "inference_api",
+            "sandboxing",
+            "security"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "config",
+          3
+        ],
+        [
+          "gateway",
+          3
+        ],
+        [
+          "inference_api",
+          3
+        ],
+        [
+          "sandboxing",
+          3
+        ],
+        [
+          "security",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "config",
+            "gateway",
+            "inference_api",
+            "sandboxing",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "gateway",
+            "inference_api",
+            "sandboxing",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "config",
+            "gateway",
+            "inference_api",
+            "sandboxing",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "gateway",
+            "inference_api",
+            "sandboxing",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "config",
+            "gateway",
+            "inference_api",
+            "sandboxing",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "gateway",
+            "inference_api",
+            "sandboxing",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71537",
+      "title": "Recover archived (.reset) session transcripts in memory hook + session-logs skill",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 5,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "docs",
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "docs",
+          3
+        ],
+        [
+          "hooks",
+          3
+        ],
+        [
+          "memory",
+          3
+        ],
+        [
+          "sessions",
+          3
+        ],
+        [
+          "skills_plugins",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "docs",
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "docs",
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "docs",
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "docs",
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "docs",
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          "exact": false,
+          "false_positives": [
+            "docs",
+            "hooks",
+            "memory",
+            "sessions",
+            "skills_plugins"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-71594",
+      "title": "docs(gateway): clarify IPv4-only BYOH bind path",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 2,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "docs",
+            "gateway"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "docs",
+          3
+        ],
+        [
+          "gateway",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "docs",
+            "gateway"
+          ],
+          "exact": false,
+          "false_positives": [
+            "docs",
+            "gateway"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "docs",
+            "gateway"
+          ],
+          "exact": false,
+          "false_positives": [
+            "docs",
+            "gateway"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "docs",
+            "gateway"
+          ],
+          "exact": false,
+          "false_positives": [
+            "docs",
+            "gateway"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72001",
+      "title": "fix(hooks): write allowedSessionKeyPrefixes from gmail wizard",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "config",
+            "hooks",
+            "security"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "config",
+          3
+        ],
+        [
+          "hooks",
+          3
+        ],
+        [
+          "security",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "config",
+            "hooks",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "hooks",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "config",
+            "hooks",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "hooks",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "config",
+            "hooks",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "config",
+            "hooks",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-72087",
+      "title": "Bug: dist/entry.js main-path breaks Codex OAuth image generation on Linux while direct runCli()/provider path succeeds",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 3,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "codex",
+            "inference_api",
+            "packaging_deployment"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "codex",
+          3
+        ],
+        [
+          "inference_api",
+          3
+        ],
+        [
+          "packaging_deployment",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "codex",
+            "inference_api",
+            "packaging_deployment"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "inference_api",
+            "packaging_deployment"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "codex",
+            "inference_api",
+            "packaging_deployment"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "inference_api",
+            "packaging_deployment"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "codex",
+            "inference_api",
+            "packaging_deployment"
+          ],
+          "exact": false,
+          "false_positives": [
+            "codex",
+            "inference_api",
+            "packaging_deployment"
+          ],
+          "false_negatives": []
+        }
+      ]
+    },
+    {
+      "id": "openclaw-openclaw-73910",
+      "title": "BUG: OpenClaw-managed Codex ACP uses isolated CODEX_HOME without auth bridge and sends unsupported timeout config",
+      "bucket": "stable_wrong",
+      "expected_topics": [],
+      "runs": 3,
+      "unique_prediction_sets": 1,
+      "exact_rate_vs_expected": 0,
+      "avg_jaccard_vs_expected": 0.0,
+      "avg_symdiff_vs_expected": 5,
+      "pairwise_prediction_exact_rate": 1,
+      "pairwise_prediction_jaccard": 1.0,
+      "pairwise_prediction_symdiff": 0,
+      "most_common_predictions": [
+        {
+          "topics": [
+            "acp",
+            "acpx",
+            "codex",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "count": 3
+        }
+      ],
+      "recurring_false_positives": [
+        [
+          "acp",
+          3
+        ],
+        [
+          "acpx",
+          3
+        ],
+        [
+          "codex",
+          3
+        ],
+        [
+          "coding_agent_integrations",
+          3
+        ],
+        [
+          "security",
+          3
+        ]
+      ],
+      "recurring_false_negatives": [],
+      "volatile_topics": [],
+      "predictions_by_run": [
+        {
+          "repeat": 1,
+          "run_name": "gpt55-3x-repeat-01",
+          "topics": [
+            "acp",
+            "acpx",
+            "codex",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "codex",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 2,
+          "run_name": "gpt55-3x-repeat-02",
+          "topics": [
+            "acp",
+            "acpx",
+            "codex",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "codex",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "false_negatives": []
+        },
+        {
+          "repeat": 3,
+          "run_name": "gpt55-3x-repeat-03",
+          "topics": [
+            "acp",
+            "acpx",
+            "codex",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "exact": false,
+          "false_positives": [
+            "acp",
+            "acpx",
+            "codex",
+            "coding_agent_integrations",
+            "security"
+          ],
+          "false_negatives": []
+        }
+      ]
+    }
+  ]
+}

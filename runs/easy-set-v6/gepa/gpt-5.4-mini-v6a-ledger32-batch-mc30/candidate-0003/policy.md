@@ -1,0 +1,87 @@
+# Decision Procedure
+
+Read the title and main problem/feature statement first; use body, comments,
+labels, changed files, and diff only to confirm or disambiguate central
+interests. Select every allowed topic that is a central maintainer-owned
+concern under the fixed taxonomy and boundary overlay. Prefer owner surfaces
+over incidental mechanisms, but add co-labels for explicit cross-surface
+deliverables.
+
+# Cardinality Rules
+
+Include every topic whose inclusion rule in the fixed overlay is satisfied; do
+not drop a qualifying topic to keep the output short. Use 1-3 topics by
+default, 4-5 only when genuinely cross-cutting, never more than 5. Drop labels
+that are only symptom locations, mechanisms, paths, examples, or consequences.
+For bugs, add `reliability` only when failure handling, persistence, recovery,
+cleanup, stuck/timeout/crash, data loss, or durable result loss is itself a
+routed concern, not merely because behavior is incorrect.
+
+# Boundary Overlays
+
+- Add `reliability` for central terminal-state correctness, send/dispatch
+  failures, dropped durable results, premature cleanup, retries, stuck/timeout/
+  crash, data loss, recovery, leaks, caps, or lifecycle cleanup; suppress it
+  for ranking/display preferences, wrong content/field mapping, invisible UI/API
+  formatting, or ordinary product semantics inside one owner surface.
+- If an item is explicitly ACPX-owned, prefer `acpx`; add `acp` when ACP
+  protocol/session/binding/delivery, parent/child behavior, or ACP-node result
+  semantics are also central. Do not add `reliability` for ACP/ACPX result-shape
+  bugs unless recovery/loss/cleanup is the routed deliverable.
+- Include `coding_agents` when user-visible spawned/child/subagent work,
+  follow-up orchestration, handoff, parent orchestration, result announcement,
+  give-up behavior, or lifecycle is central; do not replace it with `gateway` or
+  `agent_runtime` unless those own the change.
+- For chat surfaces, add `notifications` when outbound reply/send delivery,
+  sent-message state, message expiration, completion/announcement delivery,
+  delivery gates, payload/path changes, or failure recovery is central; chat
+  adapter ingestion alone stays `chat_integrations`.
+- Add `hooks` when hook emission/registration/filtering/payload/priority is a
+  deliverable, including chat event hooks; do not route that to
+  `skills_plugins` unless plugin loading/SDK is central. Sent-message hooks for
+  outbound replies usually also involve `notifications`.
+- Add `self_hosted_inference` for engine setup, preflight, lifecycle,
+  compatibility, crashes/timeouts, retries, or backends even when the engine is
+  local; if the issue is only provider API request/response behavior, use
+  `inference_api` without it.
+- Keep `gateway` for gateway-owned routes/state/startup/protocol/execution; do
+  not use it for generic provider proxying, notifications, agent orchestration,
+  or app-runtime failures.
+- Use `tool_calling` only for model tool-call protocol, deltas, schemas,
+  transcript/result routing, or rendering. Streaming prose, queue steering,
+  chat send reconciliation, command output, screenshots, or generic boundaries
+  are not enough.
+- Documentation-only changes should include `docs` plus the documented owner
+  surface(s), not every mechanism mentioned for context.
+- `config` co-labels are warranted for operator-facing settings, defaults,
+  persisted shape, validation, setup, or migration, even when another surface
+  consumes the option.
+- Add `approvals` for pending approval/permission state, prompts, decisions,
+  modes, persistence, expiry, caps, or cleanup, including when surfaced through
+  MCP; do not route such pending state to `memory`.
+- Use `api_surface` only when an external CLI/HTTP/SDK/API contract changes what
+  callers can rely on: shape, fields, status, compatibility, or documented
+  command behavior. Provider inference integration details such as prompt hints,
+  response parsing, streaming chunks, TTS/vision/embeddings request handling, or
+  provider compatibility stay `inference_api` unless a public OpenClaw contract
+  changes.
+
+# Suppression Rules
+
+- Do not infer topics from filenames, package names, or isolated keywords when
+  the main deliverable names a different owner.
+- Do not add reliability for harmless ordering, visibility, wording, sorting,
+  formatting, or explanatory-data issues unless there is loss, failure, cleanup,
+  recovery, leak/cap, or stuck behavior.
+- Do not add `memory` for pending state, context windows, sessions, transcripts,
+  leaks, or generic remembering; require memory indexing/search, embeddings,
+  active memory, vector/provider state, or memory archival/recovery.
+- Do not add `self_hosted_inference` just because a self-hosted engine is named
+  in an API-compatibility issue.
+- Do not add `tool_calling` for any mention of “tool” unless the model
+  tool-call contract itself changes.
+- Do not add `acp` beside `acpx` for ACPX-only state/transport/artifact work;
+  do add it when generic ACP semantics are explicitly changed.
+- Do not add `gateway` unless the gateway is the owning boundary.
+- Return only the required concise JSON object; no prose, explanations, or
+  extra fields.

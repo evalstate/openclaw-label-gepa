@@ -1,0 +1,396 @@
+{
+  "score": 0.0,
+  "side_info": {
+    "scores": {
+      "gepa_score": 0.0,
+      "topic_micro_f1": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "row_symdiff_score": 0.22388059701492538
+    },
+    "score_details": {
+      "topic_micro_precision": 0.0,
+      "topic_micro_recall": 1.0,
+      "exact_match": 0.0,
+      "row_exact_accuracy": 0.0,
+      "avg_row_jaccard": 0.0,
+      "avg_row_symdiff": 3.466666666666667,
+      "valid_json": 1.0,
+      "false_positives": 104,
+      "false_negatives": 0,
+      "avg_predicted_topics": 3.466666666666667,
+      "avg_expected_topics": 0
+    },
+    "evaluated": 30,
+    "failures": [
+      {
+        "id": "openclaw-openclaw-10467",
+        "title": "[Feature Request]: Multi-lane concurrency support for sub-agents via sessions_spawn",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "config",
+          "queueing",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "config",
+          "queueing",
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-39248",
+        "title": "Bug: sandbox.mode: \"non-main\" silently breaks sessions_spawn subagent initialization",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "reliability",
+          "sandboxing"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "reliability",
+          "sandboxing"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-39714",
+        "title": "Sandbox: fix Dockerized browser bridge and tab creation",
+        "expected": [],
+        "actual": [
+          "browser_automation",
+          "config",
+          "sandboxing",
+          "security"
+        ],
+        "false_positives": [
+          "browser_automation",
+          "config",
+          "sandboxing",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-40332",
+        "title": "[Feature]: Per-binding and per-agent permissionMode for ACP sessions",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx",
+          "approvals",
+          "config",
+          "security"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx",
+          "approvals",
+          "config",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-42122",
+        "title": "Speed up install smoke Docker builds",
+        "expected": [],
+        "actual": [
+          "packaging_deployment",
+          "tests_ci"
+        ],
+        "false_positives": [
+          "packaging_deployment",
+          "tests_ci"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-42606",
+        "title": "Browser: harden noVNC bootstrap headers",
+        "expected": [],
+        "actual": [
+          "browser_automation",
+          "security"
+        ],
+        "false_positives": [
+          "browser_automation",
+          "security"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43564",
+        "title": "[Feature Request] ACP Session Skill Context Injection",
+        "expected": [],
+        "actual": [
+          "acp",
+          "coding_agent_integrations",
+          "security",
+          "skills_plugins"
+        ],
+        "false_positives": [
+          "acp",
+          "coding_agent_integrations",
+          "security",
+          "skills_plugins"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-43765",
+        "title": "Improve runtime recovery for heartbeat, Feishu, and exec sessions",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "cron_automation",
+          "exec_tools",
+          "gateway",
+          "reliability"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "cron_automation",
+          "exec_tools",
+          "gateway",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-44202",
+        "title": "[Bug]: local memory embeddings on Apple Silicon can crash gateway in ggml-metal / node-llama-cpp; need official Metal/GPU guidance",
+        "expected": [],
+        "actual": [
+          "gateway",
+          "local_models",
+          "memory",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "gateway",
+          "local_models",
+          "memory",
+          "reliability",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-44379",
+        "title": "fix(pi-runner): harden context-overflow recovery with one suppress-hook retry",
+        "expected": [],
+        "actual": [
+          "coding_agent_integrations",
+          "hooks",
+          "reliability"
+        ],
+        "false_positives": [
+          "coding_agent_integrations",
+          "hooks",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-45200",
+        "title": "fix(subagents): notify user on announce give-up instead of silently dropping result",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "notifications",
+          "reliability"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "notifications",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-45393",
+        "title": "fix(errors): friendly message and last-message repair for tool_use/tool_result mismatch (#45385)",
+        "expected": [],
+        "actual": [
+          "inference_api",
+          "security",
+          "tool_calling"
+        ],
+        "false_positives": [
+          "inference_api",
+          "security",
+          "tool_calling"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-45508",
+        "title": "[Feature]: Self-hosted STT/TTS provider support in webchat (Route webchat TTS through the gateway instead of browser Speech API)",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "config",
+          "inference_api",
+          "self_hosted_inference"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "config",
+          "inference_api",
+          "self_hosted_inference"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-46552",
+        "title": "docs(queue): clarify steer behavior with partial streaming and tool boundaries",
+        "expected": [],
+        "actual": [
+          "docs",
+          "queueing"
+        ],
+        "false_positives": [
+          "docs",
+          "queueing"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-47446",
+        "title": "fix(gateway/discord): respect env proxy vars and prevent ECONNRESET",
+        "expected": [],
+        "actual": [
+          "chat_integrations",
+          "config",
+          "gateway",
+          "reliability"
+        ],
+        "false_positives": [
+          "chat_integrations",
+          "config",
+          "gateway",
+          "reliability"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48406",
+        "title": "Docs: add saturated session recovery guide",
+        "expected": [],
+        "actual": [
+          "agent_runtime",
+          "config",
+          "docs",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "agent_runtime",
+          "config",
+          "docs",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48580",
+        "title": "Bug: acpx codex sessions \u521b\u5efa\u7684\u4f1a\u8bdd\u7acb\u5373\u9000\u51fa - stdin is not a terminal",
+        "expected": [],
+        "actual": [
+          "acpx",
+          "codex",
+          "coding_agent_integrations",
+          "reliability",
+          "sessions"
+        ],
+        "false_positives": [
+          "acpx",
+          "codex",
+          "coding_agent_integrations",
+          "reliability",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-48851",
+        "title": "feat(status): add API call count to session status and usage footer",
+        "expected": [],
+        "actual": [
+          "sessions",
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "false_positives": [
+          "sessions",
+          "telemetry_usage",
+          "ui_tui"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-49502",
+        "title": "feat(gateway): include usage/cost metadata in agent.wait terminal response",
+        "expected": [],
+        "actual": [
+          "api_surface",
+          "gateway",
+          "telemetry_usage"
+        ],
+        "false_positives": [
+          "api_surface",
+          "gateway",
+          "telemetry_usage"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      },
+      {
+        "id": "openclaw-openclaw-51654",
+        "title": "Support session-level environment variables for ACP sessions",
+        "expected": [],
+        "actual": [
+          "acp",
+          "acpx",
+          "config",
+          "security",
+          "sessions"
+        ],
+        "false_positives": [
+          "acp",
+          "acpx",
+          "config",
+          "security",
+          "sessions"
+        ],
+        "false_negatives": [],
+        "row_score": 0.0
+      }
+    ]
+  }
+}

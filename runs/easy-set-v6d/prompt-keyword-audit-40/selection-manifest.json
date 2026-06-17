@@ -1,0 +1,7 @@
+{
+  "name": "prompt-keyword-audit-40",
+  "old_rows": 20,
+  "confused_rows": 20,
+  "row_ids_sha256": "a4b6892b707e8869eb4d16209567a281a40369017e1ca0758910b73f81601a2c",
+  "selection_note": "20 accepted non-ACP/session/coding-agent rows plus 20 v6b-deferred ACP/session/coding-agent-adjacent rows, including the four v6d hard cases."
+}
