@@ -7,56 +7,57 @@ from openclaw_label_gepa import cli
 from openclaw_label_gepa.regimes import load_regime
 from openclaw_label_gepa.runplan import build_run_plan
 
+V7I = Path("regimes/v7i-guarded-generator-mutate-all/regime.yaml")
+
 
 def test_shell_line_cd_to_project_root_and_uses_absolute_trackio_dir() -> None:
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+    regime = load_regime(V7I)
     plan = build_run_plan(
         regime,
         model="gemma-e4",
-        variant="plain",
         run_index=3,
         overrides={"max_metric_calls": 1600},
     )
 
     line = cli.shell_line(plan)
 
-    assert line.startswith(f"cd {Path.cwd()} && TRACKIO_DIR={Path.cwd() / 'runs/v7a/trackio'}")
+    trackio_dir = Path.cwd() / "runs/v7i-guarded-generator-mutate-all/trackio"
+    assert line.startswith(f"cd {Path.cwd()} && TRACKIO_DIR={trackio_dir}")
     assert "--max-metric-calls 1600" in line
-    assert "--run-name gemma-e4-v7a-soft-exact-plain-compact-mb15-mc1600-003" in line
-    assert "--reflection-env-dir .fast-agent" in line
+    assert "--run-name gemma-e4-v7i-structured-compact-tot20000-mb30-mc1600-003" in line
 
 
 def test_shell_line_can_append_runner_preflight_flag() -> None:
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
-    plan = build_run_plan(regime, model="gemma-e4", variant="plain")
+    regime = load_regime(V7I)
+    plan = build_run_plan(regime, model="gemma-e4")
 
     line = cli.shell_line(plan, extra_args=("--preflight-only",))
 
-    assert line.endswith("--plain-labels --preflight-only")
+    assert line.endswith("--preflight-only")
 
 
 def test_trackio_command_uses_regime_project_and_absolute_dir() -> None:
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+    regime = load_regime(V7I)
 
     line = cli.trackio_shell_line(regime)
 
     assert line == (
         f"cd {Path.cwd()} && "
-        f"BROWSER=/bin/true TRACKIO_DIR={Path.cwd() / 'runs/v7a/trackio'} "
-        "uv run trackio show --project easy-v7a-plain-gepa"
+        f"BROWSER=/bin/true TRACKIO_DIR={Path.cwd() / 'runs/v7i-guarded-generator-mutate-all/trackio'} "
+        "uv run trackio show --project easy-v7i-guarded-generator-mutate-all-gepa"
     )
 
 
-def test_validate_regime_accepts_v7a() -> None:
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+def test_validate_regime_accepts_v7i() -> None:
+    regime = load_regime(V7I)
 
     assert cli.validate_regime(regime) == []
 
 
-def test_default_regime_is_v7a() -> None:
+def test_default_regime_is_v7i() -> None:
     args = cli.parse_args(["--validate"])
 
-    assert args.regime == Path("regimes/v7a/regime.yaml")
+    assert args.regime == V7I
 
 
 def test_list_regimes_prints_available_regimes(capsys: Any) -> None:
@@ -64,17 +65,17 @@ def test_list_regimes_prints_available_regimes(capsys: Any) -> None:
 
     out = capsys.readouterr().out
     assert status == 0
-    assert '"name": "v7a"' in out
-    assert '"default_variant": "plain"' in out
+    assert '"name": "v7i-guarded-generator-mutate-all"' in out
+    assert '"name": "v7h-clean-generator-mutate-all"' in out
     assert '"benchmark_rows": 78' in out
 
 
 def test_regime_info_prints_selected_regime(capsys: Any) -> None:
-    status = cli.main(["regimes/v7a/regime.yaml", "--regime-info"])
+    status = cli.main([str(V7I), "--regime-info"])
 
     out = capsys.readouterr().out
     assert status == 0
-    assert '"name": "v7a"' in out
+    assert '"name": "v7i-guarded-generator-mutate-all"' in out
     assert '"score_mode": "row-soft-exact"' in out
     assert '"trackio"' in out
 
@@ -105,24 +106,16 @@ def test_audit_prints_success_payload(monkeypatch: Any, capsys: Any) -> None:
     assert '"name": "gepa_preflight"' in out
 
 
-def test_validate_regime_accepts_plain_only_v6h() -> None:
-    regime = load_regime(Path("regimes/v6h/regime.yaml"))
-
-    problems = cli.validate_regime(regime)
-
-    assert not [problem for problem in problems if "agent_cards.structured" in problem]
-
-
 def test_doctor_flag_uses_default_regime() -> None:
     args = cli.parse_args(["--doctor"])
 
     assert args.doctor is True
-    assert args.regime == Path("regimes/v7a/regime.yaml")
+    assert args.regime == V7I
 
 
 def test_run_flag_requires_action() -> None:
     args = cli.parse_args(["--run"])
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+    regime = load_regime(V7I)
 
     try:
         cli.dispatch(args, regime, cli.regime_summary(regime))
@@ -134,7 +127,7 @@ def test_run_flag_requires_action() -> None:
 
 def test_run_and_shell_are_mutually_exclusive() -> None:
     args = cli.parse_args(["--plan-gepa", "--run", "--shell"])
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+    regime = load_regime(V7I)
 
     try:
         cli.dispatch(args, regime, cli.regime_summary(regime))
@@ -165,14 +158,16 @@ def test_run_gepa_preflight_executes_plan(monkeypatch: Any) -> None:
             "--run",
         ]
     )
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+    regime = load_regime(V7I)
 
     status = cli.dispatch(args, regime, cli.regime_summary(regime))
 
     assert status == 0
     assert len(calls) == 1
     assert calls[0]["cwd"] == Path.cwd()
-    assert calls[0]["env"]["TRACKIO_DIR"] == str(Path.cwd() / "runs/v7a/trackio")
+    assert calls[0]["env"]["TRACKIO_DIR"] == str(
+        Path.cwd() / "runs/v7i-guarded-generator-mutate-all/trackio"
+    )
     assert calls[0]["check"] is False
     assert calls[0]["command"][-1] == "--preflight-only"
     assert "--max-metric-calls" in calls[0]["command"]
@@ -188,7 +183,7 @@ def test_trackio_command_can_execute(monkeypatch: Any) -> None:
 
     monkeypatch.setattr(cli.subprocess, "run", fake_run)
     args = cli.parse_args(["--trackio-command", "--run"])
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+    regime = load_regime(V7I)
 
     status = cli.dispatch(args, regime, cli.regime_summary(regime))
 
@@ -200,11 +195,13 @@ def test_trackio_command_can_execute(monkeypatch: Any) -> None:
         "trackio",
         "show",
         "--project",
-        "easy-v7a-plain-gepa",
+        "easy-v7i-guarded-generator-mutate-all-gepa",
     ]
     assert calls[0]["cwd"] == Path.cwd()
     assert calls[0]["check"] is False
-    assert calls[0]["env"]["TRACKIO_DIR"] == str(Path.cwd() / "runs/v7a/trackio")
+    assert calls[0]["env"]["TRACKIO_DIR"] == str(
+        Path.cwd() / "runs/v7i-guarded-generator-mutate-all/trackio"
+    )
     assert calls[0]["env"]["BROWSER"] == "/bin/true"
 
 
@@ -217,7 +214,7 @@ def test_run_command_handles_keyboard_interrupt(monkeypatch: Any, capsys: Any) -
     status = cli._run_command(
         ["uv", "run", "trackio", "show"],
         project_root=Path.cwd(),
-        trackio_dir=Path.cwd() / "runs/v7a/trackio",
+        trackio_dir=Path.cwd() / "runs/v7i-guarded-generator-mutate-all/trackio",
     )
 
     assert status == 130
@@ -253,7 +250,7 @@ fast-agent-mcp = { path = "../missing-fast-agent", editable = true }
 
 
 def test_prompt_placeholder_validation_reports_missing_file(tmp_path: Path) -> None:
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+    regime = load_regime(V7I)
     project = tmp_path / "project"
     regime_root = project / "regimes" / "bad"
     prompt = regime_root / "prompts" / "labeler.md"
@@ -269,7 +266,7 @@ def test_prompt_placeholder_validation_reports_missing_file(tmp_path: Path) -> N
 
 
 def test_reflection_agent_validation_reports_missing_card(tmp_path: Path) -> None:
-    regime = load_regime(Path("regimes/v7a/regime.yaml"))
+    regime = load_regime(V7I)
     project = tmp_path / "project"
     regime_root = project / "regimes" / "bad"
     (project / ".fast-agent").mkdir(parents=True)
@@ -278,5 +275,4 @@ def test_reflection_agent_validation_reports_missing_card(tmp_path: Path) -> Non
 
     problems = cli._validate_reflection_agent(bad_regime)
 
-    assert len(problems) == 1
-    assert "reflection AgentCard missing" in problems[0]
+    assert any("reflection AgentCard missing" in problem for problem in problems)

@@ -9,7 +9,7 @@
     "opus-2": "datasets/openclaw-label-v7a/data/final/source-opus-2.jsonl"
   },
   "gepa_train": "datasets/openclaw-label-v7a/data/final/final-gepa-train.jsonl",
-  "label_order": "regimes/v7a/prompts/allowed-topics-v7a.md",
+  "label_order": "datasets/openclaw-label-v7a/artifacts/spec/allowed-topics-v7a.md",
   "label_order_invariant": "All derived final labels, expected_topics, modal label fields, soft-disagreement labels, and source-view possible_confusions are normalized to the allowed-topics priority order.",
   "rows": 330,
   "quality_indicator_counts": {

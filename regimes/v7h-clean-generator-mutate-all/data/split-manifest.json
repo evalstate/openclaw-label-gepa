@@ -3,16 +3,16 @@
   "source": "datasets/openclaw-label-v7d-final/data/final/final-gepa-train.jsonl",
   "source_rows": 439,
   "excluded": {
-    "pareto": "regimes/v7d-final/data/pareto60.jsonl",
-    "bench": "regimes/v7d-final/data/bench78.jsonl",
+    "pareto": "regimes/v7h-clean-generator-mutate-all/data/pareto60.jsonl",
+    "bench": "regimes/v7h-clean-generator-mutate-all/data/bench78.jsonl",
     "heldout_ids": 138
   },
   "candidate_rows_after_exclusion": 301,
   "requested_feedback_rows": 300,
   "outputs": {
-    "feedback": "regimes/v7d-final/data/feedback300.jsonl",
-    "pareto": "regimes/v7d-final/data/pareto60.jsonl",
-    "bench": "regimes/v7d-final/data/bench78.jsonl"
+    "feedback": "regimes/v7h-clean-generator-mutate-all/data/feedback300.jsonl",
+    "pareto": "regimes/v7h-clean-generator-mutate-all/data/pareto60.jsonl",
+    "bench": "regimes/v7h-clean-generator-mutate-all/data/bench78.jsonl"
   },
   "hashes": {
     "feedback": "3d5b6a09222b4321ca9036f2d75720edf09435893c068d909352b17849cd0a5e",

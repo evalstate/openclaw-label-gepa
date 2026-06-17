@@ -20,7 +20,7 @@ from openclaw_label_gepa.runplan import build_benchmark_plan, build_run_plan
 if TYPE_CHECKING:
     from collections.abc import Callable, Mapping
 
-DEFAULT_REGIME = Path("regimes/v7a/regime.yaml")
+DEFAULT_REGIME = Path("regimes/v7i-guarded-generator-mutate-all/regime.yaml")
 FILE_PLACEHOLDER_RE = re.compile(r"\{\{file:([^}]+)\}\}")
 
 

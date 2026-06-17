@@ -156,15 +156,6 @@ hf download "$OPENCLAW_LABEL_DATASET_REPO" \
   --local-dir .hf/openclaw-label-v7a
 ```
 
-Refresh the local v7a regime bundle from a downloaded copy:
-
-```bash
-cp .hf/openclaw-label-v7a/data/splits/feedback300.jsonl regimes/v7a/data/feedback300.jsonl
-cp .hf/openclaw-label-v7a/data/splits/pareto60.jsonl regimes/v7a/data/pareto60.jsonl
-cp .hf/openclaw-label-v7a/data/splits/bench78.jsonl regimes/v7a/data/bench78.jsonl
-cp .hf/openclaw-label-v7a/data/splits/split-manifest.json regimes/v7a/data/split-manifest.json
-```
-
 ## Publish
 
 From the repo root:

@@ -16,7 +16,8 @@ This repo is intended to replace the exploratory `gepa-batch-openclaw` workspace
 ```text
 src/openclaw_label_gepa/   reusable Python package
 datasets/openclaw-label-v7a/ HF dataset publication bundle
-regimes/v7h/               v7h soft-exact regime, no json in header
+regimes/v7h-clean-generator-mutate-all/  v7h clean generator-mutate-all regime
+regimes/v7i-guarded-generator-mutate-all/ v7i guarded generator-mutate-all regime
 scripts/                   thin command-line entry points
 tools/runners/             current GEPA/benchmark runner scripts
 tools/data-build/          data construction scripts
@@ -55,31 +56,22 @@ uv run openclaw-label-gepa --audit
 
 ## GEPA Run Plans
 
-Print a deterministic shell command for the default v6o structured run:
+The active default regime is v7i guarded generator-mutate-all. v7h is retained as the
+clean predecessor/comparison regime.
 
-```bash
-uv run openclaw-label-gepa regimes/v6o/regime.yaml --plan-gepa --shell
-```
-
-Print the plain-label Gemma run:
-
-```bash
-uv run openclaw-label-gepa regimes/v6o/regime.yaml --plan-gepa --variant plain --model gemma-e4 --run-index 1 --shell
-```
-
-Print the v6p soft-exact run:
-
-```bash
-uv run openclaw-label-gepa regimes/v6p/regime.yaml --plan-gepa --shell
-```
-
-Print the promoted v7a plain-label run:
+Print a deterministic shell command for the default v7i run:
 
 ```bash
 uv run openclaw-label-gepa --plan-gepa --shell
 ```
 
-Print a v7a Gemma run with a 1600-call GEPA budget:
+Print the v7h run explicitly:
+
+```bash
+uv run openclaw-label-gepa regimes/v7h-clean-generator-mutate-all/regime.yaml --plan-gepa --shell
+```
+
+Print a v7i Gemma run with a 1600-call GEPA budget:
 
 ```bash
 uv run openclaw-label-gepa \
@@ -125,13 +117,13 @@ uv run openclaw-label-gepa \
   --run
 ```
 
-Print three benchmark replay commands for the v7a base policy:
+Print three benchmark replay commands for the base v7i policy:
 
 ```bash
 uv run openclaw-label-gepa --plan-benchmark --benchmark-run base --repeat 3 --shell
 ```
 
-Start the local Trackio dashboard for v7a:
+Start the local Trackio dashboard for v7i:
 
 ```bash
 uv run openclaw-label-gepa --trackio-command
