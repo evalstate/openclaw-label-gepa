@@ -179,6 +179,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Optional cue/reference markdown shown to GEPA reflection only; not inserted into the task AgentCard.",
     )
     p.add_argument("--agent-card", type=Path, default=CARD)
+    p.add_argument(
+        "--task-template",
+        type=Path,
+        default=TASK_TEMPLATE,
+        help="Fast-agent batch task template used to render each JSONL row.",
+    )
     p.add_argument("--allowed-topics", type=Path, default=ALLOWED_TOPICS)
     p.add_argument(
         "--output-schema",
@@ -2193,7 +2199,7 @@ def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgent
         agent_card=resolve_agent_card(args),
         agent="openclaw_vanilla_labeler_plain" if plain_labels else "openclaw_vanilla_labeler",
         candidate_variables=candidate_variables,
-        template_source=TASK_TEMPLATE,
+        template_source=args.task_template,
         schema=None if plain_labels else SCHEMA,
         model=args.model,
         parallel=args.parallel,
@@ -2468,7 +2474,7 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
         agent=agent_name,
         candidate_variables=candidate_variables,
         input=input_path,
-        template_source=TASK_TEMPLATE,
+        template_source=args.task_template,
         schema=None if args.plain_labels else SCHEMA,
         model=args.model,
         parallel=args.parallel,

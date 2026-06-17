@@ -111,6 +111,8 @@ def _extend_gepa_args(
         [
             "--agent-card",
             str(regime.agent_card_path(args.variant)),
+            "--task-template",
+            str(regime.task_template_path),
             "--allowed-topics",
             str(regime.label_order_path),
             "--output-schema",
@@ -301,6 +303,8 @@ def _benchmark_base_command(
         str(benchmark_path),
         "--agent-card",
         str(regime.agent_card_path(variant)),
+        "--task-template",
+        str(regime.task_template_path),
         "--allowed-topics",
         str(regime.label_order_path),
         "--output-schema",
