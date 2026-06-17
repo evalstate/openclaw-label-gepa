@@ -10,6 +10,7 @@ This repo is intended to replace the exploratory `gepa-batch-openclaw` workspace
 - keep prompts, schemas, and baseline results together
 
 
+
 ## Layout
 
 ```text
@@ -49,6 +50,8 @@ uv run openclaw-label-gepa --doctor
 uv run openclaw-label-gepa --validate
 uv run openclaw-label-gepa --audit
 ```
+
+![](./trackio.png)
 
 ## GEPA Run Plans
 
