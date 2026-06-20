@@ -1,0 +1,82 @@
+name: v7j-minimal-topics
+description: Sparse v7i successor with a minimal task-facing prompt and the guarded v7i split.
+
+dataset:
+  local_bundle: data
+  hf_repo_id: null
+
+default_variant: structured
+label_order: prompts/allowed-topics-v7j.md
+base_prompt: prompts/vanilla-labeler-v7j.md
+task_template: prompts/task-template-v7j.md
+agent_cards:
+  structured: prompts/vanilla-labeler-v7j.md
+  plain: prompts/vanilla-labeler-plain-v7j.md
+schema: schemas/output-v7j.schema.json
+reflection_agent: openclaw_gepa_reflector
+reflection_env_dir: ../../.fast-agent
+seed_policy: prompts/seed-policy-v7j.md
+mutable_topic_definitions: prompts/allowed-topics-v7j.md
+boundary_guidance: prompts/topic-boundary-guidance-v7j.md
+static_asi: prompts/vanilla-asi-v7j.md
+train_split: data/feedback240.jsonl
+feedback_split: data/feedback240.jsonl
+pareto_split: data/pareto60.jsonl
+benchmark_split: data/bench78.jsonl
+split_manifest: data/split-manifest.json
+metric: row_soft_exact
+score_mode: row-soft-exact
+
+score_formula:
+  gepa_score: "max(0.0, 0.60 * row_jaccard + 0.20 * row_topic_f1 + 0.20 * row_exact - hygiene_penalty - total_mutable_length_penalty); candidates with invalid topic-definition contracts score zero"
+  frontier_objectives:
+    - gepa_score
+    - row_jaccard
+    - row_topic_f1
+    - row_exact
+
+trackio:
+  project: easy-v7j-minimal-topics-gepa
+  group: v7j-minimal-topics
+  step_metric: gepa/iteration
+  local_dir: runs/v7j-minimal-topics/trackio
+
+run_defaults:
+  run_root: runs/v7j-minimal-topics/gepa
+  run_name_template: "{model_slug}-v7j-{variant}-{feedback_profile}-tot{total_mutable_char_budget}-mb{reflection_minibatch_size}-mc{max_metric_calls}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: compact
+  candidate_proposer: default
+  reflection_minibatch_size: 30
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 2400
+  hygiene_penalty: 0.06
+  policy_char_budget: 0
+  topic_definitions_char_budget: 0
+  total_mutable_char_budget: 20000
+  parallel: 4
+
+models:
+  default_task: codexresponses.gpt-5.4-mini
+  default_reflection: codexresponses.gpt-5.5?reasoning=high
+  supported:
+    - deepseek4flash
+    - gemma-e4
+    - qwen36
+    - codexresponses.gpt-5.4-mini
+    - responses.gpt-5.5?reasoning=high
+
+artifacts:
+  regime_doc: docs/V7J_MINIMAL_TOPICS.md
+  output_schema: schemas/output-v7j.schema.json
+  generator_prompt_seed: prompts/seed-policy-v7j.md
+
+notes:
+  - Uses the same feedback240, guarded pareto60, and bench78 data as v7i.
+  - Task-facing baseline prompt is intentionally sparse: classify the GitHub issue from the listed topics and use 0-3 labels.
+  - The boundary overlay is not task-facing or mutable in this regime.
+  - GEPA may mutate policy and topic_definitions only.
+  - Topic IDs are frozen; invalid topic-definition contracts score zero.
+  - Uses one combined prompt budget of 20000 chars; there are no separate per-component length caps.

@@ -1,0 +1,78 @@
+name: v7l-pathological-simple-failed-issues
+description: "Pathologically simple seed prompt ablation: task prompt is only a label-list instruction; reflection sees failed issues with expected/chosen labels."
+
+dataset:
+  local_bundle: ../v7k-clean-reflection-asi/data
+  hf_repo_id: null
+
+default_variant: structured
+label_order: labels-only-v7l.md
+base_prompt: ../v7k-clean-reflection-asi/prompts/labeler-pathological-simple-v7k.md
+task_template: ../v7k-clean-reflection-asi/prompts/task-template-v7k.md
+agent_cards:
+  structured: ../v7k-clean-reflection-asi/prompts/labeler-pathological-simple-v7k.md
+schema: output-labels-provider-compatible.schema.json
+reflection_agent: openclaw_gepa_reflector
+reflection_env_dir: ../../.fast-agent
+seed_policy: ../v7k-clean-reflection-asi/prompts/pathological-simple-seed-v7k.md
+static_asi: ../v7k-clean-reflection-asi/prompts/reflection-asi-policy-only-v7l.md
+train_split: ../v7k-clean-reflection-asi/data/feedback240.jsonl
+feedback_split: ../v7k-clean-reflection-asi/data/feedback240.jsonl
+pareto_split: ../v7k-clean-reflection-asi/data/pareto60.jsonl
+benchmark_split: ../v7k-clean-reflection-asi/data/bench78.jsonl
+split_manifest: ../v7k-clean-reflection-asi/data/split-manifest.json
+metric: row_soft_exact
+score_mode: row-soft-exact
+
+score_formula:
+  gepa_score: "max(0.0, 0.60 * row_jaccard + 0.20 * row_topic_f1 + 0.20 * row_exact - hygiene_penalty); only policy is mutable in this ablation"
+  frontier_objectives:
+    - gepa_score
+    - row_jaccard
+    - row_topic_f1
+    - row_exact
+
+trackio:
+  project: easy-v7l-pathological-simple-failed-issues-gepa
+  group: v7l-pathological-simple-failed-issues
+  step_metric: gepa/iteration
+  local_dir: runs/v7l-pathological-simple-failed-issues/trackio
+
+run_defaults:
+  run_root: runs/v7l-pathological-simple-failed-issues/gepa
+  run_name_template: "{model_slug}-v7l-{variant}-{feedback_profile}-policyonly-mb{reflection_minibatch_size}-mc{max_metric_calls}-p{parallel}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: failed-issues
+  candidate_proposer: default
+  reflection_minibatch_size: 15
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 1600
+  hygiene_penalty: 0.06
+  policy_char_budget: 0
+  parallel: 8
+
+models:
+  default_task: qwen3-6-27b
+  default_reflection: codexresponses.gpt-5.5?reasoning=high
+  supported:
+    - qwen3-6-27b
+    - qwen36
+    - codexresponses.gpt-5.4-mini
+    - responses.gpt-5.5?reasoning=high
+
+artifacts:
+  regime_doc: docs/V7L_PATHOLOGICAL_SIMPLE_FAILED_ISSUES.md
+  output_schema: output-labels-provider-compatible.schema.json
+  generator_prompt_seed: ../v7k-clean-reflection-asi/prompts/pathological-simple-seed-v7k.md
+
+notes:
+  - Reuses v7k data splits and output schema.
+  - Task-facing AgentCard contains only {{policy}} plus the task template GitHub context.
+  - Optimizer background receives only label IDs, not topic definitions or boundary guidance.
+  - Output schema omits array minItems/maxItems for providers with limited response_format schema support; the prompt and scorer still enforce up-to-3 behavior.
+  - Seed policy is just a choose-up-to-3 label-list instruction and the topic IDs.
+  - No mutable topic definitions or boundary overlay are supplied; GEPA mutates policy only.
+  - Reflection profile is failed-issues, so reflection sees failed issue context, expected labels, actual labels, and row score.
+  - Reflection ASI is policy-only and does not describe hidden topic definitions or boundary overlays.

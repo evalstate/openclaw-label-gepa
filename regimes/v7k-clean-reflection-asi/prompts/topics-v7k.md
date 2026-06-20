@@ -1,43 +1,6 @@
-## Allowed Topics
+## Topic List and Definitions
 
-Use only the topic IDs listed below. Choose labels by central
-maintainer-routing concern, not by keyword match.
-
-- `inference_api`
-- `self_hosted_inference`
-- `acpx`
-- `acp`
-- `coding_agent_integrations`
-- `mcp_tooling`
-- `model_lifecycle`
-- `codex`
-- `agent_runtime`
-- `sessions`
-- `gateway`
-- `exec_tools`
-- `approvals`
-- `sandboxing`
-- `hooks`
-- `cron_automation`
-- `chat_integrations`
-- `ui_tui`
-- `browser_automation`
-- `memory`
-- `security`
-- `config`
-- `packaging_deployment`
-- `docs`
-- `tests_ci`
-- `telemetry_usage`
-- `api_surface`
-- `queueing`
-- `notifications`
-- `skills_plugins`
-- `auth_identity`
-- `reliability`
-- `tool_calling`
-
-## Topic definitions
+Use only these topic IDs. Choose labels by central maintainer-routing concern, not by keyword match.
 
 - `inference_api`: The integration layer between OpenClaw and model serving/providers: usage of Responses, Chat Completions, Anthropic Messages, and similar inference APIs; streaming/SSE and usage chunks; base URL normalization; request/response handling for inference, including TTS, vision, and embeddings API integrations; and adding or configuring inference providers (setup, auth, routing, catalogs, compatibility).
 - `self_hosted_inference`: Integration with inference engines and local model operation such as vLLM, llama.cpp, Ollama, LM Studio, TGI, LocalAI, GGUF/quantization, local hardware/VRAM behavior, local model fallback/context behavior, or self-hosted embeddings/speech/memory backends — whether on device or self-hosted elsewhere.
@@ -64,7 +27,7 @@ maintainer-routing concern, not by keyword match.
 - `packaging_deployment`: Build, packaging, installers, Docker images, release artifacts, deployment, service managers, SEA, launchd, systemd, pnpm, and runtime distribution.
 - `docs`: Documentation, guides, README changes, spelling, taxonomy, and explanatory content — when the documentation itself is the subject.
 - `tests_ci`: Tests, CI, fixtures, coverage, mocks, and platform-specific test fixes — when test infrastructure itself is the subject.
-- `telemetry_usage`: OpenClaw's own telemetry and usage surface: token/usage/cost accounting, metrics, diagnostics, trace production and observability coverage, and status reporting of the product. Not for measurement or benchmark vocabulary adjacent to another surface's change.
+- `telemetry_usage`: OpenClaw's own telemetry and usage surface: token/usage/cost accounting, metrics, diagnostics, trace production and observability coverage, and status reporting of the product. Not for measurement/evaluation vocabulary adjacent to another surface's change.
 - `api_surface`: External API, CLI, HTTP, and SDK contracts: REST endpoints, webhooks, SSE, OpenResponses, chat completions, documented command contracts, and request/response shapes.
 - `queueing`: Queues, lanes, task state, follow-up queues, scheduling, run ordering, work dispatch, locks gating dispatch, stuck jobs, and backpressure.
 - `notifications`: Generic notification policy and outbound delivery behavior: completion delivery paths, delivery gates, notify settings, announcements, and sent-message handling. Emitting events or hooks about sends belongs to `hooks` unless the outbound delivery path/gate itself is implemented or changed.

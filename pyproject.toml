@@ -104,3 +104,4 @@ output-format = "full"
 [tool.uv.sources]
 fast-agent-mcp = { path = "../fast-agent-pr", editable = true }
 gepa = { path = "../gepa", editable = true }
+trackio = { path = "../trackio", editable = true }

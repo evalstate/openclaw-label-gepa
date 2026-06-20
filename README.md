@@ -136,9 +136,11 @@ from the regime so Trackio dashboards and local artifacts line up.
 
 Canonical Trackio streams:
 
+- `score/val/proposal`: OpenClaw full-valset score for the candidate just evaluated.
+- `score/val/best`: OpenClaw full-valset best-so-far score.
 - `gepa/objective/*`: GEPA frontier objectives, emitted by the GEPA fork.
-- `openclaw/objective/val/gepa_score`: OpenClaw full-valset best-so-far objective.
-- `openclaw/objective/val/proposal_gepa_score`: OpenClaw score for the candidate just evaluated.
+- `openclaw/objective/val/proposal_gepa_score`: audit-detail alias for `score/val/proposal`.
+- `openclaw/objective/val/best_gepa_score`: audit-detail alias for `score/val/best`.
 - `openclaw/diagnostic/val/*`: OpenClaw full-valset diagnostic metrics.
 - `candidate/*`: compact candidate policy health telemetry.
 

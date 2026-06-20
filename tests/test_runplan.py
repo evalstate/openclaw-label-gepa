@@ -30,6 +30,15 @@ def test_v7i_default_run_plan_uses_guarded_regime() -> None:
     assert "--plain-labels" not in plan.command
 
 
+def test_run_plan_can_override_trackio_project() -> None:
+    regime = load_regime(V7I)
+
+    plan = build_run_plan(regime, trackio_project="fresh-project")
+
+    assert plan.trackio_project == "fresh-project"
+    assert plan.command[plan.command.index("--project") + 1] == "fresh-project"
+
+
 def test_v7h_run_plan_is_retained_for_comparison() -> None:
     regime = load_regime(V7H)
 
@@ -56,6 +65,15 @@ def test_v7i_base_benchmark_plan_uses_benchmark_split() -> None:
         plan.command[plan.command.index("--output-schema") + 1]
         == "regimes/v7i-guarded-generator-mutate-all/schemas/output-v7i.schema.json"
     )
+
+
+def test_benchmark_plan_can_override_trackio_project() -> None:
+    regime = load_regime(V7I)
+
+    plan = build_benchmark_plan(regime, candidate="base", trackio_project="fresh-project")
+
+    assert plan.trackio_project == "fresh-project"
+    assert plan.command[plan.command.index("--project") + 1] == "fresh-project"
 
 
 def test_candidate_benchmark_plan_accepts_all_mutable_components(tmp_path: Path) -> None:

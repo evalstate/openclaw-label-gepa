@@ -57,7 +57,7 @@ run_defaults:
   policy_char_budget: 0
   topic_definitions_char_budget: 0
   total_mutable_char_budget: 20000
-  parallel: 8
+  parallel: 4
 
 models:
   default_task: codexresponses.gpt-5.4-mini

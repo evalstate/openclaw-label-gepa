@@ -1,0 +1,85 @@
+name: v7k-clean-reflection-asi
+description: Clean successor with self-contained prompt assets and reflection ASI stripped of run-history vocabulary.
+
+dataset:
+  local_bundle: data
+  hf_repo_id: null
+
+default_variant: structured
+label_order: prompts/topics-v7k.md
+base_prompt: prompts/labeler-v7k.md
+task_template: prompts/task-template-v7k.md
+agent_cards:
+  structured: prompts/labeler-v7k.md
+  plain: prompts/labeler-plain-v7k.md
+schema: schemas/output-v7k.schema.json
+reflection_agent: openclaw_gepa_reflector
+reflection_env_dir: ../../.fast-agent
+seed_policy: prompts/routing-policy-v7k.md
+mutable_topic_definitions: prompts/topics-v7k.md
+mutable_boundary_overlay: prompts/boundary-rules-v7k.md
+boundary_guidance: prompts/topic-boundary-guidance-v7k.md
+static_asi: prompts/reflection-asi-v7k.md
+train_split: data/feedback240.jsonl
+feedback_split: data/feedback240.jsonl
+pareto_split: data/pareto60.jsonl
+benchmark_split: data/bench78.jsonl
+split_manifest: data/split-manifest.json
+metric: row_soft_exact
+score_mode: row-soft-exact
+
+score_formula:
+  gepa_score: "max(0.0, 0.60 * row_jaccard + 0.20 * row_topic_f1 + 0.20 * row_exact - hygiene_penalty - total_mutable_length_penalty); candidates with invalid topic-definition contracts score zero"
+  frontier_objectives:
+    - gepa_score
+    - row_jaccard
+    - row_topic_f1
+    - row_exact
+
+trackio:
+  project: easy-v7k-clean-reflection-asi-gepa
+  group: v7k-clean-reflection-asi
+  step_metric: gepa/iteration
+  local_dir: runs/v7k-clean-reflection-asi/trackio
+
+run_defaults:
+  run_root: runs/v7k-clean-reflection-asi/gepa
+  run_name_template: "{model_slug}-v7k-{variant}-{feedback_profile}-tot{total_mutable_char_budget}-mb{reflection_minibatch_size}-mc{max_metric_calls}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: compact
+  candidate_proposer: default
+  reflection_minibatch_size: 30
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 2400
+  hygiene_penalty: 0.06
+  policy_char_budget: 0
+  topic_definitions_char_budget: 0
+  total_mutable_char_budget: 20000
+  parallel: 4
+
+models:
+  default_task: codexresponses.gpt-5.4-mini
+  default_reflection: codexresponses.gpt-5.5?reasoning=high
+  supported:
+    - qwen36
+    - deepseek4flash
+    - gemma-e4
+    - minimax3
+    - codexresponses.gpt-5.4-mini
+    - responses.gpt-5.5?reasoning=high
+
+artifacts:
+  regime_doc: docs/V7K_CLEAN_REFLECTION_ASI.md
+  output_schema: schemas/output-v7k.schema.json
+  generator_prompt_seed: prompts/routing-policy-v7k.md
+
+notes:
+  - Uses local copies of the final data splits and all prompt assets.
+  - Task-facing prompt uses neutral headings: Topic List and Definitions, Boundary Rules, Routing Policy.
+  - The topic list and definitions are merged into one component; there is no duplicate bare topic list.
+  - The reflection ASI describes the scoring and edit contract without historical run names or label-source bookkeeping.
+  - The optimizer may mutate policy, topic_definitions, and boundary_overlay.
+  - Topic IDs are fixed; invalid topic-definition contracts score zero.
+  - Uses one combined prompt budget of 20000 chars; there are no separate per-component length caps.

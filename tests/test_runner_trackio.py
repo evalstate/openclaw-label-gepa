@@ -54,6 +54,34 @@ def _load_runner(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
     return module
 
 
+def test_create_fresh_run_dir_errors_when_run_exists(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    module = _load_runner(monkeypatch)
+    run_root = tmp_path / "runs"
+    existing = run_root / "already-there"
+    existing.mkdir(parents=True)
+
+    with pytest.raises(SystemExit) as exc_info:
+        module.create_fresh_run_dir(run_root, "already-there")
+
+    assert "run directory already exists" in str(exc_info.value)
+    assert str(existing) in str(exc_info.value)
+
+
+def test_create_fresh_run_dir_creates_new_run(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    module = _load_runner(monkeypatch)
+
+    run_dir = module.create_fresh_run_dir(tmp_path / "runs", "new-run")
+
+    assert run_dir == tmp_path / "runs" / "new-run"
+    assert run_dir.is_dir()
+
+
 def test_valset_callback_logs_seed_objective_without_outputs(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -75,6 +103,7 @@ def test_valset_callback_logs_seed_objective_without_outputs(
             "num_examples_evaluated": 60,
             "total_valset_size": 60,
             "is_best_program": True,
+            "total_metric_calls": 60,
         }
     )
     callback.on_valset_evaluated(
@@ -83,6 +112,7 @@ def test_valset_callback_logs_seed_objective_without_outputs(
             "candidate_idx": 1,
             "average_score": 0.6596111111,
             "outputs_by_val_id": None,
+            "total_metric_calls": 180,
         }
     )
     callback.on_valset_evaluated(
@@ -91,29 +121,42 @@ def test_valset_callback_logs_seed_objective_without_outputs(
             "candidate_idx": 5,
             "average_score": 0.7205,
             "outputs_by_val_id": None,
+            "total_metric_calls": 300,
         }
     )
 
     assert len(logged) == 3
     assert logged[0]["gepa/iteration"] == 0
+    assert logged[0]["gepa/total_metric_calls"] == 60
     assert logged[0]["openclaw/objective/val/proposal_gepa_score"] == pytest.approx(
         0.7195555556
     )
-    assert logged[0]["openclaw/objective/val/gepa_score"] == pytest.approx(0.7195555556)
+    assert logged[0]["openclaw/objective/val/best_gepa_score"] == pytest.approx(
+        0.7195555556
+    )
+    assert logged[0]["score/val/proposal"] == pytest.approx(0.7195555556)
+    assert logged[0]["score/val/best"] == pytest.approx(0.7195555556)
+    assert "openclaw/objective/val/gepa_score" not in logged[0]
     assert "openclaw/objective/val/proposal_delta_vs_best_before" not in logged[0]
 
     assert logged[1]["openclaw/objective/val/proposal_gepa_score"] == pytest.approx(
         0.6596111111
     )
+    assert logged[1]["gepa/total_metric_calls"] == 180
     assert logged[1]["openclaw/objective/val/best_gepa_score"] == pytest.approx(0.7195555556)
-    assert logged[1]["openclaw/objective/val/gepa_score"] == pytest.approx(0.7195555556)
+    assert logged[1]["score/val/proposal"] == pytest.approx(0.6596111111)
+    assert logged[1]["score/val/best"] == pytest.approx(0.7195555556)
+    assert "openclaw/objective/val/gepa_score" not in logged[1]
     assert logged[1]["openclaw/objective/val/proposal_delta_vs_best_before"] == pytest.approx(
         0.6596111111 - 0.7195555556
     )
 
     assert logged[2]["openclaw/objective/val/proposal_gepa_score"] == pytest.approx(0.7205)
+    assert logged[2]["gepa/total_metric_calls"] == 300
     assert logged[2]["openclaw/objective/val/best_gepa_score"] == pytest.approx(0.7205)
-    assert logged[2]["openclaw/objective/val/gepa_score"] == pytest.approx(0.7205)
+    assert logged[2]["score/val/proposal"] == pytest.approx(0.7205)
+    assert logged[2]["score/val/best"] == pytest.approx(0.7205)
+    assert "openclaw/objective/val/gepa_score" not in logged[2]
 
 
 def test_candidate_policy_trackio_payload_includes_length_and_penalty_score(
@@ -130,19 +173,18 @@ def test_candidate_policy_trackio_payload_includes_length_and_penalty_score(
     payload = module.candidate_policy_trackio_payload(penalties)
 
     assert payload["candidate/policy_length"] == len(policy)
-    assert payload["candidate/policy_chars"] == len(policy)
-    assert payload["candidate/policy_char_budget"] == 100
-    assert payload["candidate/policy_length_over_budget"] == len(policy) - 100
     assert payload["candidate/policy_length_penalty"] == pytest.approx(
         penalties["policy_length_penalty"]
     )
     assert payload["candidate/hygiene_penalty"] == pytest.approx(0.03)
-    assert payload["candidate/policy_penalty_score"] == pytest.approx(
-        penalties["total_policy_penalty"]
-    )
+    assert payload["candidate/hygiene_findings_count"] == 1
     assert payload["candidate/total_policy_penalty"] == pytest.approx(
         penalties["total_policy_penalty"]
     )
+    assert "candidate/policy_chars" not in payload
+    assert "candidate/policy_char_budget" not in payload
+    assert "candidate/policy_length_over_budget" not in payload
+    assert "candidate/policy_penalty_score" not in payload
 
 
 def test_topic_definition_penalty_details_prices_over_budget(
@@ -229,7 +271,7 @@ def test_surgical_feedback_profile_exposes_confusions_without_row_context(
             {"missed_topic": "gateway", "extra_topic": "docs", "count": 1},
         ],
         "actionable_feedback": ["tighten docs", "recover memory", "avoid row facts", "extra"],
-        "vanilla_f1_asi": {
+        "labeler_asi": {
             "global_diagnosis": {"diagnosis": "balanced"},
             "topic_priorities": [{"topic": "memory"}],
             "prompt_hygiene": {"findings": []},
@@ -241,7 +283,7 @@ def test_surgical_feedback_profile_exposes_confusions_without_row_context(
     assert profiled["feedback_profile"] == "surgical"
     assert len(profiled["confusions"]) == 3
     assert len(profiled["actionable_feedback"]) == 3
-    assert "row_examples" not in profiled["vanilla_f1_asi"]
+    assert "row_examples" not in profiled["labeler_asi"]
     assert "row failures" not in profiled["evaluation_context"]["feedback_profile_description"]
 
     row_profile = module.apply_row_feedback_profile(
@@ -284,6 +326,98 @@ def test_surgical_feedback_profile_exposes_confusions_without_row_context(
         "actual_topic_count": 1,
     }
     assert "row_context" not in row_profile
+
+    compact_row_profile = module.apply_row_feedback_profile(
+        {
+            "scores": {"gepa_score": 0.5},
+            "expected": ["memory"],
+            "actual": ["docs"],
+            "false_positives": ["docs"],
+            "false_negatives": ["memory"],
+            "row_context": {
+                "target": "openclaw/openclaw #123",
+                "keywords": ["specific", "row", "terms"],
+            },
+        },
+        "compact",
+        include_row_identifiers=False,
+    )
+
+    assert "row_context" not in compact_row_profile
+
+    failed_issue_profile = module.apply_row_feedback_profile(
+        {
+            "scores": {"gepa_score": 0.5, "row_exact": 0.0},
+            "expected": ["memory", "sessions"],
+            "actual": ["docs"],
+            "failed_issue_context": "GitHub item:\n- Title: Session memory bug\nBody:\n```markdown\n...",
+            "row_context": {"target": "openclaw/openclaw #123"},
+            "row_feedback": ["False negatives: memory"],
+        },
+        "failed-issues",
+        include_row_identifiers=False,
+    )
+
+    assert failed_issue_profile == {
+        "github_issue": "GitHub item:\n- Title: Session memory bug\nBody:\n```markdown\n...",
+        "expected": ["memory", "sessions"],
+        "actual": ["docs"],
+        "feedback_profile": "failed-issues",
+        "reflection_hint": (
+            "Infer reusable label-boundary rules from these failed GitHub issues and "
+            "their expected labels. Do not memorize issue IDs, titles, URLs, or exact examples."
+        ),
+    }
+
+    failed_issue_asi_profile = module.apply_row_feedback_profile(
+        {
+            "scores": {"gepa_score": 0.5, "row_exact": 0.0},
+            "expected": ["memory", "sessions"],
+            "actual": ["docs"],
+            "false_positives": ["docs"],
+            "false_negatives": ["memory", "sessions"],
+            "row_feedback": ["False negatives: memory, sessions"],
+            "row_metrics": {"row_symdiff": 3},
+            "failed_issue_context": "GitHub item:\n- Title: Session memory bug\nBody:\n```markdown\n...",
+        },
+        "failed-issues-asi",
+        include_row_identifiers=False,
+    )
+
+    assert failed_issue_asi_profile["github_issue"].startswith("GitHub item:")
+    assert failed_issue_asi_profile["scores"] == {"gepa_score": 0.5, "row_exact": 0.0}
+    assert failed_issue_asi_profile["false_negatives"] == ["memory", "sessions"]
+    assert failed_issue_asi_profile["feedback_profile"] == "failed-issues-asi"
+
+
+def test_rowwise_reflection_batch_summary_counts_exact_rows(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_runner(monkeypatch)
+
+    summary = module.summarize_rowwise_reflection_batch(
+        [
+            {
+                "expected": ["memory"],
+                "actual": ["memory"],
+                "false_positives": [],
+                "false_negatives": [],
+                "scores": {"row_topic_f1": 1.0, "row_jaccard": 1.0},
+            },
+            {
+                "expected": ["sessions"],
+                "actual": ["docs"],
+                "false_positives": ["docs"],
+                "false_negatives": ["sessions"],
+                "scores": {"row_topic_f1": 0.0, "row_jaccard": 0.0},
+            },
+        ]
+    )
+
+    assert summary["batch_rows"] == 2
+    assert summary["exact_rows"] == 1
+    assert summary["failed_rows"] == 1
+    assert summary["row_exact_accuracy"] == 0.5
 
 
 def test_aggregate_scorer_populates_confusion_pairs(

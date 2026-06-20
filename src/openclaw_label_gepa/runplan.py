@@ -208,6 +208,7 @@ def _run_name(
         reflection_minibatch_size=reflection_minibatch_size,
         max_metric_calls=max_metric_calls,
         total_mutable_char_budget=int(_value(defaults, "total_mutable_char_budget", 0)),
+        parallel=int(_value(defaults, "parallel", 4)),
         run_index=run_index,
     )
 
@@ -373,6 +374,7 @@ def build_benchmark_plan(
     model: str | None = None,
     variant: str = "structured",
     run_index: int = 1,
+    trackio_project: str | None = None,
 ) -> BenchmarkPlan:
     benchmark_path = regime.split_path("benchmark")
     if benchmark_path is None:
@@ -383,7 +385,7 @@ def build_benchmark_plan(
     task_model = model or str(models.get("default_task") or "codexresponses.gpt-5.4-mini")
     project_root = regime.root.parents[1].resolve()
     run_root = project_root / f"runs/{regime.name}/benchmark"
-    trackio_project = str(_value(trackio, "project", f"{regime.name}-gepa"))
+    trackio_project = trackio_project or str(_value(trackio, "project", f"{regime.name}-gepa"))
     trackio_group = f"{_value(trackio, 'group', regime.name)}-benchmark"
     trackio_dir = project_root / str(_value(trackio, "local_dir", f".trackio/{regime.name}"))
     run_name = _benchmark_run_name(regime, task_model, variant, candidate, run_index)
@@ -430,6 +432,7 @@ def build_run_plan(
     reflection_model: str | None = None,
     variant: str = "structured",
     run_index: int = 1,
+    trackio_project: str | None = None,
     overrides: dict[str, Any] | None = None,
 ) -> RunPlan:
     defaults = {**regime.mapping("run_defaults"), **(overrides or {})}
@@ -442,7 +445,7 @@ def build_run_plan(
     project_root = regime.root.parents[1].resolve()
     run_root = project_root / str(_value(defaults, "run_root", f"runs/{regime.name}/gepa"))
     trackio_group = str(_value(trackio, "group", regime.name))
-    trackio_project = str(_value(trackio, "project", f"{regime.name}-gepa"))
+    trackio_project = trackio_project or str(_value(trackio, "project", f"{regime.name}-gepa"))
     trackio_dir = project_root / str(_value(trackio, "local_dir", f".trackio/{regime.name}"))
     run_name = _run_name(regime, task_model, variant, run_index, defaults)
     command = _base_command(regime)

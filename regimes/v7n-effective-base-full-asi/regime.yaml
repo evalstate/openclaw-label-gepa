@@ -1,0 +1,82 @@
+name: v7n-effective-base-full-asi
+description: "Start from the strong v7h base prompt/components, then run mutate-all GEPA with failed GitHub issues plus actionable ASI."
+
+dataset:
+  local_bundle: ../v7h-clean-generator-mutate-all/data
+  hf_repo_id: null
+
+default_variant: structured
+label_order: ../v7h-clean-generator-mutate-all/prompts/allowed-topics-v7h.md
+base_prompt: ../v7h-clean-generator-mutate-all/prompts/vanilla-labeler-v7h.md
+task_template: ../v7h-clean-generator-mutate-all/prompts/task-template-v7h.md
+agent_cards:
+  structured: ../v7h-clean-generator-mutate-all/prompts/vanilla-labeler-v7h.md
+  plain: ../v7h-clean-generator-mutate-all/prompts/vanilla-labeler-plain-v7h.md
+schema: schemas/output-provider-compatible.schema.json
+reflection_agent: openclaw_gepa_reflector
+reflection_env_dir: ../../.fast-agent
+seed_policy: ../v7h-clean-generator-mutate-all/prompts/seed-policy-v7h.md
+mutable_topic_definitions: ../v7h-clean-generator-mutate-all/prompts/allowed-topics-v7h.md
+mutable_boundary_overlay: ../v7h-clean-generator-mutate-all/prompts/task-boundary-overlay-v7h.md
+boundary_guidance: ../v7h-clean-generator-mutate-all/prompts/topic-boundary-guidance-v7h.md
+static_asi: reflection-asi-effective-base-full-v7n.md
+train_split: ../v7h-clean-generator-mutate-all/data/feedback300.jsonl
+feedback_split: ../v7h-clean-generator-mutate-all/data/feedback300.jsonl
+pareto_split: ../v7h-clean-generator-mutate-all/data/pareto60.jsonl
+benchmark_split: ../v7h-clean-generator-mutate-all/data/bench78.jsonl
+split_manifest: ../v7h-clean-generator-mutate-all/data/split-manifest.json
+metric: row_soft_exact
+score_mode: row-soft-exact
+
+score_formula:
+  gepa_score: "max(0.0, 0.60 * row_jaccard + 0.20 * row_topic_f1 + 0.20 * row_exact - hygiene_penalty - total_mutable_length_penalty); candidates with invalid topic-definition contracts score zero"
+  frontier_objectives:
+    - gepa_score
+    - row_jaccard
+    - row_topic_f1
+    - row_exact
+
+trackio:
+  project: easy-v7n-effective-base-full-asi-gepa
+  group: v7n-effective-base-full-asi
+  step_metric: gepa/iteration
+  local_dir: runs/v7n-effective-base-full-asi/trackio
+
+run_defaults:
+  run_root: runs/v7n-effective-base-full-asi/gepa
+  run_name_template: "{model_slug}-v7n-{variant}-{feedback_profile}-tot{total_mutable_char_budget}-mb{reflection_minibatch_size}-mc{max_metric_calls}-p{parallel}-{run_index:03d}"
+  gepa_mode: row-wise
+  feedback_profile: failed-issues-asi
+  candidate_proposer: default
+  reflection_minibatch_size: 15
+  frontier_type: hybrid
+  candidate_selection_strategy: pareto
+  acceptance_criterion: strict_improvement
+  max_metric_calls: 1600
+  hygiene_penalty: 0.06
+  policy_char_budget: 0
+  topic_definitions_char_budget: 0
+  total_mutable_char_budget: 20000
+  parallel: 8
+
+models:
+  default_task: codexresponses.gpt-5.4-mini
+  default_reflection: codexresponses.gpt-5.5?reasoning=high
+  supported:
+    - codexresponses.gpt-5.4-mini
+    - gpt-oss
+    - qwen3-6-27b
+    - qwen36
+    - responses.gpt-5.5?reasoning=high
+
+artifacts:
+  regime_doc: docs/V7N_EFFECTIVE_BASE_FULL_ASI.md
+  output_schema: schemas/output-provider-compatible.schema.json
+  generator_prompt_seed: ../v7h-clean-generator-mutate-all/prompts/seed-policy-v7h.md
+
+notes:
+  - Starts from the v7h base prompt/components, whose 3x gpt-5.4-mini bench78 mean was 0.809586.
+  - Uses v7h feedback300/pareto60/bench78 splits for direct comparison to the v7h base/optimized benchmark history.
+  - GEPA may mutate policy, topic_definitions, and boundary_overlay.
+  - Reflection uses failed-issues-asi: failed issue context plus expected/chosen labels, row diagnostics, and minibatch actionable ASI.
+  - Uses a provider-compatible schema without array minItems/maxItems for gpt-oss compatibility; the task prompt and scorer still enforce up-to-3 behavior.

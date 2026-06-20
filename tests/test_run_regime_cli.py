@@ -48,6 +48,14 @@ def test_trackio_command_uses_regime_project_and_absolute_dir() -> None:
     )
 
 
+def test_trackio_command_accepts_project_override() -> None:
+    regime = load_regime(V7I)
+
+    line = cli.trackio_shell_line(regime, project="fresh-project")
+
+    assert line.endswith("uv run trackio show --project fresh-project")
+
+
 def test_validate_regime_accepts_v7i() -> None:
     regime = load_regime(V7I)
 
@@ -58,6 +66,12 @@ def test_default_regime_is_v7i() -> None:
     args = cli.parse_args(["--validate"])
 
     assert args.regime == V7I
+
+
+def test_project_option_parses() -> None:
+    args = cli.parse_args(["--plan-gepa", "--project", "fresh-project"])
+
+    assert args.project == "fresh-project"
 
 
 def test_list_regimes_prints_available_regimes(capsys: Any) -> None:
@@ -174,6 +188,14 @@ def test_run_gepa_preflight_executes_plan(monkeypatch: Any) -> None:
     assert "1600" in calls[0]["command"]
 
 
+def test_plan_gepa_project_override_reaches_runner_command(capsys: Any) -> None:
+    status = cli.main(["--plan-gepa", "--project", "fresh-project", "--shell"])
+
+    out = capsys.readouterr().out
+    assert status == 0
+    assert "--project fresh-project" in out
+
+
 def test_trackio_command_can_execute(monkeypatch: Any) -> None:
     calls: list[dict[str, Any]] = []
 
@@ -203,6 +225,30 @@ def test_trackio_command_can_execute(monkeypatch: Any) -> None:
         Path.cwd() / "runs/v7i-guarded-generator-mutate-all/trackio"
     )
     assert calls[0]["env"]["BROWSER"] == "/bin/true"
+
+
+def test_trackio_command_execute_uses_project_override(monkeypatch: Any) -> None:
+    calls: list[dict[str, Any]] = []
+
+    def fake_run(command: list[str], *, cwd: Path, env: dict[str, str], check: bool) -> Any:
+        calls.append({"command": command, "cwd": cwd, "env": env, "check": check})
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(cli.subprocess, "run", fake_run)
+    args = cli.parse_args(["--trackio-command", "--project", "fresh-project", "--run"])
+    regime = load_regime(V7I)
+
+    status = cli.dispatch(args, regime, cli.regime_summary(regime))
+
+    assert status == 0
+    assert calls[0]["command"] == [
+        "uv",
+        "run",
+        "trackio",
+        "show",
+        "--project",
+        "fresh-project",
+    ]
 
 
 def test_run_command_handles_keyboard_interrupt(monkeypatch: Any, capsys: Any) -> None:

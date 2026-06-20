@@ -102,6 +102,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--model", default=None, help="Override task model for run plans.")
     parser.add_argument("--reflection-model", default=None, help="Override reflection model.")
     parser.add_argument(
+        "--project",
+        default=None,
+        help="Override the regime Trackio project for GEPA, benchmark, and dashboard commands.",
+    )
+    parser.add_argument(
         "--variant",
         choices=["structured", "plain"],
         default=None,
@@ -216,11 +221,16 @@ def shell_line(plan: Any, *, extra_args: tuple[str, ...] = ()) -> str:
     )
 
 
-def trackio_shell_line(regime: Any) -> str:
+def trackio_project(regime: Any, override: str | None = None) -> str:
+    trackio = regime.mapping("trackio")
+    return override or str(trackio.get("project", f"{regime.name}-gepa"))
+
+
+def trackio_shell_line(regime: Any, *, project: str | None = None) -> str:
     trackio = regime.mapping("trackio")
     project_root = regime.root.parents[1].resolve()
     trackio_dir = project_root / str(trackio.get("local_dir", f".trackio/{regime.name}"))
-    project = str(trackio.get("project", f"{regime.name}-gepa"))
+    project = trackio_project(regime, project)
     return (
         f"cd {shlex.quote(str(project_root))} && "
         "BROWSER=/bin/true "
@@ -229,11 +239,11 @@ def trackio_shell_line(regime: Any) -> str:
     )
 
 
-def trackio_command(regime: Any) -> tuple[Path, Path, list[str]]:
+def trackio_command(regime: Any, *, project: str | None = None) -> tuple[Path, Path, list[str]]:
     trackio = regime.mapping("trackio")
     project_root = regime.root.parents[1].resolve()
     trackio_dir = project_root / str(trackio.get("local_dir", f".trackio/{regime.name}"))
-    project = str(trackio.get("project", f"{regime.name}-gepa"))
+    project = trackio_project(regime, project)
     return (
         project_root,
         trackio_dir.resolve(),
@@ -688,6 +698,7 @@ def print_or_run_gepa_plan(
         reflection_model=args.reflection_model,
         variant=variant,
         run_index=args.run_index,
+        trackio_project=args.project,
         overrides={"max_metric_calls": args.max_metric_calls}
         if args.max_metric_calls is not None
         else None,
@@ -714,6 +725,7 @@ def benchmark_plans(args: argparse.Namespace, regime: Any) -> list[Any]:
             model=args.model,
             variant=args.variant or regime.raw.get("default_variant") or "structured",
             run_index=args.run_index + offset,
+            trackio_project=args.project,
         )
         for offset in range(args.repeat)
     ]
@@ -772,9 +784,9 @@ def _dispatch_requested_action(
 
     def trackio_action() -> int:
         if not args.run:
-            print(trackio_shell_line(regime))
+            print(trackio_shell_line(regime, project=args.project))
             return 0
-        project_root, trackio_dir, command = trackio_command(regime)
+        project_root, trackio_dir, command = trackio_command(regime, project=args.project)
         return _run_command(
             command,
             project_root=project_root,

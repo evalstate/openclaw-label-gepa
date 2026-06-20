@@ -1,0 +1,35 @@
+Choose up to 3 labels for this GitHub issue from this list of labels:
+
+- `inference_api`
+- `self_hosted_inference`
+- `acpx`
+- `acp`
+- `coding_agent_integrations`
+- `mcp_tooling`
+- `model_lifecycle`
+- `codex`
+- `agent_runtime`
+- `sessions`
+- `gateway`
+- `exec_tools`
+- `approvals`
+- `sandboxing`
+- `hooks`
+- `cron_automation`
+- `chat_integrations`
+- `ui_tui`
+- `browser_automation`
+- `memory`
+- `security`
+- `config`
+- `packaging_deployment`
+- `docs`
+- `tests_ci`
+- `telemetry_usage`
+- `api_surface`
+- `queueing`
+- `notifications`
+- `skills_plugins`
+- `auth_identity`
+- `reliability`
+- `tool_calling`

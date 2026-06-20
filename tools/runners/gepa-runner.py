@@ -30,6 +30,7 @@ from fast_agent.integrations.gepa import (
     gepa_numeric_metrics,
     safe_trackio_log,
 )
+from openclaw_label_gepa.label_order import load_label_order
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -146,7 +147,7 @@ def row_wise_frontier_objective_keys(score_mode: str) -> tuple[str, ...]:
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="GEPA-optimize a vanilla OpenClaw labeler.")
+    p = argparse.ArgumentParser(description="Optimize an OpenClaw labeler with GEPA.")
     p.add_argument("--model", default="codexresponses.gpt-5.5?reasoning=high")
     p.add_argument("--reflection-model", default="codexresponses.gpt-5.5?reasoning=high")
     p.add_argument("--reflection-agent", default=DEFAULT_REFLECTION_AGENT)
@@ -283,13 +284,15 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     p.add_argument(
         "--feedback-profile",
-        choices=["full", "compact", "surgical", "metrics-only"],
+        choices=["full", "compact", "surgical", "metrics-only", "failed-issues", "failed-issues-asi"],
         default="full",
         help=(
             "Reflection side-info profile. full preserves current detailed row/topic feedback; "
             "compact keeps bounded feedback while redacting row identifiers; surgical "
             "keeps aggregate label errors plus minimal row deltas; metrics-only keeps "
-            "score/cardinality/hygiene diagnostics only."
+            "score/cardinality/hygiene diagnostics only; failed-issues shows failed "
+            "GitHub issues with expected labels and score; failed-issues-asi also "
+            "adds minibatch diagnostics/actionable label-error context."
         ),
     )
     p.add_argument(
@@ -341,7 +344,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     p.add_argument("--evaluate-only", action="store_true")
     p.add_argument("--no-trackio", action="store_true")
-    p.add_argument("--project", default="openclaw-vanilla-f1")
+    p.add_argument("--project", default="openclaw-labeler-f1")
     p.add_argument("--trackio-group", default="gepa-runner")
     p.add_argument("--trackio-space-id", default=os.environ.get("TRACKIO_SPACE_ID"))
     p.add_argument("--trackio-server-url", default=os.environ.get("TRACKIO_SERVER_URL"))
@@ -627,14 +630,10 @@ def candidate_policy_trackio_payload(penalties: Mapping[str, Any]) -> dict[str, 
     policy_chars = int(penalties["policy_chars"])
     total_policy_penalty = float(penalties["total_policy_penalty"])
     return {
-        "candidate/policy_chars": policy_chars,
         "candidate/policy_length": policy_chars,
-        "candidate/policy_char_budget": int(penalties["policy_char_budget"]),
-        "candidate/policy_length_over_budget": int(penalties["policy_length_over_budget"]),
         "candidate/policy_length_penalty": float(penalties["policy_length_penalty"]),
         "candidate/hygiene_penalty": float(penalties["hygiene_penalty"]),
         "candidate/hygiene_findings_count": len(penalties["hygiene"]["findings"]),
-        "candidate/policy_penalty_score": total_policy_penalty,
         "candidate/total_policy_penalty": total_policy_penalty,
     }
 
@@ -796,10 +795,10 @@ def add_vanilla_asi(
         feedback.insert(
             2,
             f"Policy length penalty: policy is {policy_length_over_budget} chars over the "
-            f"{policy_char_budget} char budget; GEPA score was reduced by {policy_length_penalty:.4f}.",
+            f"{policy_char_budget} char budget; optimization score was reduced by {policy_length_penalty:.4f}.",
         )
 
-    report["vanilla_f1_asi"] = {
+    report["labeler_asi"] = {
         "global_diagnosis": {
             "precision": precision,
             "recall": recall,
@@ -898,7 +897,7 @@ def clean_reflection_report(report: dict[str, Any], *, keep_examples: bool) -> d
         limit=6 if keep_examples else 4,
         max_action_chars=420 if keep_examples else 260,
     )
-    asi = dict(out.get("vanilla_f1_asi") or {})
+    asi = dict(out.get("labeler_asi") or {})
     if "topic_priorities" in asi:
         asi["topic_priorities"] = clean_topic_items(
             list(asi.get("topic_priorities") or []),
@@ -906,7 +905,7 @@ def clean_reflection_report(report: dict[str, Any], *, keep_examples: bool) -> d
             limit=8 if keep_examples else 6,
             max_action_chars=260,
         )
-    out["vanilla_f1_asi"] = asi
+    out["labeler_asi"] = asi
     return out
 
 
@@ -957,6 +956,17 @@ def feedback_profile_description(profile: str) -> str:
             "metrics-only: reflection receives global score/cardinality/hygiene "
             "diagnostics only, without topic actions or row examples."
         )
+    if profile == "failed-issues":
+        return (
+            "failed-issues: reflection receives only failed GitHub issue contexts, "
+            "expected labels, and row scores."
+        )
+    if profile == "failed-issues-asi":
+        return (
+            "failed-issues-asi: reflection receives failed GitHub issue contexts plus "
+            "scores, expected/chosen labels, row feedback, and minibatch actionable "
+            "label-error diagnostics."
+        )
     raise ValueError(f"Unknown feedback profile: {profile}")
 
 
@@ -975,7 +985,7 @@ def apply_feedback_profile(report: dict[str, Any], profile: str, *, mutable_over
     cleaned = clean_reflection_report(report, keep_examples=False)
     scores = dict(cleaned.get("scores") or {})
     details = dict(cleaned.get("score_details") or {})
-    global_diagnosis = dict((cleaned.get("vanilla_f1_asi") or {}).get("global_diagnosis") or {})
+    global_diagnosis = dict((cleaned.get("labeler_asi") or {}).get("global_diagnosis") or {})
     base: dict[str, Any] = {
         "scores": scores,
         "score_details": details,
@@ -989,9 +999,9 @@ def apply_feedback_profile(report: dict[str, Any], profile: str, *, mutable_over
             "side_info_contract": "Clean evaluator/reflection payload; execution artifacts are stored separately.",
         },
         "actionable_feedback": list(cleaned.get("actionable_feedback") or [])[:2],
-        "vanilla_f1_asi": {
+        "labeler_asi": {
             "global_diagnosis": global_diagnosis,
-            "prompt_hygiene": (cleaned.get("vanilla_f1_asi") or {}).get("prompt_hygiene"),
+            "prompt_hygiene": (cleaned.get("labeler_asi") or {}).get("prompt_hygiene"),
             "reflection_hint": (
                 "Use global metrics to propose reusable rules. Avoid row-specific examples, "
                 "issue numbers, or copying fixed guidance."
@@ -1011,13 +1021,13 @@ def apply_feedback_profile(report: dict[str, Any], profile: str, *, mutable_over
     if profile not in ("compact", "surgical"):
         raise ValueError(f"Unknown feedback profile: {profile}")
 
-    topic_priorities = list((cleaned.get("vanilla_f1_asi") or {}).get("topic_priorities") or [])[:6]
-    base["vanilla_f1_asi"]["topic_priorities"] = topic_priorities
+    topic_priorities = list((cleaned.get("labeler_asi") or {}).get("topic_priorities") or [])[:6]
+    base["labeler_asi"]["topic_priorities"] = topic_priorities
     base["topic_error_patterns"] = list(cleaned.get("topic_error_patterns") or [])[:6]
     base["confusions"] = list(cleaned.get("confusions") or [])[:4]
     base["actionable_feedback"] = list(cleaned.get("actionable_feedback") or [])[:8]
     if profile == "surgical":
-        base["vanilla_f1_asi"]["reflection_hint"] = (
+        base["labeler_asi"]["reflection_hint"] = (
             "Make the smallest generalizable policy mutation that explains repeated "
             "aggregate errors. Do not introduce a topic-by-topic guide."
         )
@@ -1148,6 +1158,7 @@ def score_row_output(
             "target": inp.get("target"),
             "keywords": (inp.get("keywords") or [])[:8],
         },
+        "failed_issue_context": inp.get("github_context") or inp.get("target"),
         "model_description": result.get("description") if isinstance(result, dict) else None,
         "reflection_hint": (
             "Infer reusable centrality/co-label rules from this row. Do not copy row IDs, issue numbers, "
@@ -1460,6 +1471,8 @@ def summarize_rowwise_reflection_batch(trajectories: list[Any], *, limit: int = 
 
     return {
         "batch_rows": rows,
+        "exact_rows": exact_rows,
+        "failed_rows": max(0, rows - exact_rows),
         "macro_f1": round(sum(per_label_f1) / len(per_label_f1), 6) if per_label_f1 else 0.0,
         "active_labels": len(per_label_f1),
         "avg_row_topic_f1": round(total_row_score / rows, 6) if rows else 0.0,
@@ -1649,7 +1662,7 @@ def apply_row_feedback_profile(
 ) -> dict[str, Any]:
     row_context = dict(side_info.get("row_context") or {})
     if not include_row_identifiers:
-        row_context.pop("target", None)
+        row_context = {}
 
     if profile == "metrics-only":
         return {
@@ -1658,6 +1671,35 @@ def apply_row_feedback_profile(
             "prompt_hygiene": side_info.get("prompt_hygiene"),
             "feedback_profile": profile,
             "reflection_hint": "Metrics-only control: use score movement only; no row labels or examples are provided.",
+        }
+    if profile == "failed-issues":
+        return {
+            "github_issue": side_info.get("failed_issue_context"),
+            "expected": side_info.get("expected"),
+            "actual": side_info.get("actual"),
+            "feedback_profile": profile,
+            "reflection_hint": (
+                "Infer reusable label-boundary rules from these failed GitHub issues and "
+                "their expected labels. Do not memorize issue IDs, titles, URLs, or exact examples."
+            ),
+        }
+    if profile == "failed-issues-asi":
+        return {
+            "github_issue": side_info.get("failed_issue_context"),
+            "scores": side_info.get("scores"),
+            "row_feedback": side_info.get("row_feedback"),
+            "expected": side_info.get("expected"),
+            "actual": side_info.get("actual"),
+            "false_positives": side_info.get("false_positives"),
+            "false_negatives": side_info.get("false_negatives"),
+            "row_metrics": side_info.get("row_metrics"),
+            "prompt_hygiene": side_info.get("prompt_hygiene"),
+            "feedback_profile": profile,
+            "reflection_hint": (
+                "Infer reusable label-boundary rules from this failed GitHub issue, "
+                "its expected/chosen labels, row feedback, and the minibatch actionable "
+                "diagnostics. Do not memorize issue IDs, titles, URLs, or exact examples."
+            ),
         }
 
     base = {
@@ -1702,6 +1744,7 @@ def apply_row_feedback_profile(
         return {key: value for key, value in minimal.items() if value not in (None, [], {})}
     if profile == "full":
         out = dict(side_info)
+        out.pop("failed_issue_context", None)
         out["row_context"] = row_context
         out["feedback_profile"] = profile
         return out
@@ -1780,8 +1823,8 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
             overlay_chars = len(overlay)
             overlay_stats = {"boundary_overlay_chars": overlay_chars}
             candidate_diagnostics["boundary_overlay"] = overlay_stats
-            trackio_payload["candidate/boundary_overlay_chars"] = overlay_chars
-            trackio_payload["candidate/total_mutable_chars"] = policy_chars + overlay_chars
+            trackio_payload["candidate/boundary_overlay_length"] = overlay_chars
+            trackio_payload["candidate/total_mutable_length"] = policy_chars + overlay_chars
 
         if self.mutable_topic_definitions:
             topic_definitions = str(candidate.get("topic_definitions", ""))
@@ -1789,7 +1832,7 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
             candidate_diagnostics["topic_definitions"] = {
                 "topic_definitions_chars": topic_definitions_chars
             }
-            trackio_payload["candidate/topic_definitions_chars"] = topic_definitions_chars
+            trackio_payload["candidate/topic_definitions_length"] = topic_definitions_chars
 
         if self.total_mutable_char_budget:
             total_penalties = total_mutable_penalty_details(
@@ -1802,20 +1845,11 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
             candidate_diagnostics["total_mutable"]["component_chars"] = total_penalties[
                 "component_chars"
             ]
-            trackio_payload["candidate/total_mutable_chars"] = int(
+            trackio_payload["candidate/total_mutable_length"] = int(
                 total_penalties["total_mutable_chars"]
-            )
-            trackio_payload["candidate/total_mutable_char_budget"] = int(
-                total_penalties["total_mutable_char_budget"]
-            )
-            trackio_payload["candidate/total_mutable_length_over_budget"] = int(
-                total_penalties["total_mutable_length_over_budget"]
             )
             trackio_payload["candidate/total_mutable_length_penalty"] = float(
                 total_penalties["total_mutable_length_penalty"]
-            )
-            trackio_payload["candidate/total_mutable_length_compliance"] = float(
-                total_penalties["total_mutable_length_compliance"]
             )
 
         eval_dir = self.run_dir / "row-wise-evals" / f"eval-{self._evaluations:05d}"
@@ -1841,6 +1875,7 @@ class OpenClawCandidateDiagnosticsCallback:
         for source_key, metric_key in (
             ("iteration", "gepa/iteration"),
             ("candidate_idx", "gepa/candidate_idx"),
+            ("total_metric_calls", "gepa/total_metric_calls"),
         ):
             value = event.get(source_key)
             if isinstance(value, bool):
@@ -1996,6 +2031,7 @@ class OpenClawValsetAggregateCallback:
         payload: dict[str, int | float] = {}
         for source_key, metric_key in (
             ("iteration", "gepa/iteration"),
+            ("total_metric_calls", "gepa/total_metric_calls"),
             ("candidate_idx", "gepa/candidate_idx"),
             ("num_examples_evaluated", "openclaw/diagnostic/val/num_examples_evaluated"),
             ("total_valset_size", "openclaw/diagnostic/val/total_valset_size"),
@@ -2022,7 +2058,8 @@ class OpenClawValsetAggregateCallback:
 
         payload["openclaw/objective/val/proposal_gepa_score"] = proposal_score
         payload["openclaw/objective/val/best_gepa_score"] = best_score
-        payload["openclaw/objective/val/gepa_score"] = best_score
+        payload["score/val/proposal"] = proposal_score
+        payload["score/val/best"] = best_score
         if best_before is not None:
             payload["openclaw/objective/val/proposal_delta_vs_best_before"] = (
                 proposal_score - best_before
@@ -2042,10 +2079,25 @@ class OpenClawValsetAggregateCallback:
         return None
 
 
+def agent_name_from_card(path: Path, *, default: str) -> str:
+    text = path.read_text(encoding="utf-8")
+    if text.startswith("---\n"):
+        end = text.find("\n---\n", 4)
+        frontmatter = text[4:end] if end != -1 else ""
+        for line in frontmatter.splitlines():
+            match = re.match(r"^name:\s*['\"]?([^'\"#\s]+)", line.strip())
+            if match:
+                return match.group(1)
+    return default
+
+
 def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgentRowWiseBatchAdapter:
     """Wire the upstream row-wise adapter to OpenClaw row scoring and reflection ASI."""
     allowed = set(_schema_topic_contract()[0])
     plain_labels = args.plain_labels
+    agent_card = resolve_agent_card(args)
+    default_agent = "openclaw_vanilla_labeler_plain" if plain_labels else "openclaw_vanilla_labeler"
+    agent_name = agent_name_from_card(agent_card, default=default_agent)
     candidate_variables = {"policy": "policy"}
     if args.mutable_boundary_overlay:
         candidate_variables["boundary_overlay"] = "boundary_overlay"
@@ -2114,7 +2166,7 @@ def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgent
                 side_info["row_feedback"].append(
                     "Mutable topic definitions length penalty: definitions are "
                     f"{definition_penalties['topic_definitions_length_over_budget']} chars over the "
-                    f"{definition_penalties['topic_definitions_char_budget']} char budget; GEPA score "
+                    f"{definition_penalties['topic_definitions_char_budget']} char budget; optimization score "
                     f"was reduced by {definition_penalties['topic_definitions_length_penalty']:.4f}."
                 )
         if args.total_mutable_char_budget:
@@ -2145,7 +2197,7 @@ def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgent
                 side_info["row_feedback"].append(
                     "Total mutable prompt length penalty: mutable components are "
                     f"{total_penalties['total_mutable_length_over_budget']} chars over the "
-                    f"{total_penalties['total_mutable_char_budget']} char combined budget; GEPA score "
+                    f"{total_penalties['total_mutable_char_budget']} char combined budget; optimization score "
                     f"was reduced by {total_penalties['total_mutable_length_penalty']:.4f}."
                 )
         objective_scores = {
@@ -2165,17 +2217,43 @@ def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgent
         batch_diagnostics = summarize_rowwise_reflection_batch(list(trajectories))
         out: dict[str, list[dict[str, Any]]] = {}
         for component in components_to_update:
-            rows = [
-                {
-                    "minibatch_diagnostics": batch_diagnostics,
-                    "selected_row_score": sum(scores) / max(1, len(scores)),
-                    "reflection_hint": (
-                        "This is aggregate context for the sampled rows. Use it to write "
-                        "general boundary rules before inspecting individual row failures."
-                    ),
-                }
-            ]
+            if args.feedback_profile == "failed-issues":
+                rows = [
+                    {
+                        "minibatch_score": sum(scores) / max(1, len(scores)),
+                        "feedback_profile": args.feedback_profile,
+                        "reflection_hint": (
+                            "Only failed GitHub issues are shown below. Derive reusable "
+                            "label-boundary rules from issue content and expected labels."
+                        ),
+                    }
+                ]
+            elif args.feedback_profile == "failed-issues-asi":
+                rows = [
+                    {
+                        "minibatch_diagnostics": batch_diagnostics,
+                        "selected_row_score": sum(scores) / max(1, len(scores)),
+                        "feedback_profile": args.feedback_profile,
+                        "reflection_hint": (
+                            "Only failed GitHub issues are expanded below. Use this actionable "
+                            "minibatch ASI plus issue content to write general prompt rules."
+                        ),
+                    }
+                ]
+            else:
+                rows = [
+                    {
+                        "minibatch_diagnostics": batch_diagnostics,
+                        "selected_row_score": sum(scores) / max(1, len(scores)),
+                        "reflection_hint": (
+                            "This is aggregate context for the sampled rows. Use it to write "
+                            "general boundary rules before inspecting individual row failures."
+                        ),
+                    }
+                ]
             for score_value, side_info in zip(scores, trajectories, strict=False):
+                if args.feedback_profile in {"failed-issues", "failed-issues-asi"} and score_value >= 1.0:
+                    continue
                 profiled = apply_row_feedback_profile(
                     side_info or {},
                     args.feedback_profile,
@@ -2196,8 +2274,8 @@ def build_row_wise_adapter(run_dir: Path, args: argparse.Namespace) -> FastAgent
         mutable_topic_definitions=bool(args.mutable_topic_definitions),
         total_mutable_char_budget=args.total_mutable_char_budget,
         env_dir=ENV_DIR,
-        agent_card=resolve_agent_card(args),
-        agent="openclaw_vanilla_labeler_plain" if plain_labels else "openclaw_vanilla_labeler",
+        agent_card=agent_card,
+        agent=agent_name,
         candidate_variables=candidate_variables,
         template_source=args.task_template,
         schema=None if plain_labels else SCHEMA,
@@ -2244,7 +2322,8 @@ def resolve_parent_lineage(
 def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
     plain_labels = args.plain_labels
     agent_card = resolve_agent_card(args)
-    agent_name = "openclaw_vanilla_labeler_plain" if plain_labels else "openclaw_vanilla_labeler"
+    default_agent = "openclaw_vanilla_labeler_plain" if plain_labels else "openclaw_vanilla_labeler"
+    agent_name = agent_name_from_card(agent_card, default=default_agent)
     candidate_variables = {"policy": "policy"}
     if args.mutable_boundary_overlay:
         candidate_variables["boundary_overlay"] = "boundary_overlay"
@@ -2354,7 +2433,7 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
                     "Mutable topic definitions length penalty: definitions are "
                     f"{topic_definition_penalty_report['topic_definitions_length_over_budget']} chars "
                     f"over the {topic_definition_penalty_report['topic_definitions_char_budget']} char "
-                    f"budget; GEPA score was reduced by {penalty:.4f}.",
+                    f"budget; optimization score was reduced by {penalty:.4f}.",
                 )
         if args.total_mutable_char_budget:
             total_penalty_report = total_mutable_penalty_details(
@@ -2389,7 +2468,7 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
                     "Total mutable prompt length penalty: mutable components are "
                     f"{total_penalty_report['total_mutable_length_over_budget']} chars over the "
                     f"{total_penalty_report['total_mutable_char_budget']} char combined budget; "
-                    f"GEPA score was reduced by {penalty:.4f}.",
+                    f"optimization score was reduced by {penalty:.4f}.",
                 )
         (candidate_run.path / "raw-evaluator-report.json").write_text(
             json.dumps(report, indent=2) + "\n",
@@ -2506,7 +2585,7 @@ def objective_text(
         mutable_components.append("boundary_overlay")
     if mutable_topic_definitions:
         mutable_components.append("topic_definitions")
-    mutable_scope = "Improve only these mutable OpenClaw vanilla labeler components: " + ", ".join(
+    mutable_scope = "Improve only these editable OpenClaw labeler components: " + ", ".join(
         mutable_components
     ) + "."
     overlay_scope = (
@@ -2523,7 +2602,7 @@ def objective_text(
         "rename, reorder, or alias topic IDs. "
         + (
             f"Keep the full definitions file under {topic_definitions_char_budget:,} characters; "
-            "over-budget definitions receive a GEPA score penalty.\n"
+            "over-budget definitions receive an optimization score penalty.\n"
             if topic_definitions_char_budget
             else "Do not expand it into a second policy document.\n"
         )
@@ -2557,7 +2636,7 @@ def objective_text(
             )
         else:
             primary_objective = (
-                "maximize row-wise GEPA score = 0.50*row_topic_f1 + 0.20*row_exact + 0.30*row_jaccard"
+                "maximize row-wise score = 0.50*row_topic_f1 + 0.20*row_exact + 0.30*row_jaccard"
             )
         objective_guard = (
             "This rewards finding every central qualifying label while penalizing extra labels. "
@@ -2565,7 +2644,7 @@ def objective_text(
         )
     else:
         if score_mode == "f1":
-            primary_objective = "maximize pure topic_micro_f1 against the frozen teacher/adjudicated labels"
+            primary_objective = "maximize pure topic_micro_f1 against the reference labels"
         elif score_mode == "row-jaccard-exact":
             primary_objective = (
                 "maximize strict aggregate row set score = "
@@ -2604,7 +2683,7 @@ Aggressive mutation discipline for this run:
     total_budget_clause = (
         f"\nThe combined prompt material across all editable components has a "
         f"{total_mutable_char_budget:,} character budget. Over-budget candidates receive a "
-        "GEPA score penalty. Choose the right balance across components; compress or trade off "
+        "optimization score penalty. Choose the right balance across components; compress or trade off "
         "wording rather than moving bloat between components.\n"
         if total_mutable_char_budget
         else ""
@@ -2612,7 +2691,7 @@ Aggressive mutation discipline for this run:
     policy_budget_clause = (
         "\n"
         f"Keep the mutable policy under {policy_char_budget:,} characters; over-budget policies "
-        "receive a small GEPA score penalty, so compress rules instead of accumulating exhaustive "
+        "receive a small optimization score penalty, so compress rules instead of accumulating exhaustive "
         "topic tables.\n"
         if policy_char_budget
         else ""
@@ -2631,7 +2710,7 @@ Feedback profile: {feedback_profile_description(feedback_profile)}
 {feedback_clause}
 {mutation_discipline}
 
-Keep the policy vanilla and compact. Prefer short reusable issue-understanding,
+Keep the policy compact. Prefer short reusable issue-understanding,
 centrality, and cardinality rules over a long topic-by-topic rulebook.
 {policy_budget_clause}
 {total_budget_clause}
@@ -2647,8 +2726,8 @@ edits concise; use definitions for topic meaning, not sampled-row repair rules.
 Do not include row IDs, issue numbers, exact titles, URLs, or copied examples. Do not add
 memorized issue/title/keyword tables.
 
-Do not include data-build notes, version-history commentary, teacher/adjudication
-procedure, promotion rules, or confusion-bucket bookkeeping in the task policy.
+Do not include corpus-building notes, version-history commentary, label-source
+bookkeeping, promotion rules, or confusion-bucket bookkeeping in the task policy.
 """
 
 
@@ -2675,15 +2754,15 @@ def background_text(
 {feedback_profile_description(feedback_profile)}
 
 This profile controls only the optimizer/reflection side-info. It does not change
-the deterministic scorer, train rows, benchmark rows, labels, schema, or task
+the deterministic scorer, input rows, reference labels, schema, or task
 model output contract."""
     )
     if mutable_boundary_overlay:
         sections.append(
-            f"""This run has a second mutable GEPA component named `boundary_overlay`, seeded from
+            f"""This run has a second editable component named `boundary_overlay`, seeded from
 `{mutable_boundary_overlay}`. Treat it as task-facing boundary guidance, not as a
-place to change the taxonomy, output contract, schema, or train-row facts. Use this
-only to test whether the fixed v6h task overlay is holding back generalization."""
+place to change the taxonomy, output contract, schema, or row-specific facts. Use this
+to test whether boundary guidance should be optimized rather than fixed."""
         )
     if mutable_topic_definitions:
         budget_text = (
@@ -2693,7 +2772,7 @@ only to test whether the fixed v6h task overlay is holding back generalization."
             else ""
         )
         sections.append(
-            f"""This run has a mutable GEPA component named `topic_definitions`, seeded from
+            f"""This run has an editable component named `topic_definitions`, seeded from
 `{mutable_topic_definitions}`. The schema enum and topic IDs are frozen. The component
 may revise definition wording and boundary nuance only; candidates that add, remove,
 rename, duplicate, or omit topic definition bullets score zero.{budget_text}"""
@@ -2701,7 +2780,7 @@ rename, duplicate, or omit topic definition bullets score zero.{budget_text}"""
     if static_asi:
         sections.append(
             f"""Static reflection/evaluator guidance follows. The task model does not see this
-file unless GEPA distills a small piece of it into the mutable policy.
+file unless the optimizer distills a small piece of it into the editable policy.
 
 ```md
 {static_asi.read_text(encoding="utf-8").strip()}
@@ -2710,7 +2789,7 @@ file unless GEPA distills a small piece of it into the mutable policy.
     if optimizer_cues:
         sections.append(
             f"""Optimizer-only cue/reference material follows. The task model does not see this file
-unless you distill a small piece of it into the mutable policy. Use it to identify
+unless you distill a small piece of it into the editable policy. Use it to identify
 transferable evidence patterns and topic-boundary distinctions. Do not copy or recreate
 the cue table in the candidate policy.
 
@@ -2833,16 +2912,10 @@ def validate_allowed_topics_against_schema(path: Path) -> None:
         )
     if not SCHEMA.exists():
         raise SystemExit(f"Output schema file does not exist: {SCHEMA}")
-    text = path.read_text(encoding="utf-8")
-    match = re.search(r"```json\s*(\[.*?\])\s*```", text, re.S)
-    if not match:
-        raise SystemExit(f"{path} must contain a JSON topic list fenced as ```json ... ```")
     try:
-        topics = json.loads(match.group(1))
-    except json.JSONDecodeError as exc:
-        raise SystemExit(f"{path} contains an invalid JSON topic list: {exc}") from exc
-    if not isinstance(topics, list) or not all(isinstance(topic, str) for topic in topics):
-        raise SystemExit(f"{path} JSON topic list must be a list of strings")
+        topics = load_label_order(path)
+    except (json.JSONDecodeError, ValueError, KeyError, TypeError) as exc:
+        raise SystemExit(f"{path} must contain a valid topic list: {exc}") from exc
 
     schema_topics, _, _ = _schema_topic_contract()
     if topics != schema_topics:
@@ -3234,6 +3307,18 @@ def write_run_metadata(
     (run_dir / "run.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
+def create_fresh_run_dir(run_root: Path, run_name: str) -> Path:
+    run_dir = run_root / run_name
+    try:
+        run_dir.mkdir(parents=True, exist_ok=False)
+    except FileExistsError as exc:
+        raise SystemExit(
+            f"run directory already exists; refusing to overwrite: {run_dir}\n"
+            "Use a different --run-name or --run-index."
+        ) from exc
+    return run_dir
+
+
 def main() -> int:
     global SCHEMA
     args = parse_args()
@@ -3260,8 +3345,7 @@ def main() -> int:
         )
         return 0
     run_name = args.run_name or time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
-    run_dir = args.run_root / run_name
-    run_dir.mkdir(parents=True, exist_ok=True)
+    run_dir = create_fresh_run_dir(args.run_root, run_name)
     shutil.copy2(run_input_source, run_dir / "input.jsonl")
     if args.feedback_input:
         shutil.copy2(args.feedback_input, run_dir / "feedback-input.jsonl")
