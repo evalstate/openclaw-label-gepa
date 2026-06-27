@@ -28,7 +28,6 @@ from fast_agent.integrations.gepa import (
     FastAgentRowWiseBatchAdapter,
     RowWiseEvaluationRun,
     RowWiseScore,
-    gepa_numeric_metrics,
     safe_trackio_log,
 )
 from openclaw_label_gepa.label_order import load_label_order
@@ -507,29 +506,6 @@ def finish_trackio(enabled: bool) -> None:
         trackio.finish()
     except Exception:
         pass
-
-
-def log_candidate(candidate_idx: int, candidate_dir: Path, report: dict[str, Any]) -> None:
-    program_idx = candidate_idx - 1
-    payload: dict[str, Any] = {
-        "gepa/iteration": program_idx,
-        "candidate/local_idx": candidate_idx,
-        "candidate/program_idx": program_idx,
-    }
-    numeric_metrics = gepa_numeric_metrics(report)
-    noisy_policy_suffixes = (
-        "policy_char_budget",
-        "policy_budget_usage",
-        "policy_chars_remaining",
-        "policy_length_over_budget",
-        "policy_length_compliance",
-        "policy_hygiene_compliance",
-    )
-    for key, value in numeric_metrics.items():
-        if any(key.endswith(suffix) for suffix in noisy_policy_suffixes):
-            continue
-        payload[key] = value
-    safe_trackio_log(payload)
 
 
 def _num(value: Any, default: float = 0.0) -> float:
@@ -2012,14 +1988,11 @@ class OpenClawValsetAggregateCallback:
         self.val_rows = val_rows
         self.allowed_topics = allowed_topics
         self.score_mode = score_mode
-        self.best_gepa_score: float | None = None
 
     def on_valset_evaluated(self, event: Mapping[str, Any]) -> None:
         payload = self._objective_payload(event)
         outputs_by_val_id = event.get("outputs_by_val_id")
         if not isinstance(outputs_by_val_id, Mapping):
-            if payload:
-                safe_trackio_log(payload)
             return
 
         trajectories: list[dict[str, Any]] = []
@@ -2087,26 +2060,7 @@ class OpenClawValsetAggregateCallback:
 
         is_best = event.get("is_best_program")
         if isinstance(is_best, bool):
-            payload["openclaw/objective/val/is_best_program"] = int(is_best)
-
-        score = event.get("average_score")
-        if not isinstance(score, (int, float)):
-            return payload
-
-        proposal_score = float(score)
-        best_before = self.best_gepa_score
-        if best_before is None or proposal_score > best_before:
-            self.best_gepa_score = proposal_score
-        best_score = self.best_gepa_score
-
-        payload["openclaw/objective/val/proposal_gepa_score"] = proposal_score
-        payload["openclaw/objective/val/best_gepa_score"] = best_score
-        payload["score/val/proposal"] = proposal_score
-        payload["score/val/best"] = best_score
-        if best_before is not None:
-            payload["openclaw/objective/val/proposal_delta_vs_best_before"] = (
-                proposal_score - best_before
-            )
+            payload["openclaw/diagnostic/val/is_best_program"] = int(is_best)
         return payload
 
     def _input_for_val_id(self, val_id: Any) -> dict[str, Any] | None:
@@ -2579,7 +2533,6 @@ def build_evaluator(run_dir: Path, input_path: Path, args: argparse.Namespace):
                 "reflection_call",
             )
         }
-        log_candidate(idx, candidate_run.path, report)
         s = report["scores"]
         d = report["score_details"]
         print(

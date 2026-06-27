@@ -30,7 +30,6 @@ def _install_runner_import_stubs(monkeypatch: pytest.MonkeyPatch) -> None:
         "RowWiseScore",
     ):
         setattr(fast_agent_gepa, name, object)
-    vars(fast_agent_gepa)["gepa_numeric_metrics"] = lambda report: {}
     vars(fast_agent_gepa)["safe_trackio_log"] = lambda payload: None
 
     for module in (
@@ -83,7 +82,7 @@ def test_create_fresh_run_dir_creates_new_run(
     assert run_dir.is_dir()
 
 
-def test_valset_callback_logs_seed_objective_without_outputs(
+def test_valset_callback_skips_no_output_events_without_custom_diagnostics(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     module = _load_runner(monkeypatch)
@@ -107,57 +106,7 @@ def test_valset_callback_logs_seed_objective_without_outputs(
             "total_metric_calls": 60,
         }
     )
-    callback.on_valset_evaluated(
-        {
-            "iteration": 1,
-            "candidate_idx": 1,
-            "average_score": 0.6596111111,
-            "outputs_by_val_id": None,
-            "total_metric_calls": 180,
-        }
-    )
-    callback.on_valset_evaluated(
-        {
-            "iteration": 5,
-            "candidate_idx": 5,
-            "average_score": 0.7205,
-            "outputs_by_val_id": None,
-            "total_metric_calls": 300,
-        }
-    )
-
-    assert len(logged) == 3
-    assert logged[0]["gepa/iteration"] == 0
-    assert logged[0]["gepa/total_metric_calls"] == 60
-    assert logged[0]["openclaw/objective/val/proposal_gepa_score"] == pytest.approx(
-        0.7195555556
-    )
-    assert logged[0]["openclaw/objective/val/best_gepa_score"] == pytest.approx(
-        0.7195555556
-    )
-    assert logged[0]["score/val/proposal"] == pytest.approx(0.7195555556)
-    assert logged[0]["score/val/best"] == pytest.approx(0.7195555556)
-    assert "openclaw/objective/val/gepa_score" not in logged[0]
-    assert "openclaw/objective/val/proposal_delta_vs_best_before" not in logged[0]
-
-    assert logged[1]["openclaw/objective/val/proposal_gepa_score"] == pytest.approx(
-        0.6596111111
-    )
-    assert logged[1]["gepa/total_metric_calls"] == 180
-    assert logged[1]["openclaw/objective/val/best_gepa_score"] == pytest.approx(0.7195555556)
-    assert logged[1]["score/val/proposal"] == pytest.approx(0.6596111111)
-    assert logged[1]["score/val/best"] == pytest.approx(0.7195555556)
-    assert "openclaw/objective/val/gepa_score" not in logged[1]
-    assert logged[1]["openclaw/objective/val/proposal_delta_vs_best_before"] == pytest.approx(
-        0.6596111111 - 0.7195555556
-    )
-
-    assert logged[2]["openclaw/objective/val/proposal_gepa_score"] == pytest.approx(0.7205)
-    assert logged[2]["gepa/total_metric_calls"] == 300
-    assert logged[2]["openclaw/objective/val/best_gepa_score"] == pytest.approx(0.7205)
-    assert logged[2]["score/val/proposal"] == pytest.approx(0.7205)
-    assert logged[2]["score/val/best"] == pytest.approx(0.7205)
-    assert "openclaw/objective/val/gepa_score" not in logged[2]
+    assert logged == []
 
 
 def test_valset_callback_uses_gepa_budget_axis_fields(
@@ -172,7 +121,7 @@ def test_valset_callback_uses_gepa_budget_axis_fields(
         score_mode="row-soft-exact",
     )
 
-    callback.on_valset_evaluated(
+    payload = callback._objective_payload(
         {
             "iteration": 2,
             "candidate_idx": 3,
@@ -184,18 +133,12 @@ def test_valset_callback_uses_gepa_budget_axis_fields(
         }
     )
 
-    assert logged == [
-        {
-            "gepa/iteration": 2,
-            "gepa/candidate_idx": 3,
-            "gepa/total_metric_calls": 14,
-            "gepa/metric_calls_delta": 4,
-            "openclaw/objective/val/proposal_gepa_score": pytest.approx(0.5),
-            "openclaw/objective/val/best_gepa_score": pytest.approx(0.5),
-            "score/val/proposal": pytest.approx(0.5),
-            "score/val/best": pytest.approx(0.5),
-        }
-    ]
+    assert payload == {
+        "gepa/iteration": 2,
+        "gepa/candidate_idx": 3,
+        "gepa/total_metric_calls": 14,
+        "gepa/metric_calls_delta": 4,
+    }
 
 
 def test_candidate_policy_trackio_payload_includes_length_and_penalty_score(
