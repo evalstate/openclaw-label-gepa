@@ -89,6 +89,24 @@ def _base_command(regime: Regime) -> list[str]:
     ]
 
 
+def _extend_reflection_args(command: list[str], regime: Regime) -> None:
+    reflection_agent_card = regime.path_value("reflection_agent_card")
+    if reflection_agent_card is not None:
+        command.extend(["--reflection-agent-card", str(reflection_agent_card)])
+        return
+    reflection_env_dir = regime.path_value("reflection_env_dir") or (
+        regime.root.parents[1] / ".fast-agent"
+    )
+    command.extend(
+        [
+            "--reflection-agent",
+            str(regime.raw.get("reflection_agent", "openclaw_gepa_reflector")),
+            "--reflection-env-dir",
+            str(reflection_env_dir),
+        ]
+    )
+
+
 def _extend_optional_paths(command: list[str], regime: Regime) -> None:
     pareto = _path_arg(regime.split_path("pareto"))
     bench = _path_arg(regime.split_path("benchmark"))
@@ -104,9 +122,6 @@ def _extend_gepa_args(
     args: _GepaCommandArgs,
 ) -> None:
     defaults = args.defaults
-    reflection_env_dir = regime.path_value("reflection_env_dir") or (
-        regime.root.parents[1] / ".fast-agent"
-    )
     command.extend(
         [
             "--agent-card",
@@ -121,10 +136,6 @@ def _extend_gepa_args(
             args.task_model,
             "--reflection-model",
             args.reflect_model,
-            "--reflection-agent",
-            str(regime.raw.get("reflection_agent", "openclaw_gepa_reflector")),
-            "--reflection-env-dir",
-            str(reflection_env_dir),
             "--gepa-mode",
             str(_value(defaults, "gepa_mode", "row-wise")),
             "--score-mode",
@@ -153,6 +164,7 @@ def _extend_gepa_args(
             args.run_name,
         ]
     )
+    _extend_reflection_args(command, regime)
     reflection_minibatch_size = int(_value(defaults, "reflection_minibatch_size", 0))
     if reflection_minibatch_size:
         command.extend(["--reflection-minibatch-size", str(reflection_minibatch_size)])
@@ -291,10 +303,7 @@ def _benchmark_base_command(
     trackio_group: str,
 ) -> list[str]:
     defaults = regime.mapping("run_defaults")
-    reflection_env_dir = regime.path_value("reflection_env_dir") or (
-        regime.root.parents[1] / ".fast-agent"
-    )
-    return [
+    command = [
         "uv",
         "run",
         "python",
@@ -312,10 +321,6 @@ def _benchmark_base_command(
         str(regime.schema_path),
         "--model",
         task_model,
-        "--reflection-agent",
-        str(regime.raw.get("reflection_agent", "openclaw_gepa_reflector")),
-        "--reflection-env-dir",
-        str(reflection_env_dir),
         "--score-mode",
         str(regime.raw.get("score_mode", regime.metric)),
         "--parallel",
@@ -329,6 +334,8 @@ def _benchmark_base_command(
         "--run-name",
         run_name,
     ]
+    _extend_reflection_args(command, regime)
+    return command
 
 
 def _extend_benchmark_regime_args(command: list[str], regime: Regime) -> None:

@@ -1,5 +1,5 @@
-name: v7n-effective-base-full-asi
-description: "Start from the strong v7h base prompt/components, then run mutate-all GEPA with failed GitHub issues plus actionable ASI."
+name: v7o-effective-base-full-asi-mb3-clean
+description: "Clean v7n-derived full-ASI run: strong v7h base/components, failed GitHub issues in reflection, actionable ASI, minibatch size 3, isolated Trackio/run artifacts."
 
 dataset:
   local_bundle: ../v7h-clean-generator-mutate-all/data
@@ -19,7 +19,7 @@ seed_policy: ../v7h-clean-generator-mutate-all/prompts/seed-policy-v7h.md
 mutable_topic_definitions: ../v7h-clean-generator-mutate-all/prompts/allowed-topics-v7h.md
 mutable_boundary_overlay: ../v7h-clean-generator-mutate-all/prompts/task-boundary-overlay-v7h.md
 boundary_guidance: ../v7h-clean-generator-mutate-all/prompts/topic-boundary-guidance-v7h.md
-static_asi: reflection-asi-effective-base-full-v7n.md
+static_asi: reflection-asi-effective-base-full-v7o.md
 train_split: ../v7h-clean-generator-mutate-all/data/feedback300.jsonl
 feedback_split: ../v7h-clean-generator-mutate-all/data/feedback300.jsonl
 pareto_split: ../v7h-clean-generator-mutate-all/data/pareto60.jsonl
@@ -37,18 +37,18 @@ score_formula:
     - row_exact
 
 trackio:
-  project: easy-v7n-effective-base-full-asi-gepa
-  group: v7n-effective-base-full-asi
+  project: clean-v7o-effective-base-full-asi-mb3-gepa
+  group: v7o-effective-base-full-asi-mb3-clean
   step_metric: gepa/iteration
-  local_dir: runs/v7n-effective-base-full-asi/trackio
+  local_dir: runs/v7o-effective-base-full-asi-mb3-clean/trackio
 
 run_defaults:
-  run_root: runs/v7n-effective-base-full-asi/gepa
-  run_name_template: "{model_slug}-v7n-{variant}-{feedback_profile}-tot{total_mutable_char_budget}-mb{reflection_minibatch_size}-mc{max_metric_calls}-p{parallel}-{run_index:03d}"
+  run_root: runs/v7o-effective-base-full-asi-mb3-clean/gepa
+  run_name_template: "{model_slug}-v7o-{variant}-{feedback_profile}-tot{total_mutable_char_budget}-mb{reflection_minibatch_size}-mc{max_metric_calls}-p{parallel}-{run_index:03d}"
   gepa_mode: row-wise
   feedback_profile: failed-issues-asi
   candidate_proposer: default
-  reflection_minibatch_size: 15
+  reflection_minibatch_size: 3
   frontier_type: hybrid
   candidate_selection_strategy: pareto
   acceptance_criterion: strict_improvement
@@ -70,11 +70,12 @@ models:
     - responses.gpt-5.5?reasoning=high
 
 artifacts:
-  regime_doc: docs/V7N_EFFECTIVE_BASE_FULL_ASI.md
+  regime_doc: docs/V7O_EFFECTIVE_BASE_FULL_ASI_MB3_CLEAN.md
   output_schema: schemas/output-provider-compatible.schema.json
   generator_prompt_seed: ../v7h-clean-generator-mutate-all/prompts/seed-policy-v7h.md
 
 notes:
+  - Clean v7n-derived run namespace with isolated Trackio and run directories.
   - Starts from the v7h base prompt/components, whose 3x gpt-5.4-mini bench78 mean was 0.809586.
   - Uses v7h feedback300/pareto60/bench78 splits for direct comparison to the v7h base/optimized benchmark history.
   - GEPA may mutate policy, topic_definitions, and boundary_overlay.

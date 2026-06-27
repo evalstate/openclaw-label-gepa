@@ -8,6 +8,7 @@ from openclaw_label_gepa.regimes import load_regime
 from openclaw_label_gepa.runplan import build_run_plan
 
 V7I = Path("regimes/v7i-guarded-generator-mutate-all/regime.yaml")
+V7N = Path("regimes/v7n-effective-base-full-asi/regime.yaml")
 
 
 def test_shell_line_cd_to_project_root_and_uses_absolute_trackio_dir() -> None:
@@ -194,6 +195,16 @@ def test_plan_gepa_project_override_reaches_runner_command(capsys: Any) -> None:
     out = capsys.readouterr().out
     assert status == 0
     assert "--project fresh-project" in out
+
+
+def test_reflection_uses_agent_card_not_fast_agent_env() -> None:
+    regime = load_regime(V7N)
+
+    plan = build_run_plan(regime)
+
+    assert "--reflection-agent-card" in plan.command
+    assert "--reflection-env-dir" not in plan.command
+    assert "regimes/v7n-effective-base-full-asi/../shared/openclaw-gepa-reflector.md" in plan.command
 
 
 def test_trackio_command_can_execute(monkeypatch: Any) -> None:

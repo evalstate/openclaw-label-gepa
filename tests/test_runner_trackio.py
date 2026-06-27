@@ -50,6 +50,7 @@ def _load_runner(monkeypatch: pytest.MonkeyPatch) -> ModuleType:
     assert spec is not None
     assert spec.loader is not None
     module = importlib.util.module_from_spec(spec)
+    monkeypatch.setitem(sys.modules, spec.name, module)
     spec.loader.exec_module(module)
     return module
 
@@ -157,6 +158,44 @@ def test_valset_callback_logs_seed_objective_without_outputs(
     assert logged[2]["score/val/proposal"] == pytest.approx(0.7205)
     assert logged[2]["score/val/best"] == pytest.approx(0.7205)
     assert "openclaw/objective/val/gepa_score" not in logged[2]
+
+
+def test_valset_callback_uses_gepa_budget_axis_fields(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_runner(monkeypatch)
+    logged: list[dict[str, int | float]] = []
+    monkeypatch.setattr(module, "safe_trackio_log", logged.append)
+    callback = module.OpenClawValsetAggregateCallback(
+        val_rows=[],
+        allowed_topics=set(),
+        score_mode="row-soft-exact",
+    )
+
+    callback.on_valset_evaluated(
+        {
+            "iteration": 2,
+            "candidate_idx": 3,
+            "average_score": 0.5,
+            "outputs_by_val_id": None,
+            "metric_calls_before": 10,
+            "metric_calls_delta": 4,
+            "metric_calls_after": 14,
+        }
+    )
+
+    assert logged == [
+        {
+            "gepa/iteration": 2,
+            "gepa/candidate_idx": 3,
+            "gepa/total_metric_calls": 14,
+            "gepa/metric_calls_delta": 4,
+            "openclaw/objective/val/proposal_gepa_score": pytest.approx(0.5),
+            "openclaw/objective/val/best_gepa_score": pytest.approx(0.5),
+            "score/val/proposal": pytest.approx(0.5),
+            "score/val/best": pytest.approx(0.5),
+        }
+    ]
 
 
 def test_candidate_policy_trackio_payload_includes_length_and_penalty_score(

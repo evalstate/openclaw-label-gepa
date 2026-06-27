@@ -14,7 +14,7 @@ agent_cards:
   plain: prompts/vanilla-labeler-plain-v7h.md
 schema: schemas/output-v7h.schema.json
 reflection_agent: openclaw_gepa_reflector
-reflection_env_dir: ../../.fast-agent
+reflection_agent_card: ../shared/openclaw-gepa-reflector.md
 seed_policy: prompts/seed-policy-v7h.md
 mutable_topic_definitions: prompts/allowed-topics-v7h.md
 mutable_boundary_overlay: prompts/task-boundary-overlay-v7h.md

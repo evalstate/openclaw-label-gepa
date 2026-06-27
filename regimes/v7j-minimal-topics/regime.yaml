@@ -14,7 +14,7 @@ agent_cards:
   plain: prompts/vanilla-labeler-plain-v7j.md
 schema: schemas/output-v7j.schema.json
 reflection_agent: openclaw_gepa_reflector
-reflection_env_dir: ../../.fast-agent
+reflection_agent_card: ../shared/openclaw-gepa-reflector.md
 seed_policy: prompts/seed-policy-v7j.md
 mutable_topic_definitions: prompts/allowed-topics-v7j.md
 boundary_guidance: prompts/topic-boundary-guidance-v7j.md
@@ -64,7 +64,7 @@ models:
   supported:
     - deepseek4flash
     - gemma-e4
-    - qwen36
+    - qwen36rtx
     - codexresponses.gpt-5.4-mini
     - responses.gpt-5.5?reasoning=high
 

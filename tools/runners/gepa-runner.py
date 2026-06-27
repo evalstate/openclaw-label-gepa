@@ -15,6 +15,7 @@ import sys
 import time
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -43,6 +44,38 @@ DEFAULT_REFLECTION_AGENT = "openclaw_gepa_reflector"
 RUN_ROOT = ROOT / "runs" / "gepa-runner"
 CARD = DEFAULT_REGIME_ROOT / "prompts" / "vanilla-labeler-v7a.md"
 PLAIN_CARD = DEFAULT_REGIME_ROOT / "prompts" / "vanilla-labeler-plain-v7a.md"
+
+
+@dataclass(frozen=True)
+class ReflectionTarget:
+    env_dir: Path | None
+    agent: str | None
+    agent_card: Path | None
+
+
+class OpenClawFastAgentReflectionLM(FastAgentReflectionLM):
+    def __init__(
+        self,
+        *,
+        agent_card: str | Path | None = None,
+        **kwargs: Any,
+    ):
+        super().__init__(**kwargs)
+        self.agent_card = Path(agent_card) if agent_card is not None else None
+
+    def _command(self, prompt: str | list[dict[str, Any]], audit: Any) -> list[str]:
+        command = [sys.executable, "-m", "fast_agent.cli.__main__", "go", "--quiet"]
+        if self.agent_card is not None:
+            command.extend(["--no-env", "--agent-cards", str(self.agent_card)])
+        elif self.env_dir is not None:
+            command.extend(["--env", str(self.env_dir)])
+        if self.model is not None:
+            command.extend(["--model", self.model])
+        if self.agent is not None and self.agent_card is None:
+            command.extend(["--agent", self.agent])
+        command.extend(["--prompt-file", str(audit.prompt_path)])
+        command.extend(["--results", str(audit.path / "results.json")])
+        return command
 SEED_POLICY = DEFAULT_REGIME_ROOT / "prompts" / "seed-policy-vanilla-v7a.md"
 DEFAULT_INPUT = DEFAULT_REGIME_ROOT / "data" / "feedback300.jsonl"
 ALLOWED_TOPICS = DEFAULT_REGIME_ROOT / "prompts" / "allowed-topics-v7a.md"
@@ -151,6 +184,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--model", default="codexresponses.gpt-5.5?reasoning=high")
     p.add_argument("--reflection-model", default="codexresponses.gpt-5.5?reasoning=high")
     p.add_argument("--reflection-agent", default=DEFAULT_REFLECTION_AGENT)
+    p.add_argument(
+        "--reflection-agent-card",
+        type=Path,
+        default=None,
+        help="Reflection AgentCard to load directly with fast-agent --agent-cards/--no-env.",
+    )
     p.add_argument("--reflection-env-dir", type=Path, default=ENV_DIR)
     p.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     p.add_argument(
@@ -1876,6 +1915,8 @@ class OpenClawCandidateDiagnosticsCallback:
             ("iteration", "gepa/iteration"),
             ("candidate_idx", "gepa/candidate_idx"),
             ("total_metric_calls", "gepa/total_metric_calls"),
+            ("metric_calls_after", "gepa/total_metric_calls"),
+            ("metric_calls_delta", "gepa/metric_calls_delta"),
         ):
             value = event.get(source_key)
             if isinstance(value, bool):
@@ -2032,6 +2073,8 @@ class OpenClawValsetAggregateCallback:
         for source_key, metric_key in (
             ("iteration", "gepa/iteration"),
             ("total_metric_calls", "gepa/total_metric_calls"),
+            ("metric_calls_after", "gepa/total_metric_calls"),
+            ("metric_calls_delta", "gepa/metric_calls_delta"),
             ("candidate_idx", "gepa/candidate_idx"),
             ("num_examples_evaluated", "openclaw/diagnostic/val/num_examples_evaluated"),
             ("total_valset_size", "openclaw/diagnostic/val/total_valset_size"),
@@ -3017,13 +3060,38 @@ def validate_boundary_guidance(path: Path | None) -> int | None:
     return len(hints)
 
 
+def reflection_target(args: argparse.Namespace) -> ReflectionTarget:
+    if args.reflection_agent_card is not None:
+        return ReflectionTarget(env_dir=None, agent=None, agent_card=args.reflection_agent_card)
+    return ReflectionTarget(
+        env_dir=args.reflection_env_dir,
+        agent=args.reflection_agent,
+        agent_card=args.reflection_env_dir / "agent-cards" / f"{args.reflection_agent}.md",
+    )
+
+
 def validate_reflection_agent(args: argparse.Namespace) -> None:
+    if args.reflection_agent_card is not None:
+        if not args.reflection_agent_card.exists():
+            raise SystemExit(f"--reflection-agent-card does not exist: {args.reflection_agent_card}")
+        return
     env_config = args.reflection_env_dir / "fast-agent.yaml"
     agent_card = args.reflection_env_dir / "agent-cards" / f"{args.reflection_agent}.md"
     if not env_config.exists():
         raise SystemExit(f"--reflection-env-dir is missing fast-agent.yaml: {env_config}")
     if not agent_card.exists():
         raise SystemExit(f"--reflection-agent card does not exist: {agent_card}")
+
+
+def build_reflection_lm(args: argparse.Namespace, run_dir: Path) -> OpenClawFastAgentReflectionLM:
+    target = reflection_target(args)
+    return OpenClawFastAgentReflectionLM(
+        env_dir=target.env_dir,
+        model=args.reflection_model,
+        agent=target.agent,
+        agent_card=target.agent_card if args.reflection_agent_card is not None else None,
+        audit_dir=run_dir / "reflection",
+    )
 
 
 def print_preflight_result(
@@ -3033,6 +3101,7 @@ def print_preflight_result(
     active_card: Path,
     boundary_hint_count: int | None,
 ) -> None:
+    target = reflection_target(args)
     payload = {
         "ok": True,
         "mode": "preflight",
@@ -3053,8 +3122,9 @@ def print_preflight_result(
         ),
         "boundary_guidance": str(args.boundary_guidance) if args.boundary_guidance else None,
         "boundary_guidance_topics": boundary_hint_count,
-        "reflection_env_dir": str(args.reflection_env_dir),
-        "reflection_agent": args.reflection_agent,
+        "reflection_env_dir": str(target.env_dir) if target.env_dir is not None else None,
+        "reflection_agent": target.agent,
+        "reflection_agent_card": str(target.agent_card) if target.agent_card is not None else None,
         "project": args.project,
         "trackio_group": args.trackio_group,
         "run_root": str(args.run_root),
@@ -3220,6 +3290,7 @@ def write_run_metadata(
     feedback_run_path = run_dir / "feedback-input.jsonl" if args.feedback_input else run_dir / "input.jsonl"
     pareto_run_path = run_dir / "pareto-input.jsonl" if args.pareto_input else feedback_run_path
     effective_input = args.feedback_input if args.gepa_mode == "row-wise" and args.feedback_input else args.input
+    target = reflection_target(args)
     payload = {
         "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "run_name": run_name,
@@ -3245,11 +3316,9 @@ def write_run_metadata(
         "models": {
             "task_model": args.model,
             "reflection_model": args.reflection_model,
-            "reflection_agent": args.reflection_agent,
-            "reflection_env_dir": _rel(args.reflection_env_dir),
-            "reflection_agent_card": _rel(
-                args.reflection_env_dir / "agent-cards" / f"{args.reflection_agent}.md"
-            ),
+            "reflection_agent": target.agent,
+            "reflection_env_dir": _rel(target.env_dir),
+            "reflection_agent_card": _rel(target.agent_card),
         },
         "budget": {
             "max_metric_calls": args.max_metric_calls,
@@ -3464,20 +3533,14 @@ def main() -> int:
                     file=sys.stderr,
                 )
             adapter = build_row_wise_adapter(run_dir, args)
-            reflection_lm = FastAgentReflectionLM(
-                env_dir=args.reflection_env_dir,
-                model=args.reflection_model,
-                agent=args.reflection_agent,
-                audit_dir=run_dir / "reflection",
-            )
+            reflection_lm = build_reflection_lm(args, run_dir)
             allowed_enum = set(_schema_topic_contract()[0])
             custom_candidate_proposer = build_custom_candidate_proposer(args, reflection_lm)
             callbacks = [
                 FastAgentGEPATrackioCallback(
-                    row_wise_adapter=adapter,
+                    eval_adapter=adapter,
                     reflection_lm=reflection_lm,
                     include_gepa_context=False,
-                    include_eval_score_summary=False,
                 ),
                 OpenClawCandidateDiagnosticsCallback(adapter),
                 OpenClawValsetAggregateCallback(
@@ -3545,12 +3608,7 @@ def main() -> int:
                 engine=EngineConfig(max_metric_calls=args.max_metric_calls, cache_evaluation=True),
                 reflection=ReflectionConfig(
                     reflection_minibatch_size=args.reflection_minibatch_size,
-                    reflection_lm=FastAgentReflectionLM(
-                        env_dir=args.reflection_env_dir,
-                        model=args.reflection_model,
-                        agent=args.reflection_agent,
-                        audit_dir=run_dir / "reflection",
-                    )
+                    reflection_lm=build_reflection_lm(args, run_dir)
                 ),
                 tracking=TrackingConfig(
                     use_trackio=trackio_enabled,

@@ -13,7 +13,7 @@ agent_cards:
   structured: ../v7k-clean-reflection-asi/prompts/labeler-pathological-simple-v7k.md
 schema: output-labels-provider-compatible.schema.json
 reflection_agent: openclaw_gepa_reflector
-reflection_env_dir: ../../.fast-agent
+reflection_agent_card: ../shared/openclaw-gepa-reflector.md
 seed_policy: ../v7k-clean-reflection-asi/prompts/pathological-simple-seed-v7k.md
 static_asi: ../v7k-clean-reflection-asi/prompts/reflection-asi-policy-only-v7l.md
 train_split: ../v7k-clean-reflection-asi/data/feedback240.jsonl
@@ -58,7 +58,7 @@ models:
   default_reflection: codexresponses.gpt-5.5?reasoning=high
   supported:
     - qwen3-6-27b
-    - qwen36
+    - qwen36rtx
     - codexresponses.gpt-5.4-mini
     - responses.gpt-5.5?reasoning=high
 

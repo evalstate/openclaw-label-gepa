@@ -14,7 +14,7 @@ agent_cards:
   plain: prompts/labeler-plain-v7k.md
 schema: schemas/output-v7k.schema.json
 reflection_agent: openclaw_gepa_reflector
-reflection_env_dir: ../../.fast-agent
+reflection_agent_card: ../shared/openclaw-gepa-reflector.md
 seed_policy: prompts/routing-policy-v7k.md
 mutable_topic_definitions: prompts/topics-v7k.md
 mutable_boundary_overlay: prompts/boundary-rules-v7k.md
@@ -63,7 +63,7 @@ models:
   default_task: codexresponses.gpt-5.4-mini
   default_reflection: codexresponses.gpt-5.5?reasoning=high
   supported:
-    - qwen36
+    - qwen36rtx
     - deepseek4flash
     - gemma-e4
     - minimax3
