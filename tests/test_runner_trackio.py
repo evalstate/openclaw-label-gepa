@@ -154,19 +154,19 @@ def test_candidate_policy_trackio_payload_includes_length_and_penalty_score(
 
     payload = module.candidate_policy_trackio_payload(penalties)
 
-    assert payload["candidate/policy_length"] == len(policy)
-    assert payload["candidate/policy_length_penalty"] == pytest.approx(
+    assert payload["openclaw/candidate/policy_length"] == len(policy)
+    assert payload["openclaw/candidate/policy_length_penalty"] == pytest.approx(
         penalties["policy_length_penalty"]
     )
-    assert payload["candidate/hygiene_penalty"] == pytest.approx(0.03)
-    assert payload["candidate/hygiene_findings_count"] == 1
-    assert payload["candidate/total_policy_penalty"] == pytest.approx(
+    assert payload["openclaw/candidate/hygiene_penalty"] == pytest.approx(0.03)
+    assert payload["openclaw/candidate/hygiene_findings_count"] == 1
+    assert payload["openclaw/candidate/total_policy_penalty"] == pytest.approx(
         penalties["total_policy_penalty"]
     )
-    assert "candidate/policy_chars" not in payload
-    assert "candidate/policy_char_budget" not in payload
-    assert "candidate/policy_length_over_budget" not in payload
-    assert "candidate/policy_penalty_score" not in payload
+    assert "openclaw/candidate/policy_chars" not in payload
+    assert "openclaw/candidate/policy_char_budget" not in payload
+    assert "openclaw/candidate/policy_length_over_budget" not in payload
+    assert "openclaw/candidate/policy_penalty_score" not in payload
 
 
 def test_topic_definition_penalty_details_prices_over_budget(

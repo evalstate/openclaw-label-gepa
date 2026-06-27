@@ -645,11 +645,11 @@ def candidate_policy_trackio_payload(penalties: Mapping[str, Any]) -> dict[str, 
     policy_chars = int(penalties["policy_chars"])
     total_policy_penalty = float(penalties["total_policy_penalty"])
     return {
-        "candidate/policy_length": policy_chars,
-        "candidate/policy_length_penalty": float(penalties["policy_length_penalty"]),
-        "candidate/hygiene_penalty": float(penalties["hygiene_penalty"]),
-        "candidate/hygiene_findings_count": len(penalties["hygiene"]["findings"]),
-        "candidate/total_policy_penalty": total_policy_penalty,
+        "openclaw/candidate/policy_length": policy_chars,
+        "openclaw/candidate/policy_length_penalty": float(penalties["policy_length_penalty"]),
+        "openclaw/candidate/hygiene_penalty": float(penalties["hygiene_penalty"]),
+        "openclaw/candidate/hygiene_findings_count": len(penalties["hygiene"]["findings"]),
+        "openclaw/candidate/total_policy_penalty": total_policy_penalty,
     }
 
 
@@ -1838,8 +1838,8 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
             overlay_chars = len(overlay)
             overlay_stats = {"boundary_overlay_chars": overlay_chars}
             candidate_diagnostics["boundary_overlay"] = overlay_stats
-            trackio_payload["candidate/boundary_overlay_length"] = overlay_chars
-            trackio_payload["candidate/total_mutable_length"] = policy_chars + overlay_chars
+            trackio_payload["openclaw/candidate/boundary_overlay_length"] = overlay_chars
+            trackio_payload["openclaw/candidate/total_mutable_length"] = policy_chars + overlay_chars
 
         if self.mutable_topic_definitions:
             topic_definitions = str(candidate.get("topic_definitions", ""))
@@ -1847,7 +1847,7 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
             candidate_diagnostics["topic_definitions"] = {
                 "topic_definitions_chars": topic_definitions_chars
             }
-            trackio_payload["candidate/topic_definitions_length"] = topic_definitions_chars
+            trackio_payload["openclaw/candidate/topic_definitions_length"] = topic_definitions_chars
 
         if self.total_mutable_char_budget:
             total_penalties = total_mutable_penalty_details(
@@ -1860,10 +1860,10 @@ class OpenClawRowWiseBatchAdapter(FastAgentRowWiseBatchAdapter):
             candidate_diagnostics["total_mutable"]["component_chars"] = total_penalties[
                 "component_chars"
             ]
-            trackio_payload["candidate/total_mutable_length"] = int(
+            trackio_payload["openclaw/candidate/total_mutable_length"] = int(
                 total_penalties["total_mutable_chars"]
             )
-            trackio_payload["candidate/total_mutable_length_penalty"] = float(
+            trackio_payload["openclaw/candidate/total_mutable_length_penalty"] = float(
                 total_penalties["total_mutable_length_penalty"]
             )
 
